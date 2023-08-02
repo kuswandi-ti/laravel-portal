@@ -66,9 +66,6 @@
 
     @stack('scripts_vendor')
 
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('public/template/backend/assets/js/page/index-0.js') }}"></script>
-
     <!-- Template JS File -->
     <script src="{{ asset('public/template/backend/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('public/template/backend/assets/js/custom.js') }}"></script>
