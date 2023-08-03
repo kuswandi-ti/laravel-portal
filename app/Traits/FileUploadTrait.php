@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Storage;
 
 trait FileUploadTrait
 {
-    function handleImageUpload(Request $request, string $fieldName, ?string $oldPath = null, string $dir = 'uploads'): String
+    function handleImageUpload(Request $request, string $fieldName, ?string $oldPath = null, string $dir = 'uploads'): ?String
     {
-        if ($oldPath && Storage::disk('public')->exists($oldPath)) {
-            Storage::disk('public')->delete($oldPath);
-        }
-
         if (!$request->hasFile($fieldName)) { // Nama control di view harus sama dengan nama field di tabel
             return null;
+        }
+
+        if ($oldPath && Storage::disk('public')->exists($oldPath)) {
+            Storage::disk('public')->delete($oldPath);
         }
 
         $file = $request->file($fieldName);

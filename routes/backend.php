@@ -24,5 +24,6 @@ Route::group([
     'middleware' => ['admin']
 ], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::put('profile-password-update/{id}', [BackendProfileController::class, 'updatePassword'])->name('profile_password.update');
     Route::resource('profile', BackendProfileController::class);
 });

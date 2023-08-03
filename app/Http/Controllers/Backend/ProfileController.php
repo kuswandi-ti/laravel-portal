@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AdminProfileUpdateRequest;
+use App\Http\Requests\AdminPasswordUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -59,7 +61,13 @@ class ProfileController extends Controller
     public function update(AdminProfileUpdateRequest $request, string $id)
     {
         $imagePath = $this->handleImageUpload($request, 'image', $request->old_image, 'profile');
-        dd($imagePath);
+
+        $admin = Admin::findOrFail($id);
+        $admin->image = !empty($imagePath) ? $imagePath : $request->old_image;
+        $admin->name = $request->name;
+        $admin->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -68,5 +76,14 @@ class ProfileController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function updatePassword(AdminPasswordUpdateRequest $request, string $id)
+    {
+        $admin = Admin::findOrFail($id);
+        $admin->password = bcrypt($request->password);
+        $admin->save();
+
+        return redirect()->back();
     }
 }

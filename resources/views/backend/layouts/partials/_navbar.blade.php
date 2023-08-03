@@ -4,7 +4,8 @@
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img alt="image" src="{{ asset('public/template/backend/assets/img/avatar/avatar-1.png') }}"
                     class="mr-1 rounded-circle">
-                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                <div class="d-sm-none d-lg-inline-block">{{ __('Hi') }}, {{ auth()->guard('admin')->user()->name }}
+                </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}

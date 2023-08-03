@@ -25,7 +25,7 @@ class AdminProfileUpdateRequest extends FormRequest
         return [
             'image' => ['nullable', 'image', 'max:3000'],
             'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:admins,email,'. Auth::guard('admin')->user()->id],
+            // 'email' => ['required', 'email', 'max:255', 'unique:admins,email,'. Auth::guard('admin')->user()->id],
         ];
     }
 }
