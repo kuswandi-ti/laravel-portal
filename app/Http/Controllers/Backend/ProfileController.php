@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AdminProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
+    use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -52,9 +56,10 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminProfileUpdateRequest $request, string $id)
     {
-        //
+        $imagePath = $this->handleImageUpload($request, 'image', $request->old_image, 'profile');
+        dd($imagePath);
     }
 
     /**
