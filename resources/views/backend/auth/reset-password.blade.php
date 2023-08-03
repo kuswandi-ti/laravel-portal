@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Stisla</title>
+    <title>Reset Password &mdash; Stisla</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -33,21 +33,10 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Login</h4>
+                                <h4>Reset Password</h4>
                             </div>
-
                             <div class="card-body">
-                                @if (session()->has('success'))
-                                    <div class="alert alert-success alert-dismissible show fade">
-                                        <div class="alert-body">
-                                            <button class="close" data-dismiss="alert">
-                                                <span>×</span>
-                                            </button>
-                                            {{ session()->get('success') }}
-                                        </div>
-                                    </div>
-                                @endif
-                                <form method="POST" action="{{ route('backend.handle_login') }}"
+                                <form method="POST" action="{{ route('backend.reset_password.send') }}"
                                     class="needs-validation" novalidate="">
                                     @csrf
 
@@ -55,7 +44,8 @@
                                         <label for="email">Email <span class="text-danger">*</span></label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            tabindex="1" value="{{ old('email') }}" required autofocus>
+                                            tabindex="1" required autofocus value="{{ request()->email }}">
+                                        <input type="hidden" value="{{ request()->token }}" name="token">
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -64,30 +54,33 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="d-block">
-                                            <label for="password" class="control-label">Password <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="float-right">
-                                                <a href="{{ route('backend.forgot_password') }}" class="text-small">
-                                                    Forgot Password?
-                                                </a>
+                                        <label for="password">New Password <span class="text-danger">*</span></label>
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            tabindex="1" required>
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
                                             </div>
-                                        </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="remember" class="custom-control-input"
-                                                tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                        </div>
+                                        <label for="password">New Password Confirmation <span
+                                                class="text-danger">*</span></label>
+                                        <input id="password" type="password"
+                                            class="form-control @error('password_confirmation') is-invalid @enderror"
+                                            name="password_confirmation" tabindex="1" required>
+                                        @error('password_confirmation')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Login
+                                            Reset Password
                                         </button>
                                     </div>
                                 </form>

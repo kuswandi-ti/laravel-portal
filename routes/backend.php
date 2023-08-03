@@ -11,12 +11,16 @@ Route::group([
     Route::get('login', [AdminAuthenticationController::class, 'login'])->name('login');
     Route::post('login', [AdminAuthenticationController::class, 'handleLogin'])->name('handle_login');
     Route::post('logout', [AdminAuthenticationController::class, 'logout'])->name('logout');
+    Route::get('forgot-password', [AdminAuthenticationController::class, 'forgotPassword'])->name('forgot_password');
+    Route::post('forgot-password', [AdminAuthenticationController::class, 'sendResetLink'])->name('forgot_password.send');
+    Route::get('reset-password/{token}', [AdminAuthenticationController::class, 'resetPassword'])->name('reset_password');
+    Route::post('reset-password', [AdminAuthenticationController::class, 'handleResetPassword'])->name('reset_password.send');
 });
 
 Route::group([
     'prefix' => 'admin',
     'as' => 'backend.',
-    'middleware' => ['admin']
+    'middleware' => ['auth', 'admin']
 ], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
 });

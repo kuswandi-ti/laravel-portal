@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Stisla</title>
+    <title>Forgot Password &mdash; Stisla</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -33,10 +33,13 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Login</h4>
+                                <h4>Forgot Password</h4>
                             </div>
-
                             <div class="card-body">
+                                <p>
+                                    Forgot your password? No problem. Just let us know your email address and we will
+                                    email you a password reset link that will allow you to choose a new one.
+                                </p>
                                 @if (session()->has('success'))
                                     <div class="alert alert-success alert-dismissible show fade">
                                         <div class="alert-body">
@@ -47,7 +50,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                <form method="POST" action="{{ route('backend.handle_login') }}"
+                                <form method="POST" action="{{ route('backend.forgot_password.send') }}"
                                     class="needs-validation" novalidate="">
                                     @csrf
 
@@ -55,7 +58,7 @@
                                         <label for="email">Email <span class="text-danger">*</span></label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            tabindex="1" value="{{ old('email') }}" required autofocus>
+                                            tabindex="1" required autofocus>
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -64,30 +67,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="d-block">
-                                            <label for="password" class="control-label">Password <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="float-right">
-                                                <a href="{{ route('backend.forgot_password') }}" class="text-small">
-                                                    Forgot Password?
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="remember" class="custom-control-input"
-                                                tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Login
+                                            Email Password Reset Link
                                         </button>
                                     </div>
                                 </form>
