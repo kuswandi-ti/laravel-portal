@@ -16,20 +16,6 @@
 
     @stack('styles_vendor')
 
-    <!-- Start GA -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-94034622-3');
-    </script>
-    <!-- /END GA -->
-
     @stack('styles')
 </head>
 
@@ -40,7 +26,25 @@
 
             <!-- Main Content -->
             <div class="main-content">
-                @yield('backend_content')
+                <section class="section">
+                    <div class="section-header">
+                        <h1>@yield('section-header-title')</h1>
+                        <div class="section-header-breadcrumb">
+                            @section('section-header-breadcrumb')
+                                <div class="breadcrumb-item active">
+                                    <a href="{{ route('backend.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </div>
+                            @show
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <h2 class="section-title">@yield('section-body-title')</h2>
+                        <p class="section-lead">
+                            @yield('section-body-lead')
+                        </p>
+                        @yield('backend_content')
+                    </div>
+                </section>
             </div>
 
             <footer class="main-footer">
@@ -68,7 +72,6 @@
 
     <!-- Template JS File -->
     <script src="{{ asset('public/template/backend/assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/js/custom.js') }}"></script>
 
     @stack('scripts')
 </body>

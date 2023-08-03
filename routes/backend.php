@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\ProfileController as BackendProfileController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\AdminAuthenticationController;
 
@@ -22,5 +23,6 @@ Route::group([
     'as' => 'backend.',
     'middleware' => ['admin']
 ], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('profile', BackendProfileController::class);
 });
