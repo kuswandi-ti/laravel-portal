@@ -20,7 +20,7 @@ Route::group([
 Route::group([
     'prefix' => 'admin',
     'as' => 'backend.',
-    'middleware' => ['auth', 'admin']
+    'middleware' => ['admin']
 ], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
 });
