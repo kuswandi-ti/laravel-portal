@@ -36,6 +36,16 @@
                                 <h4>Reset Password</h4>
                             </div>
                             <div class="card-body">
+                                @if (session()->has('error'))
+                                    <div class="alert alert-danger alert-dismissible show fade">
+                                        <div class="alert-body">
+                                            <button class="close" data-dismiss="alert">
+                                                <span>×</span>
+                                            </button>
+                                            {{ session()->get('error') }}
+                                        </div>
+                                    </div>
+                                @endif
                                 <form method="POST" action="{{ route('backend.reset_password.send') }}"
                                     class="needs-validation" novalidate="">
                                     @csrf
