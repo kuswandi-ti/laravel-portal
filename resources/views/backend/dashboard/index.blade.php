@@ -1,18 +1,24 @@
 @extends('backend.layouts.master')
 
-@section('section-header-title')
+@section('page_title')
     {{ __('Dashboard') }}
 @endsection
 
-@section('section-header-breadcrumb')
+@section('section_header_title')
+    {{ __('Dashboard') }}
+@endsection
+
+@section('section_header_breadcrumb')
     @parent
 @endsection
 
-@section('section-body-title')
-    Dashboard
+@section('section_body_title')
+    {{ __('Dashboard') }}
 @endsection
 
-@section('section-body-lead', 'View all information about yourself on this page.')
+@section('section_body_lead')
+    {{ __('View all information about yourself on this page') }}
+@endsection
 
 @section('backend_content')
     <div class="row">

@@ -29,6 +29,7 @@
                                 <option>English</option>
                                 <option>Chines</option>
                                 <option>Korean</option>
+                                <option>Indonesia</option>
                             </select>
                         </div>
 

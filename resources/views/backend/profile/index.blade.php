@@ -1,19 +1,25 @@
 @extends('backend.layouts.master')
 
-@section('section-header-title')
+@section('page_title')
     {{ __('Profile') }}
 @endsection
 
-@section('section-header-breadcrumb')
+@section('section_header_title')
+    {{ __('Profile') }}
+@endsection
+
+@section('section_header_breadcrumb')
     @parent
     <div class="breadcrumb-item">{{ __('Profile') }}</div>
 @endsection
 
-@section('section-body-title')
+@section('section_body_title')
     {{ __('Hi') }}, {{ $user->name ?? '' }}
 @endsection
 
-@section('section-body-lead', 'Change information about yourself on this page.')
+@section('section_body_lead')
+    {{ __('Change information about yourself on this page') }}
+@endsection
 
 @section('backend_content')
     <div class="row mt-sm-4">
@@ -135,8 +141,6 @@
                         <button class="btn btn-primary">{{ __('Save Changes') }}</button>
                     </div>
                 </form>
-
-                <button class="btn btn-primary btntes">{{ __('Save Changes') }}</button>
             </div>
         </div>
     </div>

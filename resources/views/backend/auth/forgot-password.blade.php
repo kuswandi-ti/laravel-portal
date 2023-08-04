@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Forgot Password &mdash; Stisla</title>
+    <title>{{ __('Forgot Password') }} &mdash; {{ config('app.name') }}</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -33,12 +33,11 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Forgot Password</h4>
+                                <h4>{{ __('Forgot Password') }}</h4>
                             </div>
                             <div class="card-body">
                                 <p>
-                                    Forgot your password? No problem. Just let us know your email address and we will
-                                    email you a password reset link that will allow you to choose a new one.
+                                    {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one') }}
                                 </p>
                                 @if (session()->has('success'))
                                     <div class="alert alert-success alert-dismissible show fade">
@@ -55,7 +54,8 @@
                                     @csrf
 
                                     <div class="form-group">
-                                        <label for="email">Email <span class="text-danger">*</span></label>
+                                        <label for="email">{{ __('Email') }} <span
+                                                class="text-danger">*</span></label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
                                             tabindex="1" required autofocus>
@@ -68,14 +68,14 @@
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Email Password Reset Link
+                                            {{ __('Email Password Reset Link') }}
                                         </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="simple-footer">
-                            Copyright &copy; Stisla {{ date('Y') }}
+                            {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
                         </div>
                     </div>
                 </div>

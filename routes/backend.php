@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\ProfileController as BackendProfileController;
+use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\AdminAuthenticationController;
 
@@ -24,6 +25,7 @@ Route::group([
     'middleware' => ['admin']
 ], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::put('profile-password-update/{id}', [BackendProfileController::class, 'updatePassword'])->name('profile_password.update');
-    Route::resource('profile', BackendProfileController::class);
+    Route::put('profile-password-update/{id}', [ProfileController::class, 'updatePassword'])->name('profile_password.update');
+    Route::resource('profile', ProfileController::class);
+    Route::resource('language', LanguageController::class);
 });

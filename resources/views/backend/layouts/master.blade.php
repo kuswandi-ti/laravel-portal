@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>General Dashboard &mdash; Stisla</title>
+    <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -33,9 +33,9 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>@yield('section-header-title')</h1>
+                        <h1>@yield('section_header_title')</h1>
                         <div class="section-header-breadcrumb">
-                            @section('section-header-breadcrumb')
+                            @section('section_header_breadcrumb')
                                 <div class="breadcrumb-item active">
                                     <a href="{{ route('backend.dashboard') }}">{{ __('Dashboard') }}</a>
                                 </div>
@@ -43,9 +43,9 @@
                         </div>
                     </div>
                     <div class="section-body">
-                        <h2 class="section-title">@yield('section-body-title')</h2>
+                        <h2 class="section-title">@yield('section_body_title')</h2>
                         <p class="section-lead">
-                            @yield('section-body-lead')
+                            @yield('section_body_lead')
                         </p>
                         @yield('backend_content')
                     </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Reset Password &mdash; Stisla</title>
+    <title>{{ __('Reset Password') }} &mdash; {{ config('app.name') }}</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -33,7 +33,7 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Reset Password</h4>
+                                <h4>{{ __('Reset Password') }}</h4>
                             </div>
                             <div class="card-body">
                                 @if (session()->has('error'))
@@ -51,7 +51,8 @@
                                     @csrf
 
                                     <div class="form-group">
-                                        <label for="email">Email <span class="text-danger">*</span></label>
+                                        <label for="email">{{ __('Email') }} <span
+                                                class="text-danger">*</span></label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
                                             tabindex="1" required autofocus value="{{ request()->email }}">
@@ -64,7 +65,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="password">New Password <span class="text-danger">*</span></label>
+                                        <label for="password">{{ __('New Password') }} <span
+                                                class="text-danger">*</span></label>
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
                                             tabindex="1" required>
@@ -76,7 +78,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="password">New Password Confirmation <span
+                                        <label for="password">{{ __('New Password Confirmation') }} <span
                                                 class="text-danger">*</span></label>
                                         <input id="password" type="password"
                                             class="form-control @error('password_confirmation') is-invalid @enderror"
@@ -90,14 +92,14 @@
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Reset Password
+                                            {{ __('Reset Password') }}
                                         </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="simple-footer">
-                            Copyright &copy; Stisla {{ date('Y') }}
+                            {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
                         </div>
                     </div>
                 </div>

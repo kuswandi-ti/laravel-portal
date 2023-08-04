@@ -18,6 +18,12 @@
             </li>
 
             <li class="menu-header">Starter</li>
+            <li class="{{ request()->is('admin/language*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('backend.language.index') }}">
+                    <i class="far fa-keyboard"></i>
+                    <span>Languages</span>
+                </a>
+            </li>
             <li>
                 <a class="nav-link" href="blank.html">
                     <i class="far fa-square"></i>
