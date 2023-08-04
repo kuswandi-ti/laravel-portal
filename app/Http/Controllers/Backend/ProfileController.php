@@ -67,7 +67,7 @@ class ProfileController extends Controller
         $admin->name = $request->name;
         $admin->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', __('Update profile successfully'));
     }
 
     /**
@@ -84,6 +84,6 @@ class ProfileController extends Controller
         $admin->password = bcrypt($request->password);
         $admin->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', __('Update password successfully'));
     }
 }

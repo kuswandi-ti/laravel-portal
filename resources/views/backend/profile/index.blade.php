@@ -135,6 +135,8 @@
                         <button class="btn btn-primary">{{ __('Save Changes') }}</button>
                     </div>
                 </form>
+
+                <button class="btn btn-primary btntes">{{ __('Save Changes') }}</button>
             </div>
         </div>
     </div>
@@ -157,3 +159,5 @@
         });
     </script>
 @endpush
+
+<x-swal />
