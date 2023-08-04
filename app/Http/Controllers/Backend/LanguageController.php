@@ -6,6 +6,7 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminLanguageStoreRequest;
+use App\Http\Requests\AdminLanguageUpdateRequest;
 
 class LanguageController extends Controller
 {
@@ -14,7 +15,8 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        return view('backend.language.index');
+        $languages = Language::all();
+        return view('backend.language.index', compact('languages'));
     }
 
     /**
@@ -55,15 +57,25 @@ class LanguageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $language = Language::findOrFail($id);
+        return view('backend.language.edit', compact('language'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminLanguageUpdateRequest $request, string $id)
     {
-        //
+        $language = Language::findOrFail($id);
+
+        $language->name = $request->name;
+        $language->lang = $request->lang;
+        $language->slug = $request->slug;
+        $language->default = $request->default;
+        $language->status = $request->status;
+        $language->save();
+
+        return redirect()->route('backend.language.index')->with('success', __('Updated language successfully'));
     }
 
     /**
@@ -71,6 +83,25 @@ class LanguageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $language = Language::findOrFail($id);
+
+            if ($language->lang == 'en') {
+                return response([
+                    'status' => 'error',
+                    'message' => __('Can\'t delete this language')
+                ]);
+            }
+            $language->delete();
+            return response([
+                'status' => 'success',
+                'message' => __('Deleted language successfully')
+            ]);
+        } catch (\Throwable $th) {
+            return response([
+                'status' => 'error',
+                'message' => __('Deleted language is error')
+            ]);
+        }
     }
 }

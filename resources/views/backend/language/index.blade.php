@@ -34,7 +34,50 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p>Write something here</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table_data">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>{{ __('Language Name') }}</th>
+                                    <th class="text-center">{{ __('Language Code') }}</th>
+                                    <th class="text-center">{{ __('Default') }}</th>
+                                    <th class="text-center">{{ __('Status') }}</th>
+                                    <th class="text-center">{{ __('Action') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($languages as $language)
+                                    <tr>
+                                        <td class="text-center">{{ $language->id }}</td>
+                                        <td>{{ $language->name }}</td>
+                                        <td class="text-center">{{ $language->lang }}</td>
+                                        <td class="text-center">
+                                            @if ($language->default == 1)
+                                                <div class="badge badge-primary">{{ __('Yes') }}</div>
+                                            @else
+                                                <div class="badge badge-warning">{{ __('No') }}</div>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($language->status == 1)
+                                                <div class="badge badge-success">{{ __('Active') }}</div>
+                                            @else
+                                                <div class="badge badge-danger">{{ __('Inactive') }}</div>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('backend.language.edit', $language->id) }}"
+                                                class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('backend.language.destroy', $language->id) }}"
+                                                class="btn btn-danger btn-sm delete_item"><i
+                                                    class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,3 +85,14 @@
 @endsection
 
 <x-swal />
+
+@push('scripts')
+    <script>
+        table = $("#table_data").DataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
+        });
+    </script>
+@endpush

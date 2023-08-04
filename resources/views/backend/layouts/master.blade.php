@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
 
     <!-- General CSS Files -->
@@ -12,6 +15,11 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/datatables/datatables.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('public/template/backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('public/template/backend/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
     @stack('styles_vendor')
 
     <!-- Template CSS -->
@@ -75,6 +83,14 @@
 
     <!-- JS Libraies -->
     <script src="{{ asset('public/template/backend/assets/modules/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/assets/modules/datatables/datatables.min.js') }}"></script>
+    <script
+        src="{{ asset('public/template/backend/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
+    </script>
+    <script
+        src="{{ asset('public/template/backend/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}">
+    </script>
+    <script src="{{ asset('public/template/backend/assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
     @stack('scripts_vendor')
 
     <!-- Page Specific JS File -->
@@ -85,6 +101,55 @@
 
     <!-- Inline JS -->
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).ready(function() {
+            $('.delete_item').on('click', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let url = $(this).attr('href');
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            success: function(data) {
+                                if (data.status == 'success') {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        data.message,
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else if (data.status == 'error') {
+                                    Swal.fire(
+                                        'Error!',
+                                        data.message,
+                                        'error'
+                                    )
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    }
+                })
+            })
+        });
+
         $.uploadPreview({
             input_field: "#image-upload", // Default: .image-upload
             preview_box: "#image-preview", // Default: .image-preview
