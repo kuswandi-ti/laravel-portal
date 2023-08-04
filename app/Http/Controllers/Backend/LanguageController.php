@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminLanguageStoreRequest;
 
 class LanguageController extends Controller
 {
@@ -26,9 +28,18 @@ class LanguageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminLanguageStoreRequest $request)
     {
-        //
+        $language = new Language();
+
+        $language->name = $request->name;
+        $language->lang = $request->lang;
+        $language->slug = $request->slug;
+        $language->default = $request->default;
+        $language->status = $request->status;
+        $language->save();
+
+        return redirect()->route('backend.language.index')->with('success', __('Created language successfully'));
     }
 
     /**

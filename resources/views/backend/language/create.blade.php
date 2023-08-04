@@ -21,6 +21,10 @@
     {{ __('Create information about language on this page') }}
 @endsection
 
+@push('styles_vendor')
+    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/select2/dist/css/select2.min.css') }}">
+@endpush
+
 @section('backend_content')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
@@ -33,33 +37,86 @@
                         </a>
                     </div>
                 </div>
-                <form>
+                <form method="POST" action="{{ route('backend.language.store') }}">
+                    @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label>{{ __('Language') }}</label>
-                            <select class="form-control">
-                                <option>-- Select --</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                            <select id="lang" name="lang"
+                                class="form-control select2 @error('lang') is-invalid @enderror">
+                                <option value="" selected disabled>-- Select --</option>
+                                @foreach (config('language') as $key => $lang)
+                                    <option value="{{ $key }}" {{ old('lang') == $key ? 'selected' : '' }}>
+                                        {{ $lang['name'] }}</option>
+                                @endforeach
                             </select>
+                            @error('lang')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="invalid-feedback">
+                                {{ __('Please fill in your language') }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ __('Name') }}</label>
+                            <input type="text" id="name" name="name"
+                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                readonly>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="invalid-feedback">
+                                {{ __('Please fill in your language name') }}
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Slug') }}</label>
-                            <input type="text" class="form-control" readonly>
+                            <input type="text" id="slug" name="slug"
+                                class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}"
+                                readonly>
+                            @error('slug')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="invalid-feedback">
+                                {{ __('Please fill in your language slug') }}
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Is it default ?') }}</label>
-                            <select class="form-control">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                            <select name="default" class="form-control @error('default') is-invalid @enderror">
+                                <option value="0" {{ old('default') == '0' ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ old('default') == '1' ? 'selected' : '' }}>Yes</option>
                             </select>
+                            @error('default')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="invalid-feedback">
+                                {{ __('Please fill in your default language') }}
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Status') }}</label>
-                            <select class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
+                            <select name="status" class="form-control @error('status') is-invalid @enderror">
+                                <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactive
+                                </option>
                             </select>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="invalid-feedback">
+                                {{ __('Please fill in your language status') }}
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -73,3 +130,20 @@
         </div>
     </div>
 @endsection
+
+@push('scripts_vendor')
+    <script src="{{ asset('public/template/backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+@endpush
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#lang').on('change', function() {
+                let value = $(this).val();
+                let name = $(this).children(':selected').text();
+                $('#slug').val(value);
+                $('#name').val(name);
+            });
+        });
+    </script>
+@endpush
