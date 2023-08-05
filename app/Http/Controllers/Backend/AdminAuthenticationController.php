@@ -10,22 +10,26 @@ use App\Mail\AdminSendResetLinkMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\AdminHandleLoginRequest;
-use App\Http\Requests\AdminResetPasswordRequest;
-use App\Http\Requests\AdminSendResetLinkRequest;
+use App\Http\Requests\AdminAuthLoginRequest;
+use App\Http\Requests\AdminAuthResetPasswordRequest;
+use App\Http\Requests\AdminAuthSendResetLinkRequest;
 
 class AdminAuthenticationController extends Controller
 {
     public function login()
     {
-        return view('backend.auth.login');
+        if (!Auth::guard('admin')->check()) {
+            return view('backend.auth.login');
+        } else {
+            return redirect()->route('backend.dashboard.index');
+        }
     }
 
-    public function handleLogin(AdminHandleLoginRequest $request)
+    public function handleLogin(AdminAuthLoginRequest $request)
     {
         $request->authenticate();
 
-        return redirect()->route('backend.dashboard');
+        return redirect()->route('backend.dashboard.index');
     }
 
     public function logout(Request $request): RedirectResponse
@@ -44,7 +48,7 @@ class AdminAuthenticationController extends Controller
         return view('backend.auth.forgot-password');
     }
 
-    public function sendResetLink(AdminSendResetLinkRequest $request)
+    public function sendResetLink(AdminAuthSendResetLinkRequest $request)
     {
         $token = Str::random(64);
 
@@ -62,7 +66,7 @@ class AdminAuthenticationController extends Controller
         return view('backend.auth.reset-password', compact('token'));
     }
 
-    public function handleResetPassword(AdminResetPasswordRequest $request)
+    public function handleResetPassword(AdminAuthResetPasswordRequest $request)
     {
         $admin = Admin::where([
             'email' => $request->email,

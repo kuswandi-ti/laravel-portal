@@ -8,7 +8,7 @@ use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AdminProfileUpdateRequest;
-use App\Http\Requests\AdminPasswordUpdateRequest;
+use App\Http\Requests\AdminProfilePasswordUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -78,7 +78,7 @@ class ProfileController extends Controller
         //
     }
 
-    public function updatePassword(AdminPasswordUpdateRequest $request, string $id)
+    public function updatePassword(AdminProfilePasswordUpdateRequest $request, string $id)
     {
         $admin = Admin::findOrFail($id);
         $admin->password = bcrypt($request->password);

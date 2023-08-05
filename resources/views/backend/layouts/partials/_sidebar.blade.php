@@ -5,40 +5,43 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('backend.dashboard') }}">Stisla</a>
+            <a href="{{ route('backend.dashboard.index') }}">{{ config('app.name') }}</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">St</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Dashboard</li>
-            <li class="{{ request()->is('admin/dashboard*') ? 'active' : '' }}">
-                <a href="{{ route('backend.dashboard') }}" class="nav-link"><i
-                        class="fas fa-fire"></i><span>Dashboard</span></a>
+            <li class="menu-header">{{ __('Dashboard') }}</li>
+            <li class="{{ setSidebarActive(['backend.dashboard.*']) }}">
+                <a href="{{ route('backend.dashboard.index') }}" class="nav-link"><i
+                        class="fas fa-fire"></i><span>{{ __('Dashboard') }}</span></a>
             </li>
 
-            <li class="menu-header">Starter</li>
-            <li class="{{ request()->is('admin/language*') ? 'active' : '' }}">
+            <li class="menu-header">{{ __('Master') }}</li>
+            <li class="{{ setSidebarActive(['backend.language.*']) }}">
                 <a class="nav-link" href="{{ route('backend.language.index') }}">
                     <i class="far fa-keyboard"></i>
-                    <span>Languages</span>
+                    <span>{{ __('Languages') }}</span>
                 </a>
             </li>
-            <li>
-                <a class="nav-link" href="blank.html">
-                    <i class="far fa-square"></i>
-                    <span>Blank Page</span>
-                </a>
-            </li>
-            <li class="dropdown">
+
+            <li class="menu-header">{{ __('Settings') }}</li>
+            <li class="dropdown {{ setSidebarActive(['backend.permission.*', 'backend.role.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
-                    <i class="far fa-file-alt"></i>
-                    <span>Forms</span>
+                    <i class="fas fa-user-cog"></i>
+                    <span>{{ __('Access Management') }}</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="forms-advanced-form.html">Advanced Form</a></li>
-                    <li><a class="nav-link" href="forms-editor.html">Editor</a></li>
-                    <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
+                    <li class="{{ setSidebarActive(['backend.permission.*']) }}">
+                        <a class="nav-link" href="{{ route('backend.permission.index') }}">{{ __('Permission') }}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['backend.role.*']) }}">
+                        <a class="nav-link" href="{{ route('backend.role.index') }}">{{ __('Role') }}
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

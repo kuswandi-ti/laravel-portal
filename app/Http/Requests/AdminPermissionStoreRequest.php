@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminSendResetLinkRequest extends FormRequest
+class AdminPermissionStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class AdminSendResetLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email', 'max:255', 'exists:admins,email'],
+            'permission_name' => ['required', 'string', 'max:255', 'unique:permissions,name'],
+            'group_name' => ['required', 'string', 'max:255'],
         ];
     }
 }

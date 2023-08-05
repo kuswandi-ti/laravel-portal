@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Language;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminLanguageStoreRequest;
 use App\Http\Requests\AdminLanguageUpdateRequest;
@@ -92,7 +91,9 @@ class LanguageController extends Controller
                     'message' => __('Can\'t delete this language')
                 ]);
             }
+
             $language->delete();
+
             return response([
                 'status' => 'success',
                 'message' => __('Deleted language successfully')

@@ -1,24 +1,24 @@
 @extends('backend.layouts.master')
 
 @section('page_title')
-    {{ __('Language') }}
+    {{ __('Languages') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Language') }}
+    {{ __('Languages') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Language') }}</div>
+    <div class="breadcrumb-item">{{ __('Languages') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Edit Language') }}
+    {{ __('Edit Languages') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('Change information about language on this page') }}
+    {{ __('Update information about language on this page') }}
 @endsection
 
 @push('styles_vendor')
@@ -30,7 +30,7 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Create Language') }}</h4>
+                    <h4>{{ __('Edit Languages') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('backend.language.index') }}" class="btn btn-warning">
                             <i class="fas fa-chevron-circle-left"></i> {{ __('Back') }}

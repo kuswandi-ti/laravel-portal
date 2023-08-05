@@ -45,7 +45,7 @@
                         <div class="section-header-breadcrumb">
                             @section('section_header_breadcrumb')
                                 <div class="breadcrumb-item active">
-                                    <a href="{{ route('backend.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    <a href="{{ route('backend.dashboard.index') }}">{{ __('Dashboard') }}</a>
                                 </div>
                             @show
                         </div>
@@ -108,7 +108,7 @@
         });
 
         $(document).ready(function() {
-            $('.delete_item').on('click', function(e) {
+            $('body').on('click', '.delete_item', function(e) {
                 e.preventDefault();
                 Swal.fire({
                     title: 'Are you sure?',

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminResetPasswordRequest extends FormRequest
+class AdminAuthSendResetLinkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,6 @@ class AdminResetPasswordRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email', 'max:255', 'exists:admins,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required'],
         ];
     }
 }

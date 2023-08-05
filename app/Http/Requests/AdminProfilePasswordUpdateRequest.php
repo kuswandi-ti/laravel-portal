@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminPasswordUpdateRequest extends FormRequest
+class AdminProfilePasswordUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class AdminPasswordUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => ['required', 'max:255'],
-            'password' => ['required', 'confirmed', 'min:8'],
-            'password_confirmation' => ['required', 'min:8'],
+            'current_password' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'confirmed', 'string', 'min:8'],
+            'password_confirmation' => ['required', 'string', 'min:8'],
         ];
     }
 

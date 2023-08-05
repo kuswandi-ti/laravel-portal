@@ -22,9 +22,9 @@ class AdminLanguageStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lang' => ['required', 'max:255', 'unique:languages,lang'],
-            'name' => ['required', 'max:255'],
-            'slug' => ['required', 'max:255', 'unique:languages,slug'],
+            'lang' => ['required', 'string', 'max:255', 'unique:languages,lang'],
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255', 'unique:languages,slug'],
             'default' => ['required', 'boolean'],
             'status' => ['required', 'boolean'],
         ];
