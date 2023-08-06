@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Permission;
 use App\Http\Requests\AdminRoleStoreRequest;
 use App\Http\Requests\AdminRoleUpdateRequest;
 
-class RoleController extends Controller
+class AdminRoleController extends Controller
 {
     /**
      * Display a listing of the resource.

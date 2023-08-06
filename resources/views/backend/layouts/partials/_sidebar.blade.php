@@ -28,7 +28,7 @@
             <li class="menu-header">{{ __('Settings') }}</li>
             <li class="dropdown {{ setSidebarActive(['backend.permission.*', 'backend.role.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-user-cog"></i>
+                    <i class="fas fa-users-cog"></i>
                     <span>{{ __('Access Management') }}</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -40,6 +40,24 @@
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['backend.role.*']) }}">
                         <a class="nav-link" href="{{ route('backend.role.index') }}">{{ __('Role') }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown {{ setSidebarActive(['backend.admin.*', 'backend.profile.*']) }}">
+                <a href="#" class="nav-link has-dropdown">
+                    <i class="fas fa-user-cog"></i>
+                    <span>{{ __('User Management') }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['backend.admin.*']) }}">
+                        <a class="nav-link" href="{{ route('backend.admin.index') }}">{{ __('Admin User') }}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['backend.profile.*']) }}">
+                        <a class="nav-link" href="{{ route('backend.profile.index') }}">{{ __('Profile & Password') }}
                         </a>
                     </li>
                 </ul>

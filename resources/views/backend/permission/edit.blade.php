@@ -41,29 +41,23 @@
                             <label>{{ __('Permission Name') }}</label>
                             <input type="text" id="permission_name" name="permission_name"
                                 class="form-control @error('permission_name') is-invalid @enderror"
-                                value="{{ old('permission_name') ?? $permission->name }}">
+                                value="{{ old('permission_name') ?? $permission->name }}" required>
                             @error('permission_name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your permission name') }}
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Group Name') }}</label>
                             <input type="text" id="group_name" name="group_name"
                                 class="form-control @error('group_name') is-invalid @enderror"
-                                value="{{ old('group_name') ?? $permission->group_name }}">
+                                value="{{ old('group_name') ?? $permission->group_name }}" required>
                             @error('group_name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your permission group name') }}
-                            </div>
                         </div>
                         <div class="form-group">
                             <div class="control-label">{{ __('Guard Name') }}</div>

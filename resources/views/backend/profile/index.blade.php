@@ -26,7 +26,7 @@
         <div class="col-12 col-md-12 col-lg-7">
             <div class="card">
                 <form method="post" action="{{ route('backend.profile.update',auth()->guard('admin')->user()->id) }}"
-                    class="needs-validation" novalidate="" enctype="multipart/form-data">
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -51,15 +51,12 @@
                             <div class="form-group col-12">
                                 <label>{{ __('Name') }} <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') ?? $user->name }}" required="">
+                                    name="name" value="{{ old('name') ?? $user->name }}" required>
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <div class="invalid-feedback">
-                                    {{ __('Please fill in the name') }}
-                                </div>
                             </div>
                             <div class="form-group col-12">
                                 <label>{{ __('Email') }} <span class="text-danger">(readonly)</span></label>
@@ -70,9 +67,6 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <div class="invalid-feedback">
-                                    {{ __('Please fill in the email') }}
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,8 +79,7 @@
 
         <div class="col-12 col-md-12 col-lg-5">
             <div class="card">
-                <form method="post" action="{{ route('backend.profile_password.update', $user->id) }}"
-                    class="needs-validation" novalidate="">
+                <form method="post" action="{{ route('backend.profile_password.update', $user->id) }}">
                     @csrf
                     @method('PUT')
 
@@ -98,42 +91,33 @@
                             <div class="form-group col-12">
                                 <label>{{ __('Current Password') }} <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control @error('current_password') is-invalid @enderror"
-                                    name="current_password" required="">
+                                    name="current_password" required>
                                 @error('current_password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <div class="invalid-feedback">
-                                    {{ __('Please fill in the current password') }}
-                                </div>
                             </div>
                             <div class="form-group col-12">
                                 <label>{{ __('New Password') }} <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    name="password" required="">
+                                    name="password" required>
                                 @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <div class="invalid-feedback">
-                                    {{ __('Please fill in the new password') }}
-                                </div>
                             </div>
                             <div class="form-group col-12">
                                 <label>{{ __('Confirm New Password') }} <span class="text-danger">*</span></label>
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
-                                    name="password_confirmation" required="">
+                                    name="password_confirmation" required>
                                 @error('password_confirmation')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <div class="invalid-feedback">
-                                    {{ __('Please fill in the confirm new password') }}
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -40,15 +40,12 @@
                             <label>{{ __('Role Name') }}</label>
                             <input type="text" name="role_name"
                                 class="form-control @error('role_name') is-invalid @enderror"
-                                value="{{ old('role_name') }}">
+                                value="{{ old('role_name') }}" required>
                             @error('role_name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your role name') }}
-                            </div>
                         </div>
 
                         <div class="mb-5 form-group">
@@ -72,7 +69,7 @@
                             <div class="mb-5 form-group">
                                 <div class="control-label">{{ __($key) }}</div>
                                 <div class="row">
-                                    @foreach ($permission as $item)
+                                    @foreach ($permission->sortBy('name') as $item)
                                         <div class="col-md-3">
                                             <label class="mt-3 mr-3 custom-switch">
                                                 <input value="{{ __($item->name) }}" type="checkbox" name="permissions[]"

@@ -57,37 +57,28 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your language') }}
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Name') }}</label>
                             <input type="text" id="name" name="name"
                                 class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name') ?? $language->name }}" readonly>
+                                value="{{ old('name') ?? $language->name }}" readonly required>
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your language name') }}
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Slug') }}</label>
                             <input type="text" id="slug" name="slug"
                                 class="form-control @error('slug') is-invalid @enderror"
-                                value="{{ old('slug') ?? $language->slug }}" readonly>
+                                value="{{ old('slug') ?? $language->slug }}" readonly required>
                             @error('slug')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your language slug') }}
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Is it default ?') }}</label>
@@ -100,9 +91,6 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your default language') }}
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Status') }}</label>
@@ -116,9 +104,6 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your language status') }}
-                            </div>
                         </div>
 
                         <div class="form-group">

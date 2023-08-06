@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AdminProfileUpdateRequest;
 use App\Http\Requests\AdminProfilePasswordUpdateRequest;
 
-class ProfileController extends Controller
+class AdminProfileController extends Controller
 {
     use FileUploadTrait;
 

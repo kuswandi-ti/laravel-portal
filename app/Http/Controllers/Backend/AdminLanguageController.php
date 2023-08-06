@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminLanguageStoreRequest;
 use App\Http\Requests\AdminLanguageUpdateRequest;
 
-class LanguageController extends Controller
+class AdminLanguageController extends Controller
 {
     /**
      * Display a listing of the resource.

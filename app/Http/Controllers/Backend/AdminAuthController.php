@@ -14,7 +14,7 @@ use App\Http\Requests\AdminAuthLoginRequest;
 use App\Http\Requests\AdminAuthResetPasswordRequest;
 use App\Http\Requests\AdminAuthSendResetLinkRequest;
 
-class AdminAuthenticationController extends Controller
+class AdminAuthController extends Controller
 {
     public function login()
     {

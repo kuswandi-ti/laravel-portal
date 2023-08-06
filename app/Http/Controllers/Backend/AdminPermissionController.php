@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Permission;
 use App\Http\Requests\AdminPermissionStoreRequest;
 use App\Http\Requests\AdminPermissionUpdateRequest;
 
-class PermissionController extends Controller
+class AdminPermissionController extends Controller
 {
     /**
      * Display a listing of the resource.

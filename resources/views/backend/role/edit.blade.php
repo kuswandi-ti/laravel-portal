@@ -41,15 +41,12 @@
                             <label>{{ __('Role Name') }}</label>
                             <input type="text" name="role_name"
                                 class="form-control @error('role_name') is-invalid @enderror"
-                                value="{{ old('role_name') ?? $role->name }}">
+                                value="{{ old('role_name') ?? $role->name }}" required>
                             @error('role_name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="invalid-feedback">
-                                {{ __('Please fill in your role name') }}
-                            </div>
                         </div>
 
                         <div class="mb-5 form-group">

@@ -22,14 +22,14 @@
         </script>
     @endif
 
-    @if ($message = Session::get('error'))
+    {{-- @if ($message = Session::get('error'))
         <script>
             Toast.fire({
                 icon: 'error',
                 title: "{{ $message }}"
             })
         </script>
-    @endif
+    @endif --}}
 
     @if ($message = Session::get('warning'))
         <script>
@@ -49,12 +49,12 @@
         </script>
     @endif
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <script>
             Toast.fire({
                 icon: 'info',
                 title: 'Please check the form below for errors'
             })
         </script>
-    @endif
+    @endif --}}
 @endpush

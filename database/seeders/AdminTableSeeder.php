@@ -16,8 +16,8 @@ class AdminTableSeeder extends Seeder
         $admin = new Admin();
 
         $admin->image = '/test';
-        $admin->name = 'Super User';
-        $admin->email = 'superuser@mail.com';
+        $admin->name = 'Super Admin';
+        $admin->email = 'superadmin@mail.com';
         $admin->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'; // password
         $admin->status = 1;
         $admin->save();
