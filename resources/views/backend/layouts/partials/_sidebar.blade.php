@@ -13,20 +13,14 @@
         <ul class="sidebar-menu">
             <li class="menu-header">{{ __('Dashboard') }}</li>
             <li class="{{ setSidebarActive(['backend.dashboard.*']) }}">
-                <a href="{{ route('backend.dashboard.index') }}" class="nav-link"><i
-                        class="fas fa-fire"></i><span>{{ __('Dashboard') }}</span></a>
-            </li>
-
-            <li class="menu-header">{{ __('Master') }}</li>
-            <li class="{{ setSidebarActive(['backend.language.*']) }}">
-                <a class="nav-link" href="{{ route('backend.language.index') }}">
-                    <i class="far fa-keyboard"></i>
-                    <span>{{ __('Languages') }}</span>
+                <a href="{{ route('backend.dashboard.index') }}" class="nav-link">
+                    <i class="fas fa-th"></i>
+                    <span>{{ __('Dashboard') }}</span>
                 </a>
             </li>
 
             <li class="menu-header">{{ __('Settings') }}</li>
-            <li class="dropdown {{ setSidebarActive(['backend.permission.*', 'backend.role.*']) }}">
+            <li class="dropdown {{ setSidebarActive(['backend.permission.*', 'backend.role.*', 'backend.admin.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-users-cog"></i>
                     <span>{{ __('Access Management') }}</span>
@@ -43,24 +37,24 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="dropdown {{ setSidebarActive(['backend.admin.*', 'backend.profile.*']) }}">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-user-cog"></i>
-                    <span>{{ __('User Management') }}</span>
-                </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['backend.admin.*']) }}">
                         <a class="nav-link" href="{{ route('backend.admin.index') }}">{{ __('Admin User') }}
                         </a>
                     </li>
                 </ul>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['backend.profile.*']) }}">
-                        <a class="nav-link" href="{{ route('backend.profile.index') }}">{{ __('Profile & Password') }}
-                        </a>
-                    </li>
-                </ul>
+            </li>
+            <li class="{{ setSidebarActive(['backend.language.*']) }}">
+                <a class="nav-link" href="{{ route('backend.language.index') }}">
+                    <i class="fas fa-flag"></i>
+                    <span>{{ __('Languages') }}</span>
+                </a>
+            </li>
+            <li class="{{ setSidebarActive(['backend.setting.*']) }}">
+                <a class="nav-link" href="{{ route('backend.setting.index') }}">
+                    <i class="fas fa-cog"></i>
+                    <span>{{ __('General Settings') }}</span>
+                </a>
             </li>
         </ul>
     </aside>

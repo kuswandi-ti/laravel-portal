@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\AdminRoleController;
 use App\Http\Controllers\Backend\AdminUserController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\AdminSettingController;
 use App\Http\Controllers\Backend\AdminLanguageController;
 use App\Http\Controllers\Backend\AdminDashboardController;
 use App\Http\Controllers\Backend\AdminPermissionController;
@@ -44,6 +45,9 @@ Route::group([
     /** Role Routes */
     Route::resource('role', AdminRoleController::class);
 
-    /** User Routes */
+    /** User Admin Routes */
     Route::resource('admin', AdminUserController::class);
+
+    /** Setting Routes */
+    Route::resource('setting', AdminSettingController::class);
 });
