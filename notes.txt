@@ -1,0 +1,57 @@
+Guard :
+    Super Admin (admins),
+    Pengurus (Staff -> admin, ketua, wakil, sekretaris, bendahara),
+    User
+
+------------ Super Admin -------------
+General Settings
+    1.  Basic Configuration
+        - Application name
+        - Timezone
+        - Currency
+        - Currency Symbol
+        - Account Number Prefix
+        - Account Number Length
+        - Maintenance Mode
+Logo
+    - Logo Image
+    - Favicon Image
+System Configuration
+    - Online Member Registration
+    - Email Verification
+    - Email Notification
+    - SMS Notification
+    - Language Options
+    - Deposit
+    - Withdraw
+    - OTP Email
+    - OTP SMS
+    - Push Notification
+------------ End Super Admin -------------
+
+------------ Staff (Admin) ------------
+1. Setting Identitas Lingkungan
+2. Menentukan Ketua RT
+2. Menentukan Sekretaris RT
+2. Menentukan Bendahara RT
+------------ End Staff (Admin) --------
+
+------------ Staff (Ketua & Wakil RT) ------------
+1. Report Statistik Data Warga
+2. Report Pemasukan
+3. Report Pengeluaran
+------------ End Staff (Ketua RT) --------
+
+------------ Staff (Sekretaris RT) ------------
+1. Register Warga Baru
+2. Membuat Surat Pengantar
+2. Report Statistik Data Warga
+------------ End Staff (Sekretaris RT) --------
+
+------------ Staff (Bendahara RT) ------------
+1. Membuat Data Tagihan
+2. Membuat Data Pemasukan
+3. Membuat Data Pengeluaran
+4. Report Pemasukan
+5. Report Pengeluaran
+------------ End Staff (Bendahara RT) --------
