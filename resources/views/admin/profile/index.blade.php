@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('admin.layouts.master')
 
 @section('page_title')
     {{ __('Profile') }}
@@ -14,7 +14,7 @@
 @endsection
 
 @section('section_body_title')
-    {{ __('Hi') }}, {{ $user->name ?? '' }}
+    {{ __('Hi') }}, {{ $admin->name ?? '' }}
 @endsection
 
 @section('section_body_lead')
@@ -25,7 +25,7 @@
     <div class="row mt-sm-4">
         <div class="col-12 col-md-12 col-lg-7">
             <div class="card">
-                <form method="post" action="{{ route('backend.profile.update',auth()->guard('admin')->user()->id) }}"
+                <form method="post" action="{{ route('admin.profile.update',auth()->guard('admin')->user()->id) }}"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -39,7 +39,7 @@
                                 <div id="image-preview" class="mx-auto image-preview">
                                     <label for="image-upload" id="image-label">{{ __('Choose File') }}</label>
                                     <input type="file" name="image" id="image-upload">
-                                    <input type="hidden" name="old_image" value="{{ $user->image }}">
+                                    <input type="hidden" name="old_image" value="{{ $admin->image }}">
                                 </div>
                                 @error('image')
                                     <div class="mt-2 text-center text-danger">
@@ -51,7 +51,7 @@
                             <div class="form-group col-12">
                                 <label>{{ __('Name') }} <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') ?? $user->name }}" required>
+                                    name="name" value="{{ old('name') ?? $admin->name }}" required>
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -61,7 +61,7 @@
                             <div class="form-group col-12">
                                 <label>{{ __('Email') }} <span class="text-danger">(readonly)</span></label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') ?? $user->email }}" disabled>
+                                    name="email" value="{{ old('email') ?? $admin->email }}" disabled>
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -79,7 +79,7 @@
 
         <div class="col-12 col-md-12 col-lg-5">
             <div class="card">
-                <form method="post" action="{{ route('backend.profile_password.update', $user->id) }}">
+                <form method="post" action="{{ route('admin.profile_password.update', $admin->id) }}">
                     @csrf
                     @method('PUT')
 
@@ -140,7 +140,7 @@
     <script>
         $(document).ready(function() {
             $('.image-preview').css({
-                "background-image": "url({{ asset('public/storage' . $user->image) }})",
+                "background-image": "url({{ asset('public/storage' . $admin->image) }})",
                 "background-size": "cover",
                 "background-position": "center center"
             });
