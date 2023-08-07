@@ -9,7 +9,7 @@ trait FileUploadTrait
 {
     function handleImageUpload(Request $request, string $fieldName, ?string $oldPath = null, string $dir = 'uploads'): ?String
     {
-        if (!$request->hasFile($fieldName)) { // Nama control di view harus sama dengan nama field di tabel
+        if (!$request->hasFile($fieldName)) {
             return null;
         }
 

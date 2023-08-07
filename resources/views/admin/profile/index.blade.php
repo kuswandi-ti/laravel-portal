@@ -71,7 +71,9 @@
                         </div>
                     </div>
                     <div class="text-right card-footer">
-                        <button class="btn btn-primary">{{ __('Save Changes') }}</button>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -122,7 +124,9 @@
                         </div>
                     </div>
                     <div class="text-right card-footer">
-                        <button class="btn btn-primary">{{ __('Save Changes') }}</button>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                        </button>
                     </div>
                 </form>
             </div>

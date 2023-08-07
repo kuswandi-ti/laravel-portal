@@ -66,17 +66,10 @@
                 </ul>
             </li>
 
-            <li class="">
-                <a class="nav-link" href="">
+            <li class="{{ setSidebarActive(['admin.general_setting.*']) }}">
+                <a class="nav-link" href="{{ route('admin.general_setting.index') }}">
                     <i class="fas fa-cog"></i>
                     <span>{{ __('General Settings') }}</span>
-                </a>
-            </li>
-
-            <li class="">
-                <a class="nav-link" href="">
-                    <i class="fas fa-eye"></i>
-                    <span>{{ __('Logo') }}</span>
                 </a>
             </li>
 

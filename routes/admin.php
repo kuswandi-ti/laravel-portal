@@ -5,10 +5,10 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminProfileController;
-use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminLanguageController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminPermissionController;
+use App\Http\Controllers\Admin\AdminGeneralSettingController;
 
 Route::group([], function () {
     /** Auth Admin Routes */
@@ -44,5 +44,6 @@ Route::group([
     Route::resource('admin', AdminUserController::class);
 
     /** Setting Routes */
-    Route::resource('setting', AdminSettingController::class);
+    Route::get('general-setting', [AdminGeneralSettingController::class, 'index'])->name('general_setting.index');
+    Route::put('general-setting', [AdminGeneralSettingController::class, 'updateGeneralSetting'])->name('general_setting.update');
 });

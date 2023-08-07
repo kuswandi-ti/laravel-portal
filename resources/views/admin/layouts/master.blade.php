@@ -107,6 +107,23 @@
             }
         });
 
+        $('.custom-file-input').on('change', function() {
+            let filename = $(this)
+                .val()
+                .split('\\')
+                .pop()
+            $(this)
+                .next('.custom-file-label')
+                .addClass('selected')
+                .html(filename)
+        })
+
+        function preview(target, image) {
+            $(target)
+                .attr('src', window.URL.createObjectURL(image))
+                .show()
+        }
+
         $(document).ready(function() {
             $('body').on('click', '.delete_item', function(e) {
                 e.preventDefault();
