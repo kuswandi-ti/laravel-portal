@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Setting;
 use Illuminate\Http\Request;
-use App\Models\GeneralSetting;
 use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminGeneralSettingUpdateRequest;
@@ -14,7 +14,7 @@ class AdminGeneralSettingController extends Controller
 
     public function index()
     {
-        $general_setting = GeneralSetting::all();
+        $general_setting = Setting::where('group_name', 'general setting')->get();
         return view('admin.general_setting.index', compact('general_setting'));
     }
 
@@ -52,9 +52,10 @@ class AdminGeneralSettingController extends Controller
         // }
 
         foreach ($request->only('application_name', 'currency_code', 'currency_symbol') as $key => $value) {
-            GeneralSetting::updateOrCreate(
+            Setting::updateOrCreate(
                 ['key' => $key],
                 ['value' => $value],
+                ['group_name' => 'general setting'],
             );
         }
 
