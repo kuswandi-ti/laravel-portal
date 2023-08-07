@@ -14,7 +14,7 @@ class AdminGeneralSettingController extends Controller
 
     public function index()
     {
-        $general_setting = Setting::where('group_name', 'general setting')->get();
+        $general_setting = Setting::all();
         return view('admin.general_setting.index', compact('general_setting'));
     }
 
@@ -55,7 +55,6 @@ class AdminGeneralSettingController extends Controller
             Setting::updateOrCreate(
                 ['key' => $key],
                 ['value' => $value],
-                ['group_name' => 'general setting'],
             );
         }
 
