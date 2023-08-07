@@ -55,7 +55,7 @@
                                                 <label>{{ __('Application Name') }}</label>
                                                 <input type="text" id="application_name" name="application_name"
                                                     class="form-control @error('application_name') is-invalid @enderror"
-                                                    value="{{ old('application_name') ?? $general_setting['application_name'] }}"
+                                                    value="{{ old('application_name') ?? !empty($general_setting['application_name']) ? $general_setting['application_name'] : '' }}"
                                                     required>
                                                 @error('application_name')
                                                     <div class="invalid-feedback">
@@ -69,7 +69,7 @@
                                                 <label>{{ __('Currency') }}</label>
                                                 <input type="text" id="currency_code" name="currency_code"
                                                     class="form-control @error('currency_code') is-invalid @enderror"
-                                                    value="{{ old('currency_code') ?? $general_setting['currency_code'] }}"
+                                                    value="{{ old('currency_code') ?? !empty($general_setting['currency_code']) ? $general_setting['currency_code'] : '' }}"
                                                     required>
                                                 @error('currency_code')
                                                     <div class="invalid-feedback">
@@ -83,7 +83,7 @@
                                                 <label>{{ __('Currency Symbol') }}</label>
                                                 <input type="text" id="currency_symbol" name="currency_symbol"
                                                     class="form-control @error('currency_symbol') is-invalid @enderror"
-                                                    value="{{ old('currency_symbol') ?? $general_setting['currency_symbol'] }}"
+                                                    value="{{ old('currency_symbol') ?? !empty($general_setting['currency_symbol']) ? $general_setting['currency_symbol'] : '' }}"
                                                     required>
                                                 @error('currency_symbol')
                                                     <div class="invalid-feedback">
