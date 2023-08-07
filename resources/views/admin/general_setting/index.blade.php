@@ -55,7 +55,7 @@
                                                 <label>{{ __('Application Name') }}</label>
                                                 <input type="text" id="application_name" name="application_name"
                                                     class="form-control @error('application_name') is-invalid @enderror"
-                                                    value="{{ old('application_name') ?? !empty($general_setting['application_name']) ? $general_setting['application_name'] : '' }}"
+                                                    value="{{ old('application_name') ?? !empty($setting['application_name']) ? $setting['application_name'] : '' }}"
                                                     required>
                                                 @error('application_name')
                                                     <div class="invalid-feedback">
@@ -69,7 +69,7 @@
                                                 <label>{{ __('Currency') }}</label>
                                                 <input type="text" id="currency_code" name="currency_code"
                                                     class="form-control @error('currency_code') is-invalid @enderror"
-                                                    value="{{ old('currency_code') ?? !empty($general_setting['currency_code']) ? $general_setting['currency_code'] : '' }}"
+                                                    value="{{ old('currency_code') ?? !empty($setting['currency_code']) ? $setting['currency_code'] : '' }}"
                                                     required>
                                                 @error('currency_code')
                                                     <div class="invalid-feedback">
@@ -83,7 +83,7 @@
                                                 <label>{{ __('Currency Symbol') }}</label>
                                                 <input type="text" id="currency_symbol" name="currency_symbol"
                                                     class="form-control @error('currency_symbol') is-invalid @enderror"
-                                                    value="{{ old('currency_symbol') ?? !empty($general_setting['currency_symbol']) ? $general_setting['currency_symbol'] : '' }}"
+                                                    value="{{ old('currency_symbol') ?? !empty($setting['currency_symbol']) ? $setting['currency_symbol'] : '' }}"
                                                     required>
                                                 @error('currency_symbol')
                                                     <div class="invalid-feedback">
@@ -99,9 +99,9 @@
                                             <div class="form-group col-6">
                                                 <label for="logo">Logo</label>
                                                 <div class="mb-3 text-center">
-                                                    @if (!empty($general_setting['image_logo']))
+                                                    @if (!empty($setting['image_logo']))
                                                         <img class="preview-path_image_logo"
-                                                            src="{{ url(env('PATH_IMAGE_STORAGE') . $general_setting['image_logo']) }}"
+                                                            src="{{ url(env('PATH_IMAGE_STORAGE') . $setting['image_logo']) }}"
                                                             width="200" height="200">
                                                     @else
                                                         <img class="preview-path_image_logo"
@@ -115,15 +115,15 @@
                                                         onchange="preview('.preview-path_image_logo', this.files[0])">
                                                     <label class="custom-file-label" for="logo">Choose file</label>
                                                     <input type="hidden" name="old_image_logo"
-                                                        value="{{ !empty($general_setting['image_logo']) ? $general_setting['image_logo'] : url(env('NO_IMAGE_SQUARE')) }}">
+                                                        value="{{ !empty($setting['image_logo']) ? $setting['image_logo'] : url(env('NO_IMAGE_SQUARE')) }}">
                                                 </div>
                                             </div>
                                             <div class="form-group col-6">
                                                 <label for="favicon">Favicon</label>
                                                 <div class="mb-3 text-center">
-                                                    @if (!empty($general_setting['image_favicon']))
+                                                    @if (!empty($setting['image_favicon']))
                                                         <img class="preview-path_image_favicon"
-                                                            src="{{ url(env('PATH_IMAGE_STORAGE') . $general_setting['image_favicon']) }}"
+                                                            src="{{ url(env('PATH_IMAGE_STORAGE') . $setting['image_favicon']) }}"
                                                             width="200" height="200">
                                                     @else
                                                         <img class="preview-path_image_favicon"
@@ -137,7 +137,7 @@
                                                         onchange="preview('.preview-path_image_favicon', this.files[0])">
                                                     <label class="custom-file-label" for="favicon">Choose file</label>
                                                     <input type="hidden" name="old_image_favicon"
-                                                        value="{{ !empty($general_setting['image_favicon']) ? $general_setting['image_favicon'] : url(env('NO_IMAGE_SQUARE')) }}">
+                                                        value="{{ !empty($setting['image_favicon']) ? $setting['image_favicon'] : url(env('NO_IMAGE_SQUARE')) }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +150,7 @@
                             <div class="form-group col-3">
                                 &nbsp;
                             </div>
-                            <div class="form-group col-9 text-center">
+                            <div class="text-center form-group col-9">
                                 <button class="mt-3 btn btn-primary">
                                     <i class="fas fa-save"></i> {{ __('Save Changes') }}
                                 </button>
