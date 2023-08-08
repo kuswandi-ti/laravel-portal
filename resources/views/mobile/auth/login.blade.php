@@ -1,6 +1,8 @@
 @extends('mobile.layouts.auth')
 
-@section('app_title', 'Login')
+@section('app_title')
+    {{ __('Login') }}
+@endsection
 
 @section('frontend_content')
     <div id="appCapsule">

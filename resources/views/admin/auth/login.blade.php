@@ -37,18 +37,9 @@
                             </div>
 
                             <div class="card-body">
-                                @if (session()->has('success'))
-                                    <div class="alert alert-success alert-dismissible show fade">
-                                        <div class="alert-body">
-                                            <button class="close" data-dismiss="alert">
-                                                <span>×</span>
-                                            </button>
-                                            {{ session()->get('success') }}
-                                        </div>
-                                    </div>
-                                @endif
-                                <form method="POST" action="{{ route('admin.handle_login') }}"
-                                    class="needs-validation" novalidate="">
+                                <x-alert-message />
+
+                                <form method="POST" action="{{ route('admin.handle_login') }}">
                                     @csrf
 
                                     <div class="form-group">
@@ -62,9 +53,6 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
-                                        <div class="invalid-feedback">
-                                            {{ __('Please fill in your email') }}
-                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -79,9 +67,6 @@
                                         </div>
                                         <input id="password" type="password" class="form-control" name="password"
                                             tabindex="2" required>
-                                        <div class="invalid-feedback">
-                                            {{ __('Please fill in your password') }}
-                                        </div>
                                     </div>
 
                                     <div class="form-group">

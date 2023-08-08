@@ -140,9 +140,9 @@
             <a href="#" class="item" onclick="document.querySelector('#form-logout').submit()">
                 <div class="in">
                     <div>
-                        <form action="#" method="post" id="form-logout">
+                        <form action="{{ route('mobile.logout') }}" method="post" id="form-logout">
                             @csrf
-                            Keluar di Semua Perangkat
+                            <span class="text-danger">Keluar di Semua Perangkat</span>
                         </form>
                     </div>
                 </div>
