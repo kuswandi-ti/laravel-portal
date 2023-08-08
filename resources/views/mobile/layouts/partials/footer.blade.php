@@ -1,8 +1,9 @@
 <!-- app footer -->
 <div class="appFooter">
     <div class="footer-title">
-        Copyright © Finapp 2021. All Rights Reserved.
+        {{ __('Copyright') }} © {{ config('app.name') }} {{ date('Y') }}.
+        {{ __('All Rights Reserved') }}.
     </div>
-    Bootstrap 5 based mobile template.
+    {{ __('Bootstrap 5 based mobile template') }}.
 </div>
 <!-- * app footer -->

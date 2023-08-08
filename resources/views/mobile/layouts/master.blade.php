@@ -20,12 +20,13 @@
     <!-- * loader -->
 
     <!-- App Header -->
-    {{-- @includeIf('layouts.frontend.partials.header') --}}
+    {{-- @includeIf('mobile.layouts.partials.header') --}}
     <!-- * App Header -->
 
     <!-- App Capsule -->
     <div id="appCapsule">
         @yield('frontend_content')
+        @includeIf('mobile.layouts.partials.footer')
     </div>
     <!-- * App Capsule -->
 

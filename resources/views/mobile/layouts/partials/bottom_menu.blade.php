@@ -3,7 +3,7 @@
         <div class="col">
             <ion-icon name="file-tray-full-outline" role="img" class="md hydrated" aria-label="file-tray-full-outline">
             </ion-icon>
-            <strong>Dashboard</strong>
+            <strong>{{ __('Dashboard') }}</strong>
         </div>
     </a>
     <a href="{{ route('mobile.dashboard.transaction') }}"
@@ -12,7 +12,7 @@
             <ion-icon name="layers-outline" role="img" class="md hydrated" aria-label="layers-outline">
             </ion-icon>
             <span class="badge badge-danger">4</span>
-            <strong>Transaksi</strong>
+            <strong>{{ __('Transaction') }}</strong>
         </div>
     </a>
     <a href="#" class="item">
@@ -30,7 +30,7 @@
                 aria-label="notifications-outline">
             </ion-icon>
             <span class="badge badge-danger">4</span>
-            <strong>Notifikasi</strong>
+            <strong>{{ __('Notification') }}</strong>
         </div>
     </a>
     <a href="{{ route('mobile.dashboard.setting') }}"
@@ -38,7 +38,7 @@
         <div class="col">
             <ion-icon name="settings-outline" role="img" class="md hydrated" aria-label="settings outline">
             </ion-icon>
-            <strong>Pengaturan</strong>
+            <strong>{{ __('Setting') }}</strong>
         </div>
     </a>
 </div>
