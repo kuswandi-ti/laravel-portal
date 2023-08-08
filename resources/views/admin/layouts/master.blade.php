@@ -9,22 +9,7 @@
 
     <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/fontawesome/css/all.min.css') }}">
-
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/sweetalert2/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/datatables/datatables.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('public/template/backend/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('public/template/backend/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
-    @stack('styles_vendor')
-
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/css/components.css') }}">
+    @include('admin.includes.styles')
 
     <!-- Page Specific CSS File -->
     @stack('styles')
@@ -73,25 +58,7 @@
         </div>
     </div>
 
-    <!-- General JS Scripts -->
-    <script src="{{ asset('public/template/backend/assets/modules/jquery.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/popper.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/tooltip.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/moment.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/js/stisla.js') }}"></script>
-
-    <!-- JS Libraies -->
-    <script src="{{ asset('public/template/backend/assets/modules/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/datatables/datatables.min.js') }}"></script>
-    <script
-        src="{{ asset('public/template/backend/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('public/template/backend/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}">
-    </script>
-    <script src="{{ asset('public/template/backend/assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
+    @include('admin.includes.scripts')
     @stack('scripts_vendor')
 
     <!-- Page Specific JS File -->

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Swal extends Component
+class AlertMessage extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class Swal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.swal');
+        return view('components.alert-message');
     }
 }
