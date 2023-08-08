@@ -64,7 +64,7 @@
                             <div class="mt-2 custom-switches-stacked">
                                 @foreach ($roles as $key => $item)
                                     <label class="custom-switch">
-                                        <input type="radio" name="role" value="{{ $key }}"
+                                        <input type="checkbox" name="role[]" value="{{ $key }}"
                                             class="custom-switch-input" {{ in_array($item, $user_role) ? 'checked' : '' }}>
                                         <span class="custom-switch-indicator"></span>
                                         <span class="custom-switch-description text-primary">{{ $item }}</span>

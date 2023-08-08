@@ -28,6 +28,9 @@
                 <div class="card-header">
                     <h4>{{ __('All General User') }}</h4>
                     <div class="card-header-action">
+                        <a href="{{ route('admin.user.create') }}" class="btn btn-danger">
+                            <i class="fas fa-minus-circle"></i> {{ __('Inactive User') }}
+                        </a>
                         <a href="{{ route('admin.user.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i> {{ __('Create') }}
                         </a>
@@ -42,7 +45,7 @@
                                     <th></th>
                                     <th>{{ __('General User Name') }}</th>
                                     <th class="text-center">{{ __('Email') }}</th>
-                                    <th class="text-center">{{ __('Role') }}</th>
+                                    <th>{{ __('Role') }}</th>
                                     <th class="text-center">{{ __('Status') }}</th>
                                     <th class="text-center"><i class="fas fa-cogs"></i></th>
                                 </tr>
@@ -63,10 +66,14 @@
                                         </td>
                                         <td class="align-middle">{{ $user->name ?? '' }}</td>
                                         <td class="text-center align-middle">{{ $user->email ?? '' }}</td>
-                                        <td class="text-center align-middle">{{ $user->roles->first()->name ?? '' }}</td>
+                                        <td class="align-middle">
+                                            @foreach ($user->roles as $item)
+                                                <span class="badge badge-secondary">{{ $item->name ?? '' }}</span>
+                                            @endforeach
+                                        </td>
                                         <td class="text-center">
                                             @if (empty($user->deleted_at))
-                                                <div class="badge badge-primary">Active</div>
+                                                <div class="badge badge-info">Active</div>
                                             @else
                                                 <div class="badge badge-danger">Inactive</div>
                                             @endif
