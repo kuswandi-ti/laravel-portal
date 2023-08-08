@@ -7,10 +7,10 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminStaffStoreRequest;
-use App\Http\Requests\Admin\AdminStaffUpdateRequest;
+use App\Http\Requests\Admin\AdminGeneralUserStoreRequest;
+use App\Http\Requests\Admin\AdminGeneralUserUpdateRequest;
 
-class AdminStaffController extends Controller
+class AdminGeneralUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class AdminStaffController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.staff.index', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -27,13 +27,13 @@ class AdminStaffController extends Controller
     public function create()
     {
         $roles = Role::orderBy('name', 'DESC')->where('guard_name', 'web')->pluck('name', 'name');
-        return view('admin.staff.create', compact('roles'));
+        return view('admin.user.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AdminStaffStoreRequest $request)
+    public function store(AdminGeneralUserStoreRequest $request)
     {
         $user = new User();
 
@@ -45,7 +45,7 @@ class AdminStaffController extends Controller
 
         $user->assignRole($request->role);
 
-        return redirect()->route('admin.staff.index')->with('success', __('Created staff user successfully'));
+        return redirect()->route('admin.user.index')->with('success', __('Created user successfully'));
     }
 
     /**
@@ -65,13 +65,13 @@ class AdminStaffController extends Controller
         $roles = Role::orderBy('name', 'DESC')->where('guard_name', 'web')->pluck('name', 'name');
         $user_role = $user->roles->pluck('name', 'name')->all();
 
-        return view('admin.staff.edit', compact('user', 'roles', 'user_role'));
+        return view('admin.user.edit', compact('user', 'roles', 'user_role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AdminStaffUpdateRequest $request, string $id)
+    public function update(AdminGeneralUserUpdateRequest $request, string $id)
     {
         $user = User::findOrFail($id);
         $user->update([
@@ -81,7 +81,7 @@ class AdminStaffController extends Controller
         ]);
         $user->syncRoles($request->role);
 
-        return redirect()->route('admin.staff.index')->with('success', __('Updated staff user successfully'));
+        return redirect()->route('admin.user.index')->with('success', __('Updated user successfully'));
     }
 
     /**
@@ -103,12 +103,12 @@ class AdminStaffController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted staff user successfully')
+                'message' => __('Deleted user successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted staff user is error')
+                'message' => __('Deleted user is error')
             ]);
         }
     }

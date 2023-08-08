@@ -3,13 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminRoleController;
-use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminLanguageController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminAdminUserController;
 use App\Http\Controllers\Admin\AdminPermissionController;
+use App\Http\Controllers\Admin\AdminGeneralUserController;
 
 Route::group([], function () {
     /** Auth Admin Routes */
@@ -42,13 +42,13 @@ Route::group([
     Route::resource('role', AdminRoleController::class);
 
     /** User Admin Routes */
-    Route::resource('admin', AdminUserController::class);
+    Route::resource('admin', AdminAdminUserController::class);
 
     /** Setting Routes */
     Route::get('setting', [AdminSettingController::class, 'index'])->name('setting.index');
     Route::get('general-setting', [AdminSettingController::class, 'generalSettingIndex'])->name('general_setting.index');
     Route::put('general-setting', [AdminSettingController::class, 'generalSettingUpdate'])->name('general_setting.update');
 
-    /** User Staff Routes */
-    Route::resource('staff', AdminStaffController::class);
+    /** General User Routes */
+    Route::resource('user', AdminGeneralUserController::class);
 });

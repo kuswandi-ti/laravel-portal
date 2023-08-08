@@ -6,10 +6,10 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminUserStoreRequest;
-use App\Http\Requests\Admin\AdminUserUpdateRequest;
+use App\Http\Requests\Admin\AdminAdminUserStoreRequest;
+use App\Http\Requests\Admin\AdminAdminUserUpdateRequest;
 
-class AdminUserController extends Controller
+class AdminAdminUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,7 +32,7 @@ class AdminUserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AdminUserStoreRequest $request)
+    public function store(AdminAdminUserStoreRequest $request)
     {
         $admin = new Admin();
 
@@ -70,7 +70,7 @@ class AdminUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AdminUserUpdateRequest $request, string $id)
+    public function update(AdminAdminUserUpdateRequest $request, string $id)
     {
         $admin = Admin::findOrFail($id);
         $admin->update([

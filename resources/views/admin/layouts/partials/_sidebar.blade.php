@@ -41,7 +41,7 @@
                 </ul>
             </li>
 
-            <li class="dropdown {{ setSidebarActive(['admin.admin.*', 'admin.staff.*']) }}">
+            <li class="dropdown {{ setSidebarActive(['admin.admin.*', 'admin.user.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-cog"></i>
                     <span>{{ __('Manage Users') }}</span>
@@ -53,25 +53,12 @@
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.staff.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.staff.index') }}">{{ __('Admin & Staff') }}
-                        </a>
-                    </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="#">{{ __('Member') }}
+                    <li class="{{ setSidebarActive(['admin.user.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.user.index') }}">{{ __('General User') }}
                         </a>
                     </li>
                 </ul>
             </li>
-
-            {{-- <li class="">
-                <a class="nav-link" href="">
-                    <i class="fas fa-cogs"></i>
-                    <span>{{ __('System Configuration') }}</span>
-                </a>
-            </li> --}}
 
             <li class="dropdown {{ setSidebarActive(['admin.language.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
@@ -102,53 +89,6 @@
                     <span>{{ __('Settings') }}</span>
                 </a>
             </li>
-
-            {{-- <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-bell"></i>
-                    <span>{{ __('Notification') }}</span></a>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="">
-                            <span>{{ __('Email') }}</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="">
-                            <span>{{ __('SMS') }}</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="">
-                            <span>{{ __('Push Notification') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li> --}}
-
-            {{-- <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="far fa-credit-card"></i>
-                    <span>{{ __('Payment Gateway') }}</span></a>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="">
-                            <span>{{ __('Automatic') }}</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="">
-                            <span>{{ __('Manual') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li> --}}
             {{-- End Configuration --}}
         </ul>
     </aside>

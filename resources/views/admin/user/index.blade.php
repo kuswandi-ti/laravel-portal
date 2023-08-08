@@ -1,24 +1,24 @@
 @extends('admin.layouts.master')
 
 @section('page_title')
-    {{ __('Staff User') }}
+    {{ __('General User') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Staff User') }}
+    {{ __('General User') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Staff User') }}</div>
+    <div class="breadcrumb-item">{{ __('General User') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Staff User') }}
+    {{ __('General User') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View information about staff user on this page') }}
+    {{ __('View information about general user on this page') }}
 @endsection
 
 @section('backend_content')
@@ -26,9 +26,9 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('All Staff User') }}</h4>
+                    <h4>{{ __('All General User') }}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('admin.staff.create') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.user.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i> {{ __('Create') }}
                         </a>
                     </div>
@@ -40,7 +40,7 @@
                                 <tr>
                                     <th class="text-center"><i class="fas fa-list-ol"></i></th>
                                     <th></th>
-                                    <th>{{ __('Staff User Name') }}</th>
+                                    <th>{{ __('General User Name') }}</th>
                                     <th class="text-center">{{ __('Email') }}</th>
                                     <th class="text-center">{{ __('Role') }}</th>
                                     <th class="text-center">{{ __('Status') }}</th>
@@ -72,9 +72,9 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('admin.staff.edit', $user->id) }}"
+                                            <a href="{{ route('admin.user.edit', $user->id) }}"
                                                 class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('admin.staff.destroy', $user->id) }}"
+                                            <a href="{{ route('admin.user.destroy', $user->id) }}"
                                                 class="btn btn-danger btn-sm delete_item"><i
                                                     class="fas fa-trash-alt"></i></a>
                                         </td>

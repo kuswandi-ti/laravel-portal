@@ -1,24 +1,24 @@
 @extends('admin.layouts.master')
 
 @section('page_title')
-    {{ __('Staff User') }}
+    {{ __('User') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Staff User') }}
+    {{ __('User') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Staff User') }}</div>
+    <div class="breadcrumb-item">{{ __('User') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Edit Staff User') }}
+    {{ __('Edit Sta User') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('Update information about staff user on this page') }}
+    {{ __('Update information about user on this page') }}
 @endsection
 
 @section('backend_content')
@@ -26,19 +26,19 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Update Staff User') }}</h4>
+                    <h4>{{ __('Update User') }}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('admin.staff.index') }}" class="btn btn-warning">
+                        <a href="{{ route('admin.user.index') }}" class="btn btn-warning">
                             <i class="fas fa-chevron-circle-left"></i> {{ __('Back') }}
                         </a>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('admin.staff.update', $user->id) }}">
+                <form method="POST" action="{{ route('admin.user.update', $user->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
-                            <label>{{ __('Staff User Name') }} <x-fill-field /></label>
+                            <label>{{ __('User Name') }} <x-fill-field /></label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                 value="{{ old('name') ?? $user->name }}" required>
                             @error('name')
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>{{ __('Staff User Email') }} <x-fill-field /></label>
+                            <label>{{ __('User Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email') ?? $user->email }}" required>
                             @error('email')
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="control-label">{{ __('Staff User Role') }} <x-fill-field /></div>
+                            <div class="control-label">{{ __('User Role') }} <x-fill-field /></div>
                             <div class="mt-2 custom-switches-stacked">
                                 @foreach ($roles as $key => $item)
                                     <label class="custom-switch">
