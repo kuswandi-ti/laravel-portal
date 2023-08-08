@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\LanguagesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,8 +20,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // $this->call(AdminTableSeeder::class);
-        // $this->call(LanguageTableSeeder::class);
+        $this->call(LanguagesTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
     }
 }

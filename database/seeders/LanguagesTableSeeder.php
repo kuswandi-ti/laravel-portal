@@ -6,7 +6,7 @@ use App\Models\Language;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class LanguageTableSeeder extends Seeder
+class LanguagesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

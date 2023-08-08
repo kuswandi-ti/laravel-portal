@@ -38,7 +38,7 @@
 
                             <div class="card-body">
                                 <x-alert-message />
-
+                                <br>
                                 <form method="POST" action="{{ route('admin.handle_login') }}">
                                     @csrf
 
