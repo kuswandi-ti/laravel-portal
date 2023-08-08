@@ -41,20 +41,20 @@
                 </ul>
             </li>
 
-            <li class="dropdown {{ setSidebarActive(['admin.admin.*']) }}">
+            <li class="dropdown {{ setSidebarActive(['admin.admin.*', 'admin.staff.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-cog"></i>
                     <span>{{ __('Manage Users') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.admin.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.admin.index') }}">{{ __('Admin') }}
+                        <a class="nav-link" href="{{ route('admin.admin.index') }}">{{ __('Super Admin') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="#">{{ __('Staff') }}
+                    <li class="{{ setSidebarActive(['admin.staff.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.staff.index') }}">{{ __('Admin & Staff') }}
                         </a>
                     </li>
                 </ul>

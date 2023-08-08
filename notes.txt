@@ -40,6 +40,7 @@ System Configuration
 1. Report Statistik Data Warga
 2. Report Pemasukan
 3. Report Pengeluaran
+4. Approve Pengeluaran
 ------------ End Staff (Ketua RT) --------
 
 ------------ Staff (Sekretaris RT) ------------
@@ -55,3 +56,11 @@ System Configuration
 4. Report Pemasukan
 5. Report Pengeluaran
 ------------ End Staff (Bendahara RT) --------
+
+
+
+------------ Aturan Main ---------------------
+1. Admin RT mendaftar langganan ke super admin
+2. Superadmin membuat user admin RT
+3. Kirim link aktivasi admin RT
+------------ Aturan Main ---------------------

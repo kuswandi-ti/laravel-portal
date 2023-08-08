@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminLanguageController;
@@ -47,4 +48,7 @@ Route::group([
     Route::get('setting', [AdminSettingController::class, 'index'])->name('setting.index');
     Route::get('general-setting', [AdminSettingController::class, 'generalSettingIndex'])->name('general_setting.index');
     Route::put('general-setting', [AdminSettingController::class, 'generalSettingUpdate'])->name('general_setting.update');
+
+    /** User Staff Routes */
+    Route::resource('staff', AdminStaffController::class);
 });

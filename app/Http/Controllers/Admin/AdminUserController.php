@@ -101,12 +101,12 @@ class AdminUserController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted user admin successfully')
+                'message' => __('Deleted admin user successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted user admin is error')
+                'message' => __('Deleted admin user is error')
             ]);
         }
     }
