@@ -54,11 +54,12 @@
                                         <td class="align-middle">
                                             @if (!empty($admin->image))
                                                 <figure class="avatar">
-                                                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . $admin->image) }}">
+                                                    <img
+                                                        src="{{ url(config('common.path_image_store') . $admin->image) }}">
                                                 </figure>
                                             @else
-                                                <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="rounded-circle"
-                                                    width="35">
+                                                <img src="{{ url(config('common.no_image_square')) }}"
+                                                    class="rounded-circle" width="35">
                                             @endif
                                         </td>
                                         <td class="align-middle">{{ $admin->name ?? '' }}</td>
