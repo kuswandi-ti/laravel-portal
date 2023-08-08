@@ -41,6 +41,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
+                        @stack('header_back')
                         <h1>@yield('section_header_title')</h1>
                         <div class="section-header-breadcrumb">
                             @section('section_header_breadcrumb')

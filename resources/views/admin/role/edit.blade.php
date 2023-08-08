@@ -37,7 +37,7 @@
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                        <div class="mb-5 form-group">
+                        <div class="form-group">
                             <label>{{ __('Role Name') }}</label>
                             <input type="text" name="role_name"
                                 class="form-control @error('role_name') is-invalid @enderror"
@@ -49,7 +49,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-5 form-group">
+                        <div class="form-group">
                             <div class="control-label">{{ __('Guard Name') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
@@ -74,12 +74,12 @@
                         </div>
 
                         @foreach ($permissions as $key => $permission)
-                            <div class="mb-5 form-group">
+                            <div class="form-group">
                                 <div class="control-label">{{ __($key) }}</div>
                                 <div class="row">
                                     @foreach ($permission as $item)
                                         <div class="col-md-3">
-                                            <label class="mt-3 mr-3 custom-switch">
+                                            <label class="mt-2 custom-switch">
                                                 <input value="{{ __($item->name) }}" type="checkbox" name="permissions[]"
                                                     class="custom-switch-input"
                                                     {{ in_array($item->name, $roles_permissions) ? 'checked' : '' }}>
@@ -91,12 +91,12 @@
                                 </div>
                             </div>
                         @endforeach
+                    </div>
 
-                        <div class="form-group">
-                            <button class="mt-3 btn btn-primary">
-                                <i class="fas fa-save"></i> {{ __('Update') }}
-                            </button>
-                        </div>
+                    <div class="card-footer bg-light">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> {{ __('Update') }}
+                        </button>
                     </div>
                 </form>
             </div>

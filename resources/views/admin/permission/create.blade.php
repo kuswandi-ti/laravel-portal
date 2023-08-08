@@ -79,12 +79,12 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <button class="mt-3 btn btn-primary">
-                                <i class="fas fa-save"></i> {{ __('Create') }}
-                            </button>
-                        </div>
+                    <div class="card-footer bg-light">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> {{ __('Create') }}
+                        </button>
                     </div>
                 </form>
             </div>

@@ -8,19 +8,24 @@ use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminGeneralSettingUpdateRequest;
 
-class AdminGeneralSettingController extends Controller
+class AdminSettingController extends Controller
 {
     use FileUploadTrait;
 
     public function index()
     {
-        $general_setting = Setting::all();
-        return view('admin.general_setting.index', compact('general_setting'));
+        return view('admin.setting.index');
     }
 
-    public function updateGeneralSetting(AdminGeneralSettingUpdateRequest $request)
+    public function generalSettingIndex()
     {
-        foreach ($request->only('application_name', 'currency_code', 'currency_symbol') as $key => $value) {
+        $general_setting = Setting::all();
+        return view('admin.setting.general_setting', compact('general_setting'));
+    }
+
+    public function generalSettingUpdate(AdminGeneralSettingUpdateRequest $request)
+    {
+        foreach ($request->only('application_name', 'application_tagline', 'application_description') as $key => $value) {
             Setting::updateOrCreate(
                 ['key' => $key],
                 ['value' => $value],

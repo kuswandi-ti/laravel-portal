@@ -23,8 +23,8 @@ class AdminGeneralSettingUpdateRequest extends FormRequest
     {
         return [
             'application_name' => ['required', 'string', 'max:255'],
-            'currency_code' => ['required', 'string', 'max:255'],
-            'currency_symbol' => ['required', 'string', 'max:255'],
+            'application_tagline' => ['nullable', 'string', 'max:255'],
+            'application_description' => ['nullable', 'string', 'max:255'],
             'logo' => ['nullable', 'image', 'max:3000'],
             'favicon' => ['nullable', 'image', 'max:3000'],
         ];

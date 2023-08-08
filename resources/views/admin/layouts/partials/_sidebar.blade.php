@@ -20,8 +20,8 @@
             </li>
             {{-- End Dashboard --}}
 
-            {{-- Settings --}}
-            <li class="menu-header">{{ __('Settings') }}</li>
+            {{-- Configuration --}}
+            <li class="menu-header">{{ __('Configuration') }}</li>
             <li class="dropdown {{ setSidebarActive(['admin.permission.*', 'admin.role.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-shield"></i>
@@ -66,19 +66,12 @@
                 </ul>
             </li>
 
-            <li class="{{ setSidebarActive(['admin.general_setting.*']) }}">
-                <a class="nav-link" href="{{ route('admin.general_setting.index') }}">
-                    <i class="fas fa-cog"></i>
-                    <span>{{ __('General Settings') }}</span>
-                </a>
-            </li>
-
-            <li class="">
+            {{-- <li class="">
                 <a class="nav-link" href="">
                     <i class="fas fa-cogs"></i>
                     <span>{{ __('System Configuration') }}</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="dropdown {{ setSidebarActive(['admin.language.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
@@ -103,7 +96,14 @@
                 </ul>
             </li>
 
-            <li class="dropdown">
+            <li class="{{ setSidebarActive(['admin.setting.*']) }}">
+                <a class="nav-link" href="{{ route('admin.setting.index') }}">
+                    <i class="fas fa-cog"></i>
+                    <span>{{ __('Settings') }}</span>
+                </a>
+            </li>
+
+            {{-- <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-bell"></i>
                     <span>{{ __('Notification') }}</span></a>
@@ -128,9 +128,9 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
-            <li class="dropdown">
+            {{-- <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="far fa-credit-card"></i>
                     <span>{{ __('Payment Gateway') }}</span></a>
@@ -148,8 +148,8 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            {{-- End Settings --}}
+            </li> --}}
+            {{-- End Configuration --}}
         </ul>
     </aside>
 </div>
