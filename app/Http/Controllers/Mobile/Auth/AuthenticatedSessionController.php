@@ -17,7 +17,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('mobile.auth.login');
+        if (!Auth::guard('web')->check()) {
+            return view('mobile.auth.login');
+        } else {
+            return view('mobile.dashboard.index');
+        }
     }
 
     /**
