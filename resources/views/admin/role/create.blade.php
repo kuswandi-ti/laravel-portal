@@ -57,9 +57,9 @@
                                     <span class="custom-switch-description text-danger">{{ __('Admin') }}</span>
                                 </label>
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="staff" class="custom-switch-input">
+                                    <input type="radio" name="guard_name" value="member" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-info">{{ __('Staff') }}</span>
+                                    <span class="custom-switch-description text-info">{{ __('Member') }}</span>
                                 </label>
                                 <label class="custom-switch">
                                     <input type="radio" name="guard_name" value="web" class="custom-switch-input"

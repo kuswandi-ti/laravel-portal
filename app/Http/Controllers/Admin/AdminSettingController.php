@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Setting;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
@@ -19,8 +20,9 @@ class AdminSettingController extends Controller
 
     public function generalSettingIndex()
     {
+        $default_language = Language::where('default', '1')->get();
         $general_setting = Setting::all();
-        return view('admin.setting.general_setting', compact('general_setting'));
+        return view('admin.setting.general_setting', compact('general_setting', 'default_language'));
     }
 
     public function generalSettingUpdate(AdminGeneralSettingUpdateRequest $request)

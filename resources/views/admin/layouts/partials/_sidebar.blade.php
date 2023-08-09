@@ -20,12 +20,20 @@
             </li>
             {{-- End Dashboard --}}
 
-            {{-- Configuration --}}
-            <li class="menu-header">{{ __('Configuration') }}</li>
+            {{-- Package --}}
+            <li class="">
+                <a href="" class="nav-link">
+                    <i class="fas fa-cube"></i>
+                    <span>{{ __('Package') }}</span>
+                </a>
+            </li>
+            {{-- End Package --}}
+
+            {{-- Manage Admin Role & Permission --}}
             <li class="dropdown {{ setSidebarActive(['admin.permission.*', 'admin.role.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-shield"></i>
-                    <span>{{ __('Role & Permission') }}</span>
+                    <span>{{ __('Admin Role Permission') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.role.*']) }}">
@@ -40,11 +48,13 @@
                     </li>
                 </ul>
             </li>
+            {{-- End Manage Admin Role & Permission --}}
 
-            <li class="dropdown {{ setSidebarActive(['admin.admin.*', 'admin.user.*']) }}">
+            {{-- Manage User --}}
+            <li class="dropdown {{ setSidebarActive(['admin.admin.*', 'admin.member.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-cog"></i>
-                    <span>{{ __('Manage Users') }}</span>
+                    <span>{{ __('User Management') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.admin.*']) }}">
@@ -53,13 +63,15 @@
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.user.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.user.index') }}">{{ __('General User') }}
+                    <li class="{{ setSidebarActive(['admin.member.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.member.index') }}">{{ __('Member') }}
                         </a>
                     </li>
                 </ul>
             </li>
+            {{-- End Manage User --}}
 
+            {{-- Language --}}
             <li class="dropdown {{ setSidebarActive(['admin.language.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-language"></i>
@@ -72,24 +84,67 @@
                     </li>
                     <li class="">
                         <a class="nav-link" href="">
-                            <span>{{ __('Frontend Language') }}</span>
+                            <span>{{ __('Website Language') }}</span>
                         </a>
                     </li>
                     <li class="">
                         <a class="nav-link" href="">
-                            <span>{{ __('Admin Language') }}</span>
+                            <span>{{ __('System Language') }}</span>
                         </a>
                     </li>
                 </ul>
             </li>
+            {{-- End Language --}}
 
-            <li class="{{ setSidebarActive(['admin.setting.*']) }}">
-                <a class="nav-link" href="{{ route('admin.setting.index') }}">
-                    <i class="fas fa-cog"></i>
-                    <span>{{ __('Settings') }}</span>
+            {{-- Payment --}}
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown">
+                    <i class="far fa-credit-card"></i>
+                    <span>{{ __('Payment') }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="">
+                        <a class="nav-link" href="">
+                            {{ __('Offline Payment') }}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="">
+                        <a class="nav-link" href="">
+                            {{ __('Online Payment') }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {{-- End Payment --}}
+
+            {{-- Support Ticket --}}
+            <li class="">
+                <a href="" class="nav-link">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>{{ __('Support Ticket') }}</span>
                 </a>
             </li>
-            {{-- End Configuration --}}
+            {{-- End Support Ticket --}}
+
+            {{-- Website Setting --}}
+            <li class="">
+                <a href="" class="nav-link">
+                    <i class="fas fa-globe"></i>
+                    <span>{{ __('Website Setting') }}</span>
+                </a>
+            </li>
+            {{-- End Website Setting --}}
+
+            {{-- System Setting --}}
+            <li class="{{ setSidebarActive(['admin.setting.*']) }}">
+                <a href="{{ route('admin.setting.index') }}" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>{{ __('System Setting') }}</span>
+                </a>
+            </li>
+            {{-- End System Setting --}}
         </ul>
     </aside>
 </div>

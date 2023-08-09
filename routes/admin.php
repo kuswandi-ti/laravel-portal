@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\AdminLanguageController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminAdminUserController;
 use App\Http\Controllers\Admin\AdminPermissionController;
-use App\Http\Controllers\Admin\AdminGeneralUserController;
+use App\Http\Controllers\Admin\AdminMemberUserController;
 
 Route::group([], function () {
     /** Auth Admin Routes */
@@ -49,6 +49,6 @@ Route::group([
     Route::get('general-setting', [AdminSettingController::class, 'generalSettingIndex'])->name('general_setting.index');
     Route::put('general-setting', [AdminSettingController::class, 'generalSettingUpdate'])->name('general_setting.update');
 
-    /** General User Routes */
-    Route::resource('user', AdminGeneralUserController::class);
+    /** Member User Routes */
+    Route::resource('member', AdminMemberUserController::class);
 });

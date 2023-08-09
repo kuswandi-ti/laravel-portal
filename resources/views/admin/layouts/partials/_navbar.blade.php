@@ -15,9 +15,6 @@
                 <a href="{{ route('admin.profile.index') }}" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> {{ __('Profile') }}
                 </a>
-                <a href="features-settings.html" class="dropdown-item has-icon">
-                    <i class="fas fa-cog"></i> {{ __('Settings') }}
-                </a>
                 <div class="dropdown-divider"></div>
 
                 <form method="POST" action="{{ route('admin.logout') }}">

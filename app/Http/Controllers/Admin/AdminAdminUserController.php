@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,7 @@ class AdminAdminUserController extends Controller
      */
     public function create()
     {
-        $roles = Role::orderBy('name', 'DESC')->pluck('name', 'name');
+        $roles = Role::where('guard_name', 'admin')->orderBy('name', 'DESC')->pluck('name', 'name');
         return view('admin.admin.create', compact('roles'));
     }
 
@@ -37,6 +38,7 @@ class AdminAdminUserController extends Controller
         $admin = new Admin();
 
         $admin->name = $request->name;
+        $admin->slug = Str::slug($request->name);
         $admin->email = $request->email;
         $admin->image = '/images/no_image_circle.png';
         $admin->status = 1;
@@ -61,7 +63,7 @@ class AdminAdminUserController extends Controller
     public function edit(string $id)
     {
         $admin = Admin::findOrFail($id);
-        $roles = Role::orderBy('name', 'DESC')->pluck('name', 'name');
+        $roles = Role::where('guard_name', 'admin')->orderBy('name', 'DESC')->pluck('name', 'name');
         $admin_role = $admin->roles->pluck('name', 'name')->all();
 
         return view('admin.admin.edit', compact('admin', 'roles', 'admin_role'));
@@ -75,7 +77,9 @@ class AdminAdminUserController extends Controller
         $admin = Admin::findOrFail($id);
         $admin->update([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
             'email' => $request->email,
+            'status' => 1,
         ]);
         $admin->syncRoles($request->role);
 
@@ -93,7 +97,7 @@ class AdminAdminUserController extends Controller
             if ($admin->roles->first()->name == 'Super Admin') {
                 return response([
                     'status' => 'error',
-                    'message' => __('Can\'t delete this role')
+                    'message' => __('Can\'t delete this user becase role is Super Admin')
                 ]);
             }
 

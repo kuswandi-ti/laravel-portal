@@ -3,14 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Admin;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class PermissionsTableSeeder extends Seeder
+class RolePermissionUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,15 +20,7 @@ class PermissionsTableSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // create permissions
         $permissions = [
-            ['guard_name' => 'web', 'name' => 'lingkungan index', 'group_name' => 'Lingkungan Permission'],
-            ['guard_name' => 'web', 'name' => 'lingkungan create', 'group_name' => 'Lingkungan Permission'],
-            ['guard_name' => 'web', 'name' => 'lingkungan update', 'group_name' => 'Lingkungan Permission'],
-            ['guard_name' => 'web', 'name' => 'staff index', 'group_name' => 'Staff Permission'],
-            ['guard_name' => 'web', 'name' => 'staff create', 'group_name' => 'Staff Permission'],
-            ['guard_name' => 'web', 'name' => 'staff update', 'group_name' => 'Staff Permission'],
-            ['guard_name' => 'web', 'name' => 'staff non aktif', 'group_name' => 'Staff Permission'],
             ['guard_name' => 'web', 'name' => 'warga index', 'group_name' => 'Warga Permission'],
             ['guard_name' => 'web', 'name' => 'warga create', 'group_name' => 'Warga Permission'],
             ['guard_name' => 'web', 'name' => 'warga update', 'group_name' => 'Warga Permission'],
@@ -51,22 +43,8 @@ class PermissionsTableSeeder extends Seeder
             Permission::create($permission);
         }
 
-        // // create roles and assign existing permissions
-        // $roleAdmin = Role::create(['guard_name' => 'web', 'name' => 'Admin']);
-        // $roleAdmin->givePermissionTo([
-        //     'staff index',
-        //     'staff create',
-        //     'staff update',
-        //     'staff non aktif',
-        //     'lingkungan index',
-        //     'lingkungan create',
-        //     'lingkungan update',
-        // ]);
-
         $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua']);
         $roleKetua->givePermissionTo([
-            'lingkungan index',
-            'staff index',
             'warga index',
             'pemasukan index',
             'pengeluaran index',
@@ -74,7 +52,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         $userKetua = User::factory()->create([
             'name' => 'Ketua',
-            'slug' => 'ketua',
+            'slug' => Str::slug('ketua'),
             'image' => '/images/no_image_circle.png',
             'email' => 'ketua@mail.com',
         ]);
@@ -97,7 +75,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         $userBendahara = User::factory()->create([
             'name' => 'Bendahara',
-            'slug' => 'bendahara',
+            'slug' => Str::slug('bendahara'),
             'image' => '/images/no_image_circle.png',
             'email' => 'bendahara@mail.com',
         ]);
@@ -112,29 +90,10 @@ class PermissionsTableSeeder extends Seeder
         ]);
         $userSekretaris = User::factory()->create([
             'name' => 'Sekretaris',
-            'slug' => 'sekretaris',
+            'slug' => Str::slug('sekretaris'),
             'image' => '/images/no_image_circle.png',
             'email' => 'sekretaris@mail.com',
         ]);
         $userSekretaris->assignRole($roleSekretaris);
-
-        // $userAdmin = User::factory()->create([
-        //     'name' => 'Admin',
-        //     'slug' => 'admin',
-        //     'image' => '/images/no_image_circle.png',
-        //     'email' => 'admin@mail.com',
-        // ]);
-        // $userAdmin->assignRole($roleAdmin);
-
-        // $roleSuperAdmin = Role::create(['guard_name' => 'admin', 'name' => 'Super Admin']);
-        // gets all permissions via Gate::before rule; see AuthServiceProvider
-        $userSuperAdmin = new Admin();
-        $userSuperAdmin->image = '/images/no_image_circle.png';
-        $userSuperAdmin->name = 'Super Admin';
-        $userSuperAdmin->email = 'superadmin@mail.com';
-        $userSuperAdmin->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'; // password
-        $userSuperAdmin->status = 1;
-        $userSuperAdmin->save();
-        // $userSuperAdmin->assignRole($roleSuperAdmin);
     }
 }

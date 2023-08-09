@@ -9,6 +9,8 @@
 
     <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
 
+    @stack('styles_vendor')
+
     @include('admin.includes.styles')
 
     <!-- Page Specific CSS File -->

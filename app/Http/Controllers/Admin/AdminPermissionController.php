@@ -15,6 +15,7 @@ class AdminPermissionController extends Controller
      */
     public function index()
     {
+        // $permissions = Permission::where('guard_name', 'admin')->orderBy('name', 'ASC')->get();
         $permissions = Permission::orderBy('name', 'ASC')->get();
         return view('admin.permission.index', compact('permissions'));
     }

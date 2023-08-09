@@ -44,9 +44,9 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'staff' => [
+        'member' => [
             'driver' => 'session',
-            'provider' => 'staffs',
+            'provider' => 'members',
         ],
     ],
 
@@ -76,9 +76,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-        'staffs' => [
+        'members' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Staff::class,
+            'model' => App\Models\Member::class,
         ],
 
         // 'users' => [
@@ -119,8 +119,8 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'staffs' => [
-            'provider' => 'staffs',
+        'members' => [
+            'provider' => 'members',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
