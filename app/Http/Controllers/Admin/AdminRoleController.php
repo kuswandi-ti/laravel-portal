@@ -15,8 +15,8 @@ class AdminRoleController extends Controller
      */
     public function index()
     {
-        // $roles = Role::where('guard_name', 'admin')->orderBy('name', 'ASC')->get();
-        $roles = Role::orderBy('name', 'ASC')->get();
+        $roles = Role::where('guard_name', 'admin')->orderBy('name', 'ASC')->get();
+        // $roles = Role::orderBy('name', 'ASC')->get();
         return view('admin.role.index', compact('roles'));
     }
 
@@ -25,8 +25,8 @@ class AdminRoleController extends Controller
      */
     public function create()
     {
-        // $permissions = Permission::where('guard_name', 'admin')->get()->groupBy('group_name');
-        $permissions = Permission::groupBy('group_name');
+        $permissions = Permission::where('guard_name', 'admin')->get()->groupBy('group_name');
+        // $permissions = Permission::all()->groupBy('group_name');
         return view('admin.role.create', compact('permissions'));
     }
 
