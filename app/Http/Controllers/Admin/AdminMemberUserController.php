@@ -42,7 +42,7 @@ class AdminMemberUserController extends Controller
         $member->slug = Str::slug($request->name);
         $member->email = $request->email;
         $member->image = '/images/no_image_circle.png';
-        $admin->status = 1;
+        $member->status = 1;
         $member->save();
 
         $member->assignRole($request->role);
@@ -102,7 +102,7 @@ class AdminMemberUserController extends Controller
                 ]);
             }
 
-            $user->delete();
+            $member->delete();
 
             return response([
                 'status' => 'success',
@@ -114,5 +114,12 @@ class AdminMemberUserController extends Controller
                 'message' => __('Deleted member user is error')
             ]);
         }
+    }
+
+    public function restore($id)
+    {
+        Member::withTrashed()->find($id)->restore();
+
+        return redirect()->back()->with('success', __('Restore member user successfully'));
     }
 }

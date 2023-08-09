@@ -6,23 +6,23 @@
 
 @section('frontend_content')
     <div id="appCapsule">
-        <div class="section text-center">
+        <div class="text-center section">
             <img src="{{ asset('public/template/mobile/assets/img/illustration/login.png') }}" alt="img" class="imaged"
-                style="width: 200px;">
+                style="width: 150px;">
         </div>
 
-        <div class="section mt-2 text-center">
+        <div class="mt-2 text-center section">
             <h1>{{ __('Log In') }}</h1>
             <h4>{{ __('Log In User Terdaftar') }}</h4>
         </div>
 
-        <div class="section mb-5 p-2">
+        <div class="p-2 mb-5 section">
             <x-alert-message />
 
             <form method="POST" action="{{ route('mobile.login') }}">
                 @csrf
                 <div class="card">
-                    <div class="card-body pb-1">
+                    <div class="pb-1 card-body">
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="email1">{{ __('E-mail') }}</label>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="form-links mt-2">
+                <div class="mt-2 form-links">
                     <div>
                         <a href="{{ route('mobile.register') }}">{{ __('Register') }}</a>
                     </div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="form-button-group  transparent">
+                <div class="form-button-group transparent">
                     <button type="submit" class="btn btn-primary btn-block btn-lg">{{ __('Log In') }}</button>
                 </div>
             </form>

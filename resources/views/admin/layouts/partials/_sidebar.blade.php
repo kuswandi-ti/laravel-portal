@@ -138,7 +138,8 @@
             {{-- End Website Setting --}}
 
             {{-- System Setting --}}
-            <li class="{{ setSidebarActive(['admin.setting.*']) }}">
+            <li
+                class="{{ setSidebarActive(['admin.setting.*', 'admin.general_setting.*', 'admin.notification_setting.*']) }}">
                 <a href="{{ route('admin.setting.index') }}" class="nav-link">
                     <i class="fas fa-cog"></i>
                     <span>{{ __('System Setting') }}</span>

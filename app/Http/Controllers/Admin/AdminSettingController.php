@@ -52,4 +52,11 @@ class AdminSettingController extends Controller
 
         return redirect()->back()->with('success', __('Updated general setting successfully'));
     }
+
+    public function notificationSettingIndex()
+    {
+        $default_language = Language::where('default', '1')->get();
+        $general_setting = Setting::all();
+        return view('admin.setting.notification_setting', compact('general_setting', 'default_language'));
+    }
 }

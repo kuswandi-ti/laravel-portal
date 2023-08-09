@@ -17,8 +17,9 @@ class AdminAdminUserController extends Controller
      */
     public function index()
     {
-        $admins = Admin::all();
-        return view('admin.admin.index', compact('admins'));
+        $admins_active = Admin::all();
+        $admins_inactive = Admin::onlyTrashed()->get();
+        return view('admin.admin.index', compact('admins_active', 'admins_inactive'));
     }
 
     /**
@@ -113,5 +114,12 @@ class AdminAdminUserController extends Controller
                 'message' => __('Deleted admin user is error')
             ]);
         }
+    }
+
+    public function restore($id)
+    {
+        Admin::withTrashed()->find($id)->restore();
+
+        return redirect()->back()->with('success', __('Restore admin user successfully'));
     }
 }

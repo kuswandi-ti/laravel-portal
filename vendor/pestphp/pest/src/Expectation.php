@@ -128,6 +128,40 @@ final class Expectation
     }
 
     /**
+     * Dump the expectation value when the result of the condition is truthy.
+     *
+     * @param  (\Closure(TValue): bool)|bool  $condition
+     * @return self<TValue>
+     */
+    public function ddWhen(Closure|bool $condition, mixed ...$arguments): Expectation
+    {
+        $condition = $condition instanceof Closure ? $condition($this->value) : $condition;
+
+        if (! $condition) {
+            return $this;
+        }
+
+        $this->dd(...$arguments);
+    }
+
+    /**
+     * Dump the expectation value when the result of the condition is falsy.
+     *
+     * @param  (\Closure(TValue): bool)|bool  $condition
+     * @return self<TValue>
+     */
+    public function ddUnless(Closure|bool $condition, mixed ...$arguments): Expectation
+    {
+        $condition = $condition instanceof Closure ? $condition($this->value) : $condition;
+
+        if ($condition) {
+            return $this;
+        }
+
+        $this->dd(...$arguments);
+    }
+
+    /**
      * Send the expectation value to Ray along with all given arguments.
      *
      * @return self<TValue>
@@ -593,7 +627,7 @@ final class Expectation
     }
 
     /**
-     * Asserts that the given expectation target to have the given suffix.
+     * Asserts that the given expectation target to have the given prefix.
      */
     public function toHavePrefix(string $prefix): ArchExpectation
     {
@@ -692,5 +726,18 @@ final class Expectation
     public function toBeUsedInNothing(): ArchExpectation
     {
         return ToBeUsedInNothing::make($this);
+    }
+
+    /**
+     * Asserts that the given expectation dependency is an invokable class.
+     */
+    public function toBeInvokable(): ArchExpectation
+    {
+        return Targeted::make(
+            $this,
+            fn (ObjectDescription $object): bool => $object->reflectionClass->hasMethod('__invoke'),
+            'to be invokable',
+            FileLineFinder::where(fn (string $line): bool => str_contains($line, 'class'))
+        );
     }
 }

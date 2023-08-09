@@ -83,6 +83,6 @@ class RolePermissionAdminSeeder extends Seeder
             'status' => 1,
             'remember_token' => Str::random(10),
         ]);
-        $member->assignRole($role);
+        $admin->assignRole($role);
     }
 }

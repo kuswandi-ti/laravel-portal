@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>{{ __('Login') }} &mdash; {{ config('app.name') }}</title>
+    <title>{{ __('Super Admin Login') }} &mdash; {{ config('app.name') }}</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -33,12 +33,12 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>{{ __('Login') }}</h4>
+                                <h4>{{ __('Super Admin Login') }}</h4>
                             </div>
 
                             <div class="card-body">
                                 <x-alert-message />
-                                <br>
+
                                 <form method="POST" action="{{ route('admin.handle_login') }}">
                                     @csrf
 

@@ -46,7 +46,7 @@
                     </ul>
                     <div class="tab-content" id="myTabContent2">
                         <div class="tab-pane fade active show" id="active3" role="tabpanel" aria-labelledby="active-tab3">
-                            <div class="table-responsive mt-3">
+                            <div class="mt-3 table-responsive">
                                 <table class="table table-striped" id="table_data_active">
                                     <thead>
                                         <tr>
@@ -82,14 +82,14 @@
                                                         <span class="badge badge-secondary">{{ $item->name ?? '' }}</span>
                                                     @endforeach
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center align-middle">
                                                     @if (empty($member->deleted_at))
                                                         <div class="badge badge-info">Active</div>
                                                     @else
                                                         <div class="badge badge-danger">Inactive</div>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center align-middle">
                                                     <a href="{{ route('admin.member.edit', $member->id) }}"
                                                         class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                                     <a href="{{ route('admin.member.destroy', $member->id) }}"
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="inactive3" role="tabpanel" aria-labelledby="inactive-tab3">
-                            <div class="table-responsive mt-3">
+                            <div class="mt-3 table-responsive">
                                 <table class="table table-striped" id="table_data_inactive">
                                     <thead>
                                         <tr>
@@ -147,11 +147,9 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('admin.member.edit', $member->id) }}"
-                                                        class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="{{ route('admin.member.destroy', $member->id) }}"
-                                                        class="btn btn-danger btn-sm delete_item"><i
-                                                            class="fas fa-trash-alt"></i></a>
+                                                    <a href="{{ route('admin.member.restore', $member->id) }}"
+                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                                        title="Restore to Active"><i class="fas fa-undo"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

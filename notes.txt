@@ -64,3 +64,14 @@ System Configuration
 2. Superadmin membuat user admin RT
 3. Kirim link aktivasi admin RT
 ------------ Aturan Main ---------------------
+
+
+
+
+
+Fix Variable :
+1. Default image
+
+
+TODO
+1. Hilangkan role di member halaman admin
