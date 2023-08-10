@@ -67,7 +67,7 @@
     @stack('scripts')
 
     <!-- Template JS File -->
-    <script src="{{ asset('public/template/backend/assets/js/scripts.js') }}"></script>
+    <script src="{{ asset(config('common.path_template_admin') . 'assets/js/scripts.js') }}"></script>
 
     <!-- Inline JS -->
     <script>

@@ -1,150 +1,165 @@
-<div class="navbar-bg"></div>
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <a href="{{ route('backend.dashboard') }}" class="brand-link bg-dark">
+        @if ($setting->count() == 0)
+            <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="brand-image elevation-3" style="opacity: .8">
+        @else
+            @if (!empty($setting->path_image_logo))
+                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_logo ?? '') }}"
+                    class="brand-image elevation-3" style="opacity: .8">
+            @else
+                <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="brand-image elevation-3" style="opacity: .8">
+            @endif
+        @endif
+        <span
+            class="brand-text font-weight-light">{{ !empty($setting->business_name) ? $setting->business_name : config('app.name') }}</span>
+    </a>
 
-@include('admin.layouts.partials._navbar')
-
-<div class="main-sidebar sidebar-style-2">
-    <aside id="sidebar-wrapper">
-        <div class="sidebar-brand">
-            <a href="{{ route('admin.dashboard.index') }}">{{ config('app.name') }}</a>
+    <div class="sidebar">
+        <div class="pb-3 mt-3 mb-3 user-panel d-flex">
+            <div class="image">
+                @if (!empty(auth()->user()->path_image))
+                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . auth()->user()->path_image ?? '') }}"
+                        class="img-circle elevation-2" alt="User Image">
+                @else
+                    <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="img-circle elevation-2" alt="User Image">
+                @endif
+            </div>
+            <div class="info">
+                <a href="{{ route('backend.profile.show') }}?tab=profil" class="d-block">{{ auth()->user()->name }}</a>
+            </div>
         </div>
-        <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('admin.dashboard.index') }}">St</a>
-        </div>
-        <ul class="sidebar-menu">
-            {{-- Dashboard --}}
-            <li class="{{ setSidebarActive(['admin.dashboard.*']) }}">
-                <a href="{{ route('admin.dashboard.index') }}" class="nav-link">
-                    <i class="fas fa-th"></i>
-                    <span>{{ __('Dashboard') }}</span>
-                </a>
-            </li>
-            {{-- End Dashboard --}}
 
-            {{-- Package --}}
-            <li class="">
-                <a href="" class="nav-link">
-                    <i class="fas fa-cube"></i>
-                    <span>{{ __('Package') }}</span>
-                </a>
-            </li>
-            {{-- End Package --}}
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('backend.dashboard') }}"
+                        class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
 
-            {{-- Manage Admin Role & Permission --}}
-            <li class="dropdown {{ setSidebarActive(['admin.permission.*', 'admin.role.*']) }}">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-user-shield"></i>
-                    <span>{{ __('Admin Role Permission') }}</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.role.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.role.index') }}">{{ __('Role') }}
+                @if (auth()->user()->hasRole('admin'))
+                    <li class="nav-header">MASTER</li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.bank.index') }}"
+                            class="nav-link {{ request()->is('admin/bank*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-university"></i>
+                            <p>
+                                Bank
+                            </p>
                         </a>
                     </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.permission.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.permission.index') }}">{{ __('Permission') }}
+                    <li class="nav-item">
+                        <a href="{{ route('backend.category.index') }}"
+                            class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-cube"></i>
+                            <p>
+                                Kategori
+                            </p>
                         </a>
                     </li>
-                </ul>
-            </li>
-            {{-- End Manage Admin Role & Permission --}}
+                    <li class="nav-item">
+                        <a href="{{ route('backend.campaign.index') }}"
+                            class="nav-link {{ request()->is('admin/campaign*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th-large"></i>
+                            <p>
+                                Program
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.news.index') }}"
+                            class="nav-link {{ request()->is('admin/news*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                Berita
+                            </p>
+                        </a>
+                    </li>
 
-            {{-- Manage User --}}
-            <li class="dropdown {{ setSidebarActive(['admin.admin.*', 'admin.member.*']) }}">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-user-cog"></i>
-                    <span>{{ __('User Management') }}</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.admin.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.admin.index') }}">{{ __('Super Admin') }}
+                    <li class="nav-header">REFERENSI</li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.donatur.index') }}"
+                            class="nav-link {{ request()->is('admin/donatur*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Donatur
+                            </p>
                         </a>
                     </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.member.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.member.index') }}">{{ __('Member') }}
+                    <li class="nav-item">
+                        <a href="{{ route('backend.donation.index') }}"
+                            class="nav-link {{ request()->is('admin/donation*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-donate"></i>
+                            <p>
+                                Daftar Donasi
+                            </p>
                         </a>
                     </li>
-                </ul>
-            </li>
-            {{-- End Manage User --}}
+                    <li class="nav-item">
+                        <a href="{{ route('backend.cashout.index') }}"
+                            class="nav-link {{ request()->is('admin/cashout*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-hand-holding-usd"></i>
+                            <p>
+                                Daftar Pencairan
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.contact.index') }}"
+                            class="nav-link {{ request()->is('admin/contact*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-envelope"></i>
+                            <p>
+                                Kontak Masuk
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.subscriber.index') }}"
+                            class="nav-link {{ request()->is('admin/subscriber*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Subscriber
+                            </p>
+                        </a>
+                    </li>
 
-            {{-- Language --}}
-            <li class="dropdown {{ setSidebarActive(['admin.language.*']) }}">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-language"></i>
-                    <span>{{ __('Localization') }}</span></a>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.language.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.language.index') }}">
-                            <span>{{ __('Languages') }}</span>
+                    <li class="nav-header">REPORT</li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.report.index') }}"
+                            class="nav-link {{ request()->is('admin/report*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-chart-line"></i>
+                            <p>
+                                Laporan
+                            </p>
                         </a>
                     </li>
-                    <li class="">
-                        <a class="nav-link" href="">
-                            <span>{{ __('Website Language') }}</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a class="nav-link" href="">
-                            <span>{{ __('System Language') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            {{-- End Language --}}
 
-            {{-- Payment --}}
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="far fa-credit-card"></i>
-                    <span>{{ __('Payment') }}</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="">
-                            {{ __('Offline Payment') }}
+                    <li class="nav-header">PENGATURAN</li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.banner.index') }}"
+                            class="nav-link {{ request()->is('admin/banner*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-flag"></i>
+                            <p>
+                                Banner
+                            </p>
                         </a>
                     </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="">
-                            {{ __('Online Payment') }}
+                    <li class="nav-item">
+                        <a href="{{ route('backend.setting.index') }}"
+                            class="nav-link {{ request()->is('admin/setting*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>
+                                Setting
+                            </p>
                         </a>
                     </li>
-                </ul>
-            </li>
-            {{-- End Payment --}}
-
-            {{-- Support Ticket --}}
-            <li class="">
-                <a href="" class="nav-link">
-                    <i class="fas fa-ticket-alt"></i>
-                    <span>{{ __('Support Ticket') }}</span>
-                </a>
-            </li>
-            {{-- End Support Ticket --}}
-
-            {{-- Website Setting --}}
-            <li class="">
-                <a href="" class="nav-link">
-                    <i class="fas fa-globe"></i>
-                    <span>{{ __('Website Setting') }}</span>
-                </a>
-            </li>
-            {{-- End Website Setting --}}
-
-            {{-- System Setting --}}
-            <li class="{{ setSidebarActive(['admin.setting.*']) }}">
-                <a href="{{ route('admin.setting.index') }}" class="nav-link">
-                    <i class="fas fa-cog"></i>
-                    <span>{{ __('System Setting') }}</span>
-                </a>
-            </li>
-            {{-- End System Setting --}}
-        </ul>
-    </aside>
-</div>
+                @endif
+            </ul>
+        </nav>
+    </div>
+</aside>

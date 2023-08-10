@@ -2,74 +2,143 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
+    <title>{{ !empty($setting->company_name) ? $setting->company_name : config('app.name') }} | @yield('title')
+    </title>
+
+    <link rel="icon"
+        href="{{ url(env('PATH_IMAGE_STORAGE') . (!empty($setting->path_image_logo) ? $setting->path_image_logo : '') ?? '') }}"
+        type="image/*">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('public/template/backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+        href="{{ asset('public/template/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet"
+        href="{{ asset('public/template/backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{{ asset('public/template/backend/plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+        href="{{ asset('public/template/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
     @stack('styles_vendor')
 
-    @include('member.includes.styles')
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('public/template/backend/dist/css/adminlte.min.css') }}">
 
-    <!-- Page Specific CSS File -->
-    @stack('styles')
+    <style>
+        .note-editor {
+            margin-bottom: 0;
+        }
 
-    <!-- Inline CSS -->
+        .note-editor.is-invalid {
+            border-color: var(--danger);
+        }
+
+        .select2 {
+            max-width: 100%;
+        }
+    </style>
+
+    @stack('style')
 </head>
 
-<body>
-    <div id="app">
-        <div class="main-wrapper main-wrapper-1">
-            @include('member.layouts.partials._sidebar')
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
 
-            <!-- Main Content -->
-            <div class="main-content">
-                <section class="section">
-                    <div class="section-header">
-                        @stack('header_back')
-                        <h1>@yield('section_header_title')</h1>
-                        <div class="section-header-breadcrumb">
-                            @section('section_header_breadcrumb')
-                                <div class="breadcrumb-item active">
-                                    <a href="#">{{ __('Dashboard') }}</a>
-                                </div>
-                            @show
-                        </div>
-                    </div>
-                    <div class="section-body">
-                        <h2 class="section-title">@yield('section_body_title')</h2>
-                        <p class="section-lead">
-                            @yield('section_body_lead')
-                        </p>
-                        @yield('member_content')
-                    </div>
-                </section>
-            </div>
-
-            <footer class="main-footer">
-                <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-                        Nauval Azhar</a>
-                </div>
-                <div class="footer-right">
-
-                </div>
-            </footer>
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="{{ asset('public/template/backend/dist/img/AdminLTELogo.png') }}"
+                alt="AdminLTELogo" height="60" width="60">
         </div>
-    </div>
 
-    @include('member.includes.scripts')
+        <!-- Navbar -->
+        @includeIf('backend.layouts.partials.header')
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        @includeIf('backend.layouts.partials.sidebar')
+        <!-- /.main sidebar container -->
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="mb-2 row">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">@yield('title')</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                @section('breadcrumb')
+                                    <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                @show
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        @includeIf('backend.layouts.partials.footer')
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="{{ asset('public/template/backend/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset('public/template/backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('public/template/backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- ChartJS -->
+    <script src="{{ asset('public/template/backend/plugins/chart.js/Chart.min.js') }}"></script>
+    <!-- Sparkline -->
+    <script src="{{ asset('public/template/backend/plugins/sparklines/sparkline.js') }}"></script>
+    <!-- JQVMap -->
+    <script src="{{ asset('public/template/backend/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="{{ asset('public/template/backend/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{{ asset('public/template/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}">
+    </script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('public/template/backend/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <!-- Moment -->
+    <script src="{{ asset('public/template/backend/plugins/moment/moment.min.js') }}"></script>
+
     @stack('scripts_vendor')
 
-    <!-- Page Specific JS File -->
-    @stack('scripts')
+    <!-- AdminLTE App -->
+    <script src="{{ asset('public/template/backend/dist/js/adminlte.js') }}"></script>
 
-    <!-- Template JS File -->
-    <script src="{{ asset('public/template/backend/assets/js/scripts.js') }}"></script>
-
-    <!-- Inline JS -->
     <script>
         $.ajaxSetup({
             headers: {
@@ -93,60 +162,9 @@
                 .attr('src', window.URL.createObjectURL(image))
                 .show()
         }
-
-        $(document).ready(function() {
-            $('body').on('click', '.delete_item', function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        let url = $(this).attr('href');
-                        $.ajax({
-                            method: 'DELETE',
-                            url: url,
-                            success: function(data) {
-                                if (data.status == 'success') {
-                                    Swal.fire(
-                                        'Deleted!',
-                                        data.message,
-                                        'success'
-                                    ).then(() => {
-                                        window.location.reload();
-                                    });
-                                } else if (data.status == 'error') {
-                                    Swal.fire(
-                                        'Error!',
-                                        data.message,
-                                        'error'
-                                    )
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    }
-                })
-            })
-        });
-
-        $.uploadPreview({
-            input_field: "#image-upload", // Default: .image-upload
-            preview_box: "#image-preview", // Default: .image-preview
-            label_field: "#image-label", // Default: .image-label
-            label_default: "Choose File", // Default: Choose File
-            label_selected: "Change File", // Default: Change File
-            no_label: false, // Default: false
-            success_callback: null // Default: null
-        });
     </script>
+
+    @stack('scripts')
 </body>
 
 </html>

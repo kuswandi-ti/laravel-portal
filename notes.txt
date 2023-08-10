@@ -75,3 +75,13 @@ Fix Variable :
 
 TODO
 1. Hilangkan role di member halaman admin
+
+
+
+
+
+
+
+
+
+PATH_TEMPLATE_ADMIN="public/template/admin/"

@@ -7,4 +7,6 @@
         'no_image_square' => env('NO_IMAGE_SQUARE', ''),
         'no_image_circle' => env('NO_IMAGE_CIRCLE', ''),
 
+        'path_template_admin' => env('PATH_TEMPLATE_ADMIN', ''),
+
     ];
