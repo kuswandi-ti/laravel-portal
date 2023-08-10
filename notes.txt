@@ -85,3 +85,4 @@ TODO
 
 
 PATH_TEMPLATE_ADMIN="public/template/admin/"
+PATH_TEMPLATE_MEMBER="public/template/member/"

@@ -8,5 +8,6 @@
         'no_image_circle' => env('NO_IMAGE_CIRCLE', ''),
 
         'path_template_admin' => env('PATH_TEMPLATE_ADMIN', ''),
+        'path_template_member' => env('PATH_TEMPLATE_MEMBER', ''),
 
     ];

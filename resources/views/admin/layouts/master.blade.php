@@ -9,6 +9,7 @@
 
     <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
 
+    <!-- Page Specific CSS File -->
     @stack('styles_vendor')
 
     @include('admin.includes.styles')
@@ -50,8 +51,8 @@
 
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-                        Nauval Azhar</a>
+                    {{ __('Copyright') }} &copy; {{ date('Y') }} <div class="bullet"></div> {{ __('Design By') }} <a
+                        href="https://nauval.in/">Muhamad Nauval Azhar</a>
                 </div>
                 <div class="footer-right">
 

@@ -243,7 +243,7 @@
                                                 </option>
                                                 @foreach ($default_language as $lang)
                                                     <option value="{{ $lang->lang }}"
-                                                        {{ old('language') ?? !empty($setting['language']) ? ($setting['language'] == 'rp' ? 'selected' : '') : '' }}>
+                                                        {{ old('language') ?? !empty($setting['language']) ? ($setting['language'] == 'id' ? 'selected' : '') : '' }}>
                                                         {{ $lang->name }}</option>
                                                 @endforeach
                                             </select>
