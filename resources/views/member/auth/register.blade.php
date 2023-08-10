@@ -1,153 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('member.layouts.auth')
 
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>{{ __('Register Member Admin') }} &mdash; {{ config('app.name') }}</title>
+@section('page_title')
+    {{ __('Member Admin Register') }}
+@endsection
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/fontawesome/css/all.min.css') }}">
+@section('title')
+    {{ __('Member Admin Register') }}
+@endsection
 
-    <!-- CSS Libraries -->
-    <link rel="stylesheet"
-        href="{{ asset('public/template/backend/assets/modules/bootstrap-social/bootstrap-social.css') }}">
+@section('class_body', 'register-page')
+@section('class_box', 'register-box')
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/css/components.css') }}">
-</head>
+@section('content')
+    <div class="card-body">
+        <p class="register-box-msg">{{ __('Register new member admin') }}</p>
 
-<body>
-    <div id="app">
-        <section class="section">
-            <div class="container mt-5">
-                <div class="row">
-                    <div
-                        class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-                        <div class="login-brand">
-                            <img src="{{ asset('public/template/backend/assets/img/stisla-fill.svg') }}" alt="logo"
-                                width="100" class="shadow-light rounded-circle">
-                        </div>
-
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h4>Register</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <form method="POST">
-                                    <div class="form-divider">
-                                        <span class="text-info">Account</span>
-                                    </div>
-                                    <div class="mt-3 row">
-                                        <div class="form-group col-6">
-                                            <label for="frist_name">First Name</label>
-                                            <input id="frist_name" type="text" class="form-control" name="frist_name"
-                                                autofocus>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label for="last_name">Last Name</label>
-                                            <input id="last_name" type="text" class="form-control" name="last_name">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email">
-                                        <div class="invalid-feedback">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="password" class="d-block">Password</label>
-                                            <input id="password" type="password" class="form-control pwstrength"
-                                                data-indicator="pwindicator" name="password">
-                                            <div id="pwindicator" class="pwindicator">
-                                                <div class="bar"></div>
-                                                <div class="label"></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label for="password2" class="d-block">Password Confirmation</label>
-                                            <input id="password2" type="password" class="form-control"
-                                                name="password-confirm">
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="form-divider">
-                                        <span class="text-info">Residence</span>
-                                    </div>
-                                    <div class="mt-3 row">
-                                        <div class="form-group col-6">
-                                            <label>Country</label>
-                                            <select class="form-control selectric">
-                                                <option>Indonesia</option>
-                                                <option>Palestine</option>
-                                                <option>Syria</option>
-                                                <option>Malaysia</option>
-                                                <option>Thailand</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label>Province</label>
-                                            <select class="form-control selectric">
-                                                <option>West Java</option>
-                                                <option>East Java</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label>City</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label>Postal Code</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="agree" class="custom-control-input"
-                                                id="agree">
-                                            <label class="custom-control-label" for="agree">I agree with the terms
-                                                and conditions</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                            Register
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+        <form method="POST" action="{{ route('member.register') }}">
+            @csrf
+            <div class="mb-3 input-group">
+                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
+                    value="{{ old('name') }}" placeholder="{{ __('Full name') }}">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
                     </div>
                 </div>
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-        </section>
+            <div class="mb-3 input-group">
+                <input type="email" name="email" id="email"
+                    class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                    placeholder="{{ __('Email') }}">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3 input-group">
+                <input type="password" name="password" id="password"
+                    class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+                @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3 input-group">
+                <input type="password" name="password_confirmation" id="password_confirmation"
+                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                    placeholder="{{ __('Password Confirmation') }}">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+                @error('password_confirmation')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mt-3 row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('Register') }}</button>
+                </div>
+            </div>
+        </form>
+        <p class="mt-3 mb-1 text-center">
+            <a href="{{ route('member.login') }}">{{ __('Login') }}</a>
+        </p>
     </div>
-
-    <!-- General JS Scripts -->
-    <script src="{{ asset('public/template/backend/assets/modules/jquery.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/popper.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/tooltip.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('public/template/backend/assets/js/stisla.js') }}"></script>
-
-    <!-- JS Libraies -->
-
-    <!-- Page Specific JS File -->
-
-    <!-- Template JS File -->
-    <script src="{{ asset('public/template/backend/assets/js/scripts.js') }}"></script>
-</body>
-
-</html>
+@endsection

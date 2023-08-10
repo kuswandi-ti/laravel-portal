@@ -20,7 +20,7 @@
         <div class="card card-outline card-primary">
             <div class="text-center card-header">
                 <a href="#" class="h2">
-                    <b>{{ __('Member Admin Login') }}</b>
+                    <b>@yield('title')</b>
                 </a>
             </div>
             @yield('content')

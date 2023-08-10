@@ -86,3 +86,5 @@ TODO
 
 PATH_TEMPLATE_ADMIN="public/template/admin/"
 PATH_TEMPLATE_MEMBER="public/template/member/"
+DEFAULT_IMAGE_SQUARE="/images/no_image_square.png"
+DEFAULT_IMAGE_CIRCLE="/images/no_image_circle.png"

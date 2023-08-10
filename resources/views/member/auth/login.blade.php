@@ -1,6 +1,13 @@
 @extends('member.layouts.auth')
 
-@section('page_title', 'Member Admin Login')
+@section('page_title')
+    {{ __('Member Admin Login') }}
+@endsection
+
+@section('title')
+    {{ __('Member Admin Login') }}
+@endsection
+
 @section('class_body', 'login-page')
 @section('class_box', 'login-box')
 
@@ -8,7 +15,7 @@
     <div class="card-body">
         <p class="login-box-msg">{{ __('Fill your email and password') }}</p>
 
-        <form method="POST" action="{{ route('member.handle_login') }}">
+        <form method="POST" action="{{ route('member.login') }}">
             @csrf
             <div class="mb-3 input-group">
                 <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
@@ -58,7 +65,7 @@
             <a href="#">{{ __('Forgot Password') }}</a>
         </p>
         <p class="mb-1 text-center">
-            <a href="#">{{ __('Register') }}</a>
+            <a href="{{ route('member.register') }}">{{ __('Register') }}</a>
         </p>
     </div>
 @endsection
