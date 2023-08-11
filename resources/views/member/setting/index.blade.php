@@ -61,7 +61,7 @@
                                 <a class="nav-link" id="tabs-role-permission-tab" data-toggle="pill"
                                     href="#tabs-role-permission" role="tab" aria-controls="tabs-role-permission"
                                     aria-selected="false">
-                                    {{ __('Role & Permission') }}
+                                    {{ __('Admin Role') }}
                                 </a>
                             </div>
                         </div>
@@ -228,7 +228,50 @@
                                 </div>
                                 <div class="tab-pane fade" id="tabs-role-permission" role="tabpanel"
                                     aria-labelledby="tabs-role-permission-tab">
-                                    Role & Permission
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>{{ __('Role Name') }} <x-fill-field /></label>
+                                                    <input type="text" name="role"
+                                                        class="form-control @error('role') is-invalid @enderror"
+                                                        value='{{ old('role') }}'>
+                                                    @error('role')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @foreach ($permissions as $key => $permission)
+                                            <label class="text-info">{{ __($key) }}</label>
+                                            <div class="row mb-2">
+                                                @foreach ($permission->sortBy('name') as $item)
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" value="{{ __($item->name) }}"
+                                                                    name="permissions[]" class="custom-control-input"
+                                                                    id="{{ __($item->name) }}">
+                                                                <label class="custom-control-label"
+                                                                    for="{{ __($item->name) }}">{{ __($item->name) }}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+
+                                        <div class="row mt-3">
+                                            <div class="col-sm-12">
+                                                <button type="button" class="btn btn-primary">
+                                                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

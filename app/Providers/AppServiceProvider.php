@@ -26,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) use ($setting) {
             $view->with('setting', $setting);
         });
+
+        \Debugbar::disable();
     }
 }

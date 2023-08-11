@@ -18,13 +18,11 @@
                 </a>
                 <div class="dropdown-divider"></div>
 
-                <form method="POST" action="{{ route('admin.logout') }}">
+                <a href="#" class="dropdown-item has-icon text-danger logout">
+                    <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
+                </a>
+                <form action="{{ route('admin.logout') }}" method="post" id="form-logout">
                     @csrf
-                    <a href="{{ route('admin.logout') }}" class="dropdown-item has-icon text-danger"
-                        onclick="event.preventDefault();
-                    this.closest('form').submit();">
-                        <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
-                    </a>
                 </form>
             </div>
         </li>

@@ -21,13 +21,22 @@
             {{-- End Dashboard --}}
 
             {{-- Package --}}
-            <li class="">
-                <a href="" class="nav-link">
+            <li class="{{ setSidebarActive(['admin.package.*']) }}">
+                <a href="{{ route('admin.package.index') }}" class="nav-link">
                     <i class="fas fa-cube"></i>
                     <span>{{ __('Package') }}</span>
                 </a>
             </li>
             {{-- End Package --}}
+
+            {{-- Residence --}}
+            <li class="{{ setSidebarActive(['admin.residence.*']) }}">
+                <a href="{{ route('admin.residence.index') }}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>{{ __('Residence') }}</span>
+                </a>
+            </li>
+            {{-- End Residence --}}
 
             {{-- Manage Admin Role & Permission --}}
             <li class="dropdown {{ setSidebarActive(['admin.permission.*', 'admin.role.*']) }}">

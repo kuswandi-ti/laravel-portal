@@ -30,44 +30,42 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('member.setting.index') }}"
-                        class="nav-link {{ setSidebarActive(['member.setting.*']) }}">
-                        <i class="nav-icon fas fa-cog"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-shield"></i>
                         <p>
-                            {{ __('Setting') }}
+                            {{ __('Admin Roles') }}
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-user-cog"></i>
                         <p>
-                            Starter Pages
+                            Management User
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <li class="nav-item ml-3">
                             <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Active Page</p>
+                                <p>Admin</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ml-3">
                             <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
+                                <p>User</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a href="{{ route('member.setting.index') }}"
+                        class="nav-link {{ setSidebarActive(['member.setting.*']) }}">
+                        <i class="nav-icon fas fa-cog"></i>
                         <p>
-                            Simple Link
-                            <span class="right badge badge-danger">New</span>
+                            {{ __('Setting') }}
                         </p>
                     </a>
                 </li>

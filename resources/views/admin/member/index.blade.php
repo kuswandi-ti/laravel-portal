@@ -166,6 +166,8 @@
 
 <x-swal />
 
+@include('admin.includes.datatable')
+
 @push('scripts')
     <script>
         table_active = $("#table_data_active").DataTable({
