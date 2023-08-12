@@ -24,7 +24,15 @@
 @section('backend_content')
     <div class="row">
         <div class="col-12">
-            <div class="card card-primary mb-3">
+            <div class="mb-3 card card-primary">
+                <div class="card-header">
+                    <h4>{{ __('All Package') }}</h4>
+                    <div class="card-header-action">
+                        <a href="{{ route('admin.package.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> {{ __('Create') }}
+                        </a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <ul class="nav nav-pills" id="myTab3" role="tablist">
                         <li class="nav-item">
@@ -83,7 +91,7 @@
                                                 @if ($package->live_chat_per_month == 1)
                                                     <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
                                                 @else
-                                                    <div class="pricing-item-icon bg-danger text-white"><i
+                                                    <div class="text-white pricing-item-icon bg-danger"><i
                                                             class="fas fa-times"></i></div>
                                                 @endif
                                                 <div class="pricing-item-label">{{ __('Live Chat') }}</div>
@@ -92,7 +100,7 @@
                                                 @if ($package->support_ticket_per_month == 1)
                                                     <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
                                                 @else
-                                                    <div class="pricing-item-icon bg-danger text-white"><i
+                                                    <div class="text-white pricing-item-icon bg-danger"><i
                                                             class="fas fa-times"></i></div>
                                                 @endif
                                                 <div class="pricing-item-label">{{ __('Support Ticket') }}</div>
@@ -101,7 +109,7 @@
                                                 @if ($package->online_payment_per_month == 1)
                                                     <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
                                                 @else
-                                                    <div class="pricing-item-icon bg-danger text-white"><i
+                                                    <div class="text-white pricing-item-icon bg-danger"><i
                                                             class="fas fa-times"></i></div>
                                                 @endif
                                                 <div class="pricing-item-label">{{ __('Online Payment') }}</div>

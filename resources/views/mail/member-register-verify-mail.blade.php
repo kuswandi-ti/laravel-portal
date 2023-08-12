@@ -371,7 +371,7 @@
                                     <tr>
                                         <td>
                                             <p>Hi there,</p>
-                                            <p>Here is your password reset link</p>
+                                            <p>Please verification your registration</p>
                                             <table role="presentation" border="0" cellpadding="0" cellspacing="0"
                                                 class="btn btn-primary">
                                                 <tbody>
@@ -382,9 +382,9 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <a href="{{ route('admin.reset_password', ['token' => $token, 'email' => $email]) }}"
+                                                                            <a href="{{ route('member.register.verify', ['token' => $token]) }}"
                                                                                 target="_blank">
-                                                                                Click here to Reset Password
+                                                                                Click here to verification
                                                                             </a>
                                                                         </td>
                                                                     </tr>

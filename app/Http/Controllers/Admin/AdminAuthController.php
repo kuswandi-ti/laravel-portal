@@ -81,6 +81,6 @@ class AdminAuthController extends Controller
         $admin->remember_token = null;
         $admin->save();
 
-        return redirect()->route('admin.login')->with('success', __('Password reset successfully.'));
+        return redirect()->route('admin.login')->with('success', __('Password reset successfully. Please login first'));
     }
 }

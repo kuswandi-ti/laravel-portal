@@ -15,8 +15,11 @@
     <div class="card-body">
         <p class="login-box-msg">{{ __('Fill your email and password') }}</p>
 
-        <form method="POST" action="{{ route('member.login') }}">
+        <form method="POST" action="{{ route('member.login.post') }}">
             @csrf
+
+            <x-alert-message />
+
             <div class="mb-3 input-group">
                 <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
                     value="{{ old('email') }}" placeholder="{{ __('Email') }}" autofocus>

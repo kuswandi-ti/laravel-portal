@@ -15,11 +15,12 @@
     <div class="card-body">
         <p class="register-box-msg">{{ __('Register new member admin') }}</p>
 
-        <form method="POST" action="{{ route('member.register') }}">
+        <form method="POST" action="{{ route('member.register.post') }}">
             @csrf
+
             <div class="mb-3 input-group">
                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
-                    value="{{ old('name') }}" placeholder="{{ __('Full name') }}">
+                    value="{{ old('name') }}" placeholder="{{ __('Full name') }}" autofocus>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-user"></span>

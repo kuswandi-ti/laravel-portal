@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->text('image')->nullable();
             $table->boolean('status')->default(1);
+            $table->string('register_token', 100)->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
