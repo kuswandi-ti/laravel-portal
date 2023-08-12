@@ -32,16 +32,9 @@
                                 <p>
                                     {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one') }}
                                 </p>
-                                @if (session()->has('success'))
-                                    <div class="alert alert-success alert-dismissible show fade">
-                                        <div class="alert-body">
-                                            <button class="close" data-dismiss="alert">
-                                                <span>×</span>
-                                            </button>
-                                            {{ session()->get('success') }}
-                                        </div>
-                                    </div>
-                                @endif
+
+                                <x-alert-message />
+
                                 <form method="POST" action="{{ route('admin.forgot_password.send') }}"
                                     class="needs-validation" novalidate="">
                                     @csrf

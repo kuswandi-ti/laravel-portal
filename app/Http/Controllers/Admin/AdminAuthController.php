@@ -32,17 +32,6 @@ class AdminAuthController extends Controller
         return redirect()->route('admin.dashboard.index');
     }
 
-    public function logout(Request $request): RedirectResponse
-    {
-        Auth::guard('admin')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect()->route('admin.login');
-    }
-
     public function forgotPassword()
     {
         return view('admin.auth.forgot-password');
@@ -82,5 +71,16 @@ class AdminAuthController extends Controller
         $admin->save();
 
         return redirect()->route('admin.login')->with('success', __('Password reset successfully. Please login first'));
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login');
     }
 }

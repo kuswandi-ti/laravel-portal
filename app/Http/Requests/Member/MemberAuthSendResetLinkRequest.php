@@ -4,7 +4,7 @@ namespace App\Http\Requests\Member;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MemberAuthRegisterRequest extends FormRequest
+class MemberAuthSendResetLinkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class MemberAuthRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:members,email'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'email' => ['required', 'email', 'max:255', 'exists:members,email'],
         ];
     }
 }

@@ -9,9 +9,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\MemberSendResetLinkMail;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Member\MemberAuthLoginRequest;
 use App\Http\Requests\Member\MemberAuthRegisterRequest;
+use App\Http\Requests\Member\MemberAuthResetPasswordRequest;
+use App\Http\Requests\Member\MemberAuthSendResetLinkRequest;
 
 class MemberAuthController extends Controller
 {
@@ -38,7 +41,7 @@ class MemberAuthController extends Controller
             $message->subject('Email Verification Mail');
         });
 
-        return redirect()->route('member.dashboard.index');
+        return redirect()->route('member.login')->with('success', 'Register successfully. You need to confirm your account. We have sent you an activation code, please check your email.');;
     }
 
     public function registerVerify($token)
@@ -74,6 +77,47 @@ class MemberAuthController extends Controller
         $request->authenticate();
 
         return redirect()->route('member.dashboard.index');
+    }
+
+    public function forgotPassword()
+    {
+        return view('member.auth.forgot-password');
+    }
+
+    public function sendResetLink(MemberAuthSendResetLinkRequest $request)
+    {
+        $token = Str::random(64);
+
+        $member = Member::where('email', $request->email)->first();
+        $member->remember_token = $token;
+        $member->save();
+
+        Mail::to($request->email)->send(new MemberSendResetLinkMail($token, $request->email));
+
+        return redirect()->back()->with('success', __('A mail has been sent to your email address. Please check your email.'));
+    }
+
+    public function resetPassword($token)
+    {
+        return view('member.auth.reset-password', compact('token'));
+    }
+
+    public function handleResetPassword(MemberAuthResetPasswordRequest $request)
+    {
+        $member = Member::where([
+            'email' => $request->email,
+            'remember_token' => $request->token,
+        ])->first();
+
+        if (!$member) {
+            return back()->with('error', __('Token is invalid !'));
+        }
+
+        $member->password = bcrypt($request->password);
+        $member->remember_token = null;
+        $member->save();
+
+        return redirect()->route('member.login')->with('success', __('Password reset successfully. Please login first'));
     }
 
     public function logout(Request $request): RedirectResponse

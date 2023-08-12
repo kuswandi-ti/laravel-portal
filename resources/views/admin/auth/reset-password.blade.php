@@ -29,16 +29,9 @@
                                 <h4>{{ __('Reset Password') }}</h4>
                             </div>
                             <div class="card-body">
-                                @if (session()->has('error'))
-                                    <div class="alert alert-danger alert-dismissible show fade">
-                                        <div class="alert-body">
-                                            <button class="close" data-dismiss="alert">
-                                                <span>×</span>
-                                            </button>
-                                            {{ session()->get('error') }}
-                                        </div>
-                                    </div>
-                                @endif
+
+                                <x-alert-message />
+
                                 <form method="POST" action="{{ route('admin.reset_password.send') }}"
                                     class="needs-validation" novalidate="">
                                     @csrf
@@ -48,7 +41,7 @@
                                                 class="text-danger">*</span></label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            tabindex="1" required autofocus value="{{ request()->email }}">
+                                            tabindex="1" value="{{ request()->email }}" required>
                                         <input type="hidden" value="{{ request()->token }}" name="token">
                                         @error('email')
                                             <div class="invalid-feedback">
@@ -62,7 +55,7 @@
                                                 class="text-danger">*</span></label>
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
-                                            tabindex="1" required>
+                                            tabindex="1" required autofocus>
                                         @error('password')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

@@ -18,6 +18,12 @@ class Member
     {
         if (!Auth::guard('member')->check()) {
             return redirect()->route('member.login')->with('error', 'Please login first !');
+        } else {
+            if (!Auth::guard('member')->user()->email_verified_at) {
+                Auth::guard('member')->logout();
+                return redirect()->route('member.login')
+                    ->with('error', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+            }
         }
 
         return $next($request);

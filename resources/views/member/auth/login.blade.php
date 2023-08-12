@@ -65,7 +65,7 @@
             </div>
         </form>
         <p class="mt-3 mb-1 text-center">
-            <a href="#">{{ __('Forgot Password') }}</a>
+            <a href="{{ route('member.forgot_password') }}">{{ __('Forgot Password') }}</a>
         </p>
         <p class="mb-1 text-center">
             <a href="{{ route('member.register') }}">{{ __('Register') }}</a>

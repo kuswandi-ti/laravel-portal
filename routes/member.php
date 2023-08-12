@@ -13,10 +13,14 @@ Route::group([], function () {
     Route::get('login', [MemberAuthController::class, 'login'])->name('login');
     Route::post('login', [MemberAuthController::class, 'handleLogin'])->name('login.post');
     Route::get('member/register-verify/{token}', [MemberAuthController::class, 'registerVerify'])->name('register.verify');
+    Route::get('forgot-password', [MemberAuthController::class, 'forgotPassword'])->name('forgot_password');
+    Route::post('forgot-password', [MemberAuthController::class, 'sendResetLink'])->name('forgot_password.send');
+    Route::get('reset-password/{token}', [MemberAuthController::class, 'resetPassword'])->name('reset_password');
+    Route::post('reset-password', [MemberAuthController::class, 'handleResetPassword'])->name('reset_password.send');
 });
 
 Route::group([
-    'middleware' => ['member', 'member_is_verify_email']
+    'middleware' => ['member']
 ], function () {
     /** Auth Member Routes */
     Route::post('logout', [MemberAuthController::class, 'logout'])->name('logout');
