@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminPackageUpdateRequest extends FormRequest
+class AdminPackageStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,8 @@ class AdminPackageUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $packageId = $this->route('package');
-
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:packages,name,' . $packageId],
+            'name' => ['required', 'string', 'max:255', 'unique:packages,name'],
             'cost_per_month' => ['required', 'numeric', 'min:0'],
             'cost_per_year' => ['required', 'numeric', 'min:0'],
         ];

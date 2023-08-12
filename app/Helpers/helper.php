@@ -12,7 +12,14 @@ function setSidebarActive(array $routes): ?string
     return '';
 }
 
-function amountFormat($amount)
+function formatAmount($amount)
 {
     return number_format((float)$amount, 0, ',', '.');
+}
+
+function unformatAmount($str)
+{
+    $str = str_replace(".", "", $str);
+    $str = str_replace(",", ".", $str);
+    return (float) $str;
 }
