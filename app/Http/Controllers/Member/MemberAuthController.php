@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Models\Area;
 use App\Models\Member;
+use App\Models\Residence;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,20 +22,42 @@ class MemberAuthController extends Controller
 {
     public function register()
     {
-        return view('member.auth.register');
+        $residences = Residence::orderBy('name')->get()->pluck('name', 'id');
+        return view('member.auth.register', compact('residences'));
     }
 
     public function handleRegister(MemberAuthRegisterRequest $request)
     {
-        $token = Str::random(64);
+        // Create Area
+        $residence = Residence::findOrFail($request->residence);
+        $province_code = $residence->province_code;
+        $city_code = $residence->city_code;
+        $district_code = $residence->district_code;
+        $village_code = $residence->village_code;
+        $area = Area::create([
+            'name' => $request->area_name,
+            'slug' => Str::slug($request->area_name),
+            'residence_id' => $request->residence,
+            'province_code' => $province_code,
+            'city_code' => $city_code,
+            'district_code' => $district_code,
+            'village_code' => $village_code,
+            'register_date' => date_create('now')->format('Y-m-d'),
+            'valid_to_date' => date('Y-m-d', strtotime('+30 days', strtotime(date_create('now')->format('Y-m-d')))), // Trial 30 days
+            'status' => 1,
+        ]);;
 
+        // Create Member
+        $token = Str::random(64);
         Member::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'email' => $request->email,
             'image' => config('common.default_image_circle'),
+            'area_id' => $area->id,
             'register_token' => $token,
             'password' => Hash::make($request->password),
+            'status' => 1,
         ]);
 
         Mail::send('mail.member-register-verify-mail', ['token' => $token], function ($message) use ($request) {

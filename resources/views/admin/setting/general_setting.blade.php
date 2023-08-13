@@ -27,10 +27,6 @@
     {{ __('View information about general setting on this page') }}
 @endsection
 
-@push('styles_vendor')
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/select2/dist/css/select2.min.css') }}">
-@endpush
-
 @section('backend_content')
     <div class="row">
         <div class="col-md-3">
@@ -267,7 +263,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6" style="border: 1px solid #f8a100; border-right-style: none">
-                                        <div class="text-center mb-3 ">{{ __('Logo') }}</div>
+                                        <div class="mb-3 text-center ">{{ __('Logo') }}</div>
                                         <div class="mb-3 text-center">
                                             @if (!empty($setting['image_logo']))
                                                 <img class="preview-path_image_logo"
@@ -289,7 +285,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="border: 1px solid #f8a100;">
-                                        <div class="text-center mb-3 ">{{ __('Favicon') }}</div>
+                                        <div class="mb-3 text-center ">{{ __('Favicon') }}</div>
                                         <div class="mb-3 text-center">
                                             @if (!empty($setting['image_favicon']))
                                                 <img class="preview-path_image_favicon"
@@ -324,8 +320,6 @@
     </div>
 @endsection
 
-@push('scripts_vendor')
-    <script src="{{ asset('public/template/backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
-@endpush
-
 <x-swal />
+
+@include('admin.includes.select2')

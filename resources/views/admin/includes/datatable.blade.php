@@ -23,6 +23,13 @@
 
 @push('scripts')
     <script>
+        table = $("#table_data").DataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
+        });
+
         table_active = $("#table_data_active").DataTable({
             "columnDefs": [{
                 "sortable": false,

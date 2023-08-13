@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Area;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Member extends Authenticatable // implements MustVerifyEmail
+class Member extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
+    use HasUuids;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
@@ -28,6 +30,7 @@ class Member extends Authenticatable // implements MustVerifyEmail
         'slug',
         'email',
         'image',
+        'area_id',
         'register_token',
         'password',
     ];
@@ -51,4 +54,9 @@ class Member extends Authenticatable // implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

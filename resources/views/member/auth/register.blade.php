@@ -76,6 +76,37 @@
                     </div>
                 @enderror
             </div>
+            <div class="mb-3 input-group">
+                <select class="form-control select2 @error('residence') is-invalid @enderror" style="width: 100%;"
+                    name="residence" id="residence" placeholder="Choose Residence ..." required>
+                    <option value="" disabled selected>
+                        {{ __('Choose Residence ...') }}</option>
+                    @foreach ($residences as $id => $name)
+                        <option value="{{ $id }}" {{ old('residence') == $id ? 'selected' : '' }}>
+                            {{ $name }}</option>
+                    @endforeach
+                </select>
+                @error('residence')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3 input-group">
+                <input type="text" name="area_name" id="area_name"
+                    class="form-control @error('area_name') is-invalid @enderror" value="{{ old('area_name') }}"
+                    placeholder="{{ __('Name Area, Cluster, or Others') }}">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-landmark"></span>
+                    </div>
+                </div>
+                @error('area_name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
             <div class="mt-3 row">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-block">{{ __('Register') }}</button>
@@ -87,3 +118,5 @@
         </p>
     </div>
 @endsection
+
+@include('member.includes.select2', ['placeholder' => 'Choose Residence'])

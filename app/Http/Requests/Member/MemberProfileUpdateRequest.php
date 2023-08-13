@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Member;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MemberAuthRegisterRequest extends FormRequest
+class MemberProfileUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +24,10 @@ class MemberAuthRegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:members,email'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
-            'residence' => ['required'],
-            'area_name' => ['required', 'string', 'max:255', 'unique:areas,name'],
+            // 'email' => ['unique:members,email,' . Auth::guard('member')->user()->id],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable'],
+            'path_image' => ['nullable', 'image', 'max:3000'],
         ];
     }
 }

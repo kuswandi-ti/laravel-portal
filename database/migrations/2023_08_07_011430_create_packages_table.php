@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-			$table->decimal('cost_per_month', 10, 2);
-			$table->decimal('cost_per_year', 10, 2);
+            $table->decimal('cost_per_month', 10, 2);
+            $table->decimal('cost_per_year', 10, 2);
             $table->string('staff_limit_per_month');
             $table->string('user_limit_per_month');
             $table->string('wallet_amount_limit_per_month');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->boolean('live_chat_per_year')->default(0);
             $table->boolean('support_ticket_per_year')->default(0);
             $table->boolean('online_payment_per_year')->default(0);
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();
             $table->softDeletes();
         });

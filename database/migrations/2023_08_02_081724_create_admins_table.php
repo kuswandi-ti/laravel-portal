@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('district')->nullable();
             $table->string('village')->nullable();
             $table->text('address')->nullable();
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

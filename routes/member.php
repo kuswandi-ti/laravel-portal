@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Member\MemberAuthController;
+use App\Http\Controllers\Member\MemberProfileController;
 use App\Http\Controllers\Member\MemberSettingController;
 use App\Http\Controllers\Member\MemberDashboardController;
-use App\Http\Controllers\Member\Auth\RegisteredUserController;
 
 Route::group([], function () {
     /** Auth Member Routes */
@@ -28,9 +28,10 @@ Route::group([
     /** Dashboard Routes */
     Route::get('dashboard', [MemberDashboardController::class, 'index'])->name('dashboard.index');
 
-    // /** Profile Routes */
+    /** Profile Routes */
+    // Route::get('profile', [MemberProfileController::class, 'index'])->name('profile.index');
     // Route::put('profile-password-update/{id}', [AdminProfileController::class, 'updatePassword'])->name('profile_password.update');
-    // Route::resource('profile', AdminProfileController::class);
+    Route::resource('profile', MemberProfileController::class);
 
     // /** Language Routes */
     // Route::resource('language', AdminLanguageController::class);

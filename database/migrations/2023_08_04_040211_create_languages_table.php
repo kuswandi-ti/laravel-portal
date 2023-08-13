@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('lang');
             $table->string('slug');
-            $table->boolean('default');
-            $table->boolean('status');
+            $table->boolean('default')->default(0)->comment('Yes or No');
+            $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();
         });
     }

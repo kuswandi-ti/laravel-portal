@@ -167,21 +167,3 @@
 <x-swal />
 
 @include('admin.includes.datatable')
-
-@push('scripts')
-    <script>
-        table_active = $("#table_data_active").DataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }]
-        });
-
-        table_inactive = $("#table_data_inactive").DataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }]
-        });
-    </script>
-@endpush

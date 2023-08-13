@@ -9,7 +9,9 @@
 
     <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
 
+    @stack('styles_vendor')
     @include('member.includes.styles')
+    @stack('styles')
 </head>
 
 <body class="hold-transition @yield('class_body')">
@@ -28,6 +30,8 @@
     </div>
 
     @include('member.includes.scripts')
+    @stack('scripts_vendor')
+    @stack('scripts')
 </body>
 
 </html>

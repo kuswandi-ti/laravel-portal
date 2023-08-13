@@ -13,7 +13,7 @@
 @push('scripts')
     <script>
         $('.select2').select2({
-            placeholder: '{{ isset($placeholder) ? $placeholder : '-' }}',
+            placeholder: '{{ isset($placeholder) ? $placeholder : 'Choose one ...' }}',
             closeOnSelect: true,
             allowClear: true,
         })

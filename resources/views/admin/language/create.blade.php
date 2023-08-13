@@ -21,10 +21,6 @@
     {{ __('Create information about language on this page') }}
 @endsection
 
-@push('styles_vendor')
-    <link rel="stylesheet" href="{{ asset('public/template/backend/assets/modules/select2/dist/css/select2.min.css') }}">
-@endpush
-
 @section('backend_content')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
@@ -119,9 +115,7 @@
     </div>
 @endsection
 
-@push('scripts_vendor')
-    <script src="{{ asset('public/template/backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
-@endpush
+@include('admin.includes.select2')
 
 @push('scripts')
     <script>
