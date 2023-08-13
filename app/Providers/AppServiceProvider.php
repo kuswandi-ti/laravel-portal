@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Setting;
 use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
+use Debugbar;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('setting', $setting);
         });
 
-        \Debugbar::disable();
+        Debugbar::disable();
     }
 }

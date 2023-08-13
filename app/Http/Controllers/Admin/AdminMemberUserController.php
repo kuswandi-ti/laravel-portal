@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Area;
 use App\Models\Member;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\AdminMemberUserStoreRequest;
 use App\Http\Requests\Admin\AdminMemberUserUpdateRequest;
 
@@ -28,7 +30,8 @@ class AdminMemberUserController extends Controller
     public function create()
     {
         $roles = Role::orderBy('name', 'DESC')->where('guard_name', 'member')->pluck('name', 'name');
-        return view('admin.member.create', compact('roles'));
+        $areas = Area::orderBy('name', 'ASC')->pluck('name', 'id');
+        return view('admin.member.create', compact('roles', 'areas'));
     }
 
     /**
@@ -41,7 +44,10 @@ class AdminMemberUserController extends Controller
         $member->name = $request->name;
         $member->slug = Str::slug($request->name);
         $member->email = $request->email;
+        $member->password = Hash::make($request->password);
         $member->image = '/images/no_image_circle.png';
+        $member->area_id = $request->area;
+        $member->email_verified_at = date_create('now')->format('Y-m-d');
         $member->status = 1;
         $member->save();
 
@@ -66,8 +72,9 @@ class AdminMemberUserController extends Controller
         $member = Member::findOrFail($id);
         $roles = Role::orderBy('name', 'DESC')->where('guard_name', 'member')->pluck('name', 'name');
         $member_role = $member->roles->pluck('name', 'name')->all();
+        $areas = Area::orderBy('name', 'ASC')->pluck('name', 'id');
 
-        return view('admin.member.edit', compact('member', 'roles', 'member_role'));
+        return view('admin.member.edit', compact('member', 'roles', 'member_role', 'areas'));
     }
 
     /**
@@ -80,6 +87,7 @@ class AdminMemberUserController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'email' => $request->email,
+            'area_id' => $request->area,
             'status' => 1,
         ]);
         $member->syncRoles($request->role);

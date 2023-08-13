@@ -37,7 +37,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label>{{ __('Member User Name') }} <x-fill-field /></label>
+                            <label>{{ __('Member Name') }} <x-fill-field /></label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                 value="{{ old('name') }}" required>
                             @error('name')
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>{{ __('Member User Email') }} <x-fill-field /></label>
+                            <label>{{ __('Member Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email') }}" required>
                             @error('email')
@@ -59,7 +59,49 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="control-label">{{ __('Member User Role') }} <x-fill-field /></div>
+                            <label>{{ __('Password') }} <x-fill-field /></label>
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
+                                required>
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>{{ __('Confirmation Password') }} <x-fill-field /></label>
+                            <input type="password" name="password_confirmation"
+                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                value="{{ old('password_confirmation') }}" required>
+                            @error('password_confirmation')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>{{ __('Area') }} <x-fill-field /></label>
+                            <select class="form-control select2 @error('area') is-invalid @enderror" name="area"
+                                id="area" placeholder="Choose ...">
+                                <option value="" disabled selected>
+                                    {{ __('Choose one ...') }}</option>
+                                @foreach ($areas as $id => $name)
+                                    <option value="{{ $id }}" {{ old('area') == $id ? 'selected' : '' }}>
+                                        {{ $name }}</option>
+                                @endforeach
+                            </select>
+                            @error('area')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label">{{ __('Member Role') }} <x-fill-field /></div>
                             <div class="mt-2 custom-switches-stacked">
                                 @foreach ($roles as $key => $item)
                                     <label class="custom-switch">
@@ -88,3 +130,5 @@
         </div>
     </div>
 @endsection
+
+@include('admin.includes.select2')

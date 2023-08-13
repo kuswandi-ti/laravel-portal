@@ -20,5 +20,13 @@ class LanguagesTableSeeder extends Seeder
         $language->default = 1;
         $language->status = 1;
         $language->save();
+
+        $language = new Language();
+        $language->name = 'Indonesia';
+        $language->lang = 'id';
+        $language->slug = 'id';
+        $language->default = 0;
+        $language->status = 1;
+        $language->save();
     }
 }

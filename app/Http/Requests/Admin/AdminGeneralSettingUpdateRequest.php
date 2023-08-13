@@ -27,12 +27,12 @@ class AdminGeneralSettingUpdateRequest extends FormRequest
             'company_phone' => ['required', 'string', 'max:255'],
             'company_email' => ['required', 'string', 'max:255'],
             'company_address' => ['required', 'string', 'max:255'],
-            'date_format' => ['required'],
-            'time_format' => ['required'],
-            'currency' => ['required'],
-            'language' => ['required'],
-            'logo' => ['nullable', 'image', 'max:3000'],
-            'favicon' => ['nullable', 'image', 'max:3000'],
+            'default_date_format' => ['required'],
+            'default_time_format' => ['required'],
+            'default_currency' => ['required'],
+            'default_language' => ['required'],
+            'company_logo' => ['nullable', 'image', 'max:3000'],
+            'company_favicon' => ['nullable', 'image', 'max:3000'],
         ];
     }
 }

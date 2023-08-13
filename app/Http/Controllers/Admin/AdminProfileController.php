@@ -60,7 +60,7 @@ class AdminProfileController extends Controller
      */
     public function update(AdminProfileUpdateRequest $request, string $id)
     {
-        $imagePath = $this->handleImageUpload($request, 'image', $request->old_image, 'profile');
+        $imagePath = $this->handleImageUpload($request, 'image', $request->old_image, 'admin_profile');
 
         $admin = Admin::findOrFail($id);
         $admin->image = !empty($imagePath) ? $imagePath : $request->old_image;
