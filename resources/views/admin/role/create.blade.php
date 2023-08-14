@@ -52,7 +52,8 @@
                             <div class="control-label">{{ __('Guard Name') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="admin" class="custom-switch-input">
+                                    <input type="radio" name="guard_name" value="admin" class="custom-switch-input"
+                                        checked>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-danger">{{ __('Admin') }}</span>
                                 </label>
@@ -61,32 +62,50 @@
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ __('Member') }}</span>
                                 </label>
-                                <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="web" class="custom-switch-input"
-                                        checked="">
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-primary">{{ __('Web') }}</span>
-                                </label>
                             </div>
                         </div>
 
-                        @foreach ($permissions as $key => $permission)
-                            <div class="form-group">
-                                <div class="control-label">{{ __($key) }}</div>
-                                <div class="row">
-                                    @foreach ($permission->sortBy('name') as $item)
-                                        <div class="col-md-3">
-                                            <label class="mt-2 custom-switch">
-                                                <input value="{{ __($item->name) }}" type="checkbox" name="permissions[]"
-                                                    class="custom-switch-input">
-                                                <span class="custom-switch-indicator"></span>
-                                                <span class="custom-switch-description">{{ __($item->name) }}</span>
-                                            </label>
-                                        </div>
-                                    @endforeach
+                        <div id="permission_admin">
+                            <div class="control-label mb-3">{{ __('Permission Admin') }}</div>
+                            @foreach ($permissions_admin as $key => $permission)
+                                <div class="form-group">
+                                    <div class="control-label text-danger">{{ __($key) }}</div>
+                                    <div class="row">
+                                        @foreach ($permission->sortBy('name') as $item)
+                                            <div class="col-md-3">
+                                                <label class="mt-2 custom-switch">
+                                                    <input value="{{ __($item->name) }}" type="checkbox"
+                                                        name="permissions[]" class="custom-switch-input">
+                                                    <span class="custom-switch-indicator"></span>
+                                                    <span class="custom-switch-description">{{ __($item->name) }}</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
+
+                        <div id="permission_member">
+                            <div class="control-label mb-3">{{ __('Permission Member') }}</div>
+                            @foreach ($permissions_member as $key => $permission)
+                                <div class="form-group">
+                                    <div class="control-label text-info">{{ __($key) }}</div>
+                                    <div class="row">
+                                        @foreach ($permission->sortBy('name') as $item)
+                                            <div class="col-md-3">
+                                                <label class="mt-2 custom-switch">
+                                                    <input value="{{ __($item->name) }}" type="checkbox"
+                                                        name="permissions[]" class="custom-switch-input">
+                                                    <span class="custom-switch-indicator"></span>
+                                                    <span class="custom-switch-description">{{ __($item->name) }}</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class="card-footer bg-light">
@@ -99,3 +118,25 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#permission_admin').show();
+            $('#permission_member').hide();
+
+            $('input[type=radio][name=guard_name]').on('change', function() {
+                switch ($(this).val()) {
+                    case 'admin':
+                        $('#permission_admin').show();
+                        $('#permission_member').hide();
+                        break;
+                    case 'member':
+                        $('#permission_admin').hide();
+                        $('#permission_member').show();
+                        break;
+                }
+            });
+        })
+    </script>
+@endpush

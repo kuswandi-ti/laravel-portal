@@ -15,7 +15,7 @@ class AdminRoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::where('guard_name', 'admin')->orderBy('name', 'ASC')->get();
+        $roles = Role::where('guard_name', '!=', 'web')->orderBy('name', 'ASC')->get();
         return view('admin.role.index', compact('roles'));
     }
 
@@ -24,8 +24,9 @@ class AdminRoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::where('guard_name', 'admin')->get()->groupBy('group_name');
-        return view('admin.role.create', compact('permissions'));
+        $permissions_admin = Permission::where('guard_name', 'admin')->get()->groupBy('group_name');
+        $permissions_member = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
+        return view('admin.role.create', compact('permissions_admin', 'permissions_member'));
     }
 
     /**
@@ -34,8 +35,8 @@ class AdminRoleController extends Controller
     public function store(AdminRoleStoreRequest $request)
     {
         $role = Role::create([
+            'name' => $request->role_name,
             'guard_name' => $request->guard_name,
-            'name' => $request->role_name
         ]);
         $role->syncPermissions($request->permissions);
 
@@ -48,11 +49,12 @@ class AdminRoleController extends Controller
     public function edit(string $id)
     {
         $role = Role::findOrFail($id);
-        $permissions = Permission::all()->groupBy('group_name');
+        $permissions_admin = Permission::where('guard_name', 'admin')->get()->groupBy('group_name');
+        $permissions_member = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
         $roles_permissions = $role->permissions;
         $roles_permissions = $roles_permissions->pluck('name')->toArray();
 
-        return view('admin.role.edit', compact('role', 'permissions', 'roles_permissions'));
+        return view('admin.role.edit', compact('role', 'permissions_admin', 'permissions_member', 'roles_permissions'));
     }
 
     /**
@@ -62,8 +64,8 @@ class AdminRoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->update([
+            'name' => $request->role_name,
             'guard_name' => $request->guard_name,
-            'name' => $request->role_name
         ]);
         $role->syncPermissions($request->permissions);
 

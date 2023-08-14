@@ -74,12 +74,6 @@
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ __('Member') }}</span>
                                 </label>
-                                <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="web" class="custom-switch-input"
-                                        {{ $permission->guard_name == 'web' ? 'checked' : '' }}>
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-primary">{{ __('Web') }}</span>
-                                </label>
                             </div>
                         </div>
                     </div>

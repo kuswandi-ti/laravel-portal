@@ -2,38 +2,35 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Models\Area;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use KodePandai\Indonesia\Models\City;
-use KodePandai\Indonesia\Models\Village;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
-use KodePandai\Indonesia\Models\District;
-use KodePandai\Indonesia\Models\Province;
+use App\Http\Requests\Member\MemberSettingAreaUpdateRequest;
 
 class MemberSettingController extends Controller
 {
     public function index()
     {
-        $provinces = Province::orderBy('name')->get()->pluck('name', 'code');
+        $areaId = Auth::guard('member')->user()->area_id;
+        $area = Area::findOrFail($areaId);
         $permissions = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
-        return view('member.setting.index', compact('provinces', 'permissions'));
+        return view('member.setting.index', compact('permissions', 'area'));
     }
 
-    public function getCities(Request $request)
+    public function settingAreaUpdate(MemberSettingAreaUpdateRequest $request, string $id)
     {
-        $data['cities'] = City::orderBy('name')->where("province_code", $request->province_code)->get(["name", "code"]);
-        return response()->json($data);
-    }
+        $area = Area::findOrFail($id);
+        $area->name = $request->name;
+        $area->slug = Str::slug($request->name);
+        $area->rt = $request->rt;
+        $area->rw = $request->rw;
+        $area->postal_code = $request->postal_code;
+        $area->full_address = $request->full_address;
+        $area->save();
 
-    public function getDistricts(Request $request)
-    {
-        $data['districts'] = District::orderBy('name')->where("city_code", $request->city_code)->get(["name", "code"]);
-        return response()->json($data);
-    }
-
-    public function getVillages(Request $request)
-    {
-        $data['villages'] = Village::orderBy('name')->where("district_code", $request->district_code)->get(["name", "code"]);
-        return response()->json($data);
+        return redirect()->back()->with('success', __('Update area successfully'));
     }
 }

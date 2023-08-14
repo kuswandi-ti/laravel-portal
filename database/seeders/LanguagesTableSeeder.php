@@ -22,7 +22,7 @@ class LanguagesTableSeeder extends Seeder
         $language->save();
 
         $language = new Language();
-        $language->name = 'Indonesia';
+        $language->name = 'Indonesian';
         $language->lang = 'id';
         $language->slug = 'id';
         $language->default = 0;

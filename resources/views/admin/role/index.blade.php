@@ -76,13 +76,4 @@
 
 <x-swal />
 
-@push('scripts')
-    <script>
-        table = $("#table_data").DataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }]
-        });
-    </script>
-@endpush
+@include('admin.includes.datatable')

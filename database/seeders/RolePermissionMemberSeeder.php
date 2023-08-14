@@ -21,7 +21,7 @@ class RolePermissionMemberSeeder extends Seeder
     public function run(): void
     {
         $package = new Package();
-        $package->name = 'Puri Harmoni 6';
+        $package->name = 'Basic';
         $package->cost_per_month = 50000;
         $package->cost_per_year = 500000;
         $package->staff_limit_per_month = 3;
@@ -55,7 +55,7 @@ class RolePermissionMemberSeeder extends Seeder
         $area->slug = Str::slug('RT 005 RW 011 PH6');
         $area->residence_id = $residence->id;
         $area->rt = '005';
-        $area->rw = 'RW 011';
+        $area->rw = '011';
         $area->province_code = $residence->province_code;
         $area->city_code = $residence->city_code;
         $area->district_code = $residence->district_code;
@@ -79,9 +79,9 @@ class RolePermissionMemberSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions = [
-            ['guard_name' => 'member', 'name' => 'residence index', 'group_name' => 'Residence Permission'],
-            ['guard_name' => 'member', 'name' => 'residence create', 'group_name' => 'Residence Permission'],
-            ['guard_name' => 'member', 'name' => 'residence update', 'group_name' => 'Residence Permission'],
+            ['guard_name' => 'member', 'name' => 'area index', 'group_name' => 'Area Permission'],
+            ['guard_name' => 'member', 'name' => 'area create', 'group_name' => 'Area Permission'],
+            ['guard_name' => 'member', 'name' => 'area update', 'group_name' => 'Area Permission'],
             ['guard_name' => 'member', 'name' => 'staff index', 'group_name' => 'Staff Permission'],
             ['guard_name' => 'member', 'name' => 'staff create', 'group_name' => 'Staff Permission'],
             ['guard_name' => 'member', 'name' => 'staff update', 'group_name' => 'Staff Permission'],
@@ -91,16 +91,6 @@ class RolePermissionMemberSeeder extends Seeder
             Permission::create($permission);
         }
 
-        $role = Role::create(['guard_name' => 'member', 'name' => 'Admin']);
-        $role->givePermissionTo([
-            'residence index',
-            'residence create',
-            'residence update',
-            'staff index',
-            'staff create',
-            'staff update',
-            'staff non aktif',
-        ]);
         $member = Member::create([
             'name' => 'Admin RT 005 RW 011 PH6',
             'slug' => Str::slug('Admin RT 005 RW 011 PH6'),
@@ -112,6 +102,18 @@ class RolePermissionMemberSeeder extends Seeder
             'status' => 1,
             'remember_token' => Str::random(10),
         ]);
+
+        $role = Role::create(['guard_name' => 'member', 'name' => 'Admin', 'member_id' => $member->id]);
+        $role->givePermissionTo([
+            'area index',
+            'area create',
+            'area update',
+            'staff index',
+            'staff create',
+            'staff update',
+            'staff non aktif',
+        ]);
+
         $member->assignRole($role);
     }
 }

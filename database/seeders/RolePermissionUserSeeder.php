@@ -43,7 +43,7 @@ class RolePermissionUserSeeder extends Seeder
             Permission::create($permission);
         }
 
-        $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua']);
+        $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua', 'member_id' => 1]);
         $roleKetua->givePermissionTo([
             'warga index',
             'pemasukan index',
@@ -58,7 +58,7 @@ class RolePermissionUserSeeder extends Seeder
         ]);
         $userKetua->assignRole($roleKetua);
 
-        $roleBendahara = Role::create(['guard_name' => 'web', 'name' => 'Bendahara']);
+        $roleBendahara = Role::create(['guard_name' => 'web', 'name' => 'Bendahara', 'member_id' => 1]);
         $roleBendahara->givePermissionTo([
             'tagihan index',
             'tagihan create',
@@ -81,7 +81,7 @@ class RolePermissionUserSeeder extends Seeder
         ]);
         $userBendahara->assignRole($roleBendahara);
 
-        $roleSekretaris = Role::create(['guard_name' => 'web', 'name' => 'Sekretaris']);
+        $roleSekretaris = Role::create(['guard_name' => 'web', 'name' => 'Sekretaris', 'member_id' => 1]);
         $roleSekretaris->givePermissionTo([
             'warga index',
             'warga create',

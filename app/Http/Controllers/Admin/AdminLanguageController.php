@@ -31,6 +31,10 @@ class AdminLanguageController extends Controller
      */
     public function store(AdminLanguageStoreRequest $request)
     {
+        if ($request->default == '1') {
+            Language::update(["default" => "0"]);
+        }
+
         $language = new Language();
 
         $language->name = $request->name;
@@ -65,6 +69,10 @@ class AdminLanguageController extends Controller
      */
     public function update(AdminLanguageUpdateRequest $request, string $id)
     {
+        if ($request->default == '1') {
+            Language::where('status', '1')->update(['default' => '0']);
+        }
+
         $language = Language::findOrFail($id);
 
         $language->name = $request->name;

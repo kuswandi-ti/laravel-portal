@@ -11,11 +11,6 @@
 <!-- SweetAlert2 -->
 <link rel="stylesheet"
     href="{{ asset(config('common.path_template_member') . 'plugins/sweetalert2/sweetalert2.min.css') }}">
-<!-- JQVMap -->
-<link rel="stylesheet" href="{{ asset(config('common.path_template_member') . 'plugins/jqvmap/jqvmap.min.css') }}">
-<!-- overlayScrollbars -->
-<link rel="stylesheet"
-    href="{{ asset(config('common.path_template_member') . 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 <!-- icheck-bootstrap -->
 <link rel="stylesheet"
     href="{{ asset(config('common.path_template_member') . 'plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">

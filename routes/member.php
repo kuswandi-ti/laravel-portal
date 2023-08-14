@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Member\MemberAuthController;
+use App\Http\Controllers\Member\MemberRoleController;
 use App\Http\Controllers\Member\MemberProfileController;
 use App\Http\Controllers\Member\MemberSettingController;
+use App\Http\Controllers\Member\MemberUserUserController;
+use App\Http\Controllers\Member\MemberAdminUserController;
 use App\Http\Controllers\Member\MemberDashboardController;
 
 Route::group([], function () {
@@ -29,31 +32,22 @@ Route::group([
     Route::get('dashboard', [MemberDashboardController::class, 'index'])->name('dashboard.index');
 
     /** Profile Routes */
-    // Route::get('profile', [MemberProfileController::class, 'index'])->name('profile.index');
-    // Route::put('profile-password-update/{id}', [AdminProfileController::class, 'updatePassword'])->name('profile_password.update');
+    Route::get('profile-password', [MemberProfileController::class, 'indexPassword'])->name('profile_password.index');
+    Route::put('profile-password-update/{id}', [MemberProfileController::class, 'updatePassword'])->name('profile_password.update');
     Route::resource('profile', MemberProfileController::class);
 
-    // /** Language Routes */
-    // Route::resource('language', AdminLanguageController::class);
+    /** Role Routes */
+    Route::resource('role', MemberRoleController::class);
 
-    // /** Permission Routes */
-    // Route::resource('permission', AdminPermissionController::class);
+    /** Admin Routes */
+    Route::resource('admin', MemberAdminUserController::class);
 
-    // /** Role Routes */
-    // Route::resource('role', AdminRoleController::class);
-
-    // /** User Admin Routes */
-    // Route::resource('admin', AdminAdminUserController::class);
-    // Route::get('admin/restore/{id}', [AdminAdminUserController::class, 'restore'])->name('admin.restore');
+    /** User Routes */
+    Route::resource('user', MemberUserUserController::class);
 
     /** Setting Routes */
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');
-    // Route::get('general-setting', [AdminSettingController::class, 'generalSettingIndex'])->name('general_setting.index');
-    // Route::put('general-setting', [AdminSettingController::class, 'generalSettingUpdate'])->name('general_setting.update');
-
-    // /** Member User Routes */
-    // Route::resource('member', AdminMemberUserController::class);
-    // Route::get('member/restore/{id}', [AdminMemberUserController::class, 'restore'])->name('member.restore');
+    Route::put('setting-area/{id}', [MemberSettingController::class, 'settingAreaUpdate'])->name('setting_area.update');
 
     Route::post('get-cities', [MemberSettingController::class, 'getCities'])->name('setting.get_cities');
     Route::post('get-districts', [MemberSettingController::class, 'getDistricts'])->name('setting.get_districts');

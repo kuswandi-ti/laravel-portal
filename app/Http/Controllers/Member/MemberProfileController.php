@@ -8,6 +8,7 @@ use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Member\MemberProfileUpdateRequest;
+use App\Http\Requests\Member\MemberProfilePasswordUpdateRequest;
 
 class MemberProfileController extends Controller
 {
@@ -39,5 +40,19 @@ class MemberProfileController extends Controller
         $member->save();
 
         return redirect()->back()->with('success', __('Update profile successfully'));
+    }
+
+    public function indexPassword()
+    {
+        return view('member.profile.password_update');
+    }
+
+    public function updatePassword(MemberProfilePasswordUpdateRequest $request, string $id)
+    {
+        $member = Member::findOrFail($id);
+        $member->password = bcrypt($request->password);
+        $member->save();
+
+        return redirect()->back()->with('success', __('Update password successfully'));
     }
 }

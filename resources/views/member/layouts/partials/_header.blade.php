@@ -118,7 +118,7 @@
                     <i class="mr-2 fas fa-id-card"></i> {{ __('Profile Setting') }}
                     <span class="float-right text-sm text-muted">-</span>
                 </a>
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('member.profile_password.index') }}" class="dropdown-item">
                     <i class="mr-2 fas fa-user-lock"></i> {{ __('Change Password') }}
                     <span class="float-right text-sm text-muted">-</span>
                 </a>

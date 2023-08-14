@@ -212,7 +212,7 @@
                                             <select id="default_language" name="default_language"
                                                 class="form-control select2 @error('default_language') is-invalid @enderror"
                                                 required>
-                                                <option value="" selected disabled>-- {{ __('Select') }} --
+                                                <option value="" selected disabled>{{ __('Choose one ...') }}
                                                 </option>
                                                 @foreach ($default_language as $code => $text)
                                                     <option value="{{ $code }}"

@@ -41,10 +41,9 @@
                             <label>{{ __('Language') }}</label>
                             <select id="lang" name="lang"
                                 class="form-control select2 @error('lang') is-invalid @enderror">
-                                <option value="" selected disabled>-- Select --</option>
+                                <option value="" selected disabled>{{ __('Choose one ...') }}</option>
                                 @foreach (config('language') as $key => $lang)
-                                    <option value="{{ $key }}"
-                                        {{ $language->name == $lang['name'] ? 'selected' : '' }}>
+                                    <option value="{{ $key }}" {{ $language->lang == $key ? 'selected' : '' }}>
                                         {{ $lang['name'] }}</option>
                                 @endforeach
                             </select>

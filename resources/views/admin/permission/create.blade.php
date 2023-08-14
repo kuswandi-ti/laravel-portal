@@ -62,7 +62,8 @@
                             <div class="control-label">{{ __('Guard Name') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="admin" class="custom-switch-input">
+                                    <input type="radio" name="guard_name" value="admin" class="custom-switch-input"
+                                        checked>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-danger">{{ __('Admin') }}</span>
                                 </label>
@@ -70,12 +71,6 @@
                                     <input type="radio" name="guard_name" value="member" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ __('Member') }}</span>
-                                </label>
-                                <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="web" class="custom-switch-input"
-                                        checked="">
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-primary">{{ __('Web') }}</span>
                                 </label>
                             </div>
                         </div>

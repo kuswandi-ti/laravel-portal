@@ -19,17 +19,9 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-shield"></i>
-                        <p>
-                            {{ __('Admin Roles') }}
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ setSidebarOpenMember(['member.role.*', 'member.admin.*', 'member.user.*']) }}">
+                    <a href="#"
+                        class="nav-link {{ setSidebarActiveMember(['member.role.*', 'member.admin.*', 'member.user.*']) }}">
                         <i class="nav-icon fas fa-user-cog"></i>
                         <p>
                             {{ __('Management User') }}
@@ -37,13 +29,21 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="ml-3 nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item">
+                            <a href="{{ route('member.role.index') }}"
+                                class="nav-link {{ setSidebarActiveMember(['member.role.*']) }}">
+                                <p>{{ __('Roles') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('member.admin.index') }}"
+                                class="nav-link {{ setSidebarActiveMember(['member.admin.*']) }}">
                                 <p>{{ __('Admin') }}</p>
                             </a>
                         </li>
-                        <li class="ml-3 nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item">
+                            <a href="{{ route('member.user.index') }}"
+                                class="nav-link  {{ setSidebarActiveMember(['member.user.*']) }}">
                                 <p>{{ __('User') }}</p>
                             </a>
                         </li>

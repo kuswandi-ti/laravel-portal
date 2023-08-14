@@ -49,6 +49,10 @@ Route::group([
     Route::resource('admin', AdminAdminUserController::class);
     Route::get('admin/restore/{id}', [AdminAdminUserController::class, 'restore'])->name('admin.restore');
 
+    /** Member User Routes */
+    Route::resource('member', AdminMemberUserController::class);
+    Route::get('member/restore/{id}', [AdminMemberUserController::class, 'restore'])->name('member.restore');
+
     /** Residence Routes */
     Route::resource('residence', AdminResidenceController::class);
     Route::get('residence/restore/{id}', [AdminResidenceController::class, 'restore'])->name('residence.restore');
@@ -65,8 +69,4 @@ Route::group([
     Route::put('general-setting', [AdminSettingController::class, 'generalSettingUpdate'])->name('general_setting.update');
     Route::get('notification-setting', [AdminSettingController::class, 'notificationSettingIndex'])->name('notification_setting.index');
     Route::put('notification-setting', [AdminSettingController::class, 'notificationSettingUpdate'])->name('notification_setting.update');
-
-    /** Member User Routes */
-    Route::resource('member', AdminMemberUserController::class);
-    Route::get('member/restore/{id}', [AdminMemberUserController::class, 'restore'])->name('member.restore');
 });

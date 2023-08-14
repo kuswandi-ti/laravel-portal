@@ -60,13 +60,13 @@
                             </div>
                             <div class="form-group col-12">
                                 <label>{{ __('Email') }} <span class="text-danger">(readonly)</span></label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') ?? $admin->email }}" disabled>
-                                @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="email" class="form-control" name="email"
+                                    value="{{ old('email') ?? $admin->email }}" disabled>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>{{ __('Role') }} <span class="text-danger">(readonly)</span></label>
+                                <input type="text" class="form-control" name="role"
+                                    value="{{ old('role') ?? $admin->roles->first()->name }}" disabled>
                             </div>
                         </div>
                     </div>
@@ -134,22 +134,20 @@
     </div>
 @endsection
 
-@push('scripts_vendor')
-    <script
-        src="{{ asset('public/template/backend/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}">
-    </script>
-@endpush
+<x-swal />
+
+@include('admin.includes.upload_preview')
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            $('.image-preview').css({
-                "background-image": "url({{ asset('public/storage' . $admin->image) }})",
-                "background-size": "cover",
-                "background-position": "center center"
-            });
+        $.uploadPreview({
+            input_field: "#image-upload", // Default: .image-upload
+            preview_box: "#image-preview", // Default: .image-preview
+            label_field: "#image-label", // Default: .image-label
+            label_default: "Choose File", // Default: Choose File
+            label_selected: "Change File", // Default: Change File
+            no_label: false, // Default: false
+            success_callback: null // Default: null
         });
     </script>
 @endpush
-
-<x-swal />

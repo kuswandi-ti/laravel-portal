@@ -34,13 +34,9 @@
                         <div class="col-5 col-sm-3">
                             <div class="nav flex-column nav-tabs h-100 mr-2" id="vert-tabs-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <a class="nav-link active" id="tabs-member-tab" data-toggle="pill" href="#tabs-member"
-                                    role="tab" aria-controls="tabs-member" aria-selected="true">
-                                    {{ __('Member') }}
-                                </a>
-                                <a class="nav-link" id="tabs-residence-tab" data-toggle="pill" href="#tabs-residence"
-                                    role="tab" aria-controls="tabs-residence" aria-selected="false">
-                                    {{ __('Residence') }}
+                                <a class="nav-link active" id="tabs-area-tab" data-toggle="pill" href="#tabs-area"
+                                    role="tab" aria-controls="tabs-area" aria-selected="true">
+                                    {{ __('Area') }}
                                 </a>
                                 <a class="nav-link" id="tabs-system-tab" data-toggle="pill" href="#tabs-system"
                                     role="tab" aria-controls="tabs-system" aria-selected="false">
@@ -58,25 +54,23 @@
                                     aria-controls="tabs-logo" aria-selected="false">
                                     {{ __('Logo') }}
                                 </a>
-                                <a class="nav-link" id="tabs-role-permission-tab" data-toggle="pill"
-                                    href="#tabs-role-permission" role="tab" aria-controls="tabs-role-permission"
-                                    aria-selected="false">
-                                    {{ __('Admin Role') }}
-                                </a>
                             </div>
                         </div>
                         <div class="col-7 col-sm-9">
                             <div class="tab-content" id="vert-tabs-tabContent">
-                                <div class="tab-pane text-left fade active show" id="tabs-member" role="tabpanel"
-                                    aria-labelledby="tabs-member-tab">
-                                    <form>
+                                <div class="tab-pane text-left fade active show" id="tabs-area" role="tabpanel"
+                                    aria-labelledby="tabs-area-tab">
+                                    <form method="post" action="{{ route('member.setting_area.update', $area->id) }}">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>{{ __('Full Name') }} <x-fill-field /></label>
+                                                    <label>{{ __('Area Name, Cluster, or Others') }}
+                                                        <x-fill-field /></label>
                                                     <input type="text" name="name"
                                                         class="form-control @error('name') is-invalid @enderror"
-                                                        value='{{ old('name') }}'>
+                                                        value='{{ old('name') ?? $area->name }}' required>
                                                     @error('name')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
@@ -86,97 +80,48 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>{{ __('Email') }} <x-fill-field /></label>
-                                                    <input type="email" name="email"
-                                                        class="form-control @error('email') is-invalid @enderror"
-                                                        value='{{ old('email') }}'>
-                                                    @error('email')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>{{ __('Phone') }}</label>
-                                                    <input type="text" name="phone"
-                                                        class="form-control @error('phone') is-invalid @enderror"
-                                                        value="{{ old('phone') }}">
-                                                    @error('phone')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
+                                                    <label>{{ __('Residence') }}</label>
+                                                    <input type="text" name="name" class="form-control"
+                                                        value='{{ $area->residence->name }}' readonly>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>{{ __('Province') }} <x-fill-field /></label>
-                                                    <select
-                                                        class="form-control select2 @error('province') is-invalid @enderror"
-                                                        style="width: 100%;" name="province" id="province"
-                                                        placeholder="Choose ...">
-                                                        <option value="" disabled selected>
-                                                            {{ __('Choose one ...') }}</option>
-                                                        @foreach ($provinces as $code => $name)
-                                                            <option value="{{ $code }}"
-                                                                {{ old('provinces') ?? !empty($setting['province']) ? ($setting['province'] == $name ? 'selected' : '') : '' }}>
-                                                                {{ $name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('province')
+                                                    <label>{{ __('RT') }} <x-fill-field /></label>
+                                                    <input type="text" name="rt"
+                                                        class="form-control @error('rt') is-invalid @enderror"
+                                                        value='{{ old('rt') ?? $area->rt }}' required>
+                                                    @error('rt')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
                                                         </div>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>{{ __('City') }} <x-fill-field /></label>
-                                                    <select
-                                                        class="form-control select2 @error('city') is-invalid @enderror"
-                                                        style="width: 100%;" name="city" id="city"
-                                                        placeholder="Choose ..." value="{{ old('city') }}">
-                                                    </select>
-                                                    @error('city')
+                                                    <label>{{ __('RW') }} <x-fill-field /></label>
+                                                    <input type="text" name="rw"
+                                                        class="form-control @error('rw') is-invalid @enderror"
+                                                        value='{{ old('rw') ?? $area->rw }}' required>
+                                                    @error('rw')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
                                                         </div>
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>{{ __('District') }} <x-fill-field /></label>
-                                                    <select
-                                                        class="form-control select2 @error('district') is-invalid @enderror"
-                                                        style="width: 100%;" name="district" id="district"
-                                                        placeholder="Choose ..." value="{{ old('district') }}">
-                                                    </select>
-                                                    @error('district')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>{{ __('Village') }} <x-fill-field /></label>
-                                                    <select
-                                                        class="form-control select2 @error('village') is-invalid @enderror"
-                                                        style="width: 100%;" name="village" id="village"
-                                                        placeholder="Choose ..." value="{{ old('village') }}">
-                                                    </select>
-                                                    @error('village')
+                                                    <label>{{ __('Postal Code') }} <x-fill-field /></label>
+                                                    <input type="text" name="postal_code"
+                                                        class="form-control @error('postal_code') is-invalid @enderror"
+                                                        value='{{ old('postal_code') ?? $area->postal_code }}' required>
+                                                    @error('postal_code')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
                                                         </div>
@@ -187,28 +132,56 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>{{ __('Full Address') }}</label>
-                                                    <textarea class="form-control @error('address') is-invalid @enderror" rows="3">{{ old('address') }}</textarea>
-                                                    @error('address')
+                                                    <label>{{ __('Full Address') }} <x-fill-field /></label>
+                                                    <textarea class="form-control @error('full_address') is-invalid @enderror" name="full_address" rows="3" required>{{ old('full_address') ?? $area->full_address }}</textarea>
+                                                    @error('full_address')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
                                                         </div>
                                                     @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>{{ __('Province') }}</label>
+                                                    <input type="text" name="province" class="form-control"
+                                                        value='{{ $area->province->name }}' readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>{{ __('City') }}</label>
+                                                    <input type="text" name="city" class="form-control"
+                                                        value='{{ $area->city->name }}' readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>{{ __('District') }}</label>
+                                                    <input type="text" name="district" class="form-control"
+                                                        value='{{ $area->district->name }}' readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>{{ __('Village') }}</label>
+                                                    <input type="text" name="village" class="form-control"
+                                                        value='{{ $area->village->name }}' readonly>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-sm-12">
-                                                <button type="button" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary">
                                                     <i class="fas fa-save"></i> {{ __('Save Changes') }}
                                                 </button>
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="tab-pane fade" id="tabs-residence" role="tabpanel"
-                                    aria-labelledby="tabs-residence-tab">
-                                    Residence
                                 </div>
                                 <div class="tab-pane fade" id="tabs-system" role="tabpanel"
                                     aria-labelledby="tabs-system-tab">
@@ -226,53 +199,6 @@
                                     aria-labelledby="tabs-logo-tab">
                                     Logo
                                 </div>
-                                <div class="tab-pane fade" id="tabs-role-permission" role="tabpanel"
-                                    aria-labelledby="tabs-role-permission-tab">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>{{ __('Role Name') }} <x-fill-field /></label>
-                                                    <input type="text" name="role"
-                                                        class="form-control @error('role') is-invalid @enderror"
-                                                        value='{{ old('role') }}'>
-                                                    @error('role')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        @foreach ($permissions as $key => $permission)
-                                            <label class="text-info">{{ __($key) }}</label>
-                                            <div class="row mb-2">
-                                                @foreach ($permission->sortBy('name') as $item)
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <div class="custom-control custom-switch">
-                                                                <input type="checkbox" value="{{ __($item->name) }}"
-                                                                    name="permissions[]" class="custom-control-input"
-                                                                    id="{{ __($item->name) }}">
-                                                                <label class="custom-control-label"
-                                                                    for="{{ __($item->name) }}">{{ __($item->name) }}</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        @endforeach
-
-                                        <div class="row mt-3">
-                                            <div class="col-sm-12">
-                                                <button type="button" class="btn btn-primary">
-                                                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -283,76 +209,3 @@
 @endsection
 
 <x-swal />
-
-@push('scripts')
-    <script>
-        $('body').on('change', '#province', function() {
-            var province_code = this.value;
-            $("#city").html('');
-            $("#district").html('');
-            $("#village").html('');
-            $.ajax({
-                url: "{{ route('member.setting.get_cities') }}",
-                type: "POST",
-                data: {
-                    province_code: province_code,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: 'json',
-                success: function(result) {
-                    $('#city').html('<option value="">{{ __('Choose ...') }}</option>');
-                    $.each(result.cities, function(key, value) {
-                        $("#city").append('<option value="' + value
-                            .code + '">' + value.name + '</option>');
-                    });
-                    $('#district').html('<option value="">{{ __('Choose ...') }}</option>');
-                    $('#village').html('<option value="">{{ __('Choose ...') }}</option>');
-                }
-            });
-        });
-
-        $('body').on('change', '#city', function() {
-            var city_code = this.value;
-            $("#district").html('');
-            $("#village").html('');
-            $.ajax({
-                url: "{{ route('member.setting.get_districts') }}",
-                type: "POST",
-                data: {
-                    city_code: city_code,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: 'json',
-                success: function(result) {
-                    $('#district').html('<option value="">{{ __('Choose ...') }}</option>');
-                    $.each(result.districts, function(key, value) {
-                        $("#district").append('<option value="' + value
-                            .code + '">' + value.name + '</option>');
-                    });
-                    $('#village').html('<option value="">{{ __('Choose ...') }}</option>');
-                }
-            });
-        });
-
-        $('body').on('change', '#district', function() {
-            var district_code = this.value;
-            $("#village").html('');
-            $.ajax({
-                url: "{{ route('member.setting.get_villages') }}",
-                type: "POST",
-                data: {
-                    district_code: district_code,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: 'json',
-                success: function(result) {
-                    $('#village').html('<option value="">{{ __('Choose ...') }}</option>');
-                    $.each(result.villages, function(key, value) {
-                        $("#village").append('<option value="' + value
-                            .code + '">' + value.name + '</option>');
-                    });
-                }
-            });
-        });
-    </script>
-@endpush

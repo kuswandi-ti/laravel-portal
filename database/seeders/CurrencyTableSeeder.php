@@ -14,8 +14,8 @@ class CurrencyTableSeeder extends Seeder
     public function run(): void
     {
         $input = [
-            ['code' => 'idr', 'text' => 'IDR (Indonesian Rupiah)'],
-            ['code' => 'usd', 'text' => 'US Dollar'],
+            ['code' => 'IDR', 'text' => 'IDR (Indonesian Rupiah)'],
+            ['code' => 'USD', 'text' => 'US Dollar'],
         ];
         foreach ($input as $item) {
             Currency::create($item);

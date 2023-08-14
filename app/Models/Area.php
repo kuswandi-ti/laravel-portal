@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Member;
+use App\Models\Residence;
 use KodePandai\Indonesia\Models\City;
 use Illuminate\Database\Eloquent\Model;
 use KodePandai\Indonesia\Models\Village;
@@ -23,6 +24,11 @@ class Area extends Model
     public function member()
     {
         return $this->hasOne(Member::class);
+    }
+
+    public function residence()
+    {
+        return $this->belongsTo(Residence::class, 'residence_id', 'id');
     }
 
     public function province()

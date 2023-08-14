@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Member;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use App\Http\Requests\Member\MemberRoleStoreRequest;
+use App\Http\Requests\Member\MemberRoleUpdateRequest;
 
 class MemberRoleController extends Controller
 {
@@ -12,7 +17,8 @@ class MemberRoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::where([['guard_name', '!=', 'admin'], ['member_id', Auth::guard('member')->user()->id]])->orderBy('name', 'ASC')->get();
+        return view('member.role.index', compact('roles'));
     }
 
     /**
@@ -20,15 +26,24 @@ class MemberRoleController extends Controller
      */
     public function create()
     {
-        //
+        $permissions_member = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
+        $permissions_web = Permission::where('guard_name', 'web')->get()->groupBy('group_name');
+        return view('member.role.create', compact('permissions_member', 'permissions_web'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MemberRoleStoreRequest $request)
     {
-        //
+        $role = Role::create([
+            'name' => $request->role_name,
+            'guard_name' => $request->guard_name,
+            'member_id' => Auth::guard('member')->user()->id,
+        ]);
+        $role->syncPermissions($request->permissions);
+
+        return redirect()->route('member.role.index')->with('success', __('Create role & permissions successfully'));
     }
 
     /**
@@ -44,15 +59,28 @@ class MemberRoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $permissions_member = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
+        $permissions_web = Permission::where('guard_name', 'web')->get()->groupBy('group_name');
+        $roles_permissions = $role->permissions;
+        $roles_permissions = $roles_permissions->pluck('name')->toArray();
+
+        return view('member.role.edit', compact('role', 'permissions_member', 'permissions_web', 'roles_permissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MemberRoleUpdateRequest $request, string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role->update([
+            'name' => $request->role_name,
+            'guard_name' => $request->guard_name,
+        ]);
+        $role->syncPermissions($request->permissions);
+
+        return redirect()->route('member.role.index')->with('success', __('Updated role & permissions successfully'));
     }
 
     /**
@@ -60,6 +88,27 @@ class MemberRoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $role = Role::findOrFail($id);
+
+            if ($role->name == 'Admin') {
+                return response([
+                    'status' => 'error',
+                    'message' => __('Can\'t delete this role')
+                ]);
+            }
+
+            $role->delete();
+
+            return response([
+                'status' => 'success',
+                'message' => __('Deleted role successfully')
+            ]);
+        } catch (\Throwable $th) {
+            return response([
+                'status' => 'error',
+                'message' => __('Deleted role is error')
+            ]);
+        }
     }
 }

@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub_title')
-    {{ __('All profile setting on this page') }}
+    {{ __('Profile setting on this page') }}
 @endsection
 
 @section('breadcrumb')
@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="nav-icon fas fa-cog"></i>&nbsp;
-                        {{ __('Profile') }}
+                        {{ __('Change Profile') }}
                     </h3>
                 </div>
                 <div class="card-body">
@@ -44,7 +44,7 @@
                                             <label>{{ __('Full Name') }} <x-fill-field /></label>
                                             <input type="text" name="name"
                                                 class="form-control @error('name') is-invalid @enderror"
-                                                value='{{ old('name') ?? $member->name }}'>
+                                                value='{{ old('name') ?? $member->name }}' required>
                                             @error('name')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

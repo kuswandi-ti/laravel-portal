@@ -53,44 +53,61 @@
                             <div class="control-label">{{ __('Guard Name') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="admin" class="custom-switch-input"
-                                        {{ $role->guard_name == 'admin' ? 'checked' : '' }}>
+                                    <input type="radio" name="guard_name" id="guard_admin" value="admin"
+                                        class="custom-switch-input" {{ $role->guard_name == 'admin' ? 'checked' : '' }}>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-danger">{{ __('Admin') }}</span>
                                 </label>
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="member" class="custom-switch-input"
-                                        {{ $role->guard_name == 'member' ? 'checked' : '' }}>
+                                    <input type="radio" name="guard_name" id="guard_member" value="member"
+                                        class="custom-switch-input" {{ $role->guard_name == 'member' ? 'checked' : '' }}>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ __('Member') }}</span>
-                                </label>
-                                <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="web" class="custom-switch-input"
-                                        {{ $role->guard_name == 'web' ? 'checked' : '' }}>
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-primary">{{ __('Web') }}</span>
                                 </label>
                             </div>
                         </div>
 
-                        @foreach ($permissions as $key => $permission)
-                            <div class="form-group">
-                                <div class="control-label">{{ __($key) }}</div>
-                                <div class="row">
-                                    @foreach ($permission as $item)
-                                        <div class="col-md-3">
-                                            <label class="mt-2 custom-switch">
-                                                <input value="{{ __($item->name) }}" type="checkbox" name="permissions[]"
-                                                    class="custom-switch-input"
-                                                    {{ in_array($item->name, $roles_permissions) ? 'checked' : '' }}>
-                                                <span class="custom-switch-indicator"></span>
-                                                <span class="custom-switch-description">{{ __($item->name) }}</span>
-                                            </label>
-                                        </div>
-                                    @endforeach
+                        <div id="permission_admin">
+                            @foreach ($permissions_admin as $key => $permission)
+                                <div class="form-group">
+                                    <div class="control-label text-danger">{{ __($key) }}</div>
+                                    <div class="row">
+                                        @foreach ($permission as $item)
+                                            <div class="col-md-3">
+                                                <label class="mt-2 custom-switch">
+                                                    <input value="{{ __($item->name) }}" type="checkbox"
+                                                        name="permissions[]" class="custom-switch-input"
+                                                        {{ in_array($item->name, $roles_permissions) ? 'checked' : '' }}>
+                                                    <span class="custom-switch-indicator"></span>
+                                                    <span class="custom-switch-description">{{ __($item->name) }}</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
+
+                        <div id="permission_member">
+                            @foreach ($permissions_member as $key => $permission)
+                                <div class="form-group">
+                                    <div class="control-label text-info">{{ __($key) }}</div>
+                                    <div class="row">
+                                        @foreach ($permission as $item)
+                                            <div class="col-md-3">
+                                                <label class="mt-2 custom-switch">
+                                                    <input value="{{ __($item->name) }}" type="checkbox"
+                                                        name="permissions[]" class="custom-switch-input"
+                                                        {{ in_array($item->name, $roles_permissions) ? 'checked' : '' }}>
+                                                    <span class="custom-switch-indicator"></span>
+                                                    <span class="custom-switch-description">{{ __($item->name) }}</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class="card-footer bg-light">
@@ -103,3 +120,30 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            if ($('#guard_admin').prop('checked')) {
+                $('#permission_admin').show();
+                $('#permission_member').hide();
+            } else {
+                $('#permission_admin').hide();
+                $('#permission_member').show();
+            }
+
+            $('input[type=radio][name=guard_name]').on('change', function() {
+                switch ($(this).val()) {
+                    case 'admin':
+                        $('#permission_admin').show();
+                        $('#permission_member').hide();
+                        break;
+                    case 'member':
+                        $('#permission_admin').hide();
+                        $('#permission_member').show();
+                        break;
+                }
+            });
+        })
+    </script>
+@endpush

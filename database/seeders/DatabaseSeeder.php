@@ -35,5 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingAdminTableSeeder::class);
         $this->call(FormatDateTableSeeder::class);
         $this->call(FormatTimeTableSeeder::class);
+        $this->call(CurrencyTableSeeder::class);
     }
 }
