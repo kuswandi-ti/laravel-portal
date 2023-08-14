@@ -30,6 +30,11 @@ class AdminSendResetLinkMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        // return new Envelope(
+        //     from: new Address('laravelia@example.com', 'Mahedi Hasan'),
+        //     subject: 'Laravel Ten Test Mail',
+        // );
+
         return new Envelope(
             subject: 'Admin Reset Password Notification',
         );

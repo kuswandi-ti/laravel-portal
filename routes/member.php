@@ -48,6 +48,7 @@ Route::group([
     /** Setting Routes */
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');
     Route::put('setting-area/{id}', [MemberSettingController::class, 'settingAreaUpdate'])->name('setting_area.update');
+    Route::put('setting-logo', [MemberSettingController::class, 'settingLogoUpdate'])->name('setting_logo.update');
 
     Route::post('get-cities', [MemberSettingController::class, 'getCities'])->name('setting.get_cities');
     Route::post('get-districts', [MemberSettingController::class, 'getDistricts'])->name('setting.get_districts');

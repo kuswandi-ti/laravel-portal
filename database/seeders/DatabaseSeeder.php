@@ -8,6 +8,7 @@ use Database\Seeders\AreaTableSeeder;
 use Database\Seeders\LanguagesTableSeeder;
 use Database\Seeders\FormatDateTableSeeder;
 use Database\Seeders\FormatTimeTableSeeder;
+use Database\Seeders\SettingAdminTableSeeder;
 use Database\Seeders\RolePermissionUserSeeder;
 use Database\Seeders\RolePermissionAdminSeeder;
 use Database\Seeders\RolePermissionMemberSeeder;
@@ -36,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FormatDateTableSeeder::class);
         $this->call(FormatTimeTableSeeder::class);
         $this->call(CurrencyTableSeeder::class);
+        $this->call(SettingAdminTableSeeder::class);
     }
 }

@@ -169,6 +169,23 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="path_image">{{ __('Image Profile') }}</label>
+                                            <div class="mb-3 text-center">
+                                                @if ($member->count() == 0)
+                                                    <img class="img-fluid preview-path_image"
+                                                        src="{{ url(config('common.default_image_square')) }}"
+                                                        width="300">
+                                                @else
+                                                    @if (!empty($member->image))
+                                                        <img class="img-fluid preview-path_image"
+                                                            src="{{ url(config('common.path_image_storage') . $member->image) }}"
+                                                            width="300">
+                                                    @else
+                                                        <img class="img-fluid preview-path_image"
+                                                            src="{{ url(config('common.default_image_square')) }}"
+                                                            width="300">
+                                                    @endif
+                                                @endif
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" name="path_image" id="path_image"
                                                     class="custom-file-input @error('path_image') is-invalid @enderror"
@@ -182,22 +199,6 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="text-center">
-                                            @if ($member->count() == 0)
-                                                <img class="img-fluid preview-path_image"
-                                                    src="{{ url(config('common.default_image_square')) }}" width="300">
-                                            @else
-                                                @if (!empty($member->image))
-                                                    <img class="img-fluid preview-path_image"
-                                                        src="{{ url(config('common.path_image_storage') . $member->image) }}"
-                                                        width="300">
-                                                @else
-                                                    <img class="img-fluid preview-path_image"
-                                                        src="{{ url(config('common.default_image_square')) }}"
-                                                        width="300">
-                                                @endif
-                                            @endif
                                         </div>
                                     </div>
                                 </div>

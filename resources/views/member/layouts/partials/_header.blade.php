@@ -4,10 +4,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="../../index3.html" class="nav-link">Home</a>
+            <a href="../../index3.html" class="nav-link">{{ __('Home') }}</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="#" class="nav-link">{{ __('Contact') }}</a>
         </li>
     </ul>
 
@@ -19,7 +19,6 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
                 <a href="#" class="dropdown-item">
-
                     <div class="media">
                         <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar"
                             class="mr-3 img-size-50 img-circle">
@@ -36,7 +35,6 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-
                     <div class="media">
                         <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar"
                             class="mr-3 img-size-50 img-circle">
@@ -109,8 +107,14 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">
-                    <img src="{{ asset(config('common.path_template_member') . 'dist/img/user2-160x160.jpg') }}"
-                        class="mt-3 img-circle elevation-2" width="100" alt="User Image">
+                    @if (!empty(Auth::guard('member')->user()->image))
+                        <img class="mt-3 img-circle elevation-2"
+                            src="{{ url(config('common.path_image_storage') . Auth::guard('member')->user()->image) }}"
+                            width="100">
+                    @else
+                        <img class="mt-3 img-circle elevation-2"
+                            src="{{ url(config('common.default_image_square')) }}" width="100">
+                    @endif
                     <h6 class="mt-3">{{ auth()->guard('member')->user()->name }}</h6>
                 </span>
                 <div class="dropdown-divider"></div>

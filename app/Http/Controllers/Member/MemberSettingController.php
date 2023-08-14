@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Member;
 use App\Models\Area;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\SettingMember;
+use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
@@ -12,6 +14,8 @@ use App\Http\Requests\Member\MemberSettingAreaUpdateRequest;
 
 class MemberSettingController extends Controller
 {
+    use FileUploadTrait;
+
     public function index()
     {
         $areaId = Auth::guard('member')->user()->area_id;
@@ -32,5 +36,18 @@ class MemberSettingController extends Controller
         $area->save();
 
         return redirect()->back()->with('success', __('Update area successfully'));
+    }
+
+    public function settingLogoUpdate(Request $request)
+    {
+        if ($request->hasFile('member_logo')) {
+            $imagePath = $this->handleImageUpload($request, 'member_logo', $request->old_image_member_logo, 'member_logo');
+            SettingMember::updateOrCreate(
+                ['key' => 'member_logo'],
+                ['value' => $imagePath],
+            );
+        }
+
+        return redirect()->back()->with('success', __('Updated logo successfully'));
     }
 }

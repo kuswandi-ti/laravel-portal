@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            <form method="POST" action="{{ route('admin.general_setting.update') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.notification_setting.update') }}">
                 @csrf
                 @method('PUT')
 
@@ -118,7 +118,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>{{ __('Mail Password') }} <span class="text-danger">*</span></label>
-                                            <input type="password" id="mail_password" name="mail_password"
+                                            <input type="text" id="mail_password" name="mail_password"
                                                 class="form-control @error('mail_password') is-invalid @enderror"
                                                 value="{{ old('mail_password') ?? !empty($setting['mail_password']) ? $setting['mail_password'] : '' }}"
                                                 required>
@@ -173,8 +173,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail From Address') }} <span
-                                                    class="text-danger">*</span></label>
+                                            <label>{{ __('Mail From Address') }} <span class="text-danger">*</span></label>
                                             <input type="text" id="mail_from_address" name="mail_from_address"
                                                 class="form-control @error('mail_from_address') is-invalid @enderror"
                                                 value="{{ old('mail_from_address') ?? !empty($setting['mail_from_address']) ? $setting['mail_from_address'] : '' }}"

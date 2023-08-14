@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminGeneralSettingUpdateRequest;
+use App\Http\Requests\Admin\AdminNotificationSettingUpdateRequest;
 
 class AdminSettingController extends Controller
 {
@@ -41,7 +42,7 @@ class AdminSettingController extends Controller
         }
 
         if ($request->hasFile('company_logo')) {
-            $imagePath = $this->handleImageUpload($request, 'company_logo', $request->old_image_logo, 'logo');
+            $imagePath = $this->handleImageUpload($request, 'company_logo', $request->old_image_logo, 'company_logo');
             Setting::updateOrCreate(
                 ['key' => 'company_logo'],
                 ['value' => $imagePath],
@@ -49,7 +50,7 @@ class AdminSettingController extends Controller
         }
 
         if ($request->hasFile('company_favicon')) {
-            $imagePath = $this->handleImageUpload($request, 'company_favicon', $request->old_image_logo, 'favicon');
+            $imagePath = $this->handleImageUpload($request, 'company_favicon', $request->old_image_logo, 'company_favicon');
             Setting::updateOrCreate(
                 ['key' => 'company_favicon'],
                 ['value' => $imagePath],
@@ -61,8 +62,19 @@ class AdminSettingController extends Controller
 
     public function notificationSettingIndex()
     {
-        $default_language = Language::where('default', '1')->get();
         $general_setting = Setting::all();
-        return view('admin.setting.notification_setting', compact('general_setting', 'default_language'));
+        return view('admin.setting.notification_setting', compact('general_setting'));
+    }
+
+    public function notificationSettingUpdate(AdminNotificationSettingUpdateRequest $request)
+    {
+        foreach ($request->except('_token', '_method') as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value],
+            );
+        }
+
+        return redirect()->back()->with('success', __('Updated notification setting successfully'));
     }
 }
