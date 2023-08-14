@@ -24,6 +24,7 @@ class AdminAdminUserStoreRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:admins,email'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
             'role' => ['required'],
         ];
     }

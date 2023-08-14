@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\AdminAdminUserStoreRequest;
 use App\Http\Requests\Admin\AdminAdminUserUpdateRequest;
 
@@ -41,6 +42,7 @@ class AdminAdminUserController extends Controller
         $admin->name = $request->name;
         $admin->slug = Str::slug($request->name);
         $admin->email = $request->email;
+        $admin->password = Hash::make($request->password);
         $admin->image = '/images/no_image_circle.png';
         $admin->status = 1;
         $admin->save();
@@ -95,12 +97,12 @@ class AdminAdminUserController extends Controller
         try {
             $admin = Admin::findOrFail($id);
 
-            if ($admin->roles->first()->name == 'Super Admin') {
-                return response([
-                    'status' => 'error',
-                    'message' => __('Can\'t delete this user becase role is Super Admin')
-                ]);
-            }
+            // if ($admin->roles->first()->name == 'Super Admin') {
+            //     return response([
+            //         'status' => 'error',
+            //         'message' => __('Can\'t delete this user becase role is Super Admin')
+            //     ]);
+            // }
 
             $admin->delete();
 

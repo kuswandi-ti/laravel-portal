@@ -141,7 +141,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center align-middle">
-                                                    <a href="{{ route('admin.admin.restore', $member->id) }}"
+                                                    <a href="{{ route('admin.admin.restore', $admin->id) }}"
                                                         class="btn btn-warning btn-sm" data-toggle="tooltip"
                                                         title="Restore to Active"><i class="fas fa-undo"></i></a>
                                                 </td>
