@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Permission') }}
@@ -21,7 +21,7 @@
     {{ __('View information about permission on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
@@ -78,4 +78,4 @@
 
 <x-swal />
 
-@include('admin.includes.datatable')
+@include('layouts.admin.includes.datatable')

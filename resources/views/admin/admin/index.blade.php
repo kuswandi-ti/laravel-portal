@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Admin User') }}
@@ -21,7 +21,7 @@
     {{ __('View information about admin user on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
@@ -160,20 +160,4 @@
 
 <x-swal />
 
-@push('scripts')
-    <script>
-        table_active = $("#table_data_active").DataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }]
-        });
-
-        table_inactive = $("#table_data_inactive").DataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }]
-        });
-    </script>
-@endpush
+@include('layouts.admin.includes.datatable')

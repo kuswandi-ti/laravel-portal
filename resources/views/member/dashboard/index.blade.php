@@ -1,71 +1,86 @@
-@extends('member.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Dashboard') }}
 @endsection
 
-@section('breadcrumb')
+@section('section_header_title')
+    {{ __('Dashboard') }}
+@endsection
+
+@section('section_header_breadcrumb')
     @parent
-    <li class="breadcrumb-item active">{{ __('Dashboard') }}</li>
+@endsection
+
+@section('section_body_title')
+    {{ __('Dashboard') }}
+@endsection
+
+@section('section_body_lead')
+    {{ __('View all information about yourself on this page') }}
 @endsection
 
 @section('content')
     <div class="row">
-        <div class="col-lg-3 col-6">
-
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-primary">
+                    <i class="far fa-user"></i>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Total Admin</h4>
+                    </div>
+                    <div class="card-body">
+                        10
+                    </div>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-        <div class="col-lg-3 col-6">
-
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                    <p>Bounce Rate</p>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-danger">
+                    <i class="far fa-newspaper"></i>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>News</h4>
+                    </div>
+                    <div class="card-body">
+                        42
+                    </div>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-        <div class="col-lg-3 col-6">
-
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>44</h3>
-                    <p>User Registrations</p>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-warning">
+                    <i class="far fa-file"></i>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Reports</h4>
+                    </div>
+                    <div class="card-body">
+                        1,201
+                    </div>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-        <div class="col-lg-3 col-6">
-
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>65</h3>
-                    <p>Unique Visitors</p>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-success">
+                    <i class="fas fa-circle"></i>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Online Users</h4>
+                    </div>
+                    <div class="card-body">
+                        47
+                    </div>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
     </div>
 @endsection

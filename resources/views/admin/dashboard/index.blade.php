@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Dashboard') }}
@@ -20,7 +20,7 @@
     {{ __('View all information about yourself on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">

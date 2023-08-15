@@ -1,48 +1,53 @@
-@extends('member.layouts.auth')
+@extends('layouts.admin.auth')
 
 @section('page_title')
-    {{ __('Member Forgot Password') }}
+    {{ __('Member Admin Forgot Password') }}
 @endsection
-
-@section('title')
-    {{ __('Member Forgot Password') }}
-@endsection
-
-@section('class_body', 'login-page')
-@section('class_box', 'login-box')
 
 @section('content')
-    <div class="card-body">
-        <p class="login-box-msg">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one') }}
-        </p>
-
-        <form method="POST" action="{{ route('member.forgot_password.send') }}">
-            @csrf
-
-            <x-alert-message />
-
-            <div class="mb-3 input-group">
-                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
-                    value="{{ old('email') }}" placeholder="{{ __('Email') }}" autofocus>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
-                @error('email')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+    <div class="row">
+        <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="login-brand">
+                <img src="{{ asset(config('common.path_template_admin') . 'assets/img/stisla-fill.svg') }}" alt="logo"
+                    width="100" class="shadow-light rounded-circle">
             </div>
-            <div class="mt-3 row">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">
-                        {{ __('Email Password Reset Link') }}
-                    </button>
+
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h4>{{ __('Member AdminForgot Password') }}</h4>
+                </div>
+                <div class="card-body">
+                    <p>
+                        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one') }}
+                    </p>
+
+                    <x-alert-message />
+
+                    <form method="POST" action="{{ route('member.forgot_password.send') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ old('email') }}" required autofocus>
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                {{ __('Email Password Reset Link') }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
+            <div class="simple-footer">
+                {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
+            </div>
+        </div>
     </div>
 @endsection

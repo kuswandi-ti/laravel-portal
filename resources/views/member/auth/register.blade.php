@@ -1,122 +1,126 @@
-@extends('member.layouts.auth')
+@extends('layouts.admin.auth')
 
 @section('page_title')
     {{ __('Member Admin Register') }}
 @endsection
 
-@section('title')
-    {{ __('Member Admin Register') }}
-@endsection
-
-@section('class_body', 'register-page')
-@section('class_box', 'register-box')
-
 @section('content')
-    <div class="card-body">
-        <p class="register-box-msg">{{ __('Register new member admin') }}</p>
+    <div class="row">
+        <div class="col-12">
+            <div class="login-brand">
+                <img src="{{ asset(config('common.path_template_admin') . 'assets/img/stisla-fill.svg') }}" alt="logo"
+                    width="100" class="shadow-light rounded-circle">
+            </div>
 
-        <form method="POST" action="{{ route('member.register.post') }}">
-            @csrf
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h4>{{ __('Member Admin Register') }}</h4>
+                </div>
 
-            <div class="mb-3 input-group">
-                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
-                    value="{{ old('name') }}" placeholder="{{ __('Full name') }}" autofocus>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-user"></span>
+                <div class="card-body">
+                    <x-alert-message />
+
+                    <form method="POST" action="{{ route('member.register.post') }}">
+                        @csrf
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">{{ __('Full Name') }} <x-fill-field /></label>
+                                    <input type="text" name="name"
+                                        class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                        required autofocus>
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                                    <input type="email" name="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">{{ __('Password') }} <x-fill-field /></label>
+                                    <input type="password" name="password"
+                                        class="form-control @error('password') is-invalid @enderror" required>
+                                    @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="residence">{{ __('Residence') }}
+                                        <x-fill-field /></label>
+                                    <select name="residence"
+                                        class="form-control select2 @error('residence') is-invalid @enderror" required>
+                                        <option value="" selected disabled>{{ __('Choose one ...') }}</option>
+                                        @foreach ($residences as $id => $name)
+                                            <option value="{{ $id }}"
+                                                {{ old('residence') == $id ? 'selected' : '' }}>
+                                                {{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('residence')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="area_name">{{ __('Area Name, Cluster, or Others') }}
+                                        <x-fill-field /></label>
+                                    <input type="text" name="area_name"
+                                        class="form-control @error('area_name') is-invalid @enderror"
+                                        value="{{ old('area_name') }}" required>
+                                    @error('area_name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="password_confirmation">{{ __('Password Confirmation') }}
+                                        <x-fill-field /></label>
+                                    <input type="password" name="password_confirmation"
+                                        class="form-control @error('password_confirmation') is-invalid @enderror" required>
+                                    @error('password_confirmation')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                {{ __('Register') }}
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="form-group text-center">
+                        <a href="{{ route('member.login') }}">{{ __('Login') }}</a>
                     </div>
                 </div>
-                @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
-            <div class="mb-3 input-group">
-                <input type="email" name="email" id="email"
-                    class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                    placeholder="{{ __('Email') }}">
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
-                @error('email')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+            <div class="simple-footer">
+                {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
             </div>
-            <div class="mb-3 input-group">
-                <input type="password" name="password" id="password"
-                    class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}">
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                </div>
-                @error('password')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mb-3 input-group">
-                <input type="password" name="password_confirmation" id="password_confirmation"
-                    class="form-control @error('password_confirmation') is-invalid @enderror"
-                    placeholder="{{ __('Password Confirmation') }}">
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                </div>
-                @error('password_confirmation')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mb-3 input-group">
-                <select class="form-control select2 @error('residence') is-invalid @enderror" style="width: 100%;"
-                    name="residence" id="residence" placeholder="Choose Residence ..." required>
-                    <option value="" disabled selected>
-                        {{ __('Choose Residence ...') }}</option>
-                    @foreach ($residences as $id => $name)
-                        <option value="{{ $id }}" {{ old('residence') == $id ? 'selected' : '' }}>
-                            {{ $name }}</option>
-                    @endforeach
-                </select>
-                @error('residence')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mb-3 input-group">
-                <input type="text" name="area_name" id="area_name"
-                    class="form-control @error('area_name') is-invalid @enderror" value="{{ old('area_name') }}"
-                    placeholder="{{ __('Name Area, Cluster, or Others') }}">
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-landmark"></span>
-                    </div>
-                </div>
-                @error('area_name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mt-3 row">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Register') }}</button>
-                </div>
-            </div>
-        </form>
-        <p class="mt-3 mb-1 text-center">
-            <a href="{{ route('member.login') }}">{{ __('Login') }}</a>
-        </p>
+        </div>
     </div>
 @endsection
 
-@include('member.includes.select2', ['placeholder' => 'Choose Residence'])
+@include('layouts.admin.includes.select2')

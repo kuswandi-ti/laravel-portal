@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\AdminPermissionController;
 Route::group([], function () {
     /** Auth Admin Routes */
     Route::get('login', [AdminAuthController::class, 'login'])->name('login');
-    Route::post('login', [AdminAuthController::class, 'handleLogin'])->name('handle_login');
+    Route::post('login', [AdminAuthController::class, 'handleLogin'])->name('login.post');
     Route::get('forgot-password', [AdminAuthController::class, 'forgotPassword'])->name('forgot_password');
     Route::post('forgot-password', [AdminAuthController::class, 'sendResetLink'])->name('forgot_password.send');
     Route::get('reset-password/{token}', [AdminAuthController::class, 'resetPassword'])->name('reset_password');
@@ -69,4 +69,6 @@ Route::group([
     Route::put('general-setting', [AdminSettingController::class, 'generalSettingUpdate'])->name('general_setting.update');
     Route::get('notification-setting', [AdminSettingController::class, 'notificationSettingIndex'])->name('notification_setting.index');
     Route::put('notification-setting', [AdminSettingController::class, 'notificationSettingUpdate'])->name('notification_setting.update');
+    Route::get('payment-setting', [AdminSettingController::class, 'paymentSettingIndex'])->name('payment_setting.index');
+    Route::put('payment-setting', [AdminSettingController::class, 'paymentSettingUpdate'])->name('payment_setting.update');
 });

@@ -32,18 +32,21 @@
                         <li class="nav-item">
                             <a href="{{ route('member.role.index') }}"
                                 class="nav-link {{ setSidebarActiveMember(['member.role.*']) }}">
+                                <i class="fas fa-minus nav-icon"></i>
                                 <p>{{ __('Roles') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('member.admin.index') }}"
                                 class="nav-link {{ setSidebarActiveMember(['member.admin.*']) }}">
+                                <i class="fas fa-minus nav-icon"></i>
                                 <p>{{ __('Admin') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('member.user.index') }}"
                                 class="nav-link  {{ setSidebarActiveMember(['member.user.*']) }}">
+                                <i class="fas fa-minus nav-icon"></i>
                                 <p>{{ __('User') }}</p>
                             </a>
                         </li>

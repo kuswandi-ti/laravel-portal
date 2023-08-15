@@ -41,7 +41,7 @@ class MemberSettingController extends Controller
     public function settingLogoUpdate(Request $request)
     {
         if ($request->hasFile('member_logo')) {
-            $imagePath = $this->handleImageUpload($request, 'member_logo', $request->old_image_member_logo, 'member_logo');
+            $imagePath = $this->handleImageUpload($request, 'member_logo', $request->old_member_logo, 'member_logo');
             SettingMember::updateOrCreate(
                 ['key' => 'member_logo'],
                 ['value' => $imagePath],

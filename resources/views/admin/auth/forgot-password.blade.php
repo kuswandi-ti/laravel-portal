@@ -1,7 +1,7 @@
-@extends('admin.layouts.auth')
+@extends('layouts.admin.auth')
 
 @section('page_title')
-    {{ __('Forgot Password') }}
+    {{ __('Admin Forgot Password') }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Forgot Password') }}</h4>
+                    <h4>{{ __('Admin Forgot Password') }}</h4>
                 </div>
                 <div class="card-body">
                     <p>
@@ -23,14 +23,13 @@
 
                     <x-alert-message />
 
-                    <form method="POST" action="{{ route('admin.forgot_password.send') }}" class="needs-validation"
-                        novalidate="">
+                    <form method="POST" action="{{ route('admin.forgot_password.send') }}">
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">{{ __('Email') }} <span class="text-danger">*</span></label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" tabindex="1" required autofocus>
+                            <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ old('email') }}" required autofocus>
                             @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -39,7 +38,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
                                 {{ __('Email Password Reset Link') }}
                             </button>
                         </div>

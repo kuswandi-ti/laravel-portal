@@ -26,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
         $setting = Setting::pluck('value', 'key')->toArray();
         $setting_member = SettingMember::pluck('value', 'key')->toArray();
         view()->composer('*', function ($view) use ($setting, $setting_member) {
-            $view->with('setting', $setting)->with('setting_member', $setting_member);
+            $view->with('setting', $setting)
+                ->with('setting_member', $setting_member);
         });
 
         Debugbar::disable();

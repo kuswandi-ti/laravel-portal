@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Package') }}
@@ -21,7 +21,7 @@
     {{ __('View information about package on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row">
         <div class="col-12">
             <div class="mb-3 card card-primary">
@@ -215,4 +215,4 @@
 
 <x-swal />
 
-@include('admin.includes.datatable')
+@include('layouts.admin.includes.datatable')

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 /** Make sidebar active */
 function setSidebarActive(array $routes): ?string
 {
@@ -10,6 +12,11 @@ function setSidebarActive(array $routes): ?string
     }
 
     return '';
+}
+
+function getGuardName(): ?string
+{
+    return Auth::guard('admin')->check() ? 'admin' : 'member';
 }
 
 function setSidebarActiveMember(array $routes): ?string

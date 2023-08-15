@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Notification Setting') }}
@@ -27,7 +27,7 @@
     {{ __('View information about notification setting on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row">
         <div class="col-md-3">
             <div class="card">

@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Member User') }}
@@ -21,7 +21,7 @@
     {{ __('Update information about user on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
@@ -109,4 +109,4 @@
     </div>
 @endsection
 
-@include('admin.includes.select2')
+@include('layouts.admin.includes.select2')

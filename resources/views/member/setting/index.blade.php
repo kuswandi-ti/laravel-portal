@@ -1,320 +1,276 @@
-@extends('member.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Setting') }}
 @endsection
 
-@section('title')
+@section('section_header_title')
     {{ __('Setting') }}
 @endsection
 
-@section('sub_title')
-    {{ __('All application setting on this page') }}
-@endsection
-
-@section('breadcrumb')
+@section('section_header_breadcrumb')
     @parent
-    <li class="breadcrumb-item active">{{ __('Setting') }}</li>
+    <div class="breadcrumb-item">{{ __('Setting') }}</div>
 @endsection
 
-@includeIf('includes.select2')
+@section('section_body_title')
+    {{ __('Setting') }}
+@endsection
+
+@section('section_body_lead')
+    {{ __('View information about setting on this page') }}
+@endsection
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-3">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="nav-icon fas fa-cog"></i>&nbsp;
-                        {{ __('Setting') }}
-                    </h3>
-                </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-5 col-sm-3">
-                            <div class="mr-2 nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
-                                aria-orientation="vertical">
-                                <a class="nav-link active" id="tabs-area-tab" data-toggle="pill" href="#tabs-area"
-                                    role="tab" aria-controls="tabs-area" aria-selected="true">
-                                    {{ __('Area') }}
-                                </a>
-                                <a class="nav-link" id="tabs-system-tab" data-toggle="pill" href="#tabs-system"
-                                    role="tab" aria-controls="tabs-system" aria-selected="false">
-                                    {{ __('System') }}
-                                </a>
-                                <a class="nav-link" id="tabs-notification-tab" data-toggle="pill" href="#tabs-notification"
-                                    role="tab" aria-controls="tabs-notification" aria-selected="false">
-                                    {{ __('Notification') }}
-                                </a>
-                                <a class="nav-link" id="tabs-payment-tab" data-toggle="pill" href="#tabs-payment"
-                                    role="tab" aria-controls="tabs-payment" aria-selected="false">
-                                    {{ __('Payment') }}
-                                </a>
-                                <a class="nav-link" id="tabs-logo-tab" data-toggle="pill" href="#tabs-logo" role="tab"
-                                    aria-controls="tabs-logo" aria-selected="false">
-                                    {{ __('Logo') }}
-                                </a>
+                    <ul class="nav nav-pills flex-column" id="myTab4" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="setting1" data-toggle="tab" href="#tab-setting1" role="tab"
+                                aria-selected="true">
+                                {{ __('Area') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="logo-setting2" data-toggle="tab" href="#tab-setting2" role="tab"
+                                aria-selected="false">
+                                {{ __('Sytem') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="logo-setting3" data-toggle="tab" href="#tab-setting3" role="tab"
+                                aria-selected="false">
+                                {{ __('Notification') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="logo-setting4" data-toggle="tab" href="#tab-setting4" role="tab"
+                                aria-selected="false">
+                                {{ __('Payment') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="logo-setting5" data-toggle="tab" href="#tab-setting5" role="tab"
+                                aria-selected="false">
+                                {{ __('Logo') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content no-padding" id="myTab2Content">
+                <div class="tab-pane fade show active" id="tab-setting1" role="tabpanel">
+                    <form method="post" action="{{ route('member.setting_area.update', $area->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ __('Area') }}</h4>
                             </div>
-                        </div>
-                        <div class="col-7 col-sm-9">
-                            <div class="tab-content" id="vert-tabs-tabContent">
-                                <div class="text-left tab-pane fade active show" id="tabs-area" role="tabpanel"
-                                    aria-labelledby="tabs-area-tab">
-                                    <form method="post" action="{{ route('member.setting_area.update', $area->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>{{ __('Area Name, Cluster, or Others') }}
-                                                        <x-fill-field /></label>
-                                                    <input type="text" name="name"
-                                                        class="form-control @error('name') is-invalid @enderror"
-                                                        value='{{ old('name') ?? $area->name }}' required>
-                                                    @error('name')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>{{ __('Area Name, Cluster, or Others') }} <x-fill-field /></label>
+                                            <input type="text" name="name"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                value="{{ old('name') ?? $area->name }}" required>
+                                            @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>{{ __('Residence') }}</label>
-                                                    <input type="text" name="name" class="form-control"
-                                                        value='{{ $area->residence->name }}' readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>{{ __('RT') }} <x-fill-field /></label>
-                                                    <input type="text" name="rt"
-                                                        class="form-control @error('rt') is-invalid @enderror"
-                                                        value='{{ old('rt') ?? $area->rt }}' required>
-                                                    @error('rt')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>{{ __('RW') }} <x-fill-field /></label>
-                                                    <input type="text" name="rw"
-                                                        class="form-control @error('rw') is-invalid @enderror"
-                                                        value='{{ old('rw') ?? $area->rw }}' required>
-                                                    @error('rw')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>{{ __('Postal Code') }} <x-fill-field /></label>
-                                                    <input type="text" name="postal_code"
-                                                        class="form-control @error('postal_code') is-invalid @enderror"
-                                                        value='{{ old('postal_code') ?? $area->postal_code }}' required>
-                                                    @error('postal_code')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>{{ __('Full Address') }} <x-fill-field /></label>
-                                                    <textarea class="form-control @error('full_address') is-invalid @enderror" name="full_address" rows="3" required>{{ old('full_address') ?? $area->full_address }}</textarea>
-                                                    @error('full_address')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>{{ __('Province') }}</label>
-                                                    <input type="text" name="province" class="form-control"
-                                                        value='{{ $area->province->name }}' readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>{{ __('City') }}</label>
-                                                    <input type="text" name="city" class="form-control"
-                                                        value='{{ $area->city->name }}' readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>{{ __('District') }}</label>
-                                                    <input type="text" name="district" class="form-control"
-                                                        value='{{ $area->district->name }}' readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>{{ __('Village') }}</label>
-                                                    <input type="text" name="village" class="form-control"
-                                                        value='{{ $area->village->name }}' readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-3 row">
-                                            <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="tab-pane fade" id="tabs-system" role="tabpanel"
-                                    aria-labelledby="tabs-system-tab">
-                                    System
-                                </div>
-                                <div class="tab-pane fade" id="tabs-notification" role="tabpanel"
-                                    aria-labelledby="tabs-notification-tab">
-                                    Notification
-                                </div>
-                                <div class="tab-pane fade" id="tabs-payment" role="tabpanel"
-                                    aria-labelledby="tabs-payment-tab">
-                                    <div id="accordion">
-                                        <div class="card card-primary">
-                                            <div class="card-header">
-                                                <h4 class="card-title w-100">
-                                                    <a class="d-block w-100 collapsed" data-toggle="collapse"
-                                                        href="#collapseOne" aria-expanded="false">
-                                                        {{ __('Automatic') }}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne" class="collapse show" data-parent="#accordion"
-                                                style="">
-                                                <div class="card-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                                    terry richardson ad squid.
-                                                    3
-                                                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food
-                                                    truck quinoa nesciunt
-                                                    laborum
-                                                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                    single-origin coffee
-                                                    nulla
-                                                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer
-                                                    labore wes anderson cred
-                                                    nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                                                    Leggings occaecat craft
-                                                    beer
-                                                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
-                                                    heard of them accusamus
-                                                    labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card card-primary">
-                                            <div class="card-header">
-                                                <h4 class="card-title w-100">
-                                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo"
-                                                        aria-expanded="true">
-                                                        {{ __('Bank Transfer') }}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseTwo" class="collapse show" data-parent="#accordion"
-                                                style="">
-                                                <div class="card-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                                    terry richardson ad squid.
-                                                    3
-                                                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food
-                                                    truck quinoa nesciunt
-                                                    laborum
-                                                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                    single-origin coffee
-                                                    nulla
-                                                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer
-                                                    labore wes anderson cred
-                                                    nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                                                    Leggings occaecat craft
-                                                    beer
-                                                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
-                                                    heard of them accusamus
-                                                    labore sustainable VHS.
-                                                </div>
-                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="tabs-logo" role="tabpanel"
-                                    aria-labelledby="tabs-logo-tab">
-                                    <form method="post" action="{{ route('member.setting_logo.update') }}"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="mb-3 text-center">
-                                                        @if (empty($setting_member['member_logo']))
-                                                            <img class="img-fluid preview-member_logo"
-                                                                src="{{ url(config('common.default_image_square')) }}"
-                                                                width="300" height="300">
-                                                        @else
-                                                            @if (!empty($setting_member['member_logo']))
-                                                                <img class="img-fluid preview-member_logo"
-                                                                    src="{{ url(config('common.path_image_storage') . $setting_member['member_logo']) }}"
-                                                                    width="300" height="300">
-                                                            @else
-                                                                <img class="img-fluid preview-member_logo"
-                                                                    src="{{ url(config('common.default_image_square')) }}"
-                                                                    width="300" height="300">
-                                                            @endif
-                                                        @endif
-                                                    </div>
-                                                    <div class="custom-file">
-                                                        <input type="file" name="member_logo" id="member_logo"
-                                                            class="custom-file-input @error('member_logo') is-invalid @enderror"
-                                                            onchange="preview('.preview-member_logo', this.files[0])">
-                                                        <input type="hidden" name="old_image_member_logo"
-                                                            value="{{ !empty($setting_member['member_logo']) ? $setting_member['member_logo'] : config('common.default_image_square') }}">
-                                                        <label class="custom-file-label"
-                                                            for="member_logo">{{ __('Choose file') }}</label>
-                                                        @error('member_logo')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>{{ __('RT') }} <x-fill-field /></label>
+                                            <input type="text" name="rt"
+                                                class="form-control @error('rt') is-invalid @enderror"
+                                                value="{{ old('rt') ?? $area->rt }}" required>
+                                            @error('rt')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
-                                            </div>
+                                            @enderror
                                         </div>
-                                        <div class="mt-3 row">
-                                            <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
-                                                </button>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>{{ __('RW') }} <x-fill-field /></label>
+                                            <input type="text" name="rw"
+                                                class="form-control @error('rw') is-invalid @enderror"
+                                                value="{{ old('rw') ?? $area->rw }}" required>
+                                            @error('rw')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>{{ __('Postal Code') }} <x-fill-field /></label>
+                                            <input type="text" name="postal_code"
+                                                class="form-control @error('postal_code') is-invalid @enderror"
+                                                value="{{ old('postal_code') ?? $area->postal_code }}" required>
+                                            @error('postal_code')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>{{ __('Full Address') }} <x-fill-field /></label>
+                                            <textarea name="full_address" class="form-control @error('full_address') is-invalid @enderror" rows="3" required>{{ old('full_address') ?? $area->full_address }}</textarea>
+                                            @error('full_address')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>{{ __('Residence') }}</label>
+                                            <input type="text" name="residence_name"
+                                                class="form-control @error('residence_name') is-invalid @enderror"
+                                                value="{{ old('residence_name') ?? $area->residence->name }}" readonly>
+                                            @error('residence_name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('Province') }}</label>
+                                            <input type="text" name="province"
+                                                class="form-control @error('province') is-invalid @enderror"
+                                                value="{{ old('province') ?? $area->province->name }}" readonly>
+                                            @error('province')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('City') }}</label>
+                                            <input type="text" name="city"
+                                                class="form-control @error('city') is-invalid @enderror"
+                                                value="{{ old('city') ?? $area->city->name }}" readonly>
+                                            @error('city')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('District') }}</label>
+                                            <input type="text" name="district"
+                                                class="form-control @error('district') is-invalid @enderror"
+                                                value="{{ old('district') ?? $area->district->name }}" readonly>
+                                            @error('district')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('Village') }}</label>
+                                            <input type="text" name="village"
+                                                class="form-control @error('village') is-invalid @enderror"
+                                                value="{{ old('village') ?? $area->village->name }}" readonly>
+                                            @error('village')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="card-footer">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade show" id="tab-setting5" role="tabpanel">
+                    <form method="post" action="{{ route('member.setting_logo.update') }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ __('Logo') }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3 text-center">
+                                            @if (!empty($setting_member['member_logo']))
+                                                <img class="preview-member_logo"
+                                                    src="{{ url(config('common.path_image_storage') . $setting_member['member_logo']) }}"
+                                                    width="400" height="400">
+                                            @else
+                                                <img class="preview-member_logo"
+                                                    src="{{ url(config('common.no_image_square')) }}" width="400"
+                                                    height="400">
+                                            @endif
+                                        </div>
+                                        <div class="mb-3 custom-file">
+                                            <input type="file" class="custom-file-input" id="member_logo"
+                                                name="member_logo"
+                                                onchange="preview('.preview-member_logo', this.files[0])">
+                                            <label class="custom-file-label"
+                                                for="member_logo">{{ __('Choose file') }}</label>
+                                            <input type="hidden" name="old_member_logo"
+                                                value="{{ !empty($setting_member['member_logo']) ? $setting_member['member_logo'] : config('common.no_image_square') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -322,3 +278,5 @@
 @endsection
 
 <x-swal />
+
+@include('layouts.admin.includes.select2')

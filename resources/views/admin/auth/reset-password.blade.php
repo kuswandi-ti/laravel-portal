@@ -1,7 +1,7 @@
-@extends('admin.layouts.auth')
+@extends('layouts.admin.auth')
 
 @section('page_title')
-    {{ __('Reset Password') }}
+    {{ __('Admin Reset Password') }}
 @endsection
 
 @section('content')
@@ -14,20 +14,19 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Reset Password') }}</h4>
+                    <h4>{{ __('Admin Reset Password') }}</h4>
                 </div>
                 <div class="card-body">
 
                     <x-alert-message />
 
-                    <form method="POST" action="{{ route('admin.reset_password.send') }}" class="needs-validation"
-                        novalidate="">
+                    <form method="POST" action="{{ route('admin.reset_password.send') }}">
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">{{ __('Email') }} <span class="text-danger">*</span></label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" tabindex="1" value="{{ request()->email }}" required>
+                            <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ request()->email }}" required autofocus>
                             <input type="hidden" value="{{ request()->token }}" name="token">
                             @error('email')
                                 <div class="invalid-feedback">
@@ -37,10 +36,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">{{ __('New Password') }} <span class="text-danger">*</span></label>
-                            <input id="password" type="password"
-                                class="form-control @error('password') is-invalid @enderror" name="password" tabindex="1"
-                                required autofocus>
+                            <label for="password">{{ __('New Password') }} <x-fill-field /></label>
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror" required>
                             @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -49,11 +47,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">{{ __('New Password Confirmation') }} <span
-                                    class="text-danger">*</span></label>
-                            <input id="password" type="password"
-                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                name="password_confirmation" tabindex="1" required>
+                            <label for="password">{{ __('New Password Confirmation') }} <x-fill-field /></label>
+                            <input type="password" name="password_confirmation"
+                                class="form-control @error('password_confirmation') is-invalid @enderror" required>
                             @error('password_confirmation')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -62,7 +58,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
                                 {{ __('Reset Password') }}
                             </button>
                         </div>

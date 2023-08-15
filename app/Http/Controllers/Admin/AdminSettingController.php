@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminGeneralSettingUpdateRequest;
+use App\Http\Requests\Admin\AdminPaymentSettingUpdateRequest;
 use App\Http\Requests\Admin\AdminNotificationSettingUpdateRequest;
 
 class AdminSettingController extends Controller
@@ -76,5 +77,23 @@ class AdminSettingController extends Controller
         }
 
         return redirect()->back()->with('success', __('Updated notification setting successfully'));
+    }
+
+    public function paymentSettingIndex()
+    {
+        $payment_setting = Setting::all();
+        return view('admin.setting.payment_setting', compact('payment_setting'));
+    }
+
+    public function paymentSettingUpdate(AdminPaymentSettingUpdateRequest $request)
+    {
+        foreach ($request->except('_token', '_method') as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value],
+            );
+        }
+
+        return redirect()->back()->with('success', __('Updated payment setting successfully'));
     }
 }

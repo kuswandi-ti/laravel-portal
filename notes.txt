@@ -96,3 +96,7 @@ Package :
 3. Wallet Amount Max
 4. Live Chat
 5. Online Payment
+
+
+
+type -> name -> id -> class -> value -> required,autofocus

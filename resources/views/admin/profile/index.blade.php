@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Profile') }}
@@ -21,7 +21,7 @@
     {{ __('Change information about yourself on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row mt-sm-4">
         <div class="col-12 col-md-12 col-lg-7">
             <div class="card">
@@ -136,7 +136,7 @@
 
 <x-swal />
 
-@include('admin.includes.upload_preview')
+@include('layouts.admin.includes.upload_preview')
 
 @push('scripts')
     <script>

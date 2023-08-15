@@ -2,14 +2,15 @@
 
 return [
 
-    'path_image_storage' => env('PATH_IMAGE_STORAGE', ''),
-    'path_image_public' => env('PATH_IMAGE_PUBLIC', ''),
-    'no_image_square' => env('NO_IMAGE_SQUARE', ''),
-    'no_image_circle' => env('NO_IMAGE_CIRCLE', ''),
-    'default_image_square' => env('DEFAULT_IMAGE_SQUARE', ''),
-    'default_image_circle' => env('DEFAULT_IMAGE_CIRCLE', ''),
+    'path_image_storage' => 'public/storage',
+    'path_image_public' => 'public/images',
+    'no_image_square' => 'public/storage/images/no_image_square.png',
+    'no_image_circle' => 'public/storage/images/no_image_circle.png',
 
-    'path_template_admin' => env('PATH_TEMPLATE_ADMIN', ''),
-    'path_template_member' => env('PATH_TEMPLATE_MEMBER', ''),
+    'default_image_square' => '/images/no_image_square.png',
+    'default_image_circle' => '/images/no_image_circle.png',
+
+    'path_template_admin' => 'public/template/admin/',
+    'path_template_member' => 'public/template/member/',
 
 ];

@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Setting') }}
@@ -21,7 +21,7 @@
     {{ __('View information about setting on this page') }}
 @endsection
 
-@section('backend_content')
+@section('content')
     <div class="row">
         <div class="col-lg-6">
             <div class="card card-large-icons">
@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <h4>{{ __('Payment') }}</h4>
                     <p>{{ __('Payment settings, online and offline, manual and automatic configuration') }}.</p>
-                    <a href="features-setting-detail.html" class="card-cta">
+                    <a href="{{ route('admin.payment_setting.index') }}" class="card-cta">
                         {{ __('Change Setting') }}
                         <i class="fas fa-chevron-right"></i>
                     </a>
