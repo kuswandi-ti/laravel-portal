@@ -13,4 +13,8 @@ return [
     'path_template_admin' => 'public/template/admin/',
     'path_template_member' => 'public/template/member/',
 
+    'guard_name_admin' => 'admin',
+    'guard_name_member' => 'member',
+    'guard_name_user' => 'web',
+
 ];

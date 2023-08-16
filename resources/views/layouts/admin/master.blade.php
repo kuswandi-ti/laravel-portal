@@ -7,7 +7,11 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
+    <title>{{ $setting['site_title'] ?? config('app.name') }} &mdash; @yield('page_title')</title>
+
+    <link rel="icon"
+        href="{{ url(config('common.path_image_storage') . (!empty($setting['company_favicon']) ? $setting['company_favicon'] : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+        type="image/*">
 
     <!-- Page Specific CSS File -->
     @stack('styles_vendor')
@@ -23,7 +27,7 @@
 <body>
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
-            @include('layouts.admin.partials._sidebar_' . getGuardName())
+            @include('layouts.admin.partials._sidebar_' . getGuardNameLoggedUser())
 
             <!-- Main Content -->
             <div class="main-content">
@@ -34,7 +38,8 @@
                         <div class="section-header-breadcrumb">
                             @section('section_header_breadcrumb')
                                 <div class="breadcrumb-item active">
-                                    <a href="{{ route(getGuardName() . '.dashboard.index') }}">{{ __('Dashboard') }}</a>
+                                    <a
+                                        href="{{ route(getGuardNameLoggedUser() . '.dashboard.index') }}">{{ __('Dashboard') }}</a>
                                 </div>
                             @show
                         </div>
@@ -155,6 +160,16 @@
                     }
                 })
             })
+        });
+
+        $.uploadPreview({
+            input_field: "#image-upload", // Default: .image-upload
+            preview_box: "#image-preview", // Default: .image-preview
+            label_field: "#image-label", // Default: .image-label
+            label_default: "Choose File", // Default: Choose File
+            label_selected: "Change File", // Default: Change File
+            no_label: false, // Default: false
+            success_callback: null // Default: null
         });
     </script>
 </body>

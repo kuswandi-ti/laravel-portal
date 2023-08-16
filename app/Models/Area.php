@@ -23,7 +23,7 @@ class Area extends Model
 
     public function member()
     {
-        return $this->hasOne(Member::class);
+        return $this->belongsTo(Member::class);
     }
 
     public function residence()

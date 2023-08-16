@@ -63,8 +63,10 @@ class AdminProfileController extends Controller
         $imagePath = $this->handleImageUpload($request, 'image', $request->old_image, 'admin_profile');
 
         $admin = Admin::findOrFail($id);
-        $admin->image = !empty($imagePath) ? $imagePath : $request->old_image;
+
         $admin->name = $request->name;
+        $admin->image = !empty($imagePath) ? $imagePath : $request->old_image;
+
         $admin->save();
 
         return redirect()->back()->with('success', __('Update profile successfully'));

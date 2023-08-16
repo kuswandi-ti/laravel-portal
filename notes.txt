@@ -100,3 +100,56 @@ Package :
 
 
 type -> name -> id -> class -> value -> required,autofocus
+
+
+/** Textbox create dengan mark */
+<div class="form-group">
+    <label>{{ __('Role Name') }} <x-fill-field /></label>
+    <input type="text" name="role_name" id="role_name"
+        class="form-control @error('role_name') is-invalid @enderror"
+        value="{{ old('role_name') }}" required>
+    @error('role_name')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
+
+/** Textbox edit dengan mark */
+<div class="form-group">
+    <label>{{ __('Role Name') }} <x-fill-field /></label>
+    <input type="text" name="role_name" id="role_name"
+        class="form-control @error('role_name') is-invalid @enderror"
+        value="{{ old('role_name') ?? $role->name }}" required>
+    @error('role_name')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
+
+/** Textbox create tanpa mark */
+<div class="form-group">
+    <label>{{ __('Role Name') }}</label>
+    <input type="text" name="role_name" id="role_name"
+        class="form-control @error('role_name') is-invalid @enderror"
+        value="{{ old('role_name') }}">
+    @error('role_name')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
+
+/** Textbox edit tanpa mark */
+<div class="form-group">
+    <label>{{ __('Role Name') }}</label>
+    <input type="text" name="role_name" id="role_name"
+        class="form-control @error('role_name') is-invalid @enderror"
+        value="{{ old('role_name') ?? $role->name }}">
+    @error('role_name')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</div>

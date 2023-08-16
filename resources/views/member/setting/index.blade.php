@@ -67,6 +67,7 @@
                     <form method="post" action="{{ route('member.setting_area.update', $area->id) }}">
                         @csrf
                         @method('PUT')
+
                         <div class="card">
                             <div class="card-header">
                                 <h4>{{ __('Area') }}</h4>
@@ -228,11 +229,125 @@
                     </form>
                 </div>
 
+                <div class="tab-pane fade show" id="tab-setting2" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>{{ __('Sytem') }}</h4>
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade show" id="tab-setting3" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>{{ __('Notification') }}</h4>
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade show" id="tab-setting4" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>{{ __('Payment Gateway (Midtrans)') }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{ __('Mode') }} <span class="text-danger">*</span></label>
+                                        <select id="midtrans_mode" name="midtrans_mode"
+                                            class="form-control @error('midtrans_mode') is-invalid @enderror" required>
+                                            <option value="" selected disabled>{{ __('Choose one ...') }}
+                                            </option>
+                                            <option value="sandbox"
+                                                {{ !empty($setting['midtrans_mode']) ? ($setting['midtrans_mode'] == 'sandbox' ? 'selected' : '') : '' }}>
+                                                {{ __('Sandbox') }}</option>
+                                            <option value="production"
+                                                {{ !empty($setting['midtrans_mode']) ? ($setting['midtrans_mode'] == 'production' ? 'selected' : '') : '' }}>
+                                                {{ __('Production') }}</option>
+                                        </select>
+                                        @error('midtrans_mode')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{ __('Merchant ID') }} <span class="text-danger">*</span></label>
+                                        <input type="text" id="midtrans_merchant_id" name="midtrans_merchant_id"
+                                            class="form-control @error('midtrans_merchant_id') is-invalid @enderror"
+                                            value="{{ !empty($setting['midtrans_merchant_id']) ? $setting['midtrans_merchant_id'] : '' }}"
+                                            required>
+                                        @error('midtrans_merchant_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{ __('Client Key') }} <span class="text-danger">*</span></label>
+                                        <input type="text" id="midtrans_client_key" name="midtrans_client_key"
+                                            class="form-control @error('midtrans_client_key') is-invalid @enderror"
+                                            value="{{ !empty($setting['midtrans_client_key']) ? $setting['midtrans_client_key'] : '' }}"
+                                            required>
+                                        @error('midtrans_client_key')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{ __('Server Key') }} <span class="text-danger">*</span></label>
+                                        <input type="text" id="midtrans_server_key" name="midtrans_server_key"
+                                            class="form-control @error('midtrans_server_key') is-invalid @enderror"
+                                            value="{{ !empty($setting['midtrans_server_key']) ? $setting['midtrans_server_key'] : '' }}"
+                                            required>
+                                        @error('midtrans_server_key')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>{{ __('Bank Transfer') }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="tab-pane fade show" id="tab-setting5" role="tabpanel">
                     <form method="post" action="{{ route('member.setting_logo.update') }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
                         <div class="card">
                             <div class="card-header">
                                 <h4>{{ __('Logo') }}</h4>

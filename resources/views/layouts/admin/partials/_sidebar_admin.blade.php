@@ -5,7 +5,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('admin.dashboard.index') }}">{{ config('app.name') }}</a>
+            <a href="{{ route('admin.dashboard.index') }}">{{ $setting['site_title'] ?? config('app.name') }}</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin.dashboard.index') }}">St</a>

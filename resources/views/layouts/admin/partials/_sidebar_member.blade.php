@@ -5,10 +5,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('member.dashboard.index') }}">{{ config('app.name') }}</a>
+            <a href="{{ route('member.dashboard.index') }}">{{ $setting['site_title'] ?? config('app.name') }}</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('member.dashboard.index') }}">St</a>
+            <a href="{{ route('member.dashboard.index') }}">{{ __('SKO') }}</a>
         </div>
         <ul class="sidebar-menu">
             {{-- Dashboard --}}

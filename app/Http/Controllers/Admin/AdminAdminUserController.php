@@ -43,7 +43,7 @@ class AdminAdminUserController extends Controller
         $admin->slug = Str::slug($request->name);
         $admin->email = $request->email;
         $admin->password = Hash::make($request->password);
-        $admin->image = '/images/no_image_circle.png';
+        $admin->image = config('common.default_image_circle');
         $admin->status = 1;
         $admin->save();
 
@@ -97,12 +97,12 @@ class AdminAdminUserController extends Controller
         try {
             $admin = Admin::findOrFail($id);
 
-            // if ($admin->roles->first()->name == 'Super Admin') {
-            //     return response([
-            //         'status' => 'error',
-            //         'message' => __('Can\'t delete this user becase role is Super Admin')
-            //     ]);
-            // }
+            if ($admin->roles->first()->name == 'Super Admin') {
+                return response([
+                    'status' => 'error',
+                    'message' => __('Can\'t delete this user becase role is Super Admin')
+                ]);
+            }
 
             $admin->delete();
 

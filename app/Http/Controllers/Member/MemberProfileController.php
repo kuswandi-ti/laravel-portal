@@ -28,7 +28,7 @@ class MemberProfileController extends Controller
      */
     public function update(MemberProfileUpdateRequest $request, string $id)
     {
-        $imagePath = $this->handleImageUpload($request, 'path_image', $request->old_image, 'member_profile');
+        $imagePath = $this->handleImageUpload($request, 'image', $request->old_image, 'member_profile');
 
         $member = Member::findOrFail($id);
 

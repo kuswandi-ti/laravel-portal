@@ -1,221 +1,180 @@
-@extends('member.layouts.master')
+@extends('layouts.admin.master')
 
 @section('page_title')
     {{ __('Profile') }}
 @endsection
 
-@section('title')
+@section('section_header_title')
     {{ __('Profile') }}
 @endsection
 
-@section('sub_title')
-    {{ __('Profile setting on this page') }}
-@endsection
-
-@section('breadcrumb')
+@section('section_header_breadcrumb')
     @parent
-    <li class="breadcrumb-item active">{{ __('Profile') }}</li>
+    <div class="breadcrumb-item">{{ __('Profile') }}</div>
 @endsection
 
-@includeIf('includes.select2')
+@section('section_body_title')
+    {{ __('Hi') }}, {{ $member->name ?? '' }}
+@endsection
+
+@section('section_body_lead')
+    {{ __('Change information about yourself on this page') }}
+@endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="nav-icon fas fa-cog"></i>&nbsp;
-                        {{ __('Change Profile') }}
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-sm-12">
-                            <form method="post"
-                                action="{{ route('member.profile.update',auth()->guard('member')->user()->id) }}"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
+    <div class="row mt-sm-4">
+        <div class="col-12 col-md-12 col-lg-7">
+            <div class="card">
+                <form method="post" action="{{ route('member.profile.update',auth()->guard('member')->user()->id) }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>{{ __('Full Name') }} <x-fill-field /></label>
-                                            <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                value='{{ old('name') ?? $member->name }}' required>
-                                            @error('name')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
+                    <div class="card-header">
+                        <h4>{{ __('Edit Profile') }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <div id="image-preview" class="mx-auto image-preview">
+                                    <label for="image-upload" id="image-label">{{ __('Choose File') }}</label>
+                                    <input type="file" name="image" id="image-upload">
+                                    <input type="hidden" name="old_image" value="{{ $member->image }}">
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>{{ __('Email') }}</label>
-                                            <input type="email" name="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                value='{{ old('email') ?? $member->email }}' readonly>
-                                            @error('email')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                @error('image')
+                                    <div class="mt-2 text-center text-danger">
+                                        {{ $message }}
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>{{ __('Phone') }}</label>
-                                            <input type="text" name="phone"
-                                                class="form-control @error('phone') is-invalid @enderror"
-                                                value="{{ old('phone') ?? $member->phone }}">
-                                            @error('phone')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label>{{ __('Name') }} <x-fill-field /></label>
+                                <input type="text" name="name"
+                                    class="form-control @error('name') is-invalid @enderror"
+                                    value="{{ old('name') ?? $member->name }}" required>
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>{{ __('Full Address') }}</label>
-                                            <textarea class="form-control @error('address') is-invalid @enderror" name="address" rows="3">{{ old('address') ?? $member->address }}</textarea>
-                                            @error('address')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-6">
+                                <label>{{ __('Email') }}</label>
+                                <input type="email" name="email" class="form-control"
+                                    value="{{ old('email') ?? $member->email }}" readonly>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>{{ __('Phone') }}</label>
+                                <input type="text" name="phone" class="form-control"
+                                    value="{{ old('phone') ?? $member->phone }}">
+                                @error('phone')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>{{ __('Area') }}</label>
-                                            <input type="text" name="area"
-                                                class="form-control @error('area') is-invalid @enderror"
-                                                value='{{ old('area') ?? $member->area->name }}' readonly>
-                                            @error('area')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-12">
+                                <label>{{ __('Address') }}</label>
+                                <textarea name="address" class="form-control @error('address') is-invalid @enderror" rows="3">{{ old('address') ?? $member->address }}</textarea>
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>{{ __('Province') }}</label>
-                                            <input type="text" name="province"
-                                                class="form-control @error('province') is-invalid @enderror"
-                                                value='{{ old('province') ?? $member->area->province->name }}' readonly>
-                                            @error('province')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>{{ __('City') }}</label>
-                                            <input type="text" name="city"
-                                                class="form-control @error('city') is-invalid @enderror"
-                                                value='{{ old('city') ?? $member->area->city->name }}' readonly>
-                                            @error('city')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>{{ __('District') }}</label>
-                                            <input type="text" name="district"
-                                                class="form-control @error('district') is-invalid @enderror"
-                                                value='{{ old('district') ?? $member->area->district->name }}' readonly>
-                                            @error('district')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>{{ __('Village') }}</label>
-                                            <input type="text" name="village"
-                                                class="form-control @error('village') is-invalid @enderror"
-                                                value='{{ old('village') ?? $member->area->village->name }}' readonly>
-                                            @error('village')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="path_image">{{ __('Image Profile') }}</label>
-                                            <div class="mb-3 text-center">
-                                                @if ($member->count() == 0)
-                                                    <img class="img-fluid preview-path_image"
-                                                        src="{{ url(config('common.default_image_square')) }}"
-                                                        width="300">
-                                                @else
-                                                    @if (!empty($member->image))
-                                                        <img class="img-fluid preview-path_image"
-                                                            src="{{ url(config('common.path_image_storage') . $member->image) }}"
-                                                            width="300">
-                                                    @else
-                                                        <img class="img-fluid preview-path_image"
-                                                            src="{{ url(config('common.default_image_square')) }}"
-                                                            width="300">
-                                                    @endif
-                                                @endif
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" name="path_image" id="path_image"
-                                                    class="custom-file-input @error('path_image') is-invalid @enderror"
-                                                    onchange="preview('.preview-path_image', this.files[0])">
-                                                <input type="hidden" name="old_image" value="{{ $member->image }}">
-                                                <label class="custom-file-label"
-                                                    for="path_image">{{ __('Choose file') }}</label>
-                                                @error('path_image')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-3 row">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-save"></i> {{ __('Save Changes') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                                @enderror
+                            </div>
+                            <div class="form-group col-12">
+                                <label>{{ __('Area') }}</label>
+                                <input type="text" name="area" class="form-control"
+                                    value="{{ old('area') ?? $member->area->name }}" readonly>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>{{ __('Province') }}</label>
+                                <input type="text" name="province" class="form-control"
+                                    value="{{ old('province') ?? $member->area->province->name }}" readonly>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>{{ __('City') }}</label>
+                                <input type="text" name="city" class="form-control"
+                                    value="{{ old('city') ?? $member->area->city->name }}" readonly>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>{{ __('District') }}</label>
+                                <input type="text" name="district" class="form-control"
+                                    value="{{ old('district') ?? $member->area->district->name }}" readonly>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>{{ __('Village') }}</label>
+                                <input type="text" name="village" class="form-control"
+                                    value="{{ old('village') ?? $member->area->village->name }}" readonly>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="text-right card-footer">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-5">
+            <div class="card">
+                <form method="post" action="{{ route('member.profile_password.update', $member->id) }}">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="card-header">
+                        <h4>{{ __('Update Password') }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>{{ __('Current Password') }} <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control @error('current_password') is-invalid @enderror"
+                                    name="current_password" required>
+                                @error('current_password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-12">
+                                <label>{{ __('New Password') }} <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                    name="password" required>
+                                @error('password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-12">
+                                <label>{{ __('Confirm New Password') }} <span class="text-danger">*</span></label>
+                                <input type="password"
+                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                    name="password_confirmation" required>
+                                @error('password_confirmation')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right card-footer">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
 
 <x-swal />
+
+@include('layouts.admin.includes.upload_preview')
+@include('layouts.admin.includes.upload_preview_member')

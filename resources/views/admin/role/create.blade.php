@@ -37,7 +37,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label>{{ __('Role Name') }}</label>
+                            <label>{{ __('Role Name') }} <x-fill-field /></label>
                             <input type="text" name="role_name"
                                 class="form-control @error('role_name') is-invalid @enderror"
                                 value="{{ old('role_name') }}" required>

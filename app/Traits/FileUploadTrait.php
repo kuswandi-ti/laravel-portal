@@ -13,8 +13,10 @@ trait FileUploadTrait
             return null;
         }
 
-        if ($oldPath && Storage::disk('public')->exists($oldPath)) {
-            Storage::disk('public')->delete($oldPath);
+        if (($oldPath != (config('common.default_image_circle'))) || ($oldPath != (config('common.default_image_square')))) {
+            if ($oldPath && Storage::disk('public')->exists($oldPath)) {
+                Storage::disk('public')->delete($oldPath);
+            }
         }
 
         $file = $request->file($fieldName);

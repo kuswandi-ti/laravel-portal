@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Area;
+use App\Enums\ActiveStatusEnum;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -29,6 +30,7 @@ class Member extends Authenticatable
         'email',
         'image',
         'area_id',
+        'status',
         'register_token',
         'password',
     ];
@@ -55,6 +57,6 @@ class Member extends Authenticatable
 
     public function area()
     {
-        return $this->belongsTo(Area::class);
+        return $this->belongsTo(Area::class, 'area_id', 'id');
     }
 }

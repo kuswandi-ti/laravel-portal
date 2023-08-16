@@ -7,7 +7,11 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('page_title') &mdash; {{ config('app.name') }}</title>
+    <title>{{ $setting['site_title'] ?? config('app.name') }} &mdash; @yield('page_title')</title>
+
+    <link rel="icon"
+        href="{{ url(config('common.path_image_storage') . (!empty($setting['company_favicon']) ? $setting['company_favicon'] : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+        type="image/*">
 
     @stack('styles_vendor')
     @include('layouts.admin.includes.styles')

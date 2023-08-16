@@ -17,7 +17,10 @@ class MemberRoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::where([['guard_name', '!=', 'admin'], ['member_id', Auth::guard('member')->user()->id]])->orderBy('name', 'ASC')->get();
+        $roles = Role::where([
+            ['guard_name', '!=', getGuardNameAdmin()],
+            ['area_id', getLoggedUser()->area->id]
+        ])->orderBy('name', 'ASC')->get();
         return view('member.role.index', compact('roles'));
     }
 
@@ -26,7 +29,7 @@ class MemberRoleController extends Controller
      */
     public function create()
     {
-        $permissions_member = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
+        $permissions_member = Permission::where('guard_name', getGuardNameLoggedUser())->get()->groupBy('group_name');
         $permissions_web = Permission::where('guard_name', 'web')->get()->groupBy('group_name');
         return view('member.role.create', compact('permissions_member', 'permissions_web'));
     }
@@ -39,7 +42,7 @@ class MemberRoleController extends Controller
         $role = Role::create([
             'name' => $request->role_name,
             'guard_name' => $request->guard_name,
-            'member_id' => Auth::guard('member')->user()->id,
+            'area_id' => getLoggedUser()->area->id,
         ]);
         $role->syncPermissions($request->permissions);
 
@@ -60,8 +63,8 @@ class MemberRoleController extends Controller
     public function edit(string $id)
     {
         $role = Role::findOrFail($id);
-        $permissions_member = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
-        $permissions_web = Permission::where('guard_name', 'web')->get()->groupBy('group_name');
+        $permissions_member = Permission::where('guard_name', getGuardNameLoggedUser())->get()->groupBy('group_name');
+        $permissions_web = Permission::where('guard_name', getGuardNameUser())->get()->groupBy('group_name');
         $roles_permissions = $role->permissions;
         $roles_permissions = $roles_permissions->pluck('name')->toArray();
 

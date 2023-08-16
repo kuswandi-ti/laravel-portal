@@ -41,9 +41,11 @@ Route::group([
 
     /** Admin Routes */
     Route::resource('admin', MemberAdminUserController::class);
+    Route::get('admin/restore/{id}', [MemberAdminUserController::class, 'restore'])->name('admin.restore');
 
     /** User Routes */
     Route::resource('user', MemberUserUserController::class);
+    Route::get('user/restore/{id}', [MemberUserUserController::class, 'restore'])->name('user.restore');
 
     /** Setting Routes */
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');

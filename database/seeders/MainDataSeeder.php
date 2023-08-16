@@ -13,12 +13,10 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class MainDataSeeder extends Seeder
 {
-    use HasUuids;
 
     /**
      * Run the database seeds.
@@ -68,6 +66,8 @@ class MainDataSeeder extends Seeder
         $area->city_code = $residence->city_code;
         $area->district_code = $residence->district_code;
         $area->village_code = $residence->village_code;
+        $area->postal_code = '16820';
+        $area->full_address = 'Cileungsi - Bogor';
         $area->package_id = $package->id;
         $area->package_type = 'yearly';
         $area->membership_type = 'trial';
@@ -146,7 +146,7 @@ class MainDataSeeder extends Seeder
             'slug' => Str::slug('Super Admin User'),
             'email' => 'superadminuser@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'image' => '/images/no_image_circle.png',
+            'image' => config('common.default_image_circle'),
             'status' => 1,
             'remember_token' => Str::random(10),
         ]);
@@ -177,13 +177,13 @@ class MainDataSeeder extends Seeder
             'email' => 'adminrt5rw11ph6@mail.com',
             'email_verified_at' => date_create('now')->format('Y-m-d'),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'image' => '/images/no_image_circle.png',
+            'image' => config('common.default_image_circle'),
             'area_id' => $area->id,
             'status' => 1,
             'remember_token' => Str::random(10),
         ]);
         // Create Member Role
-        $role = Role::create(['guard_name' => 'member', 'name' => 'Admin', 'member_id' => $member->id]);
+        $role = Role::create(['guard_name' => 'member', 'name' => 'Admin', 'area_id' => $area->id]);
         // Assign Permission to Member Role
         $role->givePermissionTo([
             'area index',
@@ -225,7 +225,7 @@ class MainDataSeeder extends Seeder
             Permission::create($permission);
         }
 
-        $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua', 'member_id' => $member->id]);
+        $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua', 'area_id' => $area->id]);
         $roleKetua->givePermissionTo([
             'warga index',
             'pemasukan index',
@@ -233,17 +233,16 @@ class MainDataSeeder extends Seeder
             'approve pengeluaran',
         ]);
         $userKetua = User::factory()->create([
-            'id' => Str::uuid()->toString(),
             'name' => 'Ketua',
             'slug' => Str::slug('ketua'),
-            'image' => '/images/no_image_circle.png',
+            'image' => config('common.default_image_circle'),
             'email' => 'ketua@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
         ]);
         $userKetua->assignRole($roleKetua);
 
-        $roleBendahara = Role::create(['guard_name' => 'web', 'name' => 'Bendahara', 'member_id' => $member->id]);
+        $roleBendahara = Role::create(['guard_name' => 'web', 'name' => 'Bendahara', 'area_id' => $area->id]);
         $roleBendahara->givePermissionTo([
             'tagihan index',
             'tagihan create',
@@ -259,17 +258,16 @@ class MainDataSeeder extends Seeder
             'pengeluaran delete',
         ]);
         $userBendahara = User::factory()->create([
-            'id' => Str::uuid()->toString(),
             'name' => 'Bendahara',
             'slug' => Str::slug('bendahara'),
-            'image' => '/images/no_image_circle.png',
+            'image' => config('common.default_image_circle'),
             'email' => 'bendahara@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
         ]);
         $userBendahara->assignRole($roleBendahara);
 
-        $roleSekretaris = Role::create(['guard_name' => 'web', 'name' => 'Sekretaris', 'member_id' => $member->id]);
+        $roleSekretaris = Role::create(['guard_name' => 'web', 'name' => 'Sekretaris', 'area_id' => $area->id]);
         $roleSekretaris->givePermissionTo([
             'warga index',
             'warga create',
@@ -277,10 +275,9 @@ class MainDataSeeder extends Seeder
             'warga non aktif',
         ]);
         $userSekretaris = User::factory()->create([
-            'id' => Str::uuid()->toString(),
             'name' => 'Sekretaris',
             'slug' => Str::slug('sekretaris'),
-            'image' => '/images/no_image_circle.png',
+            'image' => config('common.default_image_circle'),
             'email' => 'sekretaris@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,

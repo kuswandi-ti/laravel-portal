@@ -14,31 +14,35 @@ function setSidebarActive(array $routes): ?string
     return '';
 }
 
-function getGuardName(): ?string
+function getGuardNameLoggedUser(): ?string
 {
-    return Auth::guard('admin')->check() ? 'admin' : 'member';
+    if (Auth::guard(getGuardNameAdmin())->check()) {
+        return getGuardNameAdmin();
+    } else if (Auth::guard(getGuardNameMember())->check()) {
+        return getGuardNameMember();
+    } else {
+        return getGuardNameUser();
+    }
 }
 
-function setSidebarActiveMember(array $routes): ?string
+function getGuardNameAdmin(): ?string
 {
-    foreach ($routes as $route) {
-        if (request()->routeIs($route)) {
-            return 'active';
-        }
-    }
-
-    return '';
+    return config('common.guard_name_admin');
 }
 
-function setSidebarOpenMember(array $routes): ?string
+function getGuardNameMember(): ?string
 {
-    foreach ($routes as $route) {
-        if (request()->routeIs($route)) {
-            return 'menu-open';
-        }
-    }
+    return config('common.guard_name_member');
+}
 
-    return '';
+function getGuardNameUser(): ?string
+{
+    return config('common.guard_name_user');
+}
+
+function getLoggedUser()
+{
+    return Auth::guard(getGuardNameLoggedUser())->user();
 }
 
 function formatAmount($amount)

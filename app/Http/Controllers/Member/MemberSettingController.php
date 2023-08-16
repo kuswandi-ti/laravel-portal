@@ -44,7 +44,7 @@ class MemberSettingController extends Controller
             $imagePath = $this->handleImageUpload($request, 'member_logo', $request->old_member_logo, 'member_logo');
             SettingMember::updateOrCreate(
                 ['key' => 'member_logo'],
-                ['value' => $imagePath],
+                ['value' => $imagePath, 'member_id' => Auth::guard('member')->user()->id],
             );
         }
 

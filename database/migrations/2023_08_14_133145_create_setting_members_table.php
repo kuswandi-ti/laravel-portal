@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('key');
             $table->longText('value')->nullable();
+            $table->bigInteger('member_id')->unsigned();
+            $table->foreign('member_id')->references('id')->on('members')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

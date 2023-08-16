@@ -42,8 +42,8 @@ class MemberAuthController extends Controller
             'city_code' => $city_code,
             'district_code' => $district_code,
             'village_code' => $village_code,
-            'register_date' => date_create('now')->format('Y-m-d'),
-            'valid_to_date' => date('Y-m-d', strtotime('+30 days', strtotime(date_create('now')->format('Y-m-d')))), // Trial 30 days
+            'register_date' => date_create('now')->format($setting['default_date_format']),
+            'valid_to_date' => date($setting['default_date_format'], strtotime('+' . $setting['trial_days'] . ' days', strtotime(date_create('now')->format($setting['default_date_format'])))),
             'status' => 1,
         ]);;
 
@@ -89,7 +89,7 @@ class MemberAuthController extends Controller
 
     public function login()
     {
-        if (!Auth::guard('member')->check()) {
+        if (!Auth::guard(getGuardNameMember())->check()) {
             return view('member.auth.login');
         } else {
             return redirect()->route('member.dashboard.index');
@@ -146,7 +146,7 @@ class MemberAuthController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::guard('member')->logout();
+        Auth::guard(getGuardNameMember())->logout();
 
         $request->session()->invalidate();
 
