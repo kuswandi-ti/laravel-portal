@@ -57,6 +57,17 @@
                                         </div>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="password_confirmation">{{ __('Password Confirmation') }}
+                                        <x-fill-field /></label>
+                                    <input type="password" name="password_confirmation"
+                                        class="form-control @error('password_confirmation') is-invalid @enderror" required>
+                                    @error('password_confirmation')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="col-6">
@@ -91,11 +102,35 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password_confirmation">{{ __('Password Confirmation') }}
+                                    <label for="package">{{ __('Package') }}
                                         <x-fill-field /></label>
-                                    <input type="password" name="password_confirmation"
-                                        class="form-control @error('password_confirmation') is-invalid @enderror" required>
-                                    @error('password_confirmation')
+                                    <select name="package"
+                                        class="form-control select2 @error('package') is-invalid @enderror" required>
+                                        <option value="" selected disabled>{{ __('Choose one ...') }}</option>
+                                        @foreach ($packages as $id => $name)
+                                            <option value="{{ $id }}"
+                                                {{ old('package') == $id ? 'selected' : '' }}>
+                                                {{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('package')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="package_type">{{ __('Package Type') }}
+                                        <x-fill-field /></label>
+                                    <select name="package_type"
+                                        class="form-control select2 @error('package_type') is-invalid @enderror" required>
+                                        <option value="" selected disabled>{{ __('Choose one ...') }}</option>
+                                        <option value="yearly" {{ old('package_type') == 'yearly' ? 'selected' : '' }}>
+                                            {{ __('Yearly') }}</option>
+                                        <option value="monthly" {{ old('package_type') == 'monthly' ? 'selected' : '' }}>
+                                            {{ __('Monthly') }}</option>
+                                    </select>
+                                    @error('package_type')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -111,8 +146,10 @@
                         </div>
                     </form>
 
-                    <div class="form-group text-center">
-                        <a href="{{ route('member.login') }}">{{ __('Login') }}</a>
+                    <div class="text-center form-group">
+                        <a href="{{ route('member.login') }}">
+                            {{ __('Login') }}
+                        </a>
                     </div>
                 </div>
             </div>

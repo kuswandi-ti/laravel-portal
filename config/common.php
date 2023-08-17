@@ -11,7 +11,7 @@ return [
     'default_image_circle' => '/images/no_image_circle.png',
 
     'path_template_admin' => 'public/template/admin/',
-    'path_template_member' => 'public/template/member/',
+    'path_template_website' => 'public/template/website/',
 
     'guard_name_admin' => 'admin',
     'guard_name_member' => 'member',

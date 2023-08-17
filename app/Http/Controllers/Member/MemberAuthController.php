@@ -4,15 +4,19 @@ namespace App\Http\Controllers\Member;
 
 use App\Models\Area;
 use App\Models\Member;
+use App\Models\Package;
+use App\Models\Setting;
 use App\Models\Residence;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MemberSendResetLinkMail;
 use Illuminate\Http\RedirectResponse;
+use App\Mail\MemberRegisterVerifyMail;
 use App\Http\Requests\Member\MemberAuthLoginRequest;
 use App\Http\Requests\Member\MemberAuthRegisterRequest;
 use App\Http\Requests\Member\MemberAuthResetPasswordRequest;
@@ -23,11 +27,14 @@ class MemberAuthController extends Controller
     public function register()
     {
         $residences = Residence::orderBy('name')->get()->pluck('name', 'id');
-        return view('member.auth.register', compact('residences'));
+        $packages = Package::orderBy('name')->get()->pluck('name', 'id');
+        return view('member.auth.register', compact('residences', 'packages'));
     }
 
     public function handleRegister(MemberAuthRegisterRequest $request)
     {
+        $setting = Setting::pluck('value', 'key')->toArray();
+
         // Create Area
         $residence = Residence::findOrFail($request->residence);
         $province_code = $residence->province_code;
@@ -42,6 +49,9 @@ class MemberAuthController extends Controller
             'city_code' => $city_code,
             'district_code' => $district_code,
             'village_code' => $village_code,
+            'package_id' => $request->package,
+            'package_type' => $request->package_type,
+            'membership_type' => 'trial',
             'register_date' => date_create('now')->format($setting['default_date_format']),
             'valid_to_date' => date($setting['default_date_format'], strtotime('+' . $setting['trial_days'] . ' days', strtotime(date_create('now')->format($setting['default_date_format'])))),
             'status' => 1,
@@ -49,7 +59,7 @@ class MemberAuthController extends Controller
 
         // Create Member
         $token = Str::random(64);
-        Member::create([
+        $member = Member::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'email' => $request->email,
@@ -60,10 +70,16 @@ class MemberAuthController extends Controller
             'status' => 1,
         ]);
 
-        Mail::send('mail.member-register-verify-mail', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Email Verification Mail');
-        });
+        // Create Role
+        $role = Role::create(['guard_name' => getGuardNameMember(), 'name' => 'Admin', 'area_id' => $area->id]);
+
+        // Assign Permission to Member Role
+        $role->givePermissionTo(setArrayMemberAdminPermission());
+
+        // Assign Role to Member Admin User
+        $member->assignRole($role);
+
+        Mail::to($request->email)->send(new MemberRegisterVerifyMail($token));
 
         return redirect()->route('member.login')->with('success', 'Register successfully. You need to confirm your account. We have sent you an activation code, please check your email.');;
     }
@@ -152,6 +168,6 @@ class MemberAuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('member.login');
+        return redirect()->route('website.index');
     }
 }

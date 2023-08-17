@@ -55,6 +55,47 @@ class MainDataSeeder extends Seeder
         $residence->status = 1;
         $residence->save();
 
+        $residence = new Residence();
+        $residence->name = 'Puri Hesti Insani';
+        $residence->slug = Str::slug('Puri Hesti Insani');
+        $residence->province_code = '32';
+        $residence->city_code = '3201';
+        $residence->district_code = '320107';
+        $residence->village_code = '3201072009';
+        $residence->address = 'Puri Harmoni 6, Ds. Situsari, Kec. Cileungsi, Kab. Bogor, Jawa Barat';
+        $residence->status = 1;
+        $residence->save();
+
+        /** Create Area Seeder */
+        $area = new Area();
+        $area->name = 'Super Admin Area';
+        $area->slug = Str::slug('Super Admin Area');
+        $area->save();
+
+        /** Create Role & Permission Admin Seeder - Begin */
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        // Create Admin Permission
+        $permissions = getArraySuperAdminPermission();
+        foreach ($permissions as $permission) {
+            Permission::create($permission);
+        }
+        // Create Admin Role
+        $role = Role::create(['guard_name' => 'admin', 'name' => 'Super Admin', 'area_id' => $area->id]);
+        // Create Super Admin User
+        $admin = Admin::create([
+            'name' => 'Super Admin User',
+            'slug' => Str::slug('Super Admin User'),
+            'email' => 'superadminuser@mail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'image' => config('common.default_image_circle'),
+            'status' => 1,
+            'remember_token' => Str::random(10),
+        ]);
+        // Assign Role to Super Admin User
+        $admin->assignRole($role);
+        /** Role & Permission Admin Seeder - End */
+
         /** Create Area Seeder */
         $area = new Area();
         $area->name = 'RT 005 RW 011 PH6';
@@ -83,90 +124,11 @@ class MainDataSeeder extends Seeder
         $area->status = 1;
         $area->save();
 
-        /** Create Role & Permission Admin Seeder - Begin */
-        // Reset cached roles and permissions
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        // Create Admin Permission
-        $permissions = [
-            ['guard_name' => 'admin', 'name' => 'package index', 'group_name' => 'Package Permission'],
-            ['guard_name' => 'admin', 'name' => 'package create', 'group_name' => 'Package Permission'],
-            ['guard_name' => 'admin', 'name' => 'package update', 'group_name' => 'Package Permission'],
-            ['guard_name' => 'admin', 'name' => 'package non aktif', 'group_name' => 'Package Permission'],
-            ['guard_name' => 'admin', 'name' => 'permission index', 'group_name' => 'Permission Permission'],
-            ['guard_name' => 'admin', 'name' => 'permission create', 'group_name' => 'Permission Permission'],
-            ['guard_name' => 'admin', 'name' => 'permission update', 'group_name' => 'Permission Permission'],
-            ['guard_name' => 'admin', 'name' => 'permission delete', 'group_name' => 'Permission Permission'],
-            ['guard_name' => 'admin', 'name' => 'role index', 'group_name' => 'Role Permission'],
-            ['guard_name' => 'admin', 'name' => 'role create', 'group_name' => 'Role Permission'],
-            ['guard_name' => 'admin', 'name' => 'role update', 'group_name' => 'Role Permission'],
-            ['guard_name' => 'admin', 'name' => 'role delete', 'group_name' => 'Role Permission'],
-            ['guard_name' => 'admin', 'name' => 'admin index', 'group_name' => 'Admin Permission'],
-            ['guard_name' => 'admin', 'name' => 'admin create', 'group_name' => 'Admin Permission'],
-            ['guard_name' => 'admin', 'name' => 'admin update', 'group_name' => 'Admin Permission'],
-            ['guard_name' => 'admin', 'name' => 'admin non aktif', 'group_name' => 'Admin Permission'],
-            ['guard_name' => 'admin', 'name' => 'member index', 'group_name' => 'Member Permission'],
-            ['guard_name' => 'admin', 'name' => 'member create', 'group_name' => 'Member Permission'],
-            ['guard_name' => 'admin', 'name' => 'member update', 'group_name' => 'Member Permission'],
-            ['guard_name' => 'admin', 'name' => 'member non aktif', 'group_name' => 'Member Permission'],
-            ['guard_name' => 'admin', 'name' => 'language index', 'group_name' => 'Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'language create', 'group_name' => 'Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'language update', 'group_name' => 'Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'language non aktif', 'group_name' => 'Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'website language index', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'website language create', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'website language update', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'website language delete', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'system language index', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'system language create', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'system language update', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'system language delete', 'group_name' => 'Website Language Permission'],
-            ['guard_name' => 'admin', 'name' => 'offline payment index', 'group_name' => 'Offline Payment Permission'],
-            ['guard_name' => 'admin', 'name' => 'offline payment create', 'group_name' => 'Offline Payment Permission'],
-            ['guard_name' => 'admin', 'name' => 'offline payment update', 'group_name' => 'Offline Payment Permission'],
-            ['guard_name' => 'admin', 'name' => 'offline payment delete', 'group_name' => 'Offline Payment Permission'],
-            ['guard_name' => 'admin', 'name' => 'online payment index', 'group_name' => 'Online Payment Permission'],
-            ['guard_name' => 'admin', 'name' => 'online payment update', 'group_name' => 'Online Payment Permission'],
-            ['guard_name' => 'admin', 'name' => 'online payment delete', 'group_name' => 'Online Payment Permission'],
-            ['guard_name' => 'admin', 'name' => 'support ticket index', 'group_name' => 'Support Ticket Permission'],
-            ['guard_name' => 'admin', 'name' => 'support ticket update', 'group_name' => 'Support Ticket Permission'],
-            ['guard_name' => 'admin', 'name' => 'support ticket delete', 'group_name' => 'Support Ticket Permission'],
-            ['guard_name' => 'admin', 'name' => 'website setting index', 'group_name' => 'Website Setting Permission'],
-            ['guard_name' => 'admin', 'name' => 'website setting update', 'group_name' => 'Website Setting Permission'],
-            ['guard_name' => 'admin', 'name' => 'system setting index', 'group_name' => 'System Setting Permission'],
-            ['guard_name' => 'admin', 'name' => 'system setting update', 'group_name' => 'System Setting Permission'],
-        ];
-        foreach ($permissions as $permission) {
-            Permission::create($permission);
-        }
-        // Create Admin Role
-        $role = Role::create(['guard_name' => 'admin', 'name' => 'Super Admin']);
-        // Create Super Admin User
-        $admin = Admin::create([
-            'name' => 'Super Admin User',
-            'slug' => Str::slug('Super Admin User'),
-            'email' => 'superadminuser@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'image' => config('common.default_image_circle'),
-            'status' => 1,
-            'remember_token' => Str::random(10),
-        ]);
-        // Assign Role to Super Admin User
-        $admin->assignRole($role);
-        /** Role & Permission Admin Seeder - End */
-
         /** Create Role & Permission Member Seeder - Begin */
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         // Create Member Permission
-        $permissions = [
-            ['guard_name' => 'member', 'name' => 'area index', 'group_name' => 'Area Permission'],
-            ['guard_name' => 'member', 'name' => 'area create', 'group_name' => 'Area Permission'],
-            ['guard_name' => 'member', 'name' => 'area update', 'group_name' => 'Area Permission'],
-            ['guard_name' => 'member', 'name' => 'staff index', 'group_name' => 'Staff Permission'],
-            ['guard_name' => 'member', 'name' => 'staff create', 'group_name' => 'Staff Permission'],
-            ['guard_name' => 'member', 'name' => 'staff update', 'group_name' => 'Staff Permission'],
-            ['guard_name' => 'member', 'name' => 'staff non aktif', 'group_name' => 'Staff Permission'],
-        ];
+        $permissions = getArrayMemberAdminPermission();
         foreach ($permissions as $permission) {
             Permission::create($permission);
         }
@@ -185,15 +147,7 @@ class MainDataSeeder extends Seeder
         // Create Member Role
         $role = Role::create(['guard_name' => 'member', 'name' => 'Admin', 'area_id' => $area->id]);
         // Assign Permission to Member Role
-        $role->givePermissionTo([
-            'area index',
-            'area create',
-            'area update',
-            'staff index',
-            'staff create',
-            'staff update',
-            'staff non aktif',
-        ]);
+        $role->givePermissionTo(setArrayMemberAdminPermission());
         // Assign Role to Member Admin User
         $member->assignRole($role);
         /** Create Role & Permission Member Seeder - End */
@@ -202,36 +156,13 @@ class MainDataSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         // Create User Permission
-        $permissions = [
-            ['guard_name' => 'web', 'name' => 'warga index', 'group_name' => 'Warga Permission'],
-            ['guard_name' => 'web', 'name' => 'warga create', 'group_name' => 'Warga Permission'],
-            ['guard_name' => 'web', 'name' => 'warga update', 'group_name' => 'Warga Permission'],
-            ['guard_name' => 'web', 'name' => 'warga non aktif', 'group_name' => 'Warga Permission'],
-            ['guard_name' => 'web', 'name' => 'tagihan index', 'group_name' => 'Tagihan Permission'],
-            ['guard_name' => 'web', 'name' => 'tagihan create', 'group_name' => 'Tagihan Permission'],
-            ['guard_name' => 'web', 'name' => 'tagihan update', 'group_name' => 'Tagihan Permission'],
-            ['guard_name' => 'web', 'name' => 'tagihan delete', 'group_name' => 'Tagihan Permission'],
-            ['guard_name' => 'web', 'name' => 'pemasukan index', 'group_name' => 'Pemasukan Permission'],
-            ['guard_name' => 'web', 'name' => 'pemasukan create', 'group_name' => 'Pemasukan Permission'],
-            ['guard_name' => 'web', 'name' => 'pemasukan update', 'group_name' => 'Pemasukan Permission'],
-            ['guard_name' => 'web', 'name' => 'pemasukan delete', 'group_name' => 'Pemasukan Permission'],
-            ['guard_name' => 'web', 'name' => 'pengeluaran index', 'group_name' => 'Pengeluaran Permission'],
-            ['guard_name' => 'web', 'name' => 'pengeluaran create', 'group_name' => 'Pengeluaran Permission'],
-            ['guard_name' => 'web', 'name' => 'pengeluaran update', 'group_name' => 'Pengeluaran Permission'],
-            ['guard_name' => 'web', 'name' => 'pengeluaran delete', 'group_name' => 'Pengeluaran Permission'],
-            ['guard_name' => 'web', 'name' => 'approve pengeluaran', 'group_name' => 'Pengeluaran Permission'],
-        ];
+        $permissions = getArrayUserAllPermission();;
         foreach ($permissions as $permission) {
             Permission::create($permission);
         }
 
         $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua', 'area_id' => $area->id]);
-        $roleKetua->givePermissionTo([
-            'warga index',
-            'pemasukan index',
-            'pengeluaran index',
-            'approve pengeluaran',
-        ]);
+        $roleKetua->givePermissionTo(setArrayKetuaPermission());
         $userKetua = User::factory()->create([
             'name' => 'Ketua',
             'slug' => Str::slug('ketua'),
@@ -243,20 +174,7 @@ class MainDataSeeder extends Seeder
         $userKetua->assignRole($roleKetua);
 
         $roleBendahara = Role::create(['guard_name' => 'web', 'name' => 'Bendahara', 'area_id' => $area->id]);
-        $roleBendahara->givePermissionTo([
-            'tagihan index',
-            'tagihan create',
-            'tagihan update',
-            'tagihan delete',
-            'pemasukan index',
-            'pemasukan create',
-            'pemasukan update',
-            'pemasukan delete',
-            'pengeluaran index',
-            'pengeluaran create',
-            'pengeluaran update',
-            'pengeluaran delete',
-        ]);
+        $roleBendahara->givePermissionTo(setArrayBendaharaPermission());
         $userBendahara = User::factory()->create([
             'name' => 'Bendahara',
             'slug' => Str::slug('bendahara'),
@@ -268,12 +186,7 @@ class MainDataSeeder extends Seeder
         $userBendahara->assignRole($roleBendahara);
 
         $roleSekretaris = Role::create(['guard_name' => 'web', 'name' => 'Sekretaris', 'area_id' => $area->id]);
-        $roleSekretaris->givePermissionTo([
-            'warga index',
-            'warga create',
-            'warga update',
-            'warga non aktif',
-        ]);
+        $roleSekretaris->givePermissionTo(setArraySekretarisPermission());
         $userSekretaris = User::factory()->create([
             'name' => 'Sekretaris',
             'slug' => Str::slug('sekretaris'),

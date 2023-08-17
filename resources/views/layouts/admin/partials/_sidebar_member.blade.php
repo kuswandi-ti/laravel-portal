@@ -21,7 +21,7 @@
             {{-- End Dashboard --}}
 
             {{-- Manage Admin Role & Permission --}}
-            <li class="dropdown {{ setSidebarActive(['member.role.*', 'member.admin.*', 'member.user.*']) }}">
+            <li class="dropdown {{ setSidebarActive(['member.role.*', 'member.admin.*', 'member.staff.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-shield"></i>
                     <span>{{ __('Management User') }}</span>
@@ -39,8 +39,8 @@
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['member.user.*']) }}">
-                        <a class="nav-link" href="{{ route('member.user.index') }}">{{ __('User') }}
+                    <li class="{{ setSidebarActive(['member.staff.*']) }}">
+                        <a class="nav-link" href="{{ route('member.staff.index') }}">{{ __('Staff') }}
                         </a>
                     </li>
                 </ul>

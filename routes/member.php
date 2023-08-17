@@ -5,9 +5,11 @@ use App\Http\Controllers\Member\MemberAuthController;
 use App\Http\Controllers\Member\MemberRoleController;
 use App\Http\Controllers\Member\MemberProfileController;
 use App\Http\Controllers\Member\MemberSettingController;
-use App\Http\Controllers\Member\MemberUserUserController;
+use App\Http\Controllers\Member\MemberStaffUserController;
 use App\Http\Controllers\Member\MemberAdminUserController;
 use App\Http\Controllers\Member\MemberDashboardController;
+
+Route::get('/', [MemberAuthController::class, 'login'])->name('login');
 
 Route::group([], function () {
     /** Auth Member Routes */
@@ -15,7 +17,7 @@ Route::group([], function () {
     Route::post('register', [MemberAuthController::class, 'handleRegister'])->name('register.post');
     Route::get('login', [MemberAuthController::class, 'login'])->name('login');
     Route::post('login', [MemberAuthController::class, 'handleLogin'])->name('login.post');
-    Route::get('member/register-verify/{token}', [MemberAuthController::class, 'registerVerify'])->name('register.verify');
+    Route::get('register-verify/{token}', [MemberAuthController::class, 'registerVerify'])->name('register.verify');
     Route::get('forgot-password', [MemberAuthController::class, 'forgotPassword'])->name('forgot_password');
     Route::post('forgot-password', [MemberAuthController::class, 'sendResetLink'])->name('forgot_password.send');
     Route::get('reset-password/{token}', [MemberAuthController::class, 'resetPassword'])->name('reset_password');
@@ -44,8 +46,8 @@ Route::group([
     Route::get('admin/restore/{id}', [MemberAdminUserController::class, 'restore'])->name('admin.restore');
 
     /** User Routes */
-    Route::resource('user', MemberUserUserController::class);
-    Route::get('user/restore/{id}', [MemberUserUserController::class, 'restore'])->name('user.restore');
+    Route::resource('staff', MemberStaffUserController::class);
+    Route::get('staff/restore/{id}', [MemberStaffUserController::class, 'restore'])->name('staff.restore');
 
     /** Setting Routes */
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');

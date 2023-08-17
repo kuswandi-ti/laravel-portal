@@ -84,6 +84,11 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
+                                <label>{{ __('Residence') }}</label>
+                                <input type="text" name="area" class="form-control"
+                                    value="{{ old('area') ?? $member->area->residence->name }}" readonly>
+                            </div>
+                            <div class="form-group col-12">
                                 <label>{{ __('Area') }}</label>
                                 <input type="text" name="area" class="form-control"
                                     value="{{ old('area') ?? $member->area->name }}" readonly>

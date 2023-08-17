@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Member;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MemberRoleUpdateRequest extends FormRequest
@@ -21,10 +22,19 @@ class MemberRoleUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $roleId = $this->route('role');
+        // $roleId = $this->route('role');
 
         return [
-            'role_name' => ['required', 'string', 'max:255', 'unique:roles,name,' . $roleId],
+            // 'role_name' => ['required', 'string', 'max:255', 'unique:roles,name,' . $roleId],
+            'role_name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('roles', 'name')->where(function ($query) {
+                    $query->where('guard_name', $this->guard_name)
+                        ->where('area_id', $this->area);
+                })->ignore($this->id)
+            ],
         ];
     }
 }

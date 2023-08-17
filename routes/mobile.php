@@ -1,32 +1,32 @@
 <?php
 
-use App\Http\Controllers\Mobile\DashboardController;
-use App\Http\Controllers\Mobile\Auth\RegisteredUserController;
-use App\Http\Controllers\Mobile\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Mobile\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Mobile\MobileAuthController;
+use App\Http\Controllers\Mobile\MobileDashboardController;
+
+Route::get('/', [MobileAuthController::class, 'login'])->name('login');
 
 Route::group([], function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-    // Route::post('register', [RegisteredUserController::class, 'store']);
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-    // Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-    // Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-    // Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
+    /** Auth Member Routes */
+    Route::get('register', [MobileAuthController::class, 'register'])->name('register');
+    Route::post('register', [MobileAuthController::class, 'handleRegister'])->name('register.post');
+    Route::get('login', [MobileAuthController::class, 'login'])->name('login');
+    Route::post('login', [MobileAuthController::class, 'handleLogin'])->name('login.post');
+    Route::get('register-verify/{token}', [MobileAuthController::class, 'registerVerify'])->name('register.verify');
+    Route::get('forgot-password', [MobileAuthController::class, 'forgotPassword'])->name('forgot_password');
+    Route::post('forgot-password', [MobileAuthController::class, 'sendResetLink'])->name('forgot_password.send');
+    Route::get('reset-password/{token}', [MobileAuthController::class, 'resetPassword'])->name('reset_password');
+    Route::post('reset-password', [MobileAuthController::class, 'handleResetPassword'])->name('reset_password.send');
 });
 
-Route::middleware('mobile')->group(function () {
-    // Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
-    // Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
-    // Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->middleware('throttle:6,1')->name('verification.send');
-    // Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
-    // Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
-    // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::group([
+    'middleware' => ['mobile']
+], function () {
+    /** Auth Member Routes */
+    Route::post('logout', [MobileAuthController::class, 'logout'])->name('logout');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/transaction', [DashboardController::class, 'transaction'])->name('dashboard.transaction');
-    Route::get('/notification', [DashboardController::class, 'notification'])->name('dashboard.notification');
-    Route::get('/setting', [DashboardController::class, 'setting'])->name('dashboard.setting');
+    Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/transaction', [MobileDashboardController::class, 'transaction'])->name('dashboard.transaction');
+    Route::get('/notification', [MobileDashboardController::class, 'notification'])->name('dashboard.notification');
+    Route::get('/setting', [MobileDashboardController::class, 'setting'])->name('dashboard.setting');
 });

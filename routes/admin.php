@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\AdminResidenceController;
 use App\Http\Controllers\Admin\AdminMemberUserController;
 use App\Http\Controllers\Admin\AdminPermissionController;
 
+Route::get('/', [AdminAuthController::class, 'login'])->name('login');
+
 Route::group([], function () {
     /** Auth Admin Routes */
     Route::get('login', [AdminAuthController::class, 'login'])->name('login');

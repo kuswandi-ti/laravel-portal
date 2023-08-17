@@ -79,7 +79,6 @@ class MemberRoleController extends Controller
         $role = Role::findOrFail($id);
         $role->update([
             'name' => $request->role_name,
-            'guard_name' => $request->guard_name,
         ]);
         $role->syncPermissions($request->permissions);
 

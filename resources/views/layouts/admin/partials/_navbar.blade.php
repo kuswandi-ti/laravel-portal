@@ -6,11 +6,11 @@
     <ul class="ml-auto navbar-nav navbar-right">
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                @if (getGuardNameLoggedUser() == 'admin')
+                @if (getGuardNameLoggedUser() == getGuardNameAdmin())
                     <img alt="image"
                         src="{{ url(config('common.path_image_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
                         class="mr-1 rounded-circle">
-                @elseif (getGuardNameLoggedUser() == 'member')
+                @elseif (getGuardNameLoggedUser() == getGuardNameMember())
                     <img alt="image"
                         src="{{ url(config('common.path_image_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
                         class="mr-1 rounded-circle">

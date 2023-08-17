@@ -50,17 +50,20 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="control-label">{{ __('Guard Name') }}</div>
+                            <div class="control-label">{{ __('Guard Name') }} <span
+                                    class="text-danger">{{ __('(disabled)') }}</span></div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
                                     <input type="radio" name="guard_name" id="guard_member" value="member"
-                                        class="custom-switch-input" {{ $role->guard_name == 'member' ? 'checked' : '' }}>
+                                        class="custom-switch-input" {{ $role->guard_name == 'member' ? 'checked' : '' }}
+                                        disabled>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-danger">{{ __('Member') }}</span>
                                 </label>
                                 <label class="custom-switch">
                                     <input type="radio" name="guard_name" id="guard_web" value="web"
-                                        class="custom-switch-input" {{ $role->guard_name == 'web' ? 'checked' : '' }}>
+                                        class="custom-switch-input" {{ $role->guard_name == 'web' ? 'checked' : '' }}
+                                        disabled>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ __('Web') }}</span>
                                 </label>

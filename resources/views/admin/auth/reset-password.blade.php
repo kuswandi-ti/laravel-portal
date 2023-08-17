@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="email">{{ __('Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                value="{{ request()->email }}" required autofocus>
+                                value="{{ request()->email }}" required>
                             <input type="hidden" value="{{ request()->token }}" name="token">
                             @error('email')
                                 <div class="invalid-feedback">
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="password">{{ __('New Password') }} <x-fill-field /></label>
                             <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror" required>
+                                class="form-control @error('password') is-invalid @enderror" required autofocus>
                             @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}

@@ -2,11 +2,10 @@
 
 namespace App\Providers;
 
-use Debugbar;
 use App\Models\Setting;
 use App\Models\SettingMember;
-use App\Models\GeneralSetting;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

@@ -27,6 +27,8 @@ class MemberAuthRegisterRequest extends FormRequest
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
             'residence' => ['required'],
             'area_name' => ['required', 'string', 'max:255', 'unique:areas,name'],
+            'package' => ['required'],
+            'package_type' => ['required'],
         ];
     }
 }
