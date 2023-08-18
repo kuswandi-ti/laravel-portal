@@ -50,31 +50,32 @@
                                 <table class="table table-striped" id="table_data_active">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
                                             <th>{{ __('Street Name') }}</th>
-                                            <th class="text-center">{{ __('Status') }}</th>
-                                            <th class="text-center"><i class="fas fa-cogs"></i></th>
+                                            <th class="text-center" width="8%">{{ __('Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($streets_active as $street)
                                             <tr>
-                                                <th scope="row" class="text-center align-middle">{{ $loop->iteration }}
+                                                <th scope="row" class="text-center align-middle" width="7%">
+                                                    {{ $loop->iteration }}
                                                 </th>
-                                                <td class="align-middle">{{ $street->name ?? '' }}</td>
-                                                <td class="text-center align-middle">
-                                                    @if ($street->status == 1)
-                                                        <div class="badge badge-primary">{{ __('Active') }}</div>
-                                                    @else
-                                                        <div class="badge badge-danger">{{ __('Inactive') }}</div>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center align-middle">
+                                                <td class="text-center align-middle" width="12%">
                                                     <a href="{{ route('member.street.edit', $street->id) }}"
                                                         class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                                     <a href="{{ route('member.street.destroy', $street->id) }}"
                                                         class="btn btn-danger btn-sm delete_item"><i
                                                             class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                                <td class="align-middle">{{ $street->name ?? '' }}</td>
+                                                <td class="text-center align-middle" width="8%">
+                                                    @if ($street->status == 1)
+                                                        <div class="badge badge-primary">{{ __('Active') }}</div>
+                                                    @else
+                                                        <div class="badge badge-danger">{{ __('Inactive') }}</div>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -87,30 +88,31 @@
                                 <table class="table table-striped" id="table_data_inactive">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
                                             <th>{{ __('Street Name') }}</th>
-                                            <th class="text-center">{{ __('Status') }}</th>
-                                            <th class="text-center"><i class="fas fa-cogs"></i></th>
+                                            <th class="text-center" width="8%">{{ __('Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($streets_inactive as $street)
                                             <tr>
-                                                <th scope="row" class="text-center align-middle">{{ $loop->iteration }}
+                                                <th scope="row" class="text-center align-middle" width="7%">
+                                                    {{ $loop->iteration }}
                                                 </th>
+                                                <td class="text-center align-middle" width="12%">
+                                                    <a href="{{ route('member.street.restore', $street->id) }}"
+                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                                        title="{{ __('Restore to Active') }}"><i
+                                                            class="fas fa-undo"></i></a>
+                                                </td>
                                                 <td class="align-middle">{{ $street->name ?? '' }}</td>
-                                                <td class="text-center align-middle">
+                                                <td class="text-center align-middle" width="8%">
                                                     @if ($street->status == 1)
                                                         <div class="badge badge-primary">{{ __('Active') }}</div>
                                                     @else
                                                         <div class="badge badge-danger">{{ __('Inactive') }}</div>
                                                     @endif
-                                                </td>
-                                                <td class="text-center align-middle">
-                                                    <a href="{{ route('member.street.restore', $street->id) }}"
-                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
-                                                        title="{{ __('Restore to Active') }}"><i
-                                                            class="fas fa-undo"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

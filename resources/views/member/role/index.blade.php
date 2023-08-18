@@ -38,25 +38,17 @@
                         <table class="table table-striped" id="table_data">
                             <thead>
                                 <tr>
-                                    <th class="text-center"><i class="fas fa-list-ol"></i></th>
+                                    <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
+                                    <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
                                     <th>{{ __('Role Name') }}</th>
                                     <th class="text-center">{{ __('Guard Name') }}</th>
-                                    <th class="text-center"><i class="fas fa-cogs"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($roles as $role)
                                     <tr>
-                                        <th scope="row" class="text-center">{{ $loop->iteration }}</th>
-                                        <td>{{ $role->name }}</td>
-                                        <td class="text-center">
-                                            @if ($role->guard_name == getGuardNameMember())
-                                                <div class="badge badge-danger">{{ $role->guard_name }}</div>
-                                            @else
-                                                <div class="badge badge-info">{{ $role->guard_name }}</div>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
+                                        <th scope="row" class="text-center" width="10%">{{ $loop->iteration }}</th>
+                                        <td class="text-center" width="12%">
                                             @if ($role->name != 'Admin')
                                                 <a href="{{ route('member.role.edit', $role->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
@@ -65,6 +57,14 @@
                                                         class="fas fa-trash-alt"></i></a>
                                             @else
                                                 <div class="badge badge-danger">{{ __('No Action') }}</div>
+                                            @endif
+                                        </td>
+                                        <td>{{ $role->name }}</td>
+                                        <td class="text-center">
+                                            @if ($role->guard_name == getGuardNameMember())
+                                                <div class="badge badge-danger">{{ $role->guard_name }}</div>
+                                            @else
+                                                <div class="badge badge-info">{{ $role->guard_name }}</div>
                                             @endif
                                         </td>
                                     </tr>

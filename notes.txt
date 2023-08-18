@@ -153,3 +153,24 @@ type -> name -> id -> class -> value -> required,autofocus
         </div>
     @enderror
 </div>
+
+
+<div class="form-group">
+    <label>{{ __('Default Date Format') }} <x-fill-field /></label>
+    <select id="default_date_format" name="default_date_format"
+        class="form-control select2 @error('default_date_format') is-invalid @enderror"
+        required>
+        <option value="" selected disabled>{{ __('Choose one ...') }}
+        </option>
+        @foreach ($format_dates as $code => $text)
+            <option value="{{ $code }}"
+                {{ old('default_date_format') ?? !empty($setting['default_date_format']) ? ($setting['default_date_format'] == $code ? 'selected' : '') : '' }}>
+                {{ $text }}</option>
+        @endforeach
+    </select>
+    @error('default_date_format')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</div>

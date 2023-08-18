@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="card-footer bg-light">
+                    <div class="card-footer">
                         <button class="btn btn-primary">
                             <i class="fas fa-save"></i> {{ __('Update') }}
                         </button>

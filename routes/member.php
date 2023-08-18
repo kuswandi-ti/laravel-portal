@@ -51,6 +51,7 @@ Route::group([
 
     /** House Routes */
     Route::resource('house', MemberHouseController::class);
+    Route::get('house/restore/{id}', [MemberHouseController::class, 'restore'])->name('house.restore');
 
     /** Role Routes */
     Route::resource('role', MemberRoleController::class);

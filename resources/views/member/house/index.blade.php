@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Member Staff') }}
+    {{ __('House') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Member Staff') }}
+    {{ __('House') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Member Staff') }}</div>
+    <div class="breadcrumb-item">{{ __('House') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Member Staff') }}
+    {{ __('House') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View information about member staff & user on this page') }}
+    {{ __('View information about house on this page') }}
 @endsection
 
 @section('content')
@@ -26,9 +26,9 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('All Member Staff') }}</h4>
+                    <h4>{{ __('All House') }}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('member.staff.create') }}" class="btn btn-primary">
+                        <a href="{{ route('member.house.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i> {{ __('Create') }}
                         </a>
                     </div>
@@ -52,45 +52,34 @@
                                         <tr>
                                             <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
                                             <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                            <th></th>
-                                            <th>{{ __('Staff Name') }}</th>
-                                            <th class="text-center">{{ __('Email') }}</th>
-                                            <th class="text-center">{{ __('Role') }}</th>
+                                            <th>{{ __('House Owner Name') }}</th>
+                                            <th class="text-center">{{ __('Street') }}</th>
+                                            <th class="text-center">{{ __('Block') }}</th>
+                                            <th class="text-center">{{ __('No') }}</th>
+                                            <th>{{ __('Address Info') }}</th>
                                             <th class="text-center" width="8%">{{ __('Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($staffs_active as $staff)
+                                        @foreach ($houses_active as $house)
                                             <tr>
                                                 <th scope="row" class="text-center align-middle" width="10%">
                                                     {{ $loop->iteration }}
                                                 </th>
                                                 <td class="text-center align-middle" width="12%">
-                                                    <a href="{{ route('member.staff.edit', $staff->id) }}"
+                                                    <a href="{{ route('member.house.edit', $house->id) }}"
                                                         class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="{{ route('member.staff.destroy', $staff->id) }}"
+                                                    <a href="{{ route('member.house.destroy', $house->id) }}"
                                                         class="btn btn-danger btn-sm delete_item"><i
                                                             class="fas fa-trash-alt"></i></a>
                                                 </td>
-                                                <td class="align-middle">
-                                                    @if (!empty($staff->image))
-                                                        <figure class="avatar">
-                                                            <img
-                                                                src="{{ url(config('common.path_image_storage') . $staff->image) }}">
-                                                        </figure>
-                                                    @else
-                                                        <figure class="avatar">
-                                                            <img src="{{ url(config('common.no_image_square')) }}">
-                                                        </figure>
-                                                    @endif
-                                                </td>
-                                                <td class="align-middle">{{ $staff->name ?? '' }}</td>
-                                                <td class="text-center align-middle">{{ $staff->email ?? '' }}</td>
-                                                <td class="text-center align-middle">
-                                                    <div class="badge badge-info">
-                                                        {{ $staff->roles->pluck('name')->first() ?? '' }}</div>
+                                                <td class="align-middle">{{ $house->owner_name ?? '' }}</td>
+                                                <td class="text-center align-middle">{{ $house->street ?? '' }}</td>
+                                                <td class="text-center align-middle">{{ $house->block ?? '' }}</td>
+                                                <td class="text-center align-middle">{{ $house->no ?? '' }}</td>
+                                                <td class="align-middle">{{ $house->address_info ?? '' }}</td>
                                                 <td class="text-center align-middle" width="8%">
-                                                    @if ($staff->status == 1)
+                                                    @if ($house->status == 1)
                                                         <div class="badge badge-primary">{{ __('Active') }}</div>
                                                     @else
                                                         <div class="badge badge-danger">{{ __('Inactive') }}</div>
@@ -109,44 +98,33 @@
                                         <tr>
                                             <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
                                             <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                            <th></th>
-                                            <th>{{ __('Staff Name') }}</th>
-                                            <th class="text-center">{{ __('Email') }}</th>
-                                            <th class="text-center">{{ __('Role') }}</th>
+                                            <th>{{ __('House Owner Name') }}</th>
+                                            <th class="text-center">{{ __('Street') }}</th>
+                                            <th class="text-center">{{ __('Block') }}</th>
+                                            <th class="text-center">{{ __('No') }}</th>
+                                            <th>{{ __('Address Info') }}</th>
                                             <th class="text-center" width="8%">{{ __('Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($staffs_inactive as $staff)
+                                        @foreach ($houses_inactive as $house)
                                             <tr>
                                                 <th scope="row" class="text-center align-middle" width="10%">
                                                     {{ $loop->iteration }}
                                                 </th>
                                                 <td class="text-center align-middle" width="12%">
-                                                    <a href="{{ route('member.staff.restore', $staff->id) }}"
+                                                    <a href="{{ route('member.house.restore', $house->id) }}"
                                                         class="btn btn-warning btn-sm" data-toggle="tooltip"
                                                         title="{{ __('Restore to Active') }}"><i
                                                             class="fas fa-undo"></i></a>
                                                 </td>
-                                                <td class="align-middle">
-                                                    @if (!empty($staff->image))
-                                                        <figure class="avatar">
-                                                            <img
-                                                                src="{{ url(config('common.path_image_storage') . $staff->image) }}">
-                                                        </figure>
-                                                    @else
-                                                        <img src="{{ url(config('common.no_image_square')) }}"
-                                                            class="rounded-circle" width="35">
-                                                    @endif
-                                                </td>
-                                                <td class="align-middle">{{ $staff->name ?? '' }}</td>
-                                                <td class="text-center align-middle">{{ $staff->email ?? '' }}</td>
-                                                <td class="text-center align-middle">
-                                                    <div class="badge badge-info">
-                                                        {{ $staff->roles->pluck('name')->first() ?? '' }}</div>
-                                                </td>
+                                                <td class="align-middle">{{ $house->owner_name ?? '' }}</td>
+                                                <td class="text-center align-middle">{{ $house->street ?? '' }}</td>
+                                                <td class="text-center align-middle">{{ $house->block ?? '' }}</td>
+                                                <td class="text-center align-middle">{{ $house->no ?? '' }}</td>
+                                                <td class="align-middle">{{ $house->address_info ?? '' }}</td>
                                                 <td class="text-center align-middle" width="8%">
-                                                    @if ($staff->status == 1)
+                                                    @if ($house->status == 1)
                                                         <div class="badge badge-primary">{{ __('Active') }}</div>
                                                     @else
                                                         <div class="badge badge-danger">{{ __('Inactive') }}</div>

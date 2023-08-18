@@ -26,21 +26,21 @@
         table = $("#table_data").DataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [2, 3]
+                "targets": [0, 1]
             }]
         });
 
         table_active = $("#table_data_active").DataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [2, 3]
+                "targets": [0, 1]
             }]
         });
 
         table_inactive = $("#table_data_inactive").DataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [2, 3]
+                "targets": [0, 1]
             }]
         });
     </script>

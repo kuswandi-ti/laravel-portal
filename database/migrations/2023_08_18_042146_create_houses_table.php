@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('street');
             $table->string('block');
             $table->string('no');
-            $table->string('address_info');
+            $table->string('address_info')->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();

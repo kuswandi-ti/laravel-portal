@@ -23,8 +23,8 @@
             {{-- Area & House --}}
             <li class="dropdown {{ setSidebarActive(['member.street.*', 'member.block.*', 'member.house.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-layer-group"></i>
-                    <span>{{ __('Management Area') }}</span>
+                    <i class="fas fa-home"></i>
+                    <span>{{ __('Management House') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.street.*']) }}">

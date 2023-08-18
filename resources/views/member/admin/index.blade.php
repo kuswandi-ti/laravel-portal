@@ -50,20 +50,32 @@
                                 <table class="table table-striped" id="table_data_active">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
                                             <th></th>
                                             <th>{{ __('Member Admin Name') }}</th>
                                             <th class="text-center">{{ __('Email') }}</th>
                                             <th class="text-center">{{ __('Role') }}</th>
-                                            <th class="text-center">{{ __('Status') }}</th>
-                                            <th class="text-center"><i class="fas fa-cogs"></i></th>
+                                            <th class="text-center" width="8%">{{ __('Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($members_active as $member)
                                             <tr>
-                                                <th scope="row" class="text-center align-middle">{{ $loop->iteration }}
+                                                <th scope="row" class="text-center align-middle" width="10%">
+                                                    {{ $loop->iteration }}
                                                 </th>
+                                                <td class="text-center align-middle" width="12%">
+                                                    @if ($member->roles->first()->name != 'Admin')
+                                                        <a href="{{ route('member.admin.edit', $member->id) }}"
+                                                            class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                        <a href="{{ route('member.admin.destroy', $member->id) }}"
+                                                            class="btn btn-danger btn-sm delete_item"><i
+                                                                class="fas fa-trash-alt"></i></a>
+                                                    @else
+                                                        <div class="badge badge-danger">{{ __('No Action') }}</div>
+                                                    @endif
+                                                </td>
                                                 <td class="align-middle">
                                                     @if (!empty($member->image))
                                                         <figure class="avatar">
@@ -86,22 +98,11 @@
                                                         <div class="badge badge-info">
                                                             {{ $member->roles->pluck('name')->first() ?? '' }}</div>
                                                     @endif
-                                                <td class="text-center align-middle">
+                                                <td class="text-center align-middle" width="8%">
                                                     @if ($member->status == 1)
                                                         <div class="badge badge-primary">{{ __('Active') }}</div>
                                                     @else
                                                         <div class="badge badge-danger">{{ __('Inactive') }}</div>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center align-middle">
-                                                    @if ($member->roles->first()->name != 'Admin')
-                                                        <a href="{{ route('member.admin.edit', $member->id) }}"
-                                                            class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                        <a href="{{ route('member.admin.destroy', $member->id) }}"
-                                                            class="btn btn-danger btn-sm delete_item"><i
-                                                                class="fas fa-trash-alt"></i></a>
-                                                    @else
-                                                        <div class="badge badge-danger">{{ __('No Action') }}</div>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -115,20 +116,27 @@
                                 <table class="table table-striped" id="table_data_inactive">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
                                             <th></th>
+                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
                                             <th>{{ __('Member Admin Name') }}</th>
                                             <th class="text-center">{{ __('Email') }}</th>
                                             <th class="text-center">{{ __('Role') }}</th>
-                                            <th class="text-center">{{ __('Status') }}</th>
-                                            <th class="text-center"><i class="fas fa-cogs"></i></th>
+                                            <th class="text-center" width="8%">{{ __('Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($members_inactive as $member)
                                             <tr>
-                                                <th scope="row" class="text-center align-middle">{{ $loop->iteration }}
+                                                <th scope="row" class="text-center align-middle" width="10%">
+                                                    {{ $loop->iteration }}
                                                 </th>
+                                                <td class="text-center align-middle" width="12%">
+                                                    <a href="{{ route('member.admin.restore', $member->id) }}"
+                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                                        title="{{ __('Restore to Active') }}"><i
+                                                            class="fas fa-undo"></i></a>
+                                                </td>
                                                 <td class="align-middle">
                                                     @if (!empty($member->image))
                                                         <figure class="avatar">
@@ -151,18 +159,12 @@
                                                             {{ $member->roles->pluck('name')->first() ?? '' }}</div>
                                                     @endif
                                                 </td>
-                                                <td class="text-center align-middle">
+                                                <td class="text-center align-middle" width="8%">
                                                     @if ($member->status == 1)
                                                         <div class="badge badge-primary">{{ __('Active') }}</div>
                                                     @else
                                                         <div class="badge badge-danger">{{ __('Inactive') }}</div>
                                                     @endif
-                                                </td>
-                                                <td class="text-center align-middle">
-                                                    <a href="{{ route('member.admin.restore', $member->id) }}"
-                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
-                                                        title="{{ __('Restore to Active') }}"><i
-                                                            class="fas fa-undo"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
