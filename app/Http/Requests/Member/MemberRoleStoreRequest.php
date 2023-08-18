@@ -30,7 +30,7 @@ class MemberRoleStoreRequest extends FormRequest
                 'max:255',
                 Rule::unique('roles', 'name')->where(function ($query) {
                     $query->where('guard_name', $this->guard_name)
-                        ->where('area_id', $this->area);
+                        ->where('area_id', getLoggedUserAreaId());
                 })
             ],
         ];

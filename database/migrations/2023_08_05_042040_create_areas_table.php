@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('slug')->nullable();
+            $table->string('slug');
             $table->bigInteger('residence_id')->unsigned()->nullable();
             $table->foreign('residence_id')->references('id')->on('residences')->onUpdate('cascade')->onDelete('restrict');
             $table->string('rt')->nullable();

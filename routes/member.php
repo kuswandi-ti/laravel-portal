@@ -3,11 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Member\MemberAuthController;
 use App\Http\Controllers\Member\MemberRoleController;
+use App\Http\Controllers\Member\MemberBlockController;
+use App\Http\Controllers\Member\MemberHouseController;
+use App\Http\Controllers\Member\MemberStreetController;
 use App\Http\Controllers\Member\MemberProfileController;
 use App\Http\Controllers\Member\MemberSettingController;
-use App\Http\Controllers\Member\MemberStaffUserController;
 use App\Http\Controllers\Member\MemberAdminUserController;
 use App\Http\Controllers\Member\MemberDashboardController;
+use App\Http\Controllers\Member\MemberStaffUserController;
 
 Route::get('/', [MemberAuthController::class, 'login'])->name('login');
 
@@ -38,6 +41,17 @@ Route::group([
     Route::put('profile-password-update/{id}', [MemberProfileController::class, 'updatePassword'])->name('profile_password.update');
     Route::resource('profile', MemberProfileController::class);
 
+    /** Street Routes */
+    Route::resource('street', MemberStreetController::class);
+    Route::get('street/restore/{id}', [MemberStreetController::class, 'restore'])->name('street.restore');
+
+    /** Block Routes */
+    Route::resource('block', MemberBlockController::class);
+    Route::get('block/restore/{id}', [MemberBlockController::class, 'restore'])->name('block.restore');
+
+    /** House Routes */
+    Route::resource('house', MemberHouseController::class);
+
     /** Role Routes */
     Route::resource('role', MemberRoleController::class);
 
@@ -54,6 +68,7 @@ Route::group([
     Route::put('setting-area/{id}', [MemberSettingController::class, 'settingAreaUpdate'])->name('setting_area.update');
     Route::put('setting-logo', [MemberSettingController::class, 'settingLogoUpdate'])->name('setting_logo.update');
 
+    /** Others Routes */
     Route::post('get-cities', [MemberSettingController::class, 'getCities'])->name('setting.get_cities');
     Route::post('get-districts', [MemberSettingController::class, 'getDistricts'])->name('setting.get_districts');
     Route::post('get-villages', [MemberSettingController::class, 'getVillages'])->name('setting.get_villages');

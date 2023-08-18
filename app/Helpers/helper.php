@@ -184,6 +184,11 @@ function getLoggedUser()
     return Auth::guard(getGuardNameLoggedUser())->user();
 }
 
+function getLoggedUserAreaId()
+{
+    return getLoggedUser()->area->id;
+}
+
 function formatAmount($amount)
 {
     return number_format((float)$amount, 0, ',', '.');

@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mobile\MobileAuthController;
+use App\Http\Controllers\Mobile\MobileUserUserController;
 use App\Http\Controllers\Mobile\MobileDashboardController;
 
 Route::get('/', [MobileAuthController::class, 'login'])->name('login');
 
 Route::group([], function () {
-    /** Auth Member Routes */
+    /** Auth Staff & User Routes */
     Route::get('register', [MobileAuthController::class, 'register'])->name('register');
     Route::post('register', [MobileAuthController::class, 'handleRegister'])->name('register.post');
     Route::get('login', [MobileAuthController::class, 'login'])->name('login');
@@ -22,11 +23,15 @@ Route::group([], function () {
 Route::group([
     'middleware' => ['mobile']
 ], function () {
-    /** Auth Member Routes */
+    /** Auth Staff & User Routes */
     Route::post('logout', [MobileAuthController::class, 'logout'])->name('logout');
 
+    /** Bottom Menu Routes */
     Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/transaction', [MobileDashboardController::class, 'transaction'])->name('dashboard.transaction');
     Route::get('/notification', [MobileDashboardController::class, 'notification'])->name('dashboard.notification');
     Route::get('/setting', [MobileDashboardController::class, 'setting'])->name('dashboard.setting');
+
+    /** User Routes */
+    Route::resource('user', MobileUserUserController::class);
 });

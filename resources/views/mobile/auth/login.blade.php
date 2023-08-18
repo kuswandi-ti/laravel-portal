@@ -1,10 +1,10 @@
-@extends('mobile.layouts.auth')
+@extends('layouts.mobile.auth')
 
 @section('app_title')
     {{ __('Login') }}
 @endsection
 
-@section('frontend_content')
+@section('content')
     <div id="appCapsule">
         <div class="text-center section">
             <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/illustration/login.png') }}" alt="img"

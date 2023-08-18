@@ -1,9 +1,11 @@
-@extends('mobile.layouts.master')
+@extends('layouts.mobile.master')
 
-@section('app_title', 'Notifikasi')
+@section('app_title')
+    {{ __('Notification') }}
+@endsection
 
-@section('frontend_content')
-    @includeIf('mobile.layouts.partials.title')
+@section('content')
+    @include('layouts.mobile.partials._title')
 
     <div class="section full">
         <ul class="listview image-listview flush">

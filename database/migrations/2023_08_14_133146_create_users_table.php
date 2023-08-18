@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->nullable();
+            $table->string('slug');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
@@ -27,13 +27,13 @@ return new class extends Migration
             $table->enum('religion', ['Islam', 'Katolik', 'Protestan', 'Hindu', 'Budha', 'Konghucu', 'Other'])->nullable();
             $table->text('image')->nullable();
             $table->string('phone')->nullable();
-            $table->string('home_street_name')->nullable();
-            $table->string('home_block')->nullable();
-            $table->string('home_number')->nullable();
-            $table->string('home_address_others')->nullable();
-            $table->enum('home_ownership', ['Owner', 'Rent', 'Other'])->nullable();
-            $table->enum('home_stay', ['Permanent', 'Non Permanent', 'Other'])->nullable();
-            $table->string('home_note')->nullable();
+            $table->string('house_street_name')->nullable();
+            $table->string('house_block')->nullable();
+            $table->string('house_number')->nullable();
+            $table->string('house_address_others')->nullable();
+            $table->enum('house_ownership', ['Owner', 'Rent', 'Other'])->nullable();
+            $table->enum('house_stay', ['Permanent', 'Non Permanent', 'Other'])->nullable();
+            $table->string('house_note')->nullable();
             $table->string('family_card_no')->nullable();
             $table->string('id_card_no')->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();

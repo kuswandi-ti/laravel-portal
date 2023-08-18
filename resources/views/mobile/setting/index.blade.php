@@ -1,9 +1,11 @@
-@extends('mobile.layouts.master')
+@extends('layouts.mobile.master')
 
-@section('app_title', 'Pengaturan')
+@section('app_title')
+    {{ __('Setting') }}
+@endsection
 
-@section('frontend_content')
-    @includeIf('mobile.layouts.partials.title')
+@section('content')
+    @include('layouts.mobile.partials._title')
 
     <div class="section mt-3 text-center">
         <div class="avatar-section">
@@ -137,7 +139,7 @@
             </div>
         </li>
         <li>
-            <a href="#" class="item" onclick="document.querySelector('#form-logout').submit()">
+            <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#DialogBasic">
                 <div class="in">
                     <div>
                         <form action="{{ route('mobile.logout') }}" method="post" id="form-logout">
@@ -174,4 +176,24 @@
             </a>
         </li>
     </ul>
+
+    <div class="modal fade dialogbox" id="DialogBasic" data-bs-backdrop="static" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sending $50 to John</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure about that?
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-inline">
+                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">CANCEL</a>
+                        <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal"
+                            onclick="document.querySelector('#form-logout').submit()">SEND</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

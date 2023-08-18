@@ -1,9 +1,11 @@
-@extends('mobile.layouts.master')
+@extends('layouts.mobile.master')
 
-@section('app_title', 'Transaksi')
+@section('app_title')
+    {{ __('Transaction') }}
+@endsection
 
-@section('frontend_content')
-    @includeIf('mobile.layouts.partials.title')
+@section('content')
+    @include('layouts.mobile.partials._title')
 
     <div class="section mt-2">
         <div class="section-title">2023</div>

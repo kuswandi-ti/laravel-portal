@@ -2022,7 +2022,7 @@
                                                             </ul>
                                                         </li>
                                                         <li class="dropdown">
-                                                            <a class="dropdown-item dropdown-toggle">
+                                                            <a class="dropdown-item dropdown-toggle" href="#">
                                                                 {{ __('Authentication') }}
                                                             </a>
                                                             <ul class="dropdown-menu">

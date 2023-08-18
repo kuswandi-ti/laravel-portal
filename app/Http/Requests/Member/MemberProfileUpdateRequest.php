@@ -24,7 +24,6 @@ class MemberProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['unique:members,email,' . Auth::guard('member')->user()->id],
             'phone' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable'],
             'path_image' => ['nullable', 'image', 'max:3000'],

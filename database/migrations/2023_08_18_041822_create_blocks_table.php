@@ -11,20 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->id();
+        Schema::create('blocks', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->text('image')->nullable();
-            $table->string('phone')->nullable();
-            $table->text('address')->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
-            $table->string('register_token')->nullable();
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
-            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,9 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
-        Schema::table('members', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('blocks');
     }
 };

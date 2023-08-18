@@ -5,7 +5,7 @@ namespace App\Http\Requests\Member;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MemberRoleUpdateRequest extends FormRequest
+class MemberBlockUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,13 @@ class MemberRoleUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        // $roleId = $this->route('role');
-
         return [
-            // 'role_name' => ['required', 'string', 'max:255', 'unique:roles,name,' . $roleId],
-            'role_name' => [
+            'name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('roles', 'name')->where(function ($query) {
-                    $query->where('guard_name', $this->guard_name)
+                Rule::unique('blocks', 'name')->where(function ($query) {
+                    $query->where('name', $this->name)
                         ->where('area_id', getLoggedUserAreaId());
                 })->ignore($this->id)
             ],

@@ -1,16 +1,11 @@
-@extends('mobile.layouts.master')
+@extends('layouts.mobile.master')
 
-@section('app_title', 'Dashboard')
+@section('app_title')
+    {{ __('Dashboard') }}
+@endsection
 
-@push('styles_vendor')
-    <link rel="stylesheet"
-        href="{{ asset('public/template/mobile/assets/js/plugins/OwlCarousel/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('public/template/mobile/assets/js/plugins/OwlCarousel/assets/owl.theme.default.min.css') }}">
-@endpush
-
-@section('frontend_content')
-    @includeIf('mobile.layouts.partials.header')
+@section('content')
+    @include('layouts.mobile.partials._header')
 
     <div class="section wallet-card-section pt-1">
         <div class="wallet-card">
@@ -22,7 +17,7 @@
                 <div class="right">
                     <div class="avatar-section">
                         <a href="#">
-                            <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar1.jpg') }}"
+                            <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/avatar/avatar1.jpg') }}"
                                 alt="avatar" class="imaged rounded" style="width: 80px;">
                         </a>
                     </div>
@@ -288,8 +283,8 @@
         <div class="owl-carousel owl-theme owl-carousel-news" style="padding-left: 16px; padding-right: 16px;">
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news1.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news1.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">What will be the value of bitcoin in the next...</h4>
                     </div>
@@ -297,8 +292,8 @@
             </a>
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news2.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news2.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">Rules you need to know in business</h4>
                     </div>
@@ -306,8 +301,8 @@
             </a>
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news5.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news5.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">10 easy ways to save your money</h4>
                     </div>
@@ -315,8 +310,8 @@
             </a>
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news4.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news4.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">Follow the financial agenda with...</h4>
                     </div>
@@ -324,8 +319,8 @@
             </a>
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news5.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news5.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">What will be the value of bitcoin in the next...</h4>
                     </div>
@@ -333,8 +328,8 @@
             </a>
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news1.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news1.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">Rules you need to know in business</h4>
                     </div>
@@ -342,8 +337,8 @@
             </a>
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news1.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news1.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">10 easy ways to save your money</h4>
                     </div>
@@ -351,8 +346,8 @@
             </a>
             <a href="app-blog-post.html">
                 <div class="blog-card">
-                    <img src="{{ asset('public/template/mobile/assets/img/sample/news/news1.png') }}" alt="image"
-                        class="imaged w-100">
+                    <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/news/news1.png') }}"
+                        alt="image" class="imaged w-100">
                     <div class="text">
                         <h4 class="title">Follow the financial agenda with...</h4>
                     </div>
@@ -360,32 +355,8 @@
             </a>
         </div>
     </div>
+
+    @include('layouts.mobile.partials._footer')
 @endsection
 
-@push('scripts_vendor')
-    <script src="{{ asset('public/template/mobile/assets/js/plugins/OwlCarousel/owl.carousel.min.js') }}"></script>
-@endpush
-
-@push('scripts')
-    <script>
-        var owlInfo = $('.owl-carousel-info');
-        owlInfo.owlCarousel({
-            items: 1,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 3500,
-            autoplayHoverPause: true
-        });
-
-        var owlNews = $('.owl-carousel-news');
-        owlNews.owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 2500,
-            autoplayHoverPause: true
-        });
-    </script>
-@endpush
+@include('layouts.mobile.includes.owl_carousel')
