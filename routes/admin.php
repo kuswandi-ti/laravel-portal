@@ -15,9 +15,9 @@ use App\Http\Controllers\Admin\AdminMemberUserController;
 use App\Http\Controllers\Admin\AdminPermissionController;
 use App\Http\Controllers\Admin\AdminTranslateController;
 
-Route::get('/', [AdminAuthController::class, 'login'])->name('login');
+Route::group(['middleware' => ['set_language']], function () {
+    Route::get('/', [AdminAuthController::class, 'login'])->name('login');
 
-Route::group([], function () {
     /** Auth Admin Routes */
     Route::get('login', [AdminAuthController::class, 'login'])->name('login');
     Route::post('login', [AdminAuthController::class, 'handleLogin'])->name('login.post');
