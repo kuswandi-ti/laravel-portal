@@ -103,7 +103,7 @@ class RolePermissionMemberSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        $role = Role::create(['guard_name' => 'member', 'name' => 'Admin', 'member_id' => $member->id]);
+        $role = Role::create(['guard_name' => 'member', 'name' => getGuardTextAdmin(), 'member_id' => $member->id]);
         $role->givePermissionTo([
             'area index',
             'area create',

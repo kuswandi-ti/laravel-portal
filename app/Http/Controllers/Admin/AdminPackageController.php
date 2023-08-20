@@ -50,6 +50,8 @@ class AdminPackageController extends Controller
         $package->support_ticket_per_year = isset($request->support_ticket_per_year) ? $request->support_ticket_per_year : '0';
         $package->online_payment_per_year = isset($request->online_payment_per_year) ? $request->online_payment_per_year : '0';
         $package->status = 1;
+        $package->created_at = saveDateTimeNow();
+        $package->created_by = getLoggedUser()->name;
         $package->save();
 
         return redirect()->route('admin.package.index')->with('success', __('admin.Created package successfully'));
@@ -96,6 +98,8 @@ class AdminPackageController extends Controller
             'support_ticket_per_year' => isset($request->support_ticket_per_year) ? $request->support_ticket_per_year : '0',
             'online_payment_per_year' => isset($request->online_payment_per_year) ? $request->online_payment_per_year : '0',
             'status' => 1,
+            'updated_at' => saveDateTimeNow(),
+            'updated_by' => getLoggedUser()->name,
         ];
 
         $package->update($data);
@@ -111,7 +115,10 @@ class AdminPackageController extends Controller
         try {
             $package = Package::findOrFail($id);
 
-            $package->delete();
+            $package->status = 0;
+            $package->deleted_at = saveDateTimeNow();
+            $package->deleted_by = getLoggedUser()->name;
+            $package->save();
 
             return response([
                 'status' => 'success',
@@ -123,5 +130,17 @@ class AdminPackageController extends Controller
                 'message' => __('admin.Deleted package is error')
             ]);
         }
+    }
+
+    public function restore($id)
+    {
+        $package = Package::findOrFail($id);
+
+        $package->status = 1;
+        $package->restored_at = saveDateTimeNow();
+        $package->restored_by = getLoggedUser()->name;
+        $package->save();
+
+        return redirect()->route('admin.package.index')->with('success', __('admin.Restore package successfully'));
     }
 }

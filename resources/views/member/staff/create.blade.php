@@ -91,7 +91,7 @@
                                             class="custom-switch-input" checked>
                                         <span class="custom-switch-indicator"></span>
                                         <span
-                                            class="custom-switch-description {{ $item == 'Admin' ? 'text-danger' : 'text-info' }}">{{ $item }}</span>
+                                            class="custom-switch-description {{ $item == getGuardTextAdmin() ? 'text-danger' : 'text-info' }}">{{ $item }}</span>
                                     </label>
                                 @endforeach
                                 @error('role')

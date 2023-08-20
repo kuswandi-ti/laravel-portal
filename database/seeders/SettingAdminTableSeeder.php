@@ -26,6 +26,8 @@ class SettingAdminTableSeeder extends Seeder
             ['key' => 'trial_days', 'value' => '30'],
             ['key' => 'company_logo', 'value' => config('common.default_image_circle')],
             ['key' => 'company_favicon', 'value' => config('common.default_image_circle')],
+            ['key' => 'site_microsoft_api_host', 'value' => 'microsoft-translator-text.p.rapidapi.com'],
+            ['key' => 'site_microsoft_api_key', 'value' => '384e408287mshfda0dbb1518ddf2p12065bjsn6ae311d7402b'],
         ];
         foreach ($input as $item) {
             Setting::create($item);

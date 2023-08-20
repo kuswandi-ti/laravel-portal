@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\Setting;
 use App\Models\Language;
 use App\Models\SettingMember;
@@ -182,6 +183,21 @@ function getGuardNameUser(): ?string
     return config('common.guard_name_user');
 }
 
+function getGuardTextAdmin(): ?string
+{
+    return config('common.guard_text_admin');
+}
+
+function getGuardTextMember(): ?string
+{
+    return config('common.guard_text_member');
+}
+
+function getGuardTextUser(): ?string
+{
+    return config('common.guard_text_user');
+}
+
 function getLoggedUser()
 {
     return Auth::guard(getGuardNameLoggedUser())->user();
@@ -212,9 +228,19 @@ function setStatusText($status)
     return $status == 1 ? 'Active' : 'Inactive';
 }
 
-function dateNow()
+function saveDateTimeNow()
 {
-    return date_create('now')->format('Y-m-d');
+    return Carbon::now()->addHour(7)->format('Y-m-d H:i:s');
+}
+
+function saveDateNow()
+{
+    return Carbon::now()->addHour(7)->format('Y-m-d');
+}
+
+function saveTimeNow()
+{
+    return Carbon::now()->addHour(7)->format('H:i:s');
 }
 
 function formatAmount($amount)

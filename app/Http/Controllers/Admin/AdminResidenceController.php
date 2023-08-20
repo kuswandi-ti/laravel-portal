@@ -20,8 +20,7 @@ class AdminResidenceController extends Controller
      */
     public function index()
     {
-        $residences_active = Residence::all();
-        return view('admin.residence.index', compact('residences_active'));
+        return view('admin.residence.index');
     }
 
     /**
@@ -48,6 +47,8 @@ class AdminResidenceController extends Controller
         $residence->village_code = $request->village;
         $residence->address = $request->address;
         $residence->status = 1;
+        $residence->created_at = saveDateTimeNow();
+        $residence->created_by = getLoggedUser()->name;
         $residence->save();
 
         return redirect()->route('admin.residence.index')->with('success', __('admin.Created residence successfully'));
@@ -89,6 +90,8 @@ class AdminResidenceController extends Controller
             'village_code' => $request->village,
             'address' => $request->address,
             'status' => 1,
+            'updated_at' => saveDateTimeNow(),
+            'updated_by' => getLoggedUser()->name,
         ]);
 
         return redirect()->route('admin.residence.index')->with('success', __('admin.Updated residence successfully'));
@@ -103,7 +106,8 @@ class AdminResidenceController extends Controller
             $residence = Residence::findOrFail($id);
 
             $residence->status = 0;
-            $residence->deleted_at = dateNow();
+            $residence->deleted_at = saveDateTimeNow();
+            $residence->deleted_by = getLoggedUser()->name;
             $residence->save();
 
             return response([
@@ -123,10 +127,11 @@ class AdminResidenceController extends Controller
         $residence = Residence::findOrFail($id);
 
         $residence->status = 1;
-        $residence->deleted_at = null;
+        $residence->restored_at = saveDateTimeNow();
+        $residence->restored_by = getLoggedUser()->name;
         $residence->save();
 
-        return redirect()->route('admin.residence.index')->with('success', __('admin.Restore successfully'));
+        return redirect()->route('admin.residence.index')->with('success', __('admin.Restore residence successfully'));
     }
 
     public function getCities(Request $request)
@@ -167,7 +172,7 @@ class AdminResidenceController extends Controller
                     ';
                 } else {
                     return '
-                        <a href="' . route('admin.residence.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Restore to Active">
+                        <a href="' . route('admin.residence.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
                             <i class="fas fa-undo"></i>
                         </a>
                     ';

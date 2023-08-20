@@ -49,7 +49,7 @@
                                     <tr>
                                         <th scope="row" class="text-center" width="10%">{{ $loop->iteration }}</th>
                                         <td class="text-center" width="12%">
-                                            @if ($role->name != 'Admin')
+                                            @if ($role->name != getGuardTextAdmin())
                                                 <a href="{{ route('member.role.edit', $role->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                                 <a href="{{ route('member.role.destroy', $role->id) }}"

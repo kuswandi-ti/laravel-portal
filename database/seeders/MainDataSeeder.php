@@ -145,7 +145,7 @@ class MainDataSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         // Create Member Role
-        $role = Role::create(['guard_name' => 'member', 'name' => 'Admin', 'area_id' => $area->id]);
+        $role = Role::create(['guard_name' => 'member', 'name' => getGuardTextAdmin(), 'area_id' => $area->id]);
         // Assign Permission to Member Role
         $role->givePermissionTo(setArrayMemberAdminPermission());
         // Assign Role to Member Admin User

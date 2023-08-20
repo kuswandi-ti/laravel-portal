@@ -106,10 +106,10 @@ class MemberAdminUserController extends Controller
         try {
             $member = Member::findOrFail($id);
 
-            if ($member->roles->pluck('name')->first() == 'Admin') {
+            if ($member->roles->pluck('name')->first() == getGuardTextAdmin()) {
                 return response([
                     'status' => 'error',
-                    'message' => __('Can\'t delete this user becase role is Admin')
+                    'message' => __('admin.Cannot delete this user becase role is ' . getGuardTextAdmin())
                 ]);
             }
 

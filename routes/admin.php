@@ -38,6 +38,7 @@ Route::group([
 
     /** Package Routes */
     Route::resource('package', AdminPackageController::class);
+    Route::get('package/restore/{id}', [AdminPackageController::class, 'restore'])->name('package.restore');
 
     /** Residence Routes */
     Route::get('residence/data', [AdminResidenceController::class, 'data'])->name('residence.data');
@@ -55,6 +56,7 @@ Route::group([
     Route::resource('permission', AdminPermissionController::class);
 
     /** Role Routes */
+    Route::get('role/data', [AdminRoleController::class, 'data'])->name('role.data');
     Route::resource('role', AdminRoleController::class);
 
     /** User Admin Routes */

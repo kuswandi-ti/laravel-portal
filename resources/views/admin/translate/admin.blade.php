@@ -90,11 +90,11 @@
                                             </thead>
                                             <tbody>
                                                 @php
-                                                    $translatedValues = trans('admin', [], $language->lang);
+                                                    $translated_values = trans('admin', [], $language->lang);
                                                 @endphp
 
-                                                @if (is_array($translatedValues))
-                                                    @foreach ($translatedValues as $key => $value)
+                                                @if (is_array($translated_values))
+                                                    @foreach ($translated_values as $key => $value)
                                                         <tr>
                                                             <td class="text-center" width="12%">
                                                                 <button data-langcode="{{ $language->lang }}"
@@ -128,7 +128,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('admin.admin.Value') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('admin.Value') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -137,7 +137,7 @@
                     <form action="{{ route('admin.translate.update_languange_string') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="">{{ __('admin.admin.Value') }}</label>
+                            <label for="">{{ __('admin.Value') }}</label>
                             <input type="text" name="value" class="form-control" value="">
                             <input type="hidden" name="lang_code" class="form-control" value="">
                             <input type="hidden" name="key" class="form-control" value="">
@@ -146,8 +146,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">{{ __('admin.admin.Close') }}</button>
-                            <button type="submit" class="btn btn-primary">{{ __('admin.admin.Save changes') }}</button>
+                                data-dismiss="modal">{{ __('admin.Close') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('admin.Save changes') }}</button>
                         </div>
                     </form>
                 </div>
@@ -209,8 +209,9 @@
                                 'Done!',
                                 data.message,
                                 'success'
-                            )
-                            window.location.reload();
+                            ).then(() => {
+                                window.location.reload();
+                            });
 
                         } else {
                             Swal.fire(

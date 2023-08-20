@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('key');
             $table->longText('value')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('restored_at')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->string('deleted_by')->nullable();
+            $table->string('restored_by')->nullable();
         });
     }
 

@@ -18,9 +18,12 @@ return new class extends Migration
             $table->bigInteger('member_id')->unsigned();
             $table->foreign('member_id')->references('id')->on('members')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('restored_at')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->string('deleted_by')->nullable();
+            $table->string('restored_by')->nullable();
         });
     }
 

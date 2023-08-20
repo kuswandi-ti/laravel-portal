@@ -55,18 +55,18 @@
                                     <input type="radio" name="guard_name" value="admin" class="custom-switch-input"
                                         checked>
                                     <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-danger">{{ __('admin.Admin') }}</span>
+                                    <span class="custom-switch-description text-danger">{{ getGuardTextAdmin() }}</span>
                                 </label>
                                 <label class="custom-switch">
                                     <input type="radio" name="guard_name" value="member" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-info">{{ __('admin.Member') }}</span>
+                                    <span class="custom-switch-description text-info">{{ getGuardTextMember() }}</span>
                                 </label>
                             </div>
                         </div>
 
                         <div id="permission_admin">
-                            <div class="control-label mb-3">{{ __('admin.Permission Admin') }}</div>
+                            <div class="mb-3 control-label">{{ __('admin.Permission Admin') }}</div>
                             @foreach ($permissions_admin as $key => $permission)
                                 <div class="form-group">
                                     <div class="control-label text-danger">{{ __($key) }}</div>
@@ -87,7 +87,7 @@
                         </div>
 
                         <div id="permission_member">
-                            <div class="control-label mb-3">{{ __('admin.Permission Member') }}</div>
+                            <div class="mb-3 control-label">{{ __('admin.Permission Member') }}</div>
                             @foreach ($permissions_member as $key => $permission)
                                 <div class="form-group">
                                     <div class="control-label text-info">{{ __($key) }}</div>

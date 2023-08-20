@@ -93,10 +93,10 @@ class MemberRoleController extends Controller
         try {
             $role = Role::findOrFail($id);
 
-            if ($role->name == 'Admin') {
+            if ($role->name == getGuardTextAdmin()) {
                 return response([
                     'status' => 'error',
-                    'message' => __('Can\'t delete this role')
+                    'message' => __('Cannot delete this role because role is ' . getGuardTextAdmin())
                 ]);
             }
 

@@ -18,4 +18,8 @@ return [
     'guard_name_member' => 'member',
     'guard_name_user' => 'web',
 
+    'guard_text_admin' => 'Admin',
+    'guard_text_member' => 'Member',
+    'guard_text_user' => 'Web',
+
 ];

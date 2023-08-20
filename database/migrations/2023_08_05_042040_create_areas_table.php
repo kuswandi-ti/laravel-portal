@@ -40,10 +40,12 @@ return new class extends Migration
             $table->boolean('online_payment')->default(0);
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();
-            $table->softDeletes();
+            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('restored_at')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->string('deleted_by')->nullable();
+            $table->string('restored_by')->nullable();
         });
     }
 

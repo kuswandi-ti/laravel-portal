@@ -66,14 +66,13 @@
                                     <input type="radio" name="guard_name" value="admin" class="custom-switch-input"
                                         {{ $permission->guard_name == 'admin' ? 'checked' : '' }}>
                                     <span class="custom-switch-indicator"></span>
-                                    <span
-                                        class="custom-switch-description text-danger">{{ __('admin.admin.Admin') }}</span>
+                                    <span class="custom-switch-description text-danger">{{ getGuardTextAdmin() }}</span>
                                 </label>
                                 <label class="custom-switch">
                                     <input type="radio" name="guard_name" value="member" class="custom-switch-input"
                                         {{ $permission->guard_name == 'member' ? 'checked' : '' }}>
                                     <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-info">{{ __('admin.Member') }}</span>
+                                    <span class="custom-switch-description text-info">{{ getGuardTextMember() }}</span>
                                 </label>
                             </div>
                         </div>

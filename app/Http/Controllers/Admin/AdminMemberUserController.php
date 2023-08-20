@@ -53,7 +53,7 @@ class AdminMemberUserController extends Controller
 
         $member->assignRole($request->role);
 
-        return redirect()->route('admin.member.index')->with('success', __('admin.Created member user successfully'));
+        return redirect()->route('admin.member.index')->with('success', __('Created member user successfully'));
     }
 
     /**
@@ -92,7 +92,7 @@ class AdminMemberUserController extends Controller
         ]);
         $member->syncRoles($request->role);
 
-        return redirect()->route('admin.member.index')->with('success', __('admin.Updated member user successfully'));
+        return redirect()->route('admin.member.index')->with('success', __('Updated member user successfully'));
     }
 
     /**
@@ -103,10 +103,10 @@ class AdminMemberUserController extends Controller
         try {
             $member = Member::findOrFail($id);
 
-            if ($member->roles->first()->name == 'Admin') {
+            if ($member->roles->first()->name == getGuardTextAdmin()) {
                 return response([
                     'status' => 'error',
-                    'message' => __('admin.Can\'t delete this role')
+                    'message' => __('Cannot delete this user because role is ' . getGuardTextAdmin())
                 ]);
             }
 
@@ -114,12 +114,12 @@ class AdminMemberUserController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('admin.Deleted member user successfully')
+                'message' => __('Deleted member user successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('admin.Deleted member user is error')
+                'message' => __('Deleted member user is error')
             ]);
         }
     }
@@ -128,6 +128,6 @@ class AdminMemberUserController extends Controller
     {
         Member::withTrashed()->find($id)->restore();
 
-        return redirect()->back()->with('success', __('admin.Restore member user successfully'));
+        return redirect()->back()->with('success', __('Restore member user successfully'));
     }
 }

@@ -117,13 +117,21 @@
                                         </div>
                                     </div>
                                     <div class="pricing-cta">
-                                        <a href="{{ route('admin.package.edit', $package->id) }}"
-                                            class="btn btn-primary btn-sm">
-                                            {{ __('admin.Edit') }} <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('admin.package.destroy', $package->id) }}"
-                                            class="btn btn-primary btn-sm delete_item">{{ __('admin.Delete') }} <i
-                                                class="fas fa-trash-alt"></i></a>
+                                        @if ($package->status == 1)
+                                            <a href="{{ route('admin.package.edit', $package->id) }}"
+                                                class="btn btn-primary btn-sm">
+                                                {{ __('admin.Edit') }} <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('admin.package.destroy', $package->id) }}"
+                                                class="btn btn-primary btn-sm delete_item">{{ __('admin.Delete') }} <i
+                                                    class="fas fa-trash-alt"></i></a>
+                                        @else
+                                            <a href="{{ route('admin.package.restore', $package->id) }}"
+                                                class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                                title="{{ __('Restore to Active') }}">
+                                                {{ __('admin.Restore') }} <i class="fas fa-undo"></i>
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

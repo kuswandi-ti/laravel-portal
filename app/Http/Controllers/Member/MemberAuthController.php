@@ -71,7 +71,7 @@ class MemberAuthController extends Controller
         ]);
 
         // Create Role
-        $role = Role::create(['guard_name' => getGuardNameMember(), 'name' => 'Admin', 'area_id' => $area->id]);
+        $role = Role::create(['guard_name' => getGuardNameMember(), 'name' => getGuardTextAdmin(), 'area_id' => $area->id]);
 
         // Assign Permission to Member Role
         $role->givePermissionTo(setArrayMemberAdminPermission());

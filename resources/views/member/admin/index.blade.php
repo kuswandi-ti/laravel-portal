@@ -66,7 +66,7 @@
                                                     {{ $loop->iteration }}
                                                 </th>
                                                 <td class="text-center align-middle" width="12%">
-                                                    @if ($member->roles->first()->name != 'Admin')
+                                                    @if ($member->roles->first()->name != getGuardTextAdmin())
                                                         <a href="{{ route('member.admin.edit', $member->id) }}"
                                                             class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                                         <a href="{{ route('member.admin.destroy', $member->id) }}"
@@ -91,7 +91,7 @@
                                                 <td class="align-middle">{{ $member->name ?? '' }}</td>
                                                 <td class="text-center align-middle">{{ $member->email ?? '' }}</td>
                                                 <td class="text-center align-middle">
-                                                    @if ($member->roles->pluck('name')->first() == 'Admin')
+                                                    @if ($member->roles->pluck('name')->first() == getGuardTextAdmin())
                                                         <div class="badge badge-danger">
                                                             {{ $member->roles->pluck('name')->first() ?? '' }}</div>
                                                     @else
@@ -151,7 +151,7 @@
                                                 <td class="align-middle">{{ $member->name ?? '' }}</td>
                                                 <td class="text-center align-middle">{{ $member->email ?? '' }}</td>
                                                 <td class="text-center align-middle">
-                                                    @if ($member->roles->pluck('name')->first() == 'Admin')
+                                                    @if ($member->roles->pluck('name')->first() == getGuardTextAdmin())
                                                         <div class="badge badge-danger">
                                                             {{ $member->roles->pluck('name')->first() ?? '' }}</div>
                                                     @else

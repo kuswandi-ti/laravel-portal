@@ -113,7 +113,7 @@ class AdminTranslateController extends Controller
 
             file_put_contents(lang_path($lang_code . '/' . $request->file_name . '.php'), $php_array);
 
-            return response(['status' => 'success', __('admin.admin.Translation is completed')]);
+            return response(['status' => 'success', 'message' => __('admin.Translation is completed')]);
         } catch (\Throwable $th) {
             return response(['status' => 'error', $th->getMessage()]);
         }
