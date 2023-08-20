@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use App\Http\Controllers\Controller;
+use App\Models\House;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MobileUserUserController extends Controller
 {
@@ -20,7 +21,11 @@ class MobileUserUserController extends Controller
      */
     public function create()
     {
-        //
+        $houses = House::where('area_id', getLoggedUserAreaId())
+            ->orderBy('block')
+            ->orderBy('no')
+            ->get();
+        return view('mobile.user.create', compact('houses'));
     }
 
     /**

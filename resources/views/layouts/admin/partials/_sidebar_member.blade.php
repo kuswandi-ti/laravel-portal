@@ -8,14 +8,14 @@
             <a href="{{ route('member.dashboard.index') }}">{{ $setting['site_title'] ?? config('app.name') }}</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('member.dashboard.index') }}">{{ __('SKO') }}</a>
+            <a href="{{ route('member.dashboard.index') }}">{{ __('admin.SKO') }}</a>
         </div>
         <ul class="sidebar-menu">
             {{-- Dashboard --}}
             <li class="{{ setSidebarActive(['member.dashboard.*']) }}">
                 <a href="{{ route('member.dashboard.index') }}" class="nav-link">
                     <i class="fas fa-th"></i>
-                    <span>{{ __('Dashboard') }}</span>
+                    <span>{{ __('admin.Dashboard') }}</span>
                 </a>
             </li>
             {{-- End Dashboard --}}
@@ -24,23 +24,23 @@
             <li class="dropdown {{ setSidebarActive(['member.street.*', 'member.block.*', 'member.house.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-home"></i>
-                    <span>{{ __('Management House') }}</span>
+                    <span>{{ __('admin.Management House') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.street.*']) }}">
-                        <a class="nav-link" href="{{ route('member.street.index') }}">{{ __('Street') }}
+                        <a class="nav-link" href="{{ route('member.street.index') }}">{{ __('admin.Street') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.block.*']) }}">
-                        <a class="nav-link" href="{{ route('member.block.index') }}">{{ __('Block') }}
+                        <a class="nav-link" href="{{ route('member.block.index') }}">{{ __('admin.Block') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.house.*']) }}">
-                        <a class="nav-link" href="{{ route('member.house.index') }}">{{ __('House') }}
+                        <a class="nav-link" href="{{ route('member.house.index') }}">{{ __('admin.House') }}
                         </a>
                     </li>
                 </ul>
@@ -51,23 +51,23 @@
             <li class="dropdown {{ setSidebarActive(['member.role.*', 'member.admin.*', 'member.staff.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-shield"></i>
-                    <span>{{ __('Role & User') }}</span>
+                    <span>{{ __('admin.Role & User') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.role.*']) }}">
-                        <a class="nav-link" href="{{ route('member.role.index') }}">{{ __('Role') }}
+                        <a class="nav-link" href="{{ route('member.role.index') }}">{{ __('admin.Role') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.admin.*']) }}">
-                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('Admin') }}
+                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Admin') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.staff.*']) }}">
-                        <a class="nav-link" href="{{ route('member.staff.index') }}">{{ __('Staff') }}
+                        <a class="nav-link" href="{{ route('member.staff.index') }}">{{ __('admin.Staff') }}
                         </a>
                     </li>
                 </ul>
@@ -78,17 +78,17 @@
             <li class="dropdown {{ setSidebarActive(['member.role.*', 'member.admin.*', 'member.staff.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-money-check"></i>
-                    <span>{{ __('Payment') }}</span>
+                    <span>{{ __('admin.Payment') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.role.*']) }}">
-                        <a class="nav-link" href="{{ route('member.role.index') }}">{{ __('Automatic') }}
+                        <a class="nav-link" href="{{ route('member.role.index') }}">{{ __('admin.Automatic') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.admin.*']) }}">
-                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('Bank Transfer') }}
+                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Bank Transfer') }}
                         </a>
                     </li>
                 </ul>
@@ -99,7 +99,7 @@
             <li class="{{ setSidebarActive(['member.setting.*']) }}">
                 <a href="{{ route('member.setting.index') }}" class="nav-link">
                     <i class="fas fa-cog"></i>
-                    <span>{{ __('Setting') }}</span>
+                    <span>{{ __('admin.Setting') }}</span>
                 </a>
             </li>
             {{-- End System Setting --}}

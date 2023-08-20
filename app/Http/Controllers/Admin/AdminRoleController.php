@@ -40,7 +40,7 @@ class AdminRoleController extends Controller
         ]);
         $role->syncPermissions($request->permissions);
 
-        return redirect()->route('admin.role.index')->with('success', __('Create role & permissions successfully'));
+        return redirect()->route('admin.role.index')->with('success', __('admin.Create role & permissions successfully'));
     }
 
     /**
@@ -69,7 +69,7 @@ class AdminRoleController extends Controller
         ]);
         $role->syncPermissions($request->permissions);
 
-        return redirect()->route('admin.role.index')->with('success', __('Updated role & permissions successfully'));
+        return redirect()->route('admin.role.index')->with('success', __('admin.Updated role & permissions successfully'));
     }
 
     /**
@@ -83,7 +83,7 @@ class AdminRoleController extends Controller
             if ($role->name == 'Super Admin') {
                 return response([
                     'status' => 'error',
-                    'message' => __('Can\'t delete this role')
+                    'message' => __('admin.Can\'t delete this role')
                 ]);
             }
 
@@ -91,12 +91,12 @@ class AdminRoleController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted role successfully')
+                'message' => __('admin.Deleted role successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted role is error')
+                'message' => __('admin.Deleted role is error')
             ]);
         }
     }

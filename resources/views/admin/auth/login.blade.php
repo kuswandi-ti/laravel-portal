@@ -1,7 +1,7 @@
 @extends('layouts.admin.auth')
 
 @section('page_title')
-    {{ __('System Admin Login') }}
+    {{ __('admin.System Admin Login') }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('System Admin Login') }}</h4>
+                    <h4>{{ __('admin.System Admin Login') }}</h4>
                 </div>
 
                 <div class="card-body">
@@ -24,7 +24,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                            <label for="email">{{ __('admin.Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email') }}" required autofocus>
                             @error('email')
@@ -36,10 +36,11 @@
 
                         <div class="form-group">
                             <div class="d-block">
-                                <label for="password" class="control-label">{{ __('Password') }} <x-fill-field /></label>
+                                <label for="password" class="control-label">{{ __('admin.Password') }}
+                                    <x-fill-field /></label>
                                 <div class="float-right">
                                     <a href="{{ route('admin.forgot_password') }}" class="text-small">
-                                        {{ __('Forgot Password?') }}
+                                        {{ __('admin.Forgot Password?') }}
                                     </a>
                                 </div>
                             </div>
@@ -55,20 +56,20 @@
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
-                                <label class="custom-control-label" for="remember-me">{{ __('Remember Me') }}</label>
+                                <label class="custom-control-label" for="remember-me">{{ __('admin.Remember Me') }}</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                {{ __('Login') }}
+                                {{ __('admin.Login') }}
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="simple-footer">
-                {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
+                {{ __('admin.Copyright') }} &copy; Stisla {{ date('Y') }}
             </div>
         </div>
     </div>

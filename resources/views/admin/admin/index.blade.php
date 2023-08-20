@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Admin User') }}
+    {{ __('admin.Admin User') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Admin User') }}
+    {{ __('admin.Admin User') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Admin User') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Admin User') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Admin User') }}
+    {{ __('admin.Admin User') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View information about admin user on this page') }}
+    {{ __('admin.View information about admin user on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('All Admin User') }}</h4>
+                    <h4>{{ __('admin.All Admin User') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('admin.admin.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> {{ __('Create') }}
+                            <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
                         </a>
                     </div>
                 </div>
@@ -50,20 +50,28 @@
                                 <table class="table table-striped" id="table_data_active">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
                                             <th></th>
-                                            <th>{{ __('Admin User Name') }}</th>
-                                            <th class="text-center">{{ __('Email') }}</th>
-                                            <th class="text-center">{{ __('Role') }}</th>
-                                            <th class="text-center">{{ __('Status') }}</th>
-                                            <th class="text-center"><i class="fas fa-cogs"></i></th>
+                                            <th>{{ __('admin.Admin User Name') }}</th>
+                                            <th class="text-center">{{ __('admin.Email') }}</th>
+                                            <th class="text-center">{{ __('admin.Role') }}</th>
+                                            <th class="text-center" width="8%">{{ __('admin.Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($admins_active as $admin)
                                             <tr>
-                                                <th scope="row" class="text-center align-middle">{{ $loop->iteration }}
+                                                <th scope="row" class="text-center align-middle" width="10%">
+                                                    {{ $loop->iteration }}
                                                 </th>
+                                                <td class="text-center align-middle" width="12%">
+                                                    <a href="{{ route('admin.admin.edit', $admin->id) }}"
+                                                        class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <a href="{{ route('admin.admin.destroy', $admin->id) }}"
+                                                        class="btn btn-danger btn-sm delete_item"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </td>
                                                 <td class="align-middle">
                                                     @if (!empty($admin->image))
                                                         <figure class="avatar">
@@ -79,19 +87,12 @@
                                                 <td class="text-center align-middle">{{ $admin->email ?? '' }}</td>
                                                 <td class="text-center align-middle">
                                                     {{ $admin->roles->first()->name ?? '' }}</td>
-                                                <td class="text-center align-middle">
+                                                <td class="text-center align-middle" width="8%">
                                                     @if ($admin->status == 1)
-                                                        <div class="badge badge-primary">Active</div>
+                                                        <div class="badge badge-primary">{{ __('admin.Active') }}</div>
                                                     @else
-                                                        <div class="badge badge-danger">Inactive</div>
+                                                        <div class="badge badge-danger">{{ __('admin.Inactive') }}</div>
                                                     @endif
-                                                </td>
-                                                <td class="text-center align-middle">
-                                                    <a href="{{ route('admin.admin.edit', $admin->id) }}"
-                                                        class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="{{ route('admin.admin.destroy', $admin->id) }}"
-                                                        class="btn btn-danger btn-sm delete_item"><i
-                                                            class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -104,20 +105,26 @@
                                 <table class="table table-striped" id="table_data_inactive">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
+                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
                                             <th></th>
-                                            <th>{{ __('Admin User Name') }}</th>
-                                            <th class="text-center">{{ __('Email') }}</th>
-                                            <th class="text-center">{{ __('Role') }}</th>
-                                            <th class="text-center">{{ __('Status') }}</th>
-                                            <th class="text-center"><i class="fas fa-cogs"></i></th>
+                                            <th>{{ __('admin.Admin User Name') }}</th>
+                                            <th class="text-center">{{ __('admin.Email') }}</th>
+                                            <th class="text-center">{{ __('admin.Role') }}</th>
+                                            <th class="text-center" width="8%">{{ __('admin.Status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($admins_inactive as $admin)
                                             <tr>
-                                                <th scope="row" class="text-center align-middle">{{ $loop->iteration }}
+                                                <th scope="row" class="text-center align-middle" width="10%">
+                                                    {{ $loop->iteration }}
                                                 </th>
+                                                <td class="text-center align-middle" width="12%">
+                                                    <a href="{{ route('admin.admin.restore', $admin->id) }}"
+                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                                        title="Restore to Active"><i class="fas fa-undo"></i></a>
+                                                </td>
                                                 <td class="align-middle">
                                                     @if (!empty($admin->image))
                                                         <figure class="avatar">
@@ -133,17 +140,12 @@
                                                 <td class="text-center align-middle">{{ $admin->email ?? '' }}</td>
                                                 <td class="text-center align-middle">
                                                     {{ $admin->roles->first()->name ?? '' }}</td>
-                                                <td class="text-center align-middle">
+                                                <td class="text-center align-middle" width="8%">
                                                     @if ($admin->status == 1)
-                                                        <div class="badge badge-primary">Active</div>
+                                                        <div class="badge badge-primary">{{ __('admin.Active') }}</div>
                                                     @else
-                                                        <div class="badge badge-danger">Inactive</div>
+                                                        <div class="badge badge-danger">{{ __('admin.Inactive') }}</div>
                                                     @endif
-                                                </td>
-                                                <td class="text-center align-middle">
-                                                    <a href="{{ route('admin.admin.restore', $admin->id) }}"
-                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
-                                                        title="Restore to Active"><i class="fas fa-undo"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

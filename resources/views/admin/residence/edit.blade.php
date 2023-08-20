@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Residence') }}
+    {{ __('admin.Residence') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Residence') }}
+    {{ __('admin.Residence') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Residence') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Residence') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Edit Residence') }}
+    {{ __('admin.Edit Residence') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('Update information about residence on this page') }}
+    {{ __('admin.Update information about residence on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Edit Residence') }}</h4>
+                    <h4>{{ __('admin.Edit Residence') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('admin.residence.index') }}" class="btn btn-warning">
-                            <i class="fas fa-chevron-circle-left"></i> {{ __('Back') }}
+                            <i class="fas fa-chevron-circle-left"></i> {{ __('admin.Back') }}
                         </a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>{{ __('Residence Name') }} <x-fill-field /></label>
+                                    <label>{{ __('admin.Residence Name') }} <x-fill-field /></label>
                                     <input type="text" name="name"
                                         class="form-control @error('name') is-invalid @enderror"
                                         value="{{ old('name') ?? $residence->name }}" required>
@@ -56,11 +56,11 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>{{ __('Province') }} <x-fill-field /></label>
+                                    <label>{{ __('admin.Province') }} <x-fill-field /></label>
                                     <select class="form-control select2 @error('province') is-invalid @enderror"
                                         name="province" id="province" placeholder="Choose ...">
                                         <option value="" disabled selected>
-                                            {{ __('Choose one ...') }}</option>
+                                            {{ __('admin.Choose one ...') }}</option>
                                         @foreach ($provinces as $code => $name)
                                             <option value="{{ $code }}"
                                                 {{ $residence->province_code == $code ? 'selected' : '' }}>
@@ -76,11 +76,11 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>{{ __('City') }} <x-fill-field /></label>
+                                    <label>{{ __('admin.City') }} <x-fill-field /></label>
                                     <select class="form-control select2 @error('city') is-invalid @enderror" name="city"
                                         id="city" placeholder="Choose ...">
                                         <option value="" disabled selected>
-                                            {{ __('Choose one ...') }}</option>
+                                            {{ __('admin.Choose one ...') }}</option>
                                         @foreach ($cities as $code => $name)
                                             <option value="{{ $code }}"
                                                 {{ $residence->city_code == $code ? 'selected' : '' }}>
@@ -98,11 +98,11 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>{{ __('District') }} <x-fill-field /></label>
+                                    <label>{{ __('admin.District') }} <x-fill-field /></label>
                                     <select class="form-control select2 @error('district') is-invalid @enderror"
                                         name="district" id="district" placeholder="Choose ...">
                                         <option value="" disabled selected>
-                                            {{ __('Choose one ...') }}</option>
+                                            {{ __('admin.Choose one ...') }}</option>
                                         @foreach ($districts as $code => $name)
                                             <option value="{{ $code }}"
                                                 {{ $residence->district_code == $code ? 'selected' : '' }}>
@@ -118,11 +118,11 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>{{ __('Village') }} <x-fill-field /></label>
+                                    <label>{{ __('admin.Village') }} <x-fill-field /></label>
                                     <select class="form-control select2 @error('village') is-invalid @enderror"
                                         name="village" id="village" placeholder="Choose ...">
                                         <option value="" disabled selected>
-                                            {{ __('Choose one ...') }}</option>
+                                            {{ __('admin.Choose one ...') }}</option>
                                         @foreach ($villages as $code => $name)
                                             <option value="{{ $code }}"
                                                 {{ $residence->village_code == $code ? 'selected' : '' }}>
@@ -140,7 +140,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>{{ __('Full Address') }}</label>
+                                    <label>{{ __('admin.Full Address') }}</label>
                                     <textarea class="form-control @error('address') is-invalid @enderror" rows="3" name="address">{{ old('address') ?? $residence->address }}</textarea>
                                     @error('address')
                                         <div class="invalid-feedback">
@@ -154,7 +154,7 @@
 
                     <div class="card-footer bg-light">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> {{ __('Update') }}
+                            <i class="fas fa-save"></i> {{ __('admin.Update') }}
                         </button>
                     </div>
                 </form>
@@ -184,15 +184,18 @@
                 dataType: 'json',
                 success: function(result) {
                     $('#city').html(
-                        '<option value="" disabled selected>{{ __('Choose one ...') }}</option>');
+                        '<option value="" disabled selected>{{ __('admin.Choose one ...') }}</option>'
+                        );
                     $.each(result.cities, function(key, value) {
                         $("#city").append('<option value="' + value.code + '">' + value.name +
                             '</option>');
                     });
                     $('#district').html(
-                        '<option value="" disabled selected>{{ __('Choose one ...') }}</option>');
+                        '<option value="" disabled selected>{{ __('admin.Choose one ...') }}</option>'
+                        );
                     $('#village').html(
-                        '<option value="" disabled selected>{{ __('Choose one ...') }}</option>');
+                        '<option value="" disabled selected>{{ __('admin.Choose one ...') }}</option>'
+                        );
                 }
             });
         });
@@ -211,14 +214,16 @@
                 dataType: 'json',
                 success: function(result) {
                     $('#district').html(
-                        '<option value="" disabled selected>{{ __('Choose one ...') }}</option>');
+                        '<option value="" disabled selected>{{ __('admin.Choose one ...') }}</option>'
+                        );
                     $.each(result.districts, function(key, value) {
                         $("#district").append('<option value="' + value.code + '">' + value
                             .name +
                             '</option>');
                     });
                     $('#village').html(
-                        '<option value="" disabled selected>{{ __('Choose one ...') }}</option>');
+                        '<option value="" disabled selected>{{ __('admin.Choose one ...') }}</option>'
+                        );
                 }
             });
         });
@@ -236,7 +241,8 @@
                 dataType: 'json',
                 success: function(result) {
                     $('#village').html(
-                        '<option value="" disabled selected>{{ __('Choose one ...') }}</option>');
+                        '<option value="" disabled selected>{{ __('admin.Choose one ...') }}</option>'
+                        );
                     $.each(result.villages, function(key, value) {
                         $("#village").append('<option value="' + value.code + '">' + value
                             .name +

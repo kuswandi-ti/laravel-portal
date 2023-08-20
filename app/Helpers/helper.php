@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Setting;
+use App\Models\Language;
+use App\Models\SettingMember;
 use Illuminate\Support\Facades\Auth;
 
 /** Make sidebar active */
@@ -187,6 +190,31 @@ function getLoggedUser()
 function getLoggedUserAreaId()
 {
     return getLoggedUser()->area->id;
+}
+
+function getSettingAdmin()
+{
+    return Setting::pluck('value', 'key')->toArray();
+}
+
+function getSettingMember()
+{
+    return !empty(getLoggedUser()) ? SettingMember::where('member_id', getLoggedUser()->id)->get()->pluck('value', 'key')->toArray() : '';
+}
+
+function setStatusBadge($status)
+{
+    return $status == 1 ? 'info' : 'danger';
+}
+
+function setStatusText($status)
+{
+    return $status == 1 ? 'Active' : 'Inactive';
+}
+
+function dateNow()
+{
+    return date_create('now')->format('Y-m-d');
 }
 
 function formatAmount($amount)

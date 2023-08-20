@@ -7,11 +7,11 @@
 @section('content')
     @include('layouts.mobile.partials._title')
 
-    <div class="section mt-3 text-center">
+    <div class="mt-3 text-center section">
         <div class="avatar-section">
             <a href="#">
                 <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar"
-                    class="imaged w100 rounded">
+                    class="rounded imaged w100">
                 <span class="button">
                     <ion-icon name="camera-outline"></ion-icon>
                 </span>
@@ -19,13 +19,13 @@
         </div>
     </div>
 
-    <div class="listview-title mt-1">Tema</div>
+    <div class="mt-1 listview-title">Tema</div>
     <ul class="listview image-listview text inset no-line">
         <li>
             <div class="item">
                 <div class="in">
                     <div>Mode Gelap</div>
-                    <div class="form-check form-switch  ms-2">
+                    <div class="form-check form-switch ms-2">
                         <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch">
                         <label class="form-check-label" for="darkmodeSwitch"></label>
                     </div>
@@ -34,7 +34,7 @@
         </li>
     </ul>
 
-    <div class="listview-title mt-1">Notifikasi</div>
+    <div class="mt-1 listview-title">Notifikasi</div>
     <ul class="listview image-listview text inset">
         <li>
             <div class="item">
@@ -45,7 +45,7 @@
                             Kirim notifikasi jika sudah mendekati tanggal jatuh tempo tagihan
                         </div>
                     </div>
-                    <div class="form-check form-switch  ms-2">
+                    <div class="form-check form-switch ms-2">
                         <input class="form-check-input" type="checkbox" id="SwitchCheckDefault1">
                         <label class="form-check-label" for="SwitchCheckDefault1"></label>
                     </div>
@@ -61,7 +61,7 @@
                             Terima notifikasi jika proses pembayaran sukses
                         </div>
                     </div>
-                    <div class="form-check form-switch  ms-2">
+                    <div class="form-check form-switch ms-2">
                         <input class="form-check-input" type="checkbox" id="SwitchCheckDefault1">
                         <label class="form-check-label" for="SwitchCheckDefault1"></label>
                     </div>
@@ -78,7 +78,7 @@
         </li>
     </ul>
 
-    <div class="listview-title mt-1">Pengaturan Profil</div>
+    <div class="mt-1 listview-title">Pengaturan Profil</div>
     <ul class="listview image-listview text inset">
         <li>
             <a href="#" class="item">
@@ -116,8 +116,8 @@
         </li>
     </ul>
 
-    <div class="listview-title mt-1">Keamanan</div>
-    <ul class="listview image-listview text mb-2 inset">
+    <div class="mt-1 listview-title">Keamanan</div>
+    <ul class="mb-2 listview image-listview text inset">
         <li>
             <a href="#" class="item">
                 <div class="in">
@@ -152,8 +152,8 @@
         </li>
     </ul>
 
-    <div class="listview-title mt-1">Bantuan & Saran</div>
-    <ul class="listview image-listview text mb-4 inset">
+    <div class="mt-1 listview-title">Bantuan & Saran</div>
+    <ul class="mb-4 listview image-listview text inset">
         <li>
             <a href="#" class="item">
                 <div class="in">
@@ -188,9 +188,9 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-inline">
-                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">CANCEL</a>
+                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</a>
                         <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal"
-                            onclick="document.querySelector('#form-logout').submit()">SEND</a>
+                            onclick="document.querySelector('#form-logout').submit()">{{ __('Yes') }}</a>
                     </div>
                 </div>
             </div>

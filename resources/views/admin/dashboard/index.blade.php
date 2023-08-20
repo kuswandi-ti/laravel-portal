@@ -1,11 +1,11 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Dashboard') }}
+    {{ __('admin.Dashboard') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Dashboard') }}
+    {{ __('admin.Dashboard') }}
 @endsection
 
 @section('section_header_breadcrumb')
@@ -13,11 +13,11 @@
 @endsection
 
 @section('section_body_title')
-    {{ __('Dashboard') }}
+    {{ __('admin.Dashboard') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View all information about yourself on this page') }}
+    {{ __('admin.View all information about yourself on this page') }}
 @endsection
 
 @section('content')

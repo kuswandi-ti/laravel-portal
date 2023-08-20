@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Notification Setting') }}
+    {{ __('admin.Notification Setting') }}
 @endsection
 
 @push('header_back')
@@ -11,20 +11,20 @@
 @endpush
 
 @section('section_header_title')
-    {{ __('Notification Setting') }}
+    {{ __('admin.Notification Setting') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Notification Setting') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Notification Setting') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Notification Setting') }}
+    {{ __('admin.Notification Setting') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View information about notification setting on this page') }}
+    {{ __('admin.View information about notification setting on this page') }}
 @endsection
 
 @section('content')
@@ -36,13 +36,13 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="email-setting" data-toggle="tab" href="#tab-email-setting"
                                 role="tab" aria-selected="true">
-                                {{ __('Email Setting') }}
+                                {{ __('admin.Email Setting') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="push-notification-setting" data-toggle="tab"
                                 href="#tab-push-notification-setting" role="tab" aria-selected="false">
-                                {{ __('Push Notification Setting') }}
+                                {{ __('admin.Push Notification Setting') }}
                             </a>
                         </li>
                     </ul>
@@ -58,17 +58,17 @@
                     <div class="tab-pane fade show active" id="tab-email-setting" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ __('Email Setting') }}</h4>
+                                <h4>{{ __('admin.Email Setting') }}</h4>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail Type') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Type') }} <span class="text-danger">*</span></label>
                                             <select id="mail_type" name="mail_type"
                                                 class="form-control @error('mail_type') is-invalid @enderror" required>
-                                                <option value="" selected disabled>-- {{ __('Select') }} --
+                                                <option value="" selected disabled>-- {{ __('admin.Select') }} --
                                                 </option>
                                                 <option value="smtp"
                                                     {{ old('mail_type') ?? !empty($setting['mail_type']) ? ($setting['mail_type'] == 'smtp' ? 'selected' : '') : '' }}>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail Host') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Host') }} <span class="text-danger">*</span></label>
                                             <input type="text" id="mail_host" name="mail_host"
                                                 class="form-control @error('mail_host') is-invalid @enderror"
                                                 value="{{ old('mail_host') ?? !empty($setting['mail_host']) ? $setting['mail_host'] : '' }}"
@@ -103,7 +103,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail Username') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Username') }} <span
+                                                    class="text-danger">*</span></label>
                                             <input type="text" id="mail_username" name="mail_username"
                                                 class="form-control @error('mail_username') is-invalid @enderror"
                                                 value="{{ old('mail_username') ?? !empty($setting['mail_username']) ? $setting['mail_username'] : '' }}"
@@ -117,7 +118,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail Password') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Password') }} <span
+                                                    class="text-danger">*</span></label>
                                             <input type="text" id="mail_password" name="mail_password"
                                                 class="form-control @error('mail_password') is-invalid @enderror"
                                                 value="{{ old('mail_password') ?? !empty($setting['mail_password']) ? $setting['mail_password'] : '' }}"
@@ -134,11 +136,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail Encryption') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Encryption') }} <span
+                                                    class="text-danger">*</span></label>
                                             <select id="mail_encryption" name="mail_encryption"
                                                 class="form-control @error('mail_encryption') is-invalid @enderror"
                                                 required>
-                                                <option value="" selected disabled>-- {{ __('Select') }} --
+                                                <option value="" selected disabled>-- {{ __('admin.Select') }} --
                                                 </option>
                                                 <option value="ssl"
                                                     {{ old('mail_encryption') ?? !empty($setting['mail_encryption']) ? ($setting['mail_encryption'] == 'ssl' ? 'selected' : '') : '' }}>
@@ -156,7 +159,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail Port') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Port') }} <span class="text-danger">*</span></label>
                                             <input type="text" id="mail_port" name="mail_port"
                                                 class="form-control @error('mail_port') is-invalid @enderror"
                                                 value="{{ old('mail_port') ?? !empty($setting['mail_port']) ? $setting['mail_port'] : '' }}"
@@ -173,7 +176,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail From Address') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail From Address') }} <span
+                                                    class="text-danger">*</span></label>
                                             <input type="text" id="mail_from_address" name="mail_from_address"
                                                 class="form-control @error('mail_from_address') is-invalid @enderror"
                                                 value="{{ old('mail_from_address') ?? !empty($setting['mail_from_address']) ? $setting['mail_from_address'] : '' }}"
@@ -187,7 +191,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Mail From Name') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail From Name') }} <span
+                                                    class="text-danger">*</span></label>
                                             <input type="text" id="mail_from_name" name="mail_from_name"
                                                 class="form-control @error('mail_from_name') is-invalid @enderror"
                                                 value="{{ old('mail_from_name') ?? !empty($setting['mail_from_name']) ? $setting['mail_from_name'] : '' }}"
@@ -207,7 +212,7 @@
                     <div class="tab-pane fade show" id="tab-push-notification-setting" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ __('Push Notification Setting') }}</h4>
+                                <h4>{{ __('admin.Push Notification Setting') }}</h4>
                             </div>
                             <div class="card-body">
 
@@ -217,7 +222,7 @@
                 </div>
 
                 <button class="btn btn-primary btn-block">
-                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                    <i class="fas fa-save"></i> {{ __('admin.Save Changes') }}
                 </button>
             </form>
         </div>

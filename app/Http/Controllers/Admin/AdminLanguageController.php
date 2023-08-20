@@ -31,8 +31,8 @@ class AdminLanguageController extends Controller
      */
     public function store(AdminLanguageStoreRequest $request)
     {
-        if ($request->default == '1') {
-            Language::update(["default" => "0"]);
+        if ($request->default == 1) {
+            Language::update(['default' => 0]);
         }
 
         $language = new Language();
@@ -44,7 +44,7 @@ class AdminLanguageController extends Controller
         $language->status = $request->status;
         $language->save();
 
-        return redirect()->route('admin.language.index')->with('success', __('Created language successfully'));
+        return redirect()->route('admin.language.index')->with('success', __('admin.Created language successfully'));
     }
 
     /**
@@ -82,7 +82,7 @@ class AdminLanguageController extends Controller
         $language->status = $request->status;
         $language->save();
 
-        return redirect()->route('admin.language.index')->with('success', __('Updated language successfully'));
+        return redirect()->route('admin.language.index')->with('success', __('admin.Updated language successfully'));
     }
 
     /**
@@ -96,7 +96,7 @@ class AdminLanguageController extends Controller
             if ($language->lang == 'en') {
                 return response([
                     'status' => 'error',
-                    'message' => __('Can\'t delete this language')
+                    'message' => __('admin.Can\'t delete this language')
                 ]);
             }
 
@@ -104,12 +104,12 @@ class AdminLanguageController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted language successfully')
+                'message' => __('admin.Deleted language successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted language is error')
+                'message' => __('admin.Deleted language is error')
             ]);
         }
     }

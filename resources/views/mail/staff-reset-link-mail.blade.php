@@ -370,8 +370,8 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td>
-                                            <p>Hi there,</p>
-                                            <p>Here is your password reset link</p>
+                                            <p>{{ __('admin.Hi there') }},</p>
+                                            <p>{{ __('admin.Here is your password reset link') }}</p>
                                             <table role="presentation" border="0" cellpadding="0" cellspacing="0"
                                                 class="btn btn-primary">
                                                 <tbody>
@@ -384,7 +384,7 @@
                                                                         <td>
                                                                             <a href="{{ route('mobile.reset_password', ['token' => $token, 'email' => $email]) }}"
                                                                                 target="_blank">
-                                                                                Click here to Reset Password
+                                                                                {{ __('admin.Click here to Reset Password') }}
                                                                             </a>
                                                                         </td>
                                                                     </tr>
@@ -395,10 +395,9 @@
                                                 </tbody>
                                             </table>
                                             <p>
-                                                This is a really simple email template. Its sole purpose is to get the
-                                                recipient to click the button with no distractions.
+                                                {{ __('admin.This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions') }}.
                                             </p>
-                                            <p>Good luck! Hope it works.</p>
+                                            <p>{{ __('admin.Good luck! Hope it works') }}.</p>
                                         </td>
                                     </tr>
                                 </table>

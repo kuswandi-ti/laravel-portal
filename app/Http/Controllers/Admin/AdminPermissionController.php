@@ -39,7 +39,7 @@ class AdminPermissionController extends Controller
         $permission->group_name = $request->group_name;
         $permission->save();
 
-        return redirect()->route('admin.permission.index')->with('success', __('Created permission successfully'));
+        return redirect()->route('admin.permission.index')->with('success', __('admin.Created permission successfully'));
     }
 
     /**
@@ -71,7 +71,7 @@ class AdminPermissionController extends Controller
         $permission->group_name = $request->group_name;
         $permission->save();
 
-        return redirect()->route('admin.permission.index')->with('success', __('Updated permission successfully'));
+        return redirect()->route('admin.permission.index')->with('success', __('admin.Updated permission successfully'));
     }
 
     /**
@@ -84,12 +84,12 @@ class AdminPermissionController extends Controller
             $permission->delete();
             return response([
                 'status' => 'success',
-                'message' => __('Deleted permission successfully')
+                'message' => __('admin.Deleted permission successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted permission is error')
+                'message' => __('admin.Deleted permission is error')
             ]);
         }
     }

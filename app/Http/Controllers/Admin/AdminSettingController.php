@@ -25,7 +25,7 @@ class AdminSettingController extends Controller
 
     public function generalSettingIndex()
     {
-        $default_language = Language::where('default', '1')->get()->pluck('name', 'lang');
+        $default_language = Language::pluck('name', 'lang');
         $format_dates = FormatDate::all()->pluck('text', 'code');
         $format_times = FormatTime::all()->pluck('text', 'code');
         $currencies = Currency::all()->pluck('text', 'code');
@@ -58,7 +58,7 @@ class AdminSettingController extends Controller
             );
         }
 
-        return redirect()->back()->with('success', __('Updated general setting successfully'));
+        return redirect()->back()->with('success', __('admin.Updated general setting successfully'));
     }
 
     public function notificationSettingIndex()
@@ -76,7 +76,7 @@ class AdminSettingController extends Controller
             );
         }
 
-        return redirect()->back()->with('success', __('Updated notification setting successfully'));
+        return redirect()->back()->with('success', __('admin.Updated notification setting successfully'));
     }
 
     public function paymentSettingIndex()
@@ -94,6 +94,6 @@ class AdminSettingController extends Controller
             );
         }
 
-        return redirect()->back()->with('success', __('Updated payment setting successfully'));
+        return redirect()->back()->with('success', __('admin.Updated payment setting successfully'));
     }
 }

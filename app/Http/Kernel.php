@@ -49,6 +49,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'member' => \App\Http\Middleware\Member::class,
         'mobile' => \App\Http\Middleware\Mobile::class,
+        'set_language' => \App\Http\Middleware\SetLanguage::class,
     ];
 
     /**

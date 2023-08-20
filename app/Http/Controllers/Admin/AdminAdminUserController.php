@@ -49,7 +49,7 @@ class AdminAdminUserController extends Controller
 
         $admin->assignRole($request->role);
 
-        return redirect()->route('admin.admin.index')->with('success', __('Created admin user successfully'));
+        return redirect()->route('admin.admin.index')->with('success', __('admin.Created admin user successfully'));
     }
 
     /**
@@ -86,7 +86,7 @@ class AdminAdminUserController extends Controller
         ]);
         $admin->syncRoles($request->role);
 
-        return redirect()->route('admin.admin.index')->with('success', __('Updated admin user successfully'));
+        return redirect()->route('admin.admin.index')->with('success', __('admin.Updated admin user successfully'));
     }
 
     /**
@@ -100,7 +100,7 @@ class AdminAdminUserController extends Controller
             if ($admin->roles->first()->name == 'Super Admin') {
                 return response([
                     'status' => 'error',
-                    'message' => __('Can\'t delete this user becase role is Super Admin')
+                    'message' => __('admin.Can\'t delete this user becase role is Super Admin')
                 ]);
             }
 
@@ -108,12 +108,12 @@ class AdminAdminUserController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted admin user successfully')
+                'message' => __('admin.Deleted admin user successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted admin user is error')
+                'message' => __('admin.Deleted admin user is error')
             ]);
         }
     }
@@ -122,6 +122,6 @@ class AdminAdminUserController extends Controller
     {
         Admin::withTrashed()->find($id)->restore();
 
-        return redirect()->back()->with('success', __('Restore admin user successfully'));
+        return redirect()->back()->with('success', __('admin.Restore admin user successfully'));
     }
 }

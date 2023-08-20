@@ -2023,19 +2023,19 @@
                                                         </li>
                                                         <li class="dropdown">
                                                             <a class="dropdown-item dropdown-toggle" href="#">
-                                                                {{ __('Authentication') }}
+                                                                {{ __('admin.Authentication') }}
                                                             </a>
                                                             <ul class="dropdown-menu">
                                                                 <li>
                                                                     <a class="dropdown-item"
                                                                         href="{{ route('mobile.login') }}">
-                                                                        {{ __('Login User') }}
+                                                                        {{ __('admin.Login User') }}
                                                                     </a>
                                                                 </li>
                                                                 <li>
                                                                     <a class="dropdown-item"
                                                                         href="{{ route('member.login') }}">
-                                                                        {{ __('Login Admin') }}
+                                                                        {{ __('admin.Login Admin') }}
                                                                     </a>
                                                                 </li>
                                                             </ul>

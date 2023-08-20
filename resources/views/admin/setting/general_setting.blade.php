@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('General Setting') }}
+    {{ __('admin.General Setting') }}
 @endsection
 
 @push('header_back')
@@ -11,20 +11,20 @@
 @endpush
 
 @section('section_header_title')
-    {{ __('General Setting') }}
+    {{ __('admin.General Setting') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('General Setting') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.General Setting') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('General Setting') }}
+    {{ __('admin.General Setting') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View information about general setting on this page') }}
+    {{ __('admin.View information about general setting on this page') }}
 @endsection
 
 @section('content')
@@ -36,13 +36,13 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="basic-setting" data-toggle="tab" href="#tab-basic-setting"
                                 role="tab" aria-selected="true">
-                                {{ __('Basic Setting') }}
+                                {{ __('admin.Basic Setting') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="logo-favicon-setting" data-toggle="tab" href="#tab-logo-favicon-setting"
                                 role="tab" aria-selected="false">
-                                {{ __('Logo & Favicon') }}
+                                {{ __('admin.Logo & Favicon') }}
                             </a>
                         </li>
                     </ul>
@@ -58,13 +58,13 @@
                     <div class="tab-pane fade show active" id="tab-basic-setting" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ __('Basic Setting') }}</h4>
+                                <h4>{{ __('admin.Basic Setting') }}</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Company Name') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Company Name') }} <x-fill-field /></label>
                                             <input type="text" id="company_name" name="company_name"
                                                 class="form-control @error('company_name') is-invalid @enderror"
                                                 value="{{ old('company_name') ?? !empty($setting['company_name']) ? $setting['company_name'] : '' }}"
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Site Title') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Site Title') }} <x-fill-field /></label>
                                             <input type="text" id="site_title" name="site_title"
                                                 class="form-control @error('site_title') is-invalid @enderror"
                                                 value="{{ old('site_title') ?? !empty($setting['site_title']) ? $setting['site_title'] : '' }}"
@@ -95,7 +95,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Company Phone') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Company Phone') }} <x-fill-field /></label>
                                             <input type="text" id="company_phone" name="company_phone"
                                                 class="form-control @error('company_phone') is-invalid @enderror"
                                                 value="{{ old('company_phone') ?? !empty($setting['company_phone']) ? $setting['company_phone'] : '' }}"
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Company Email') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Company Email') }} <x-fill-field /></label>
                                             <input type="text" id="company_email" name="company_email"
                                                 class="form-control @error('company_email') is-invalid @enderror"
                                                 value="{{ old('company_email') ?? !empty($setting['company_email']) ? $setting['company_email'] : '' }}"
@@ -126,7 +126,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>{{ __('Company Address') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Company Address') }} <x-fill-field /></label>
                                             <textarea class="form-control @error('company_address') is-invalid @enderror" name="company_address" required>{{ old('company_address') ?? !empty($setting['company_address']) ? $setting['company_address'] : '' }}</textarea>
                                             @error('company_address')
                                                 <div class="invalid-feedback">
@@ -140,11 +140,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Default Date Format') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Default Date Format') }} <x-fill-field /></label>
                                             <select id="default_date_format" name="default_date_format"
                                                 class="form-control select2 @error('default_date_format') is-invalid @enderror"
                                                 required>
-                                                <option value="" selected disabled>{{ __('Choose one ...') }}
+                                                <option value="" selected disabled>{{ __('admin.Choose one ...') }}
                                                 </option>
                                                 @foreach ($format_dates as $code => $text)
                                                     <option value="{{ $code }}"
@@ -161,11 +161,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Default Time Format') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Default Time Format') }} <x-fill-field /></label>
                                             <select id="default_time_format" name="default_time_format"
                                                 class="form-control select2 @error('default_time_format') is-invalid @enderror"
                                                 required>
-                                                <option value="" selected disabled>{{ __('Choose one ...') }}
+                                                <option value="" selected disabled>{{ __('admin.Choose one ...') }}
                                                 </option>
                                                 @foreach ($format_times as $code => $text)
                                                     <option value="{{ $code }}"
@@ -185,11 +185,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Default Currency') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Default Currency') }} <x-fill-field /></label>
                                             <select id="default_currency" name="default_currency"
                                                 class="form-control select2 @error('default_currency') is-invalid @enderror"
                                                 required>
-                                                <option value="" selected disabled>{{ __('Choose one ...') }}
+                                                <option value="" selected disabled>{{ __('admin.Choose one ...') }}
                                                 </option>
                                                 @foreach ($currencies as $code => $text)
                                                     <option value="{{ $code }}"
@@ -206,11 +206,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('Default Language') }} <x-fill-field /></label>
+                                            <label>{{ __('admin.Default Language') }} <x-fill-field /></label>
                                             <select id="default_language" name="default_language"
                                                 class="form-control select2 @error('default_language') is-invalid @enderror"
                                                 required>
-                                                <option value="" selected disabled>{{ __('Choose one ...') }}
+                                                <option value="" selected disabled>{{ __('admin.Choose one ...') }}
                                                 </option>
                                                 @foreach ($default_language as $code => $text)
                                                     <option value="{{ $code }}"
@@ -233,12 +233,12 @@
                     <div class="tab-pane fade show" id="tab-logo-favicon-setting" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ __('Logo & Favicon') }}</h4>
+                                <h4>{{ __('admin.Logo & Favicon') }}</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6" style="border: 1px solid #f8a100; border-right-style: none">
-                                        <div class="mb-3 mt-3 text-center">{{ __('Logo') }}</div>
+                                        <div class="mb-3 mt-3 text-center">{{ __('admin.Logo') }}</div>
                                         <div class="mb-3 text-center">
                                             @if (!empty($setting['company_logo']))
                                                 <img class="preview-company_logo"
@@ -255,13 +255,13 @@
                                                 name="company_logo"
                                                 onchange="preview('.preview-company_logo', this.files[0])">
                                             <label class="custom-file-label"
-                                                for="company_logo">{{ __('Choose file') }}</label>
+                                                for="company_logo">{{ __('admin.Choose file') }}</label>
                                             <input type="hidden" name="old_company_logo"
                                                 value="{{ !empty($setting['company_logo']) ? $setting['company_logo'] : url(config('common.no_image_square')) }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="border: 1px solid #f8a100; border-right-style: none">
-                                        <div class="mb-3 mt-3 text-center">{{ __('Favicon') }}</div>
+                                        <div class="mb-3 mt-3 text-center">{{ __('admin.Favicon') }}</div>
                                         <div class="mb-3 text-center">
                                             @if (!empty($setting['company_favicon']))
                                                 <img class="preview-company_favicon"
@@ -278,7 +278,7 @@
                                                 name="company_favicon"
                                                 onchange="preview('.preview-company_favicon', this.files[0])">
                                             <label class="custom-file-label"
-                                                for="company_favicon">{{ __('Choose file') }}</label>
+                                                for="company_favicon">{{ __('admin.Choose file') }}</label>
                                             <input type="hidden" name="old_company_favicon"
                                                 value="{{ !empty($setting['company_favicon']) ? $setting['company_favicon'] : url(config('common.no_image_square')) }}">
                                         </div>
@@ -290,7 +290,7 @@
                 </div>
 
                 <button class="btn btn-primary btn-block">
-                    <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                    <i class="fas fa-save"></i> {{ __('admin.Save Changes') }}
                 </button>
             </form>
         </div>

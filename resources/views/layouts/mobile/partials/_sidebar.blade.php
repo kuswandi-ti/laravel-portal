@@ -2,12 +2,12 @@
 <div class="modal fade panelbox panelbox-left" id="sidebarPanel" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-body p-0">
+            <div class="p-0 modal-body">
                 <!-- profile box -->
-                <div class="profileBox pt-2 pb-2">
+                <div class="pt-2 pb-2 profileBox">
                     <div class="image-wrapper">
                         <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar1.jpg') }}"
-                            alt="image" class="imaged  w36">
+                            alt="image" class="imaged w36">
                     </div>
                     <div class="in">
                         <strong>Sebastian Doe</strong>
@@ -65,51 +65,15 @@
                 <!-- * action group -->
 
                 <!-- setup -->
-                <div class="listview-title mt-1">{{ __('House Setup') }}</div>
+                <div class="mt-1 listview-title">{{ __('admin.Menu') }}</div>
                 <ul class="listview flush transparent no-line image-listview">
                     <li>
                         <a href="{{ route('mobile.user.index') }}" class="item">
                             <div class="icon-box bg-primary">
-                                <ion-icon name="contract-outline"></ion-icon>
+                                <ion-icon name="person-circle-outline"></ion-icon>
                             </div>
                             <div class="in">
-                                {{ __('Street Area') }}
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="grid-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                {{ __('House Block Area') }}
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="app-pages.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="home-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                {{ __('House Area') }}
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- * setup -->
-
-                <!-- menu -->
-                <div class="listview-title mt-1">{{ __('Menu') }}</div>
-                <ul class="listview flush transparent no-line image-listview">
-                    <li>
-                        <a href="{{ route('mobile.user.index') }}" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="person-add"></ion-icon>
-                            </div>
-                            <div class="in">
-                                {{ __('User') }}
+                                {{ __('admin.User') }}
                             </div>
                         </a>
                     </li>
@@ -155,10 +119,10 @@
                         </a>
                     </li>
                 </ul>
-                <!-- * menu -->
+                <!-- * setup -->
 
                 <!-- others -->
-                <div class="listview-title mt-1">Others</div>
+                <div class="mt-1 listview-title">Others</div>
                 <ul class="listview flush transparent no-line image-listview">
                     <li>
                         <a href="app-settings.html" class="item">
@@ -196,7 +160,7 @@
                 <!-- * others -->
 
                 <!-- send money -->
-                <div class="listview-title mt-1">Send Money</div>
+                <div class="mt-1 listview-title">Send Money</div>
                 <ul class="listview image-listview flush transparent no-line">
                     <li>
                         <a href="#" class="item">

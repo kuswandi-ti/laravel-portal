@@ -21,8 +21,7 @@ class AdminResidenceController extends Controller
     public function index()
     {
         $residences_active = Residence::all();
-        $residences_inactive = Residence::onlyTrashed()->get();
-        return view('admin.residence.index', compact('residences_active', 'residences_inactive'));
+        return view('admin.residence.index', compact('residences_active'));
     }
 
     /**
@@ -51,7 +50,7 @@ class AdminResidenceController extends Controller
         $residence->status = 1;
         $residence->save();
 
-        return redirect()->route('admin.residence.index')->with('success', __('Created residence successfully'));
+        return redirect()->route('admin.residence.index')->with('success', __('admin.Created residence successfully'));
     }
 
     /**
@@ -92,7 +91,7 @@ class AdminResidenceController extends Controller
             'status' => 1,
         ]);
 
-        return redirect()->route('admin.residence.index')->with('success', __('Updated residence successfully'));
+        return redirect()->route('admin.residence.index')->with('success', __('admin.Updated residence successfully'));
     }
 
     /**
@@ -102,24 +101,32 @@ class AdminResidenceController extends Controller
     {
         try {
             $residence = Residence::findOrFail($id);
-            $residence->delete();
+
+            $residence->status = 0;
+            $residence->deleted_at = dateNow();
+            $residence->save();
+
             return response([
                 'status' => 'success',
-                'message' => __('Deleted residence successfully')
+                'message' => __('admin.Deleted residence successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted residence is error')
+                'message' => __('admin.Deleted residence is error')
             ]);
         }
     }
 
     public function restore($id)
     {
-        Residence::withTrashed()->find($id)->restore();
+        $residence = Residence::findOrFail($id);
 
-        return redirect()->back()->with('success', __('Restore residence successfully'));
+        $residence->status = 1;
+        $residence->deleted_at = null;
+        $residence->save();
+
+        return redirect()->route('admin.residence.index')->with('success', __('admin.Restore successfully'));
     }
 
     public function getCities(Request $request)
@@ -138,5 +145,36 @@ class AdminResidenceController extends Controller
     {
         $data['villages'] = Village::orderBy('name')->where("district_code", $request->district_code)->get(["name", "code"]);
         return response()->json($data);
+    }
+
+    public function data(Request $request)
+    {
+        $query = Residence::orderBy('name');
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('status', function ($query) {
+                return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->status == 1) {
+                    return '
+                        <a href="' . route('admin.residence.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="' . route('admin.residence.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    ';
+                } else {
+                    return '
+                        <a href="' . route('admin.residence.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Restore to Active">
+                            <i class="fas fa-undo"></i>
+                        </a>
+                    ';
+                }
+            })
+            ->rawColumns(['status', 'action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

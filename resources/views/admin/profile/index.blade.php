@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Profile') }}
+    {{ __('admin.Profile') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Profile') }}
+    {{ __('admin.Profile') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Profile') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Profile') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Hi') }}, {{ $admin->name ?? '' }}
+    {{ __('admin.Hi') }}, {{ $admin->name ?? '' }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('Change information about yourself on this page') }}
+    {{ __('admin.Change information about yourself on this page') }}
 @endsection
 
 @section('content')
@@ -31,13 +31,13 @@
                     @method('PUT')
 
                     <div class="card-header">
-                        <h4>{{ __('Edit Profile') }}</h4>
+                        <h4>{{ __('admin.Edit Profile') }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-12">
                                 <div id="image-preview" class="mx-auto image-preview">
-                                    <label for="image-upload" id="image-label">{{ __('Choose File') }}</label>
+                                    <label for="image-upload" id="image-label">{{ __('admin.Choose File') }}</label>
                                     <input type="file" name="image" id="image-upload">
                                     <input type="hidden" name="old_image" value="{{ $admin->image }}">
                                 </div>
@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="form-group col-12">
-                                <label>{{ __('Name') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.Name') }} <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') ?? $admin->name }}" required>
                                 @error('name')
@@ -59,12 +59,12 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('Email') }} <span class="text-danger">(readonly)</span></label>
+                                <label>{{ __('admin.Email') }} <span class="text-danger">(readonly)</span></label>
                                 <input type="email" class="form-control" name="email"
                                     value="{{ old('email') ?? $admin->email }}" disabled>
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('Role') }} <span class="text-danger">(readonly)</span></label>
+                                <label>{{ __('admin.Role') }} <span class="text-danger">(readonly)</span></label>
                                 <input type="text" class="form-control" name="role"
                                     value="{{ old('role') ?? $admin->roles->first()->name }}" disabled>
                             </div>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="text-right card-footer">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                            <i class="fas fa-save"></i> {{ __('admin.Save Changes') }}
                         </button>
                     </div>
                 </form>
@@ -86,12 +86,12 @@
                     @method('PUT')
 
                     <div class="card-header">
-                        <h4>{{ __('Update Password') }}</h4>
+                        <h4>{{ __('admin.Update Password') }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-12">
-                                <label>{{ __('Current Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.Current Password') }} <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control @error('current_password') is-invalid @enderror"
                                     name="current_password" required>
                                 @error('current_password')
@@ -101,7 +101,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('New Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.New Password') }} <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" required>
                                 @error('password')
@@ -111,7 +111,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('Confirm New Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.Confirm New Password') }} <span class="text-danger">*</span></label>
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
                                     name="password_confirmation" required>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="text-right card-footer">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> {{ __('Save Changes') }}
+                            <i class="fas fa-save"></i> {{ __('admin.Save Changes') }}
                         </button>
                     </div>
                 </form>

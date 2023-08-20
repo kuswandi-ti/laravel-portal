@@ -19,6 +19,9 @@ return new class extends Migration
             $table->boolean('default')->default(0)->comment('Yes or No');
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            $table->string('deleted_by')->nullable();
         });
     }
 

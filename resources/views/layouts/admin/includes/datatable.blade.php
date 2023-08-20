@@ -21,7 +21,7 @@
     <script src="{{ asset(config('common.path_template_admin') . 'assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
 @endpush
 
-@push('scripts')
+{{-- @push('scripts')
     <script>
         table = $("#table_data").DataTable({
             "columnDefs": [{
@@ -44,4 +44,4 @@
             }]
         });
     </script>
-@endpush
+@endpush --}}

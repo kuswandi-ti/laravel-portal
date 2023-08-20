@@ -1,7 +1,7 @@
 @extends('layouts.admin.auth')
 
 @section('page_title')
-    {{ __('Admin Forgot Password') }}
+    {{ __('admin.Admin Forgot Password') }}
 @endsection
 
 @section('content')
@@ -14,11 +14,11 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Admin Forgot Password') }}</h4>
+                    <h4>{{ __('admin.Admin Forgot Password') }}</h4>
                 </div>
                 <div class="card-body">
                     <p>
-                        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one') }}
+                        {{ __('admin.Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one') }}
                     </p>
 
                     <x-alert-message />
@@ -27,7 +27,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                            <label for="email">{{ __('admin.Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email') }}" required autofocus>
                             @error('email')
@@ -39,14 +39,14 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                {{ __('Email Password Reset Link') }}
+                                {{ __('admin.Email Password Reset Link') }}
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="simple-footer">
-                {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
+                {{ __('admin.Copyright') }} &copy; Stisla {{ date('Y') }}
             </div>
         </div>
     </div>

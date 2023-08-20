@@ -39,7 +39,7 @@
                             @section('section_header_breadcrumb')
                                 <div class="breadcrumb-item active">
                                     <a
-                                        href="{{ route(getGuardNameLoggedUser() . '.dashboard.index') }}">{{ __('Dashboard') }}</a>
+                                        href="{{ route(getGuardNameLoggedUser() . '.dashboard.index') }}">{{ __('admin.Dashboard') }}</a>
                                 </div>
                             @show
                         </div>
@@ -56,8 +56,8 @@
 
             <footer class="main-footer">
                 <div class="footer-left">
-                    {{ __('Copyright') }} &copy; {{ date('Y') }} <div class="bullet"></div> {{ __('Design By') }} <a
-                        href="https://nauval.in/">Muhamad Nauval Azhar</a>
+                    {{ __('admin.Copyright') }} &copy; {{ date('Y') }} <div class="bullet"></div>
+                    {{ __('admin.Design By') }} <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
                 </div>
                 <div class="footer-right">
 

@@ -52,7 +52,7 @@ class AdminPackageController extends Controller
         $package->status = 1;
         $package->save();
 
-        return redirect()->route('admin.package.index')->with('success', __('Created package successfully'));
+        return redirect()->route('admin.package.index')->with('success', __('admin.Created package successfully'));
     }
 
     /**
@@ -100,7 +100,7 @@ class AdminPackageController extends Controller
 
         $package->update($data);
 
-        return redirect()->route('admin.package.index')->with('success', __('Updated package successfully'));
+        return redirect()->route('admin.package.index')->with('success', __('admin.Updated package successfully'));
     }
 
     /**
@@ -115,12 +115,12 @@ class AdminPackageController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted package successfully')
+                'message' => __('admin.Deleted package successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted package is error')
+                'message' => __('admin.Deleted package is error')
             ]);
         }
     }

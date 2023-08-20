@@ -1,7 +1,7 @@
 @extends('layouts.admin.auth')
 
 @section('page_title')
-    {{ __('Admin Reset Password') }}
+    {{ __('admin.Admin Reset Password') }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Admin Reset Password') }}</h4>
+                    <h4>{{ __('admin.Admin Reset Password') }}</h4>
                 </div>
                 <div class="card-body">
 
@@ -24,7 +24,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                            <label for="email">{{ __('admin.Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ request()->email }}" required>
                             <input type="hidden" value="{{ request()->token }}" name="token">
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">{{ __('New Password') }} <x-fill-field /></label>
+                            <label for="password">{{ __('admin.New Password') }} <x-fill-field /></label>
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" required autofocus>
                             @error('password')
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">{{ __('New Password Confirmation') }} <x-fill-field /></label>
+                            <label for="password">{{ __('admin.New Password Confirmation') }} <x-fill-field /></label>
                             <input type="password" name="password_confirmation"
                                 class="form-control @error('password_confirmation') is-invalid @enderror" required>
                             @error('password_confirmation')
@@ -59,14 +59,14 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                {{ __('Reset Password') }}
+                                {{ __('admin.Reset Password') }}
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="simple-footer">
-                {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
+                {{ __('admin.Copyright') }} &copy; Stisla {{ date('Y') }}
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminLanguageChange;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminResidenceController;
 use App\Http\Controllers\Admin\AdminMemberUserController;
 use App\Http\Controllers\Admin\AdminPermissionController;
+use App\Http\Controllers\Admin\AdminTranslateController;
 
 Route::get('/', [AdminAuthController::class, 'login'])->name('login');
 
@@ -37,6 +39,14 @@ Route::group([
     /** Package Routes */
     Route::resource('package', AdminPackageController::class);
 
+    /** Residence Routes */
+    Route::get('residence/data', [AdminResidenceController::class, 'data'])->name('residence.data');
+    Route::get('residence/restore/{id}', [AdminResidenceController::class, 'restore'])->name('residence.restore');
+    Route::post('get-cities', [AdminResidenceController::class, 'getCities'])->name('residence.get_cities');
+    Route::post('get-districts', [AdminResidenceController::class, 'getDistricts'])->name('residence.get_districts');
+    Route::post('get-villages', [AdminResidenceController::class, 'getVillages'])->name('residence.get_villages');
+    Route::resource('residence', AdminResidenceController::class);
+
     /** Profile Routes */
     Route::put('profile-password-update/{id}', [AdminProfileController::class, 'updatePassword'])->name('profile_password.update');
     Route::resource('profile', AdminProfileController::class);
@@ -55,15 +65,17 @@ Route::group([
     Route::resource('member', AdminMemberUserController::class);
     Route::get('member/restore/{id}', [AdminMemberUserController::class, 'restore'])->name('member.restore');
 
-    /** Residence Routes */
-    Route::resource('residence', AdminResidenceController::class);
-    Route::get('residence/restore/{id}', [AdminResidenceController::class, 'restore'])->name('residence.restore');
-    Route::post('get-cities', [AdminResidenceController::class, 'getCities'])->name('residence.get_cities');
-    Route::post('get-districts', [AdminResidenceController::class, 'getDistricts'])->name('residence.get_districts');
-    Route::post('get-villages', [AdminResidenceController::class, 'getVillages'])->name('residence.get_villages');
-
     /** Language Routes */
     Route::resource('language', AdminLanguageController::class);
+
+    /** Translate Routes */
+    Route::get('translate-admin', [AdminTranslateController::class, 'indexAdmin'])->name('translate.admin');
+    Route::get('translate-member', [AdminTranslateController::class, 'indexMember'])->name('translate.member');
+    Route::get('translate-mobile', [AdminTranslateController::class, 'indexMobile'])->name('translate.mobile');
+    Route::get('translate-website', [AdminTranslateController::class, 'indexWebsite'])->name('translate.website');
+    Route::post('extract-localize-string', [AdminTranslateController::class, 'extractLocalizationStrings'])->name('translate.extract_localize_string');
+    Route::post('languange-string-update', [AdminTranslateController::class, 'updateLanguangeString'])->name('translate.update_languange_string');
+    Route::post('translate-string', [AdminTranslateController::class, 'translateString'])->name('translate.translate_string');
 
     /** Setting Routes */
     Route::get('setting', [AdminSettingController::class, 'index'])->name('setting.index');

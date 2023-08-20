@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*', function ($view) {
-            $view->with('setting', Setting::pluck('value', 'key')->toArray())
-                ->with('setting_member', !empty(Auth::guard('member')->user()) ? SettingMember::where('member_id', Auth::guard('member')->user()->id)->get()->pluck('value', 'key')->toArray() : '');
+            $view->with('setting', getSettingAdmin())
+                ->with('setting_member', getSettingMember());
         });
 
         Debugbar::disable();
