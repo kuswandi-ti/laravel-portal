@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('key');
             $table->longText('value')->nullable();
-            $table->bigInteger('member_id')->unsigned();
-            $table->foreign('member_id')->references('id')->on('members')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignUuid('area_id')->constrained('areas')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('restored_at')->nullable();
