@@ -221,7 +221,10 @@ function getSettingAdmin()
 
 function getSettingMember()
 {
-    return !empty(getLoggedUser()) ? SettingMember::where('member_id', getLoggedUser()->id)->get()->pluck('value', 'key')->toArray() : '';
+    return !empty(getLoggedUser()) ? SettingMember::where('area_id', getLoggedUserAreaId())
+                ->get()
+                ->pluck('value', 'key')
+                ->toArray() : '';
 }
 
 function setStatusBadge($status)

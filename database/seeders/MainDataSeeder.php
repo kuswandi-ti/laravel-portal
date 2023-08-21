@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\Package;
 use App\Models\Residence;
 use Illuminate\Support\Str;
+use App\Models\SettingMember;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -198,5 +199,12 @@ class MainDataSeeder extends Seeder
         ]);
         $userSekretaris->assignRole($roleSekretaris);
         /** Create Role & Permission User Seeder - End */
+
+        $input = [
+            ['key' => 'default_language', 'value' => 'en', 'area_id' => $area->id],
+        ];
+        foreach ($input as $item) {
+            SettingMember::create($item);
+        }
     }
 }
