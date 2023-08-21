@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <div class="control-label text-danger">{{ __($key) }}</div>
                                     <div class="row">
-                                        @foreach ($permission as $item)
+                                        @foreach ($permission->sortBy('name') as $item)
                                             <div class="col-md-3">
                                                 <label class="mt-2 custom-switch">
                                                     <input value="{{ __($item->name) }}" type="checkbox"
@@ -96,7 +96,7 @@
                                 <div class="form-group">
                                     <div class="control-label text-info">{{ __($key) }}</div>
                                     <div class="row">
-                                        @foreach ($permission as $item)
+                                        @foreach ($permission->sortBy('name') as $item)
                                             <div class="col-md-3">
                                                 <label class="mt-2 custom-switch">
                                                     <input value="{{ __($item->name) }}" type="checkbox"

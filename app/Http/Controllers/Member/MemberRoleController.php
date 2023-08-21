@@ -17,11 +17,7 @@ class MemberRoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::where([
-            ['guard_name', '!=', getGuardNameAdmin()],
-            ['area_id', getLoggedUser()->area->id]
-        ])->orderBy('name', 'ASC')->get();
-        return view('member.role.index', compact('roles'));
+        return view('member.role.index');
     }
 
     /**
@@ -30,7 +26,7 @@ class MemberRoleController extends Controller
     public function create()
     {
         $permissions_member = Permission::where('guard_name', getGuardNameLoggedUser())->get()->groupBy('group_name');
-        $permissions_web = Permission::where('guard_name', 'web')->get()->groupBy('group_name');
+        $permissions_web = Permission::where('guard_name', getGuardNameUser())->get()->groupBy('group_name');
         return view('member.role.create', compact('permissions_member', 'permissions_web'));
     }
 
@@ -112,5 +108,37 @@ class MemberRoleController extends Controller
                 'message' => __('Deleted role is error')
             ]);
         }
+    }
+
+    public function data(Request $request)
+    {
+        $query = Role::where([
+            ['guard_name', '!=', getGuardNameAdmin()],
+            ['area_id', getLoggedUser()->area->id]
+        ])->orderBy('name', 'ASC')->get();
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('guard_name', function ($query) {
+                $badge = $query->guard_name == getGuardNameMember() ? 'danger' : 'dark';
+                return '<div class="badge badge-' . $badge . '">' . $query->guard_name . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->name == 'Admin') {
+                    return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
+                } else {
+                    return '
+                        <a href="' . route('member.role.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="' . route('member.role.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    ';
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

@@ -50,36 +50,23 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="control-label">{{ __('admin.Guard Name') }}</div>
-                            <div class="mt-2 custom-switches-stacked">
-                                <label class="custom-switch">
-                                    <input type="radio" name="guard_name" id="guard_admin" value="admin"
-                                        class="custom-switch-input" {{ $role->guard_name == 'admin' ? 'checked' : '' }}>
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-danger">{{ __('admin.Admin') }}</span>
-                                </label>
-                                <label class="custom-switch">
-                                    <input type="radio" name="guard_name" id="guard_member" value="member"
-                                        class="custom-switch-input" {{ $role->guard_name == 'member' ? 'checked' : '' }}>
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-info">{{ __('admin.Member') }}</span>
-                                </label>
-                            </div>
+                            <div class="control-label">{{ __('admin.Guard Name') }} <span
+                                    class="text-danger">({{ $role->guard_name }})</span></div>
                         </div>
 
                         <div id="permission_admin">
                             @foreach ($permissions_admin as $key => $permission)
                                 <div class="form-group">
-                                    <div class="control-label text-danger">{{ __($key) }}</div>
+                                    <div class="control-label text-danger">{{ $key }}</div>
                                     <div class="row">
                                         @foreach ($permission as $item)
                                             <div class="col-md-3">
                                                 <label class="mt-2 custom-switch">
-                                                    <input value="{{ __($item->name) }}" type="checkbox"
-                                                        name="permissions[]" class="custom-switch-input"
+                                                    <input value="{{ $item->name }}" type="checkbox" name="permissions[]"
+                                                        class="custom-switch-input"
                                                         {{ in_array($item->name, $roles_permissions) ? 'checked' : '' }}>
                                                     <span class="custom-switch-indicator"></span>
-                                                    <span class="custom-switch-description">{{ __($item->name) }}</span>
+                                                    <span class="custom-switch-description">{{ $item->name }}</span>
                                                 </label>
                                             </div>
                                         @endforeach

@@ -19,9 +19,7 @@ class AdminMemberUserController extends Controller
      */
     public function index()
     {
-        $members_active = Member::all();
-        $members_inactive = Member::onlyTrashed()->get();
-        return view('admin.member.index', compact('members_active', 'members_inactive'));
+        return view('admin.member.index');
     }
 
     /**
@@ -45,9 +43,10 @@ class AdminMemberUserController extends Controller
         $member->slug = Str::slug($request->name);
         $member->email = $request->email;
         $member->password = Hash::make($request->password);
-        $member->image = '/images/no_image_circle.png';
+        $member->image = config('common.default_image_circle');
         $member->area_id = $request->area;
-        $member->email_verified_at = date_create('now')->format('Y-m-d');
+        $member->email_verified_at = saveDateTimeNow();
+        $member->created_by = getLoggedUser()->name;
         $member->status = 1;
         $member->save();
 
@@ -88,6 +87,7 @@ class AdminMemberUserController extends Controller
             'slug' => Str::slug($request->name),
             'email' => $request->email,
             'area_id' => $request->area,
+            'updated_by' => getLoggedUser()->name,
             'status' => 1,
         ]);
         $member->syncRoles($request->role);
@@ -103,31 +103,86 @@ class AdminMemberUserController extends Controller
         try {
             $member = Member::findOrFail($id);
 
-            if ($member->roles->first()->name == getGuardTextAdmin()) {
+            if ($member->roles->first()->name == 'Admin') {
                 return response([
                     'status' => 'error',
-                    'message' => __('Cannot delete this user because role is ' . getGuardTextAdmin())
+                    'message' => __('admin.Cannot delete this user becase role is Admin')
                 ]);
             }
 
-            $member->delete();
+            $member->status = 0;
+            $member->deleted_at = saveDateTimeNow();
+            $member->deleted_by = getLoggedUser()->name;
+            $member->save();
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted member user successfully')
+                'message' => __('admin.Deleted member user successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted member user is error')
+                'message' => __('admin.Deleted member user is error')
             ]);
         }
     }
 
     public function restore($id)
     {
-        Member::withTrashed()->find($id)->restore();
+        $member = Member::findOrFail($id);
 
-        return redirect()->back()->with('success', __('Restore member user successfully'));
+        $member->status = 1;
+        $member->restored_at = saveDateTimeNow();
+        $member->restored_by = getLoggedUser()->name;
+        $member->save();
+
+        return redirect()->route('admin.member.index')->with('success', __('admin.Restore member user successfully'));
+    }
+
+    public function data(Request $request)
+    {
+        $query = Member::orderBy('name', 'ASC');
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('image', function ($query) {
+                if (!empty($query->image)) {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . $query->image) . '"></figure>';
+                } else {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . config('common.default_image_circle')) . '"></figure>';
+                }
+            })
+            ->editColumn('role', function ($query) {
+                $badge = $query->roles->pluck('name')->first() == 'Admin' ? 'danger' : 'dark';
+                return '<div class="badge badge-' . $badge . '">' . $query->roles->pluck('name')->first() . '</div>';
+            })
+            ->editColumn('status', function ($query) {
+                return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->roles->pluck('name')->first() == 'Admin') {
+                    return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
+                } else {
+                    if ($query->status == 1) {
+                        return '
+                            <a href="' . route('admin.member.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="' . route('admin.member.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    } else {
+                        return '
+                            <a href="' . route('admin.member.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

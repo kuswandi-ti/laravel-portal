@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="form-group col-12">
-                                <label>{{ __('admin.Name') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.Name') }} <x-fill-field /></label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') ?? $admin->name }}" required>
                                 @error('name')
@@ -59,18 +59,20 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('admin.Email') }} <span class="text-danger">(readonly)</span></label>
+                                <label>{{ __('admin.Email') }} <span
+                                        class="text-danger">({{ __('readonly') }})</span></label>
                                 <input type="email" class="form-control" name="email"
                                     value="{{ old('email') ?? $admin->email }}" disabled>
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('admin.Role') }} <span class="text-danger">(readonly)</span></label>
+                                <label>{{ __('admin.Role') }} <span
+                                        class="text-danger">({{ __('readonly') }})</span></label>
                                 <input type="text" class="form-control" name="role"
                                     value="{{ old('role') ?? $admin->roles->first()->name }}" disabled>
                             </div>
                         </div>
                     </div>
-                    <div class="text-right card-footer">
+                    <div class="card-footer">
                         <button class="btn btn-primary">
                             <i class="fas fa-save"></i> {{ __('admin.Save Changes') }}
                         </button>
@@ -91,7 +93,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-12">
-                                <label>{{ __('admin.Current Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.Current Password') }} <x-fill-field /></label>
                                 <input type="password" class="form-control @error('current_password') is-invalid @enderror"
                                     name="current_password" required>
                                 @error('current_password')
@@ -101,7 +103,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('admin.New Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.New Password') }} <x-fill-field /></label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" required>
                                 @error('password')
@@ -111,7 +113,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('admin.Confirm New Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('admin.Confirm New Password') }} <x-fill-field /></label>
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
                                     name="password_confirmation" required>
@@ -123,7 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-right card-footer">
+                    <div class="card-footer">
                         <button class="btn btn-primary">
                             <i class="fas fa-save"></i> {{ __('admin.Save Changes') }}
                         </button>

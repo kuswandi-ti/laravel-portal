@@ -89,6 +89,7 @@ class MainDataSeeder extends Seeder
             'email' => 'superadminuser@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'image' => config('common.default_image_circle'),
+            'area_id' => $area->id,
             'status' => 1,
             'remember_token' => Str::random(10),
         ]);

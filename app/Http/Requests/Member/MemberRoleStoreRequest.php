@@ -23,7 +23,6 @@ class MemberRoleStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'role_name' => ['required', 'string', 'max:255', 'unique:roles,name'],
             'role_name' => [
                 'required',
                 'string',

@@ -21,12 +21,12 @@ class AdminLanguageUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $langId = $this->route('language');
+        $language_id = $this->route('language');
 
         return [
-            'lang' => ['required', 'string', 'max:255', 'unique:languages,lang,' . $langId],
+            'lang' => ['required', 'string', 'max:255', 'unique:languages,lang,' . $language_id],
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:languages,slug,' . $langId],
+            'slug' => ['required', 'string', 'max:255', 'unique:languages,slug,' . $language_id],
             'default' => ['required', 'boolean'],
             'status' => ['required', 'boolean'],
         ];

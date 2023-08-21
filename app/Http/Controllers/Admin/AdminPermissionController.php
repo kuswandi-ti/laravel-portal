@@ -15,8 +15,7 @@ class AdminPermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::where('guard_name', '!=', 'web')->orderBy('name', 'ASC')->get();
-        return view('admin.permission.index', compact('permissions'));
+        return view('admin.permission.index');
     }
 
     /**
@@ -92,5 +91,33 @@ class AdminPermissionController extends Controller
                 'message' => __('admin.Deleted permission is error')
             ]);
         }
+    }
+
+    public function data(Request $request)
+    {
+        $query = Permission::where('guard_name', '!=', getGuardNameUser())
+            ->orderBy('guard_name', 'ASC')
+            ->orderBy('name', 'ASC')
+            ->get();
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('guard_name', function ($query) {
+                $badge = $query->guard_name == getGuardNameAdmin() ? 'danger' : 'dark';
+                return '<div class="badge badge-' . $badge . '">' . $query->guard_name . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                return '
+                    <a href="' . route('admin.permission.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="' . route('admin.permission.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                ';
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

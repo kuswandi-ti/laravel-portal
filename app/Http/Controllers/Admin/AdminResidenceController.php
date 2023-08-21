@@ -47,7 +47,6 @@ class AdminResidenceController extends Controller
         $residence->village_code = $request->village;
         $residence->address = $request->address;
         $residence->status = 1;
-        $residence->created_at = saveDateTimeNow();
         $residence->created_by = getLoggedUser()->name;
         $residence->save();
 
@@ -89,9 +88,8 @@ class AdminResidenceController extends Controller
             'district_code' => $request->district,
             'village_code' => $request->village,
             'address' => $request->address,
-            'status' => 1,
-            'updated_at' => saveDateTimeNow(),
             'updated_by' => getLoggedUser()->name,
+            'status' => 1,
         ]);
 
         return redirect()->route('admin.residence.index')->with('success', __('admin.Updated residence successfully'));
@@ -155,6 +153,7 @@ class AdminResidenceController extends Controller
     public function data(Request $request)
     {
         $query = Residence::orderBy('name');
+
         return datatables($query)
             ->addIndexColumn()
             ->editColumn('status', function ($query) {

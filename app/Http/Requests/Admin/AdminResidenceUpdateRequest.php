@@ -22,10 +22,10 @@ class AdminResidenceUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $residenceId = $this->route('residence');
+        $residence_id = $this->route('residence');
 
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:residences,name,'. $residenceId],
+            'name' => ['required', 'string', 'max:255', 'unique:residences,name,'. $residence_id],
             'province' => ['required', 'string'],
             'city' => ['required', 'string'],
             'district' => ['required', 'string'],

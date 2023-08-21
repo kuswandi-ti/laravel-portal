@@ -53,6 +53,7 @@ Route::group([
     Route::resource('profile', AdminProfileController::class);
 
     /** Permission Routes */
+    Route::get('permission/data', [AdminPermissionController::class, 'data'])->name('permission.data');
     Route::resource('permission', AdminPermissionController::class);
 
     /** Role Routes */
@@ -60,14 +61,18 @@ Route::group([
     Route::resource('role', AdminRoleController::class);
 
     /** User Admin Routes */
-    Route::resource('admin', AdminAdminUserController::class);
+    Route::get('admin/data', [AdminAdminUserController::class, 'data'])->name('admin.data');
     Route::get('admin/restore/{id}', [AdminAdminUserController::class, 'restore'])->name('admin.restore');
+    Route::resource('admin', AdminAdminUserController::class);
 
     /** Member User Routes */
-    Route::resource('member', AdminMemberUserController::class);
+    Route::get('member/data', [AdminMemberUserController::class, 'data'])->name('member.data');
     Route::get('member/restore/{id}', [AdminMemberUserController::class, 'restore'])->name('member.restore');
+    Route::resource('member', AdminMemberUserController::class);
 
     /** Language Routes */
+    Route::get('language/data', [AdminLanguageController::class, 'data'])->name('language.data');
+    Route::get('language/restore/{id}', [AdminLanguageController::class, 'restore'])->name('language.restore');
     Route::resource('language', AdminLanguageController::class);
 
     /** Translate Routes */

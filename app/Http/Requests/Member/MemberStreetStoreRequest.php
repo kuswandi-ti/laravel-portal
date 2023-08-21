@@ -27,7 +27,7 @@ class MemberStreetStoreRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('streets', 'name')->where(function ($query) {
+                Rule::unique('streets')->where(function ($query) {
                     $query->where('name', $this->name)
                         ->where('area_id', getLoggedUserAreaId());
                 })

@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use App\Models\Setting;
 use App\Models\Language;
+use Illuminate\Support\Str;
 use App\Models\SettingMember;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,13 +19,18 @@ function setSidebarActive(array $routes): ?string
     return '';
 }
 
+function truncateString(string $text, int $limit = 45): ?string
+{
+    return Str::limit($text, $limit, '...');
+}
+
 function getArraySuperAdminPermission()
 {
     return [
         ['guard_name' => 'admin', 'name' => 'package index', 'group_name' => 'Package Permission'],
         ['guard_name' => 'admin', 'name' => 'package create', 'group_name' => 'Package Permission'],
         ['guard_name' => 'admin', 'name' => 'package update', 'group_name' => 'Package Permission'],
-        ['guard_name' => 'admin', 'name' => 'package non aktif', 'group_name' => 'Package Permission'],
+        ['guard_name' => 'admin', 'name' => 'package delete', 'group_name' => 'Package Permission'],
         ['guard_name' => 'admin', 'name' => 'permission index', 'group_name' => 'Permission Permission'],
         ['guard_name' => 'admin', 'name' => 'permission create', 'group_name' => 'Permission Permission'],
         ['guard_name' => 'admin', 'name' => 'permission update', 'group_name' => 'Permission Permission'],
@@ -36,15 +42,15 @@ function getArraySuperAdminPermission()
         ['guard_name' => 'admin', 'name' => 'admin index', 'group_name' => 'Admin Permission'],
         ['guard_name' => 'admin', 'name' => 'admin create', 'group_name' => 'Admin Permission'],
         ['guard_name' => 'admin', 'name' => 'admin update', 'group_name' => 'Admin Permission'],
-        ['guard_name' => 'admin', 'name' => 'admin non aktif', 'group_name' => 'Admin Permission'],
+        ['guard_name' => 'admin', 'name' => 'admin delete', 'group_name' => 'Admin Permission'],
         ['guard_name' => 'admin', 'name' => 'member index', 'group_name' => 'Member Permission'],
         ['guard_name' => 'admin', 'name' => 'member create', 'group_name' => 'Member Permission'],
         ['guard_name' => 'admin', 'name' => 'member update', 'group_name' => 'Member Permission'],
-        ['guard_name' => 'admin', 'name' => 'member non aktif', 'group_name' => 'Member Permission'],
+        ['guard_name' => 'admin', 'name' => 'member delete', 'group_name' => 'Member Permission'],
         ['guard_name' => 'admin', 'name' => 'language index', 'group_name' => 'Language Permission'],
         ['guard_name' => 'admin', 'name' => 'language create', 'group_name' => 'Language Permission'],
         ['guard_name' => 'admin', 'name' => 'language update', 'group_name' => 'Language Permission'],
-        ['guard_name' => 'admin', 'name' => 'language non aktif', 'group_name' => 'Language Permission'],
+        ['guard_name' => 'admin', 'name' => 'language delete', 'group_name' => 'Language Permission'],
         ['guard_name' => 'admin', 'name' => 'website language index', 'group_name' => 'Website Language Permission'],
         ['guard_name' => 'admin', 'name' => 'website language create', 'group_name' => 'Website Language Permission'],
         ['guard_name' => 'admin', 'name' => 'website language update', 'group_name' => 'Website Language Permission'],
@@ -79,7 +85,7 @@ function getArrayMemberAdminPermission()
         ['guard_name' => 'member', 'name' => 'staff index', 'group_name' => 'Staff Permission'],
         ['guard_name' => 'member', 'name' => 'staff create', 'group_name' => 'Staff Permission'],
         ['guard_name' => 'member', 'name' => 'staff update', 'group_name' => 'Staff Permission'],
-        ['guard_name' => 'member', 'name' => 'staff non aktif', 'group_name' => 'Staff Permission'],
+        ['guard_name' => 'member', 'name' => 'staff delete', 'group_name' => 'Staff Permission'],
     ];
 }
 
@@ -92,7 +98,7 @@ function setArrayMemberAdminPermission()
         'staff index',
         'staff create',
         'staff update',
-        'staff non aktif',
+        'staff delete',
     ];
 }
 
@@ -102,7 +108,7 @@ function getArrayUserAllPermission()
         ['guard_name' => 'web', 'name' => 'warga index', 'group_name' => 'Warga Permission'],
         ['guard_name' => 'web', 'name' => 'warga create', 'group_name' => 'Warga Permission'],
         ['guard_name' => 'web', 'name' => 'warga update', 'group_name' => 'Warga Permission'],
-        ['guard_name' => 'web', 'name' => 'warga non aktif', 'group_name' => 'Warga Permission'],
+        ['guard_name' => 'web', 'name' => 'warga delete', 'group_name' => 'Warga Permission'],
         ['guard_name' => 'web', 'name' => 'tagihan index', 'group_name' => 'Tagihan Permission'],
         ['guard_name' => 'web', 'name' => 'tagihan create', 'group_name' => 'Tagihan Permission'],
         ['guard_name' => 'web', 'name' => 'tagihan update', 'group_name' => 'Tagihan Permission'],
@@ -153,7 +159,7 @@ function setArraySekretarisPermission()
         'warga index',
         'warga create',
         'warga update',
-        'warga non aktif',
+        'warga delete',
     ];
 }
 
@@ -210,7 +216,7 @@ function getLoggedUserAreaId()
 
 function getSettingAdmin()
 {
-    return Setting::pluck('value', 'key')->toArray();
+    return !empty(getLoggedUser()) ? Setting::pluck('value', 'key')->toArray() : '';
 }
 
 function getSettingMember()
@@ -241,6 +247,28 @@ function saveDateNow()
 function saveTimeNow()
 {
     return Carbon::now()->addHour(7)->format('H:i:s');
+}
+
+function canAccess(array $permissions)
+{
+    $permission = getLoggedUser()->hasAnyPermission($permissions);
+    $super_admin = getLoggedUser()->hasRole('Super Admin');
+
+    if($permission || $super_admin) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getLoggedUserRole()
+{
+    $role = getLoggedUser()->getRoleNames();
+    return $role->first();
+}
+
+function checkPermission(string $permission){
+    return getLoggedUser()->hasPermissionTo($permission);
 }
 
 function formatAmount($amount)

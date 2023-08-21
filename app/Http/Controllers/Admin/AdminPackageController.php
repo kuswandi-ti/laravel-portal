@@ -50,7 +50,6 @@ class AdminPackageController extends Controller
         $package->support_ticket_per_year = isset($request->support_ticket_per_year) ? $request->support_ticket_per_year : '0';
         $package->online_payment_per_year = isset($request->online_payment_per_year) ? $request->online_payment_per_year : '0';
         $package->status = 1;
-        $package->created_at = saveDateTimeNow();
         $package->created_by = getLoggedUser()->name;
         $package->save();
 
@@ -98,7 +97,6 @@ class AdminPackageController extends Controller
             'support_ticket_per_year' => isset($request->support_ticket_per_year) ? $request->support_ticket_per_year : '0',
             'online_payment_per_year' => isset($request->online_payment_per_year) ? $request->online_payment_per_year : '0',
             'status' => 1,
-            'updated_at' => saveDateTimeNow(),
             'updated_by' => getLoggedUser()->name,
         ];
 

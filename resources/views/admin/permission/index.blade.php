@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="mt-3 table-responsive">
                         <table class="table table-striped" id="table_data">
                             <thead>
                                 <tr>
@@ -46,27 +46,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($permissions as $permission)
-                                    <tr>
-                                        <th scope="row" class="text-center" width="10%">{{ $loop->iteration }}</th>
-                                        <td class="text-center" width="12%">
-                                            <a href="{{ route('admin.permission.edit', $permission->id) }}"
-                                                class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('admin.permission.destroy', $permission->id) }}"
-                                                class="btn btn-danger btn-sm delete_item"><i
-                                                    class="fas fa-trash-alt"></i></a>
-                                        </td>
-                                        <td>{{ $permission->name }}</td>
-                                        <td class="text-center">
-                                            @if ($permission->guard_name == 'admin')
-                                                <div class="badge badge-danger">{{ $permission->guard_name }}</div>
-                                            @else
-                                                <div class="badge badge-primary">{{ $permission->guard_name }}</div>
-                                            @endif
-                                        </td>
-                                        <td>{{ $permission->group_name }}</td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -79,3 +58,44 @@
 <x-swal />
 
 @include('layouts.admin.includes.datatable')
+
+@push('scripts')
+    <script>
+        let table_data;
+
+        table_data = $('#table_data').DataTable({
+            processing: true,
+            autoWidth: false,
+            responsive: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('admin.permission.data') }}',
+            },
+            columns: [{
+                data: 'DT_RowIndex',
+                searchable: false,
+                sortable: false,
+            }, {
+                data: 'action',
+                searchable: false,
+                sortable: false,
+            }, {
+                data: 'name',
+                searchable: true,
+                sortable: true,
+            }, {
+                data: 'guard_name',
+                searchable: true,
+                sortable: true,
+            }, {
+                data: 'group_name',
+                searchable: true,
+                sortable: true,
+            }],
+            columnDefs: [{
+                className: 'text-center',
+                targets: [0, 1, 3, 4]
+            }],
+        });
+    </script>
+@endpush

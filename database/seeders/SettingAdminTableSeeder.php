@@ -26,8 +26,16 @@ class SettingAdminTableSeeder extends Seeder
             ['key' => 'trial_days', 'value' => '30'],
             ['key' => 'company_logo', 'value' => config('common.default_image_circle')],
             ['key' => 'company_favicon', 'value' => config('common.default_image_circle')],
-            ['key' => 'site_microsoft_api_host', 'value' => 'microsoft-translator-text.p.rapidapi.com'],
-            ['key' => 'site_microsoft_api_key', 'value' => '384e408287mshfda0dbb1518ddf2p12065bjsn6ae311d7402b'],
+            ['key' => 'site_microsoft_api_host', 'value' => config('common.site_microsoft_api_host')],
+            ['key' => 'site_microsoft_api_key', 'value' => config('common.site_microsoft_api_key')],
+            ['key' => 'mail_type', 'value' => config('common.mail_mailer')],
+            ['key' => 'mail_host', 'value' => config('common.mail_host')],
+            ['key' => 'mail_username', 'value' => config('common.mail_username')],
+            ['key' => 'mail_password', 'value' => config('common.mail_password')],
+            ['key' => 'mail_encryption', 'value' => config('common.mail_encryption')],
+            ['key' => 'mail_port', 'value' => config('common.mail_port')],
+            ['key' => 'mail_from_address', 'value' => config('common.mail_from_address')],
+            ['key' => 'mail_from_name', 'value' => config('common.mail_from_name')],
         ];
         foreach ($input as $item) {
             Setting::create($item);

@@ -65,7 +65,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail Type') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Type') }} <x-fill-field /></label>
                                             <select id="mail_type" name="mail_type"
                                                 class="form-control @error('mail_type') is-invalid @enderror" required>
                                                 <option value="" selected disabled>-- {{ __('admin.Select') }} --
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail Host') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Host') }} <x-fill-field /></label>
                                             <input type="text" id="mail_host" name="mail_host"
                                                 class="form-control @error('mail_host') is-invalid @enderror"
                                                 value="{{ old('mail_host') ?? !empty($setting['mail_host']) ? $setting['mail_host'] : '' }}"
@@ -103,8 +103,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail Username') }} <span
-                                                    class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Username') }} <x-fill-field /></label>
                                             <input type="text" id="mail_username" name="mail_username"
                                                 class="form-control @error('mail_username') is-invalid @enderror"
                                                 value="{{ old('mail_username') ?? !empty($setting['mail_username']) ? $setting['mail_username'] : '' }}"
@@ -118,8 +117,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail Password') }} <span
-                                                    class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Password') }} <x-fill-field /></label>
                                             <input type="text" id="mail_password" name="mail_password"
                                                 class="form-control @error('mail_password') is-invalid @enderror"
                                                 value="{{ old('mail_password') ?? !empty($setting['mail_password']) ? $setting['mail_password'] : '' }}"
@@ -136,8 +134,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail Encryption') }} <span
-                                                    class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Encryption') }} <x-fill-field /></label>
                                             <select id="mail_encryption" name="mail_encryption"
                                                 class="form-control @error('mail_encryption') is-invalid @enderror"
                                                 required>
@@ -159,7 +156,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail Port') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail Port') }} <x-fill-field /></label>
                                             <input type="text" id="mail_port" name="mail_port"
                                                 class="form-control @error('mail_port') is-invalid @enderror"
                                                 value="{{ old('mail_port') ?? !empty($setting['mail_port']) ? $setting['mail_port'] : '' }}"
@@ -176,8 +173,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail From Address') }} <span
-                                                    class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail From Address') }} <x-fill-field /></label>
                                             <input type="text" id="mail_from_address" name="mail_from_address"
                                                 class="form-control @error('mail_from_address') is-invalid @enderror"
                                                 value="{{ old('mail_from_address') ?? !empty($setting['mail_from_address']) ? $setting['mail_from_address'] : '' }}"
@@ -191,8 +187,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mail From Name') }} <span
-                                                    class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Mail From Name') }} <x-fill-field /></label>
                                             <input type="text" id="mail_from_name" name="mail_from_name"
                                                 class="form-control @error('mail_from_name') is-invalid @enderror"
                                                 value="{{ old('mail_from_name') ?? !empty($setting['mail_from_name']) ? $setting['mail_from_name'] : '' }}"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
@@ -15,8 +16,7 @@ class AdminRoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::where('guard_name', '!=', 'web')->orderBy('name', 'ASC')->get();
-        return view('admin.role.index', compact('roles'));
+        return view('admin.role.index');
     }
 
     /**
@@ -37,6 +37,7 @@ class AdminRoleController extends Controller
         $role = Role::create([
             'name' => $request->role_name,
             'guard_name' => $request->guard_name,
+            'area_id' => getLoggedUserAreaId(),
         ]);
         $role->syncPermissions($request->permissions);
 
@@ -65,7 +66,6 @@ class AdminRoleController extends Controller
         $role = Role::findOrFail($id);
         $role->update([
             'name' => $request->role_name,
-            'guard_name' => $request->guard_name,
         ]);
         $role->syncPermissions($request->permissions);
 
@@ -83,7 +83,7 @@ class AdminRoleController extends Controller
             if ($role->name == 'Super Admin') {
                 return response([
                     'status' => 'error',
-                    'message' => __('admin.Can\'t delete this role')
+                    'message' => __('admin.Cannot delete this role')
                 ]);
             }
 
@@ -99,5 +99,34 @@ class AdminRoleController extends Controller
                 'message' => __('admin.Deleted role is error')
             ]);
         }
+    }
+
+    public function data(Request $request)
+    {
+        $query = Role::where('guard_name', '!=', getGuardNameUser())->orderBy('name', 'ASC')->get();
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('guard_name', function ($query) {
+                $badge = $query->guard_name == getGuardNameAdmin() ? 'danger' : 'dark';
+                return '<div class="badge badge-' . $badge . '">' . $query->guard_name . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->name == 'Super Admin') {
+                    return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
+                } else {
+                    return '
+                        <a href="' . route('admin.role.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="' . route('admin.role.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    ';
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

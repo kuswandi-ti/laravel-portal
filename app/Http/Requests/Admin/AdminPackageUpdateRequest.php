@@ -21,10 +21,10 @@ class AdminPackageUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $packageId = $this->route('package');
+        $package_id = $this->route('package');
 
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:packages,name,' . $packageId],
+            'name' => ['required', 'string', 'max:255', 'unique:packages,name,' . $package_id],
             'cost_per_month' => ['required', 'numeric', 'min:0'],
             'cost_per_year' => ['required', 'numeric', 'min:0'],
         ];

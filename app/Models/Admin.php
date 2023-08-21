@@ -6,7 +6,6 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -14,10 +13,6 @@ class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-    use SoftDeletes;
-
-    protected $guard = 'admin';
-    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +22,7 @@ class Admin extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'updated_by',
         'password',
     ];
 
@@ -49,4 +45,9 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id', 'id');
+    }
 }

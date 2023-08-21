@@ -115,7 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-right card-footer">
+                    <div class="card-footer">
                         <button class="btn btn-primary">
                             <i class="fas fa-save"></i> {{ __('Save Changes') }}
                         </button>
@@ -136,7 +136,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-12">
-                                <label>{{ __('Current Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('Current Password') }} <x-fill-field /></label>
                                 <input type="password" class="form-control @error('current_password') is-invalid @enderror"
                                     name="current_password" required>
                                 @error('current_password')
@@ -146,7 +146,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('New Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('New Password') }} <x-fill-field /></label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" required>
                                 @error('password')
@@ -156,7 +156,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-12">
-                                <label>{{ __('Confirm New Password') }} <span class="text-danger">*</span></label>
+                                <label>{{ __('Confirm New Password') }} <x-fill-field /></label>
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
                                     name="password_confirmation" required>
@@ -168,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-right card-footer">
+                    <div class="card-footer">
                         <button class="btn btn-primary">
                             <i class="fas fa-save"></i> {{ __('Save Changes') }}
                         </button>

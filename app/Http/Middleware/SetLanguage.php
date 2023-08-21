@@ -19,13 +19,13 @@ class SetLanguage
     {
         if (getGuardNameLoggedUser() == getGuardNameAdmin()) {
             $setting_admin = getSettingAdmin();
-            $locale = $setting_admin['default_language'];
+            $locale = !empty($setting_admin['default_language']) ? $setting_admin['default_language'] : 'en';
         } elseif (getGuardNameLoggedUser() == getGuardNameMember()) {
             $setting_member = getSettingMember();
-            $locale = $setting_member['default_language'];
+            $locale = !empty($setting_member['default_language']) ? $setting_member['default_language'] : 'en';
         } else {
             $setting_default = Setting::pluck('value', 'key')->toArray();
-            $locale = $setting_default['default_language'];
+            $locale = !empty($setting_default['default_language']) ? $setting_default['default_language'] : 'en';
         }
 
         App::setLocale($locale);

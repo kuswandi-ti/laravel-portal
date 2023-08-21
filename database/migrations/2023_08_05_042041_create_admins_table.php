@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('district')->nullable();
             $table->string('village')->nullable();
             $table->text('address')->nullable();
+            $table->foreignUuid('area_id')->constrained('areas')->nullable();
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->rememberToken();
             $table->timestamps();

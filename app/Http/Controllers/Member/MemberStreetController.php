@@ -16,9 +16,7 @@ class MemberStreetController extends Controller
      */
     public function index()
     {
-        $streets_active = Street::where('area_id', getLoggedUser()->area->id)->get();
-        $streets_inactive = Street::onlyTrashed()->where('area_id', getLoggedUser()->area->id)->get();
-        return view('member.street.index', compact('streets_active', 'streets_inactive'));
+        return view('member.street.index');
     }
 
     /**
@@ -39,6 +37,7 @@ class MemberStreetController extends Controller
         $street->name = $request->name;
         $street->slug = Str::slug($request->name);
         $street->area_id = getLoggedUser()->area->id;
+        $street->created_by = getLoggedUser()->name;
         $street->status = 1;
         $street->save();
 
@@ -71,6 +70,7 @@ class MemberStreetController extends Controller
         $street->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'updated_by' => getLoggedUser()->name,
         ]);
 
         return redirect()->route('member.street.index')->with('success', __('Updated street successfully'));
@@ -85,9 +85,9 @@ class MemberStreetController extends Controller
             $street = Street::findOrFail($id);
 
             $street->status = 0;
+            $street->deleted_at = saveDateTimeNow();
+            $street->deleted_by = getLoggedUser()->name;
             $street->save();
-
-            $street->delete();
 
             return response([
                 'status' => 'success',
@@ -103,13 +103,45 @@ class MemberStreetController extends Controller
 
     public function restore($id)
     {
-        $street = Street::withTrashed()->findOrFail($id);
+        $street = Street::findOrFail($id);
 
         $street->status = 1;
+        $street->restored_at = saveDateTimeNow();
+        $street->restored_by = getLoggedUser()->name;
         $street->save();
 
-        $street->restore();
+        return redirect()->route('member.street.index')->with('success', __('Restore street successfully'));
+    }
 
-        return redirect()->back()->with('success', __('Restore street successfully'));
+    public function data(Request $request)
+    {
+        $query = Street::orderBy('name', 'ASC');
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('status', function ($query) {
+                return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->status == 1) {
+                    return '
+                        <a href="' . route('member.street.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="' . route('member.street.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    ';
+                } else {
+                    return '
+                        <a href="' . route('member.street.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                            <i class="fas fa-undo"></i>
+                        </a>
+                    ';
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

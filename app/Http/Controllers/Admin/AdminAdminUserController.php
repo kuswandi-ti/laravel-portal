@@ -18,9 +18,7 @@ class AdminAdminUserController extends Controller
      */
     public function index()
     {
-        $admins_active = Admin::all();
-        $admins_inactive = Admin::onlyTrashed()->get();
-        return view('admin.admin.index', compact('admins_active', 'admins_inactive'));
+        return view('admin.admin.index');
     }
 
     /**
@@ -44,6 +42,8 @@ class AdminAdminUserController extends Controller
         $admin->email = $request->email;
         $admin->password = Hash::make($request->password);
         $admin->image = config('common.default_image_circle');
+        $admin->area_id = getLoggedUserAreaId();
+        $admin->created_by = getLoggedUser()->name;
         $admin->status = 1;
         $admin->save();
 
@@ -82,6 +82,7 @@ class AdminAdminUserController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'email' => $request->email,
+            'updated_by' => getLoggedUser()->name,
             'status' => 1,
         ]);
         $admin->syncRoles($request->role);
@@ -100,11 +101,14 @@ class AdminAdminUserController extends Controller
             if ($admin->roles->first()->name == 'Super Admin') {
                 return response([
                     'status' => 'error',
-                    'message' => __('admin.Can\'t delete this user becase role is Super Admin')
+                    'message' => __('admin.Cannot delete this user becase role is Super Admin')
                 ]);
             }
 
-            $admin->delete();
+            $admin->status = 0;
+            $admin->deleted_at = saveDateTimeNow();
+            $admin->deleted_by = getLoggedUser()->name;
+            $admin->save();
 
             return response([
                 'status' => 'success',
@@ -120,8 +124,60 @@ class AdminAdminUserController extends Controller
 
     public function restore($id)
     {
-        Admin::withTrashed()->find($id)->restore();
+        $admin = Admin::findOrFail($id);
 
-        return redirect()->back()->with('success', __('admin.Restore admin user successfully'));
+        $admin->status = 1;
+        $admin->restored_at = saveDateTimeNow();
+        $admin->restored_by = getLoggedUser()->name;
+        $admin->save();
+
+        return redirect()->route('admin.admin.index')->with('success', __('admin.Restore admin user successfully'));
+    }
+
+    public function data(Request $request)
+    {
+        $query = Admin::orderBy('name', 'ASC');
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('image', function ($query) {
+                if (!empty($query->image)) {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . $query->image) . '"></figure>';
+                } else {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . config('common.default_image_circle')) . '"></figure>';
+                }
+            })
+            ->editColumn('role', function ($query) {
+                $badge = $query->roles->pluck('name')->first() == 'Super Admin' ? 'danger' : 'dark';
+                return '<div class="badge badge-' . $badge . '">' . $query->roles->pluck('name')->first() . '</div>';
+            })
+            ->editColumn('status', function ($query) {
+                return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->roles->pluck('name')->first() == 'Super Admin') {
+                    return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
+                } else {
+                    if ($query->status == 1) {
+                        return '
+                            <a href="' . route('admin.admin.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="' . route('admin.admin.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    } else {
+                        return '
+                            <a href="' . route('admin.admin.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

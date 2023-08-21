@@ -67,7 +67,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.admin.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.admin.index') }}">{{ __('admin.Super Admin') }}
+                        <a class="nav-link" href="{{ route('admin.admin.index') }}">{{ __('admin.Admin') }}
                         </a>
                     </li>
                 </ul>

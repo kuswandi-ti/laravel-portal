@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminLanguageStoreRequest;
 use App\Http\Requests\Admin\AdminLanguageUpdateRequest;
@@ -14,8 +15,7 @@ class AdminLanguageController extends Controller
      */
     public function index()
     {
-        $languages = Language::all();
-        return view('admin.language.index', compact('languages'));
+        return view('admin.language.index');
     }
 
     /**
@@ -41,6 +41,7 @@ class AdminLanguageController extends Controller
         $language->lang = $request->lang;
         $language->slug = $request->slug;
         $language->default = $request->default;
+        $language->created_by = getLoggedUser()->name;
         $language->status = $request->status;
         $language->save();
 
@@ -79,6 +80,7 @@ class AdminLanguageController extends Controller
         $language->lang = $request->lang;
         $language->slug = $request->slug;
         $language->default = $request->default;
+        $language->updated_by = getLoggedUser()->name;
         $language->status = $request->status;
         $language->save();
 
@@ -93,14 +95,17 @@ class AdminLanguageController extends Controller
         try {
             $language = Language::findOrFail($id);
 
-            if ($language->lang == 'en') {
+            if ($language->default == 1) {
                 return response([
                     'status' => 'error',
-                    'message' => __('admin.Can\'t delete this language')
+                    'message' => __('admin.Cannot delete this language because is default')
                 ]);
             }
 
-            $language->delete();
+            $language->status = 0;
+            $language->deleted_at = saveDateTimeNow();
+            $language->deleted_by = getLoggedUser()->name;
+            $language->save();
 
             return response([
                 'status' => 'success',
@@ -112,5 +117,57 @@ class AdminLanguageController extends Controller
                 'message' => __('admin.Deleted language is error')
             ]);
         }
+    }
+
+    public function restore($id)
+    {
+        $language = Language::findOrFail($id);
+
+        $language->status = 1;
+        $language->restored_at = saveDateTimeNow();
+        $language->restored_by = getLoggedUser()->name;
+        $language->save();
+
+        return redirect()->route('admin.language.index')->with('success', __('admin.Restore language successfully'));
+    }
+
+    public function data(Request $request)
+    {
+        $query = Language::orderBy('name', 'ASC');
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('default', function ($query) {
+                $default = $query->default == 1 ? __('Yes') : __('No');
+                return '<div class="badge badge-' . setStatusBadge($query->default) . '">' . $default . '</div>';
+            })
+            ->editColumn('status', function ($query) {
+                return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->default == 1) {
+                    return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
+                } else {
+                    if ($query->status == 1) {
+                        return '
+                            <a href="' . route('admin.language.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="' . route('admin.language.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    } else {
+                        return '
+                            <a href="' . route('admin.language.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

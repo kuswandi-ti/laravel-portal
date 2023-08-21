@@ -61,13 +61,13 @@
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.admin.*']) }}">
-                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Admin') }}
+                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Admin User') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.staff.*']) }}">
-                        <a class="nav-link" href="{{ route('member.staff.index') }}">{{ __('admin.Staff') }}
+                        <a class="nav-link" href="{{ route('member.staff.index') }}">{{ __('admin.Staff User') }}
                         </a>
                     </li>
                 </ul>

@@ -2,24 +2,34 @@
 
 return [
 
-    'path_image_storage' => 'public/storage',
-    'path_image_public' => 'public/images',
-    'no_image_square' => 'public/storage/images/no_image_square.png',
-    'no_image_circle' => 'public/storage/images/no_image_circle.png',
+    'path_storage' => env('PATH_STORAGE'),
 
-    'default_image_square' => '/images/no_image_square.png',
-    'default_image_circle' => '/images/no_image_circle.png',
+    'default_image_square' => env('DEFAULT_IMAGE_SQUARE'),
+    'default_image_circle' => env('DEFAULT_IMAGE_CIRCLE'),
 
-    'path_template_admin' => 'public/template/admin/',
-    'path_template_mobile' => 'public/template/mobile/',
-    'path_template_website' => 'public/template/website/',
+    'path_template' => env('PATH_TEMPLATE'),
+    'path_template_admin' => env('PATH_TEMPLATE_ADMIN'),
+    'path_template_mobile' => env('PATH_TEMPLATE_MOBILE'),
+    'path_template_website' => env('PATH_TEMPLATE_WEBSITE'),
 
-    'guard_name_admin' => 'admin',
-    'guard_name_member' => 'member',
-    'guard_name_user' => 'web',
+    'guard_name_admin' => env('GUARD_NAME_ADMIN'),
+    'guard_name_member' => env('GUARD_NAME_MEMBER'),
+    'guard_name_user' => env('GUARD_NAME_USER'),
 
-    'guard_text_admin' => 'Admin',
-    'guard_text_member' => 'Member',
-    'guard_text_user' => 'Web',
+    'guard_text_admin' => env('GUARD_TEXT_ADMIN'),
+    'guard_text_member' => env('GUARD_TEXT_MEMBER'),
+    'guard_text_user' => env('GUARD_TEXT_USER'),
+
+    'site_microsoft_api_host' => env('SITE_MICROSOFT_API_HOST'),
+    'site_microsoft_api_key' => env('SITE_MICROSOFT_API_KEY'),
+
+    'mail_mailer' => env('MAIL_MAILER'),
+    'mail_host' => env('MAIL_HOST'),
+    'mail_port' => env('MAIL_PORT'),
+    'mail_username' => env('MAIL_USERNAME'),
+    'mail_password' => env('MAIL_PASSWORD'),
+    'mail_encryption' => env('MAIL_ENCRYPTION'),
+    'mail_from_address' => env('MAIL_FROM_ADDRESS'),
+    'mail_from_name' => env('MAIL_FROM_NAME'),
 
 ];

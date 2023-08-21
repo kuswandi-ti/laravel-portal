@@ -42,18 +42,22 @@ Route::group([
     Route::resource('profile', MemberProfileController::class);
 
     /** Street Routes */
-    Route::resource('street', MemberStreetController::class);
+    Route::get('street/data', [MemberStreetController::class, 'data'])->name('street.data');
     Route::get('street/restore/{id}', [MemberStreetController::class, 'restore'])->name('street.restore');
+    Route::resource('street', MemberStreetController::class);
 
     /** Block Routes */
-    Route::resource('block', MemberBlockController::class);
+    Route::get('block/data', [MemberBlockController::class, 'data'])->name('block.data');
     Route::get('block/restore/{id}', [MemberBlockController::class, 'restore'])->name('block.restore');
+    Route::resource('block', MemberBlockController::class);
 
     /** House Routes */
-    Route::resource('house', MemberHouseController::class);
+    Route::get('house/data', [MemberHouseController::class, 'data'])->name('house.data');
     Route::get('house/restore/{id}', [MemberHouseController::class, 'restore'])->name('house.restore');
+    Route::resource('house', MemberHouseController::class);
 
     /** Role Routes */
+    Route::get('role/data', [MemberRoleController::class, 'data'])->name('role.data');
     Route::resource('role', MemberRoleController::class);
 
     /** Admin Routes */

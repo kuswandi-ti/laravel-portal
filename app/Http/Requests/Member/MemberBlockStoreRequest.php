@@ -27,7 +27,7 @@ class MemberBlockStoreRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('blocks', 'name')->where(function ($query) {
+                Rule::unique('blocks')->where(function ($query) {
                     $query->where('name', $this->name)
                         ->where('area_id', getLoggedUserAreaId());
                 })

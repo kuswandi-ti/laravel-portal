@@ -34,92 +34,19 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <ul class="nav nav-pills" id="myTab3" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active show" id="active-tab3" data-toggle="tab" href="#active3"
-                                role="tab" aria-controls="active" aria-selected="true">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="inactive-tab3" data-toggle="tab" href="#inactive3" role="tab"
-                                aria-controls="inactive" aria-selected="false">Inactive</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent2">
-                        <div class="tab-pane fade active show" id="active3" role="tabpanel" aria-labelledby="active-tab3">
-                            <div class="mt-3 table-responsive">
-                                <table class="table table-striped" id="table_data_active">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
-                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                            <th>{{ __('Street Name') }}</th>
-                                            <th class="text-center" width="8%">{{ __('Status') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($streets_active as $street)
-                                            <tr>
-                                                <th scope="row" class="text-center align-middle" width="7%">
-                                                    {{ $loop->iteration }}
-                                                </th>
-                                                <td class="text-center align-middle" width="12%">
-                                                    <a href="{{ route('member.street.edit', $street->id) }}"
-                                                        class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="{{ route('member.street.destroy', $street->id) }}"
-                                                        class="btn btn-danger btn-sm delete_item"><i
-                                                            class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                                <td class="align-middle">{{ $street->name ?? '' }}</td>
-                                                <td class="text-center align-middle" width="8%">
-                                                    @if ($street->status == 1)
-                                                        <div class="badge badge-primary">{{ __('Active') }}</div>
-                                                    @else
-                                                        <div class="badge badge-danger">{{ __('Inactive') }}</div>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="inactive3" role="tabpanel" aria-labelledby="inactive-tab3">
-                            <div class="table-responsive">
-                                <table class="table table-striped" id="table_data_inactive">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
-                                            <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                            <th>{{ __('Street Name') }}</th>
-                                            <th class="text-center" width="8%">{{ __('Status') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($streets_inactive as $street)
-                                            <tr>
-                                                <th scope="row" class="text-center align-middle" width="7%">
-                                                    {{ $loop->iteration }}
-                                                </th>
-                                                <td class="text-center align-middle" width="12%">
-                                                    <a href="{{ route('member.street.restore', $street->id) }}"
-                                                        class="btn btn-warning btn-sm" data-toggle="tooltip"
-                                                        title="{{ __('Restore to Active') }}"><i
-                                                            class="fas fa-undo"></i></a>
-                                                </td>
-                                                <td class="align-middle">{{ $street->name ?? '' }}</td>
-                                                <td class="text-center align-middle" width="8%">
-                                                    @if ($street->status == 1)
-                                                        <div class="badge badge-primary">{{ __('Active') }}</div>
-                                                    @else
-                                                        <div class="badge badge-danger">{{ __('Inactive') }}</div>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="mt-3 table-responsive">
+                        <table class="table table-striped" id="table_data">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
+                                    <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
+                                    <th>{{ __('Street Name') }}</th>
+                                    <th class="text-center" width="8%">{{ __('Status') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -130,3 +57,40 @@
 <x-swal />
 
 @include('layouts.admin.includes.datatable')
+
+@push('scripts')
+    <script>
+        let table_data;
+
+        table_data = $('#table_data').DataTable({
+            processing: true,
+            autoWidth: false,
+            responsive: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('member.street.data') }}',
+            },
+            columns: [{
+                data: 'DT_RowIndex',
+                searchable: false,
+                sortable: false,
+            }, {
+                data: 'action',
+                searchable: false,
+                sortable: false,
+            }, {
+                data: 'name',
+                searchable: true,
+                sortable: true,
+            }, {
+                data: 'status',
+                searchable: true,
+                sortable: true,
+            }],
+            columnDefs: [{
+                className: 'text-center',
+                targets: [0, 1, 3]
+            }],
+        });
+    </script>
+@endpush

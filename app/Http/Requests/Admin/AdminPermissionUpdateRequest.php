@@ -22,10 +22,10 @@ class AdminPermissionUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $permissionId = $this->route('permission');
+        $permission_id = $this->route('permission');
 
         return [
-            'permission_name' => ['required', 'string', 'max:255', 'unique:permissions,name,' . $permissionId],
+            'permission_name' => ['required', 'string', 'max:255', 'unique:permissions,name,' . $permission_id],
             'group_name' => ['required', 'string', 'max:255'],
         ];
     }

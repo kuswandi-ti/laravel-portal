@@ -22,6 +22,11 @@
     @stack('styles')
 
     <!-- Inline CSS -->
+    <style>
+        table.dataTable tbody td {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body>

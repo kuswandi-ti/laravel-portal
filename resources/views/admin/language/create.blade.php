@@ -53,7 +53,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>{{ __('admin.Name') }}</label>
+                            <label>{{ __('admin.Name') }} <span class="text-danger">({{ __('readonly') }})</span></label>
                             <input type="text" id="name" name="name"
                                 class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
                                 readonly required>
@@ -64,7 +64,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>{{ __('admin.Slug') }}</label>
+                            <label>{{ __('admin.Slug') }} <span class="text-danger">({{ __('readonly') }})</span></label>
                             <input type="text" id="slug" name="slug"
                                 class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}"
                                 readonly required>

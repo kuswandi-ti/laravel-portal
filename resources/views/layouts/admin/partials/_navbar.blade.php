@@ -1,7 +1,3 @@
-@php
-    $languages = \App\Models\Language::where('status', 1)->get();
-@endphp
-
 <nav class="navbar navbar-expand-lg main-navbar">
     <div class="mr-auto form-inline">
         <ul class="mr-3 navbar-nav">
@@ -16,15 +12,9 @@
     <ul class="ml-auto navbar-nav navbar-right">
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                @if (getGuardNameLoggedUser() == getGuardNameAdmin())
-                    <img alt="image"
-                        src="{{ url(config('common.path_image_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
-                        class="mr-1 rounded-circle">
-                @elseif (getGuardNameLoggedUser() == getGuardNameMember())
-                    <img alt="image"
-                        src="{{ url(config('common.path_image_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
-                        class="mr-1 rounded-circle">
-                @endif
+                <img alt="image"
+                    src="{{ url(config('common.path_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+                    class="mr-1 rounded-circle">
                 <div class="d-sm-none d-lg-inline-block">{{ __('admin.Hi') }},
                     {{ getLoggedUser()->name }}
                 </div>
@@ -57,28 +47,3 @@
         </li>
     </ul>
 </nav>
-
-{{-- @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#site_language').on('change', function() {
-                let language_code = $(this).val()
-                $.ajax({
-                    method: 'GET',
-                    url: "{{ route('admin.language.change') }}",
-                    data: {
-                        language_code: language_code,
-                    },
-                    success: function(data) {
-                        if (data.status === 'success') {
-                            window.location.reload()
-                        }
-                    },
-                    error: function(data) {
-                        console.log(data)
-                    },
-                })
-            })
-        })
-    </script>
-@endpush --}}

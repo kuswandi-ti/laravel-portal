@@ -73,21 +73,43 @@ Fix Variable :
 1. Default image
 
 
-TODO
 1. Hilangkan role di member halaman admin
 
 
 
 
 
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=48f8e1de6780f8
+MAIL_PASSWORD=f2d23b631e7928
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
 
 
 
+PATH_STORAGE="public/storage"
 
-PATH_TEMPLATE_ADMIN="public/template/admin/"
-PATH_TEMPLATE_MEMBER="public/template/member/"
 DEFAULT_IMAGE_SQUARE="/images/no_image_square.png"
 DEFAULT_IMAGE_CIRCLE="/images/no_image_circle.png"
+
+PATH_TEMPLATE="public/template"
+PATH_TEMPLATE_ADMIN="${PATH_TEMPLATE}/admin/"
+PATH_TEMPLATE_MOBILE="${PATH_TEMPLATE}/mobile/"
+PATH_TEMPLATE_WEBSITE="${PATH_TEMPLATE}/website/"
+
+GUARD_NAME_ADMIN="admin"
+GUARD_NAME_MEMBER="member"
+GUARD_NAME_USER="web"
+
+GUARD_TEXT_ADMIN="Admin"
+GUARD_TEXT_MEMBER="Member"
+GUARD_TEXT_USER="User"
+
+SITE_MICROSOFT_API_HOST=microsoft-translator-text.p.rapidapi.com
+SITE_MICROSOFT_API_KEY=384e408287mshfda0dbb1518ddf2p12065bjsn6ae311d7402b
 
 
 Package :
@@ -174,3 +196,10 @@ type -> name -> id -> class -> value -> required,autofocus
         </div>
     @enderror
 </div>
+
+
+
+
+TODO :
+1. Edit Translate masih belum sesuai (setelah search, data yg diedit tidak sesuai)
+   Lihat kembali di tutorial udemy

@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="mt-3 table-responsive">
                         <table class="table table-striped" id="table_data">
                             <thead>
                                 <tr>
@@ -47,34 +47,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($languages as $language)
-                                    <tr>
-                                        <td class="text-center" width="10%">{{ $loop->iteration }}</td>
-                                        <td class="text-center" width="12%">
-                                            <a href="{{ route('admin.language.edit', $language->id) }}"
-                                                class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('admin.language.destroy', $language->id) }}"
-                                                class="btn btn-danger btn-sm delete_item"><i
-                                                    class="fas fa-trash-alt"></i></a>
-                                        </td>
-                                        <td>{{ $language->name }}</td>
-                                        <td class="text-center">{{ $language->lang }}</td>
-                                        <td class="text-center" width="8%">
-                                            @if ($language->default == 1)
-                                                <div class="badge badge-primary">{{ __('admin.Yes') }}</div>
-                                            @else
-                                                <div class="badge badge-warning">{{ __('admin.No') }}</div>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            @if ($language->status == 1)
-                                                <div class="badge badge-success">{{ __('admin.Active') }}</div>
-                                            @else
-                                                <div class="badge badge-danger">{{ __('admin.Inactive') }}</div>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -87,3 +59,48 @@
 <x-swal />
 
 @include('layouts.admin.includes.datatable')
+
+@push('scripts')
+    <script>
+        let table_data;
+
+        table_data = $('#table_data').DataTable({
+            processing: true,
+            autoWidth: false,
+            responsive: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('admin.language.data') }}',
+            },
+            columns: [{
+                data: 'DT_RowIndex',
+                searchable: false,
+                sortable: false,
+            }, {
+                data: 'action',
+                searchable: false,
+                sortable: false,
+            }, {
+                data: 'name',
+                searchable: true,
+                sortable: true,
+            }, {
+                data: 'lang',
+                searchable: true,
+                sortable: true,
+            }, {
+                data: 'default',
+                searchable: true,
+                sortable: true,
+            }, {
+                data: 'status',
+                searchable: true,
+                sortable: true,
+            }],
+            columnDefs: [{
+                className: 'text-center',
+                targets: [0, 1, 3, 4, 5]
+            }],
+        });
+    </script>
+@endpush
