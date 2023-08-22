@@ -39,7 +39,7 @@ class MemberProfileController extends Controller
 
         $member->save();
 
-        return redirect()->back()->with('success', __('Update profile successfully'));
+        return redirect()->back()->with('success', __('admin.Update profile successfully'));
     }
 
     public function indexPassword()
@@ -53,6 +53,6 @@ class MemberProfileController extends Controller
         $member->password = bcrypt($request->password);
         $member->save();
 
-        return redirect()->back()->with('success', __('Update password successfully'));
+        return redirect()->back()->with('success', __('admin.Update password successfully'));
     }
 }

@@ -42,7 +42,7 @@ class MemberRoleController extends Controller
         ]);
         $role->syncPermissions($request->permissions);
 
-        return redirect()->route('member.role.index')->with('success', __('Create role & permissions successfully'));
+        return redirect()->route('member.role.index')->with('success', __('admin.Create role & permissions successfully'));
     }
 
     /**
@@ -78,7 +78,7 @@ class MemberRoleController extends Controller
         ]);
         $role->syncPermissions($request->permissions);
 
-        return redirect()->route('member.role.index')->with('success', __('Updated role & permissions successfully'));
+        return redirect()->route('member.role.index')->with('success', __('admin.Updated role & permissions successfully'));
     }
 
     /**
@@ -92,7 +92,7 @@ class MemberRoleController extends Controller
             if ($role->name == getGuardTextAdmin()) {
                 return response([
                     'status' => 'error',
-                    'message' => __('Cannot delete this role because role is ' . getGuardTextAdmin())
+                    'message' => __('admin.Cannot delete this role because role is ' . getGuardTextAdmin())
                 ]);
             }
 
@@ -100,12 +100,12 @@ class MemberRoleController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted role successfully')
+                'message' => __('admin.Deleted role successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted role is error')
+                'message' => __('admin.Deleted role is error')
             ]);
         }
     }
@@ -125,7 +125,7 @@ class MemberRoleController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->name == 'Admin') {
-                    return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
+                    return '<div class="badge badge-danger">'  . __('admin.No Action') . '</div>';
                 } else {
                     return '
                         <a href="' . route('member.role.edit', $query->id) . '" class="btn btn-primary btn-sm">

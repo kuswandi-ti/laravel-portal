@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Member;
 use App\Models\Member;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Enums\ActiveStatusEnum;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -19,9 +18,7 @@ class MemberAdminUserController extends Controller
      */
     public function index()
     {
-        $members_active = Member::where('area_id', getLoggedUser()->area->id)->get();
-        $members_inactive = Member::onlyTrashed()->where('area_id', getLoggedUser()->area->id)->get();
-        return view('member.admin.index', compact('members_active', 'members_inactive'));
+        return view('member.admin.index');
     }
 
     /**
@@ -49,12 +46,13 @@ class MemberAdminUserController extends Controller
         $member->password = Hash::make($request->password);
         $member->image = config('common.default_image_circle');
         $member->area_id = getLoggedUser()->area->id;
+        $member->created_by = getLoggedUser()->name;
         $member->status = 1;
         $member->save();
 
         $member->assignRole($request->role);
 
-        return redirect()->route('member.admin.index')->with('success', __('Created admin user successfully'));
+        return redirect()->route('member.admin.index')->with('success', __('admin.Created admin user successfully'));
     }
 
     /**
@@ -92,10 +90,12 @@ class MemberAdminUserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'updated_by' => getLoggedUser()->name,
+            'status' => 1,
         ]);
         $member->syncRoles($request->role);
 
-        return redirect()->route('member.admin.index')->with('success', __('Updated admin user successfully'));
+        return redirect()->route('member.admin.index')->with('success', __('admin.Updated admin user successfully'));
     }
 
     /**
@@ -106,39 +106,86 @@ class MemberAdminUserController extends Controller
         try {
             $member = Member::findOrFail($id);
 
-            if ($member->roles->pluck('name')->first() == getGuardTextAdmin()) {
+            if ($member->roles->first()->name == getGuardTextAdmin()) {
                 return response([
                     'status' => 'error',
-                    'message' => __('admin.Cannot delete this user becase role is ' . getGuardTextAdmin())
+                    'message' => __('admin.admin.Cannot delete this user becase role is Admin')
                 ]);
             }
 
             $member->status = 0;
+            $member->deleted_at = saveDateTimeNow();
+            $member->deleted_by = getLoggedUser()->name;
             $member->save();
-
-            $member->delete();
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted admin user successfully')
+                'message' => __('admin.Deleted admin user successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted admin user is error')
+                'message' => __('admin.Deleted admin user is error')
             ]);
         }
     }
 
     public function restore($id)
     {
-        $member = Member::withTrashed()->findOrFail($id);
+        $member = Member::findOrFail($id);
 
         $member->status = 1;
+        $member->restored_at = saveDateTimeNow();
+        $member->restored_by = getLoggedUser()->name;
         $member->save();
 
-        $member->restore();
+        return redirect()->route('member.admin.index')->with('success', __('admin.Restore admin user successfully'));
+    }
 
-        return redirect()->back()->with('success', __('Restore member admin successfully'));
+    public function data(Request $request)
+    {
+        $query = Member::where('area_id', getLoggedUserAreaId())->orderBy('name', 'ASC')->get();
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('image', function ($query) {
+                if (!empty($query->image)) {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . $query->image) . '"></figure>';
+                } else {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . config('common.default_image_circle')) . '"></figure>';
+                }
+            })
+            ->editColumn('role', function ($query) {
+                $badge = $query->roles->pluck('name')->first() == getGuardTextAdmin() ? 'danger' : 'dark';
+                return '<div class="badge badge-' . $badge . '">' . $query->roles->pluck('name')->first() . '</div>';
+            })
+            ->editColumn('status', function ($query) {
+                return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->roles->pluck('name')->first() == getGuardTextAdmin()) {
+                    return '<div class="badge badge-danger">'  . __('admin.No Action') . '</div>';
+                } else {
+                    if ($query->status == 1) {
+                        return '
+                            <a href="' . route('member.admin.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="' . route('member.admin.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    } else {
+                        return '
+                            <a href="' . route('member.admin.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

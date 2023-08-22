@@ -41,7 +41,7 @@ class MemberStreetController extends Controller
         $street->status = 1;
         $street->save();
 
-        return redirect()->route('member.street.index')->with('success', __('Created street successfully'));
+        return redirect()->route('member.street.index')->with('success', __('admin.Created street successfully'));
     }
 
     /**
@@ -73,7 +73,7 @@ class MemberStreetController extends Controller
             'updated_by' => getLoggedUser()->name,
         ]);
 
-        return redirect()->route('member.street.index')->with('success', __('Updated street successfully'));
+        return redirect()->route('member.street.index')->with('success', __('admin.Updated street successfully'));
     }
 
     /**
@@ -91,12 +91,12 @@ class MemberStreetController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted street successfully')
+                'message' => __('admin.Deleted street successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted street is error')
+                'message' => __('admin.Deleted street is error')
             ]);
         }
     }
@@ -110,7 +110,7 @@ class MemberStreetController extends Controller
         $street->restored_by = getLoggedUser()->name;
         $street->save();
 
-        return redirect()->route('member.street.index')->with('success', __('Restore street successfully'));
+        return redirect()->route('member.street.index')->with('success', __('admin.Restore street successfully'));
     }
 
     public function data(Request $request)
@@ -134,7 +134,7 @@ class MemberStreetController extends Controller
                     ';
                 } else {
                     return '
-                        <a href="' . route('member.street.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                        <a href="' . route('member.street.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
                             <i class="fas fa-undo"></i>
                         </a>
                     ';

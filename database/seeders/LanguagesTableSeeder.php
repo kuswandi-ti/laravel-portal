@@ -19,6 +19,7 @@ class LanguagesTableSeeder extends Seeder
         $language->slug = 'en';
         $language->default = 1;
         $language->status = 1;
+        $language->created_by = 'Super Admin';
         $language->save();
 
         $language = new Language();
@@ -27,6 +28,7 @@ class LanguagesTableSeeder extends Seeder
         $language->slug = 'id';
         $language->default = 0;
         $language->status = 1;
+        $language->created_by = 'Super Admin';
         $language->save();
     }
 }

@@ -81,7 +81,8 @@
             {{-- End Manage User --}}
 
             {{-- Language --}}
-            <li class="dropdown {{ setSidebarActive(['admin.language.*', 'admin.translate.admin*']) }}">
+            <li
+                class="dropdown {{ setSidebarActive(['admin.language.*', 'admin.translate.admin*', 'admin.translate.mobile*', 'admin.translate.website*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-language"></i>
                     <span>{{ __('admin.Localization') }}</span></a>
@@ -94,11 +95,6 @@
                     <li class="{{ setSidebarActive(['admin.translate.admin*']) }}">
                         <a class="nav-link" href="{{ route('admin.translate.admin') }}">
                             <span>{{ __('admin.Admin Translate') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ setSidebarActive(['admin.translate.member*']) }}">
-                        <a class="nav-link" href="{{ route('admin.translate.member') }}">
-                            <span>{{ __('admin.Member Translate') }}</span>
                         </a>
                     </li>
                     <li class="{{ setSidebarActive(['admin.translate.mobile*']) }}">
@@ -124,7 +120,7 @@
                 <ul class="dropdown-menu">
                     <li class="">
                         <a class="nav-link" href="">
-                            {{ __('admin.Offline Payment') }}
+                            {{ __('admin.Bank Transfer') }}
                         </a>
                     </li>
                 </ul>

@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('family_card_no')->nullable();
             $table->string('id_card_no')->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
+            $table->foreignUuid('house_id')->constrained('houses')->nullable();
             $table->string('register_token')->nullable();
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->rememberToken();

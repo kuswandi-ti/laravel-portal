@@ -200,6 +200,125 @@ type -> name -> id -> class -> value -> required,autofocus
 
 
 
+Admin
+'views/admin'
+'Http/Controllers/Admin'
+'views/mail'
+'views/layouts/admin'
+Member
+'views/member'
+'Http/Controllers/Member'
+
+
+
+
 TODO :
 1. Edit Translate masih belum sesuai (setelah search, data yg diedit tidak sesuai)
-   Lihat kembali di tutorial udemy
+   Lihat kembali di tutorial udemy (OK). Solusi, di jquery menggunakan fungsi body on click button
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------
+.env
+---------------------------------------------------------------------------------------
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:LkBA79J19f8a/1u+ZTtlZfePTCjXST6P3Xt5S04d/6s=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_laravel_portal
+DB_USERNAME=root
+DB_PASSWORD=
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=e795e7a21b5af5
+MAIL_PASSWORD=cebc03e3d821e3
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+
+VITE_APP_NAME="${APP_NAME}"
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+PATH_STORAGE="public/storage"
+
+DEFAULT_IMAGE_SQUARE="/images/no_image_square.png"
+DEFAULT_IMAGE_CIRCLE="/images/no_image_circle.png"
+
+PATH_TEMPLATE="public/template"
+PATH_TEMPLATE_ADMIN="${PATH_TEMPLATE}/admin/"
+PATH_TEMPLATE_MOBILE="${PATH_TEMPLATE}/mobile/"
+PATH_TEMPLATE_WEBSITE="${PATH_TEMPLATE}/website/"
+
+GUARD_NAME_ADMIN="admin"
+GUARD_NAME_MEMBER="member"
+GUARD_NAME_USER="web"
+
+GUARD_TEXT_ADMIN="Admin"
+GUARD_TEXT_MEMBER="Member"
+GUARD_TEXT_USER="User"
+
+SITE_MICROSOFT_API_HOST=microsoft-translator-text.p.rapidapi.com
+SITE_MICROSOFT_API_KEY=384e408287mshfda0dbb1518ddf2p12065bjsn6ae311d7402b
+
+MIDTRANS_ENVIRONMENT=sandbox
+MIDTRANS_MERCHANT_ID=G182400219
+MIDTRANS_CLIENT_KEY=SB-Mid-client-dR0O_qzGlDut2H4W
+MIDTRANS_SERVER_KEY=SB-Mid-server-wqi7Qz4u9kNIMpxnwW1LLTsC
+
+# MIDTRANS_ENVIRONMENT=production
+# MIDTRANS_MERCHANT_ID=G182400219
+# MIDTRANS_CLIENT_KEY=Mid-client-9VatgRzOBhxiVTDx
+# MIDTRANS_SERVER_KEY=Mid-server-aIcbql824rydGuK_Pz1NT7ex
+---------------------------------------------------------------------------------------

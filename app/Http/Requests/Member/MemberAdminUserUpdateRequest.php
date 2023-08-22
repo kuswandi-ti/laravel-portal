@@ -21,11 +21,11 @@ class MemberAdminUserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        // $userId = $this->route('admin');
+        $member_id = $this->route('admin');
 
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:members,email,' . $this->id],
+            'email' => ['required', 'email', 'max:255', 'unique:members,email,' . $member_id],
             'role' => ['required'],
         ];
     }

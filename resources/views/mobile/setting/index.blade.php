@@ -7,7 +7,7 @@
 @section('content')
     @include('layouts.mobile.partials._title')
 
-    <div class="mt-3 text-center section">
+    <div class="mt-2 text-center section">
         <div class="avatar-section">
             <a href="#">
                 <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar"

@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('House') }}
+    {{ __('admin.House') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('House') }}
+    {{ __('admin.House') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('House') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.House') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('House') }}
+    {{ __('admin.House') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View information about house on this page') }}
+    {{ __('admin.View information about house on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('All House') }}</h4>
+                    <h4>{{ __('admin.All House') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('member.house.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> {{ __('Create') }}
+                            <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
                         </a>
                     </div>
                 </div>
@@ -40,12 +40,12 @@
                                 <tr>
                                     <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
                                     <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                    <th>{{ __('House Owner Name') }}</th>
-                                    <th class="text-center">{{ __('Street') }}</th>
-                                    <th class="text-center">{{ __('Block') }}</th>
-                                    <th class="text-center">{{ __('House No') }}</th>
-                                    <th>{{ __('Address Info') }}</th>
-                                    <th class="text-center" width="8%">{{ __('Status') }}</th>
+                                    <th>{{ __('admin.House Owner Name') }}</th>
+                                    <th class="text-center">{{ __('admin.Street') }}</th>
+                                    <th class="text-center">{{ __('admin.Block') }}</th>
+                                    <th class="text-center">{{ __('admin.House No') }}</th>
+                                    <th>{{ __('admin.Address Info') }}</th>
+                                    <th class="text-center" width="8%">{{ __('admin.Status') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

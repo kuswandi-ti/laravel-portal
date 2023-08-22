@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Street') }}
+    {{ __('admin.Street') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Street') }}
+    {{ __('admin.Street') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Street') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Street') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Create Street') }}
+    {{ __('admin.Create Street') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('Create information about street on this page') }}
+    {{ __('admin.Create information about street on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Create Street') }}</h4>
+                    <h4>{{ __('admin.Create Street') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('member.street.index') }}" class="btn btn-warning">
-                            <i class="fas fa-chevron-circle-left"></i> {{ __('Back') }}
+                            <i class="fas fa-chevron-circle-left"></i> {{ __('admin.Back') }}
                         </a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label>{{ __('Street Name') }} <x-fill-field /></label>
+                            <label>{{ __('admin.Street Name') }} <x-fill-field /></label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                 value="{{ old('name') }}" required autofocus>
                             @error('name')
@@ -49,7 +49,7 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> {{ __('Create') }}
+                            <i class="fas fa-save"></i> {{ __('admin.Create') }}
                         </button>
                     </div>
                 </form>

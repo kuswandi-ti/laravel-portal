@@ -153,14 +153,14 @@ class AdminMemberUserController extends Controller
                 }
             })
             ->editColumn('role', function ($query) {
-                $badge = $query->roles->pluck('name')->first() == 'Admin' ? 'danger' : 'dark';
+                $badge = $query->roles->pluck('name')->first() == getGuardTextAdmin() ? 'danger' : 'dark';
                 return '<div class="badge badge-' . $badge . '">' . $query->roles->pluck('name')->first() . '</div>';
             })
             ->editColumn('status', function ($query) {
                 return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
             })
             ->addColumn('action', function ($query) {
-                if ($query->roles->pluck('name')->first() == 'Admin') {
+                if ($query->roles->pluck('name')->first() == getGuardTextAdmin()) {
                     return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
                 } else {
                     if ($query->status == 1) {

@@ -65,7 +65,7 @@
                 <!-- * action group -->
 
                 <!-- setup -->
-                <div class="mt-1 listview-title">{{ __('admin.Menu') }}</div>
+                <div class="mt-1 listview-title">{{ __('Menu') }}</div>
                 <ul class="listview flush transparent no-line image-listview">
                     <li>
                         <a href="{{ route('mobile.user.index') }}" class="item">
@@ -73,7 +73,7 @@
                                 <ion-icon name="person-circle-outline"></ion-icon>
                             </div>
                             <div class="in">
-                                {{ __('admin.User') }}
+                                {{ __('User') }}
                             </div>
                         </a>
                     </li>

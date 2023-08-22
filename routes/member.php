@@ -12,9 +12,9 @@ use App\Http\Controllers\Member\MemberAdminUserController;
 use App\Http\Controllers\Member\MemberDashboardController;
 use App\Http\Controllers\Member\MemberStaffUserController;
 
-Route::get('/', [MemberAuthController::class, 'login'])->name('login');
+Route::group(['middleware' => ['set_language']], function () {
+    Route::get('/', [MemberAuthController::class, 'login'])->name('login');
 
-Route::group([], function () {
     /** Auth Member Routes */
     Route::get('register', [MemberAuthController::class, 'register'])->name('register');
     Route::post('register', [MemberAuthController::class, 'handleRegister'])->name('register.post');
@@ -61,12 +61,14 @@ Route::group([
     Route::resource('role', MemberRoleController::class);
 
     /** Admin Routes */
-    Route::resource('admin', MemberAdminUserController::class);
+    Route::get('admin/data', [MemberAdminUserController::class, 'data'])->name('admin.data');
     Route::get('admin/restore/{id}', [MemberAdminUserController::class, 'restore'])->name('admin.restore');
+    Route::resource('admin', MemberAdminUserController::class);
 
     /** User Routes */
-    Route::resource('staff', MemberStaffUserController::class);
+    Route::get('staff/data', [MemberStaffUserController::class, 'data'])->name('staff.data');
     Route::get('staff/restore/{id}', [MemberStaffUserController::class, 'restore'])->name('staff.restore');
+    Route::resource('staff', MemberStaffUserController::class);
 
     /** Setting Routes */
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');

@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('admin.Translate Admin Site') }}
+    {{ __('admin.Translate Website') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('admin.Translate Admin Site') }}
+    {{ __('admin.Translate Website') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('admin.Translate Admin Site') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Translate Website') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('admin.Translate Admin Site') }}
+    {{ __('admin.Translate Website') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('admin.View information about translate admin site on this page') }}
+    {{ __('admin.View information about translate webite on this page') }}
 @endsection
 
 @section('content')
@@ -26,7 +26,7 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('admin.All Translate Admin Site') }}</h4>
+                    <h4>{{ __('admin.All Translate Website') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('admin.language.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
@@ -58,10 +58,10 @@
                                                     action="{{ route('admin.translate.extract_localize_string') }}">
                                                     @csrf
                                                     <input type="hidden" name="directory"
-                                                        value="{{ resource_path('views/admin') }},{{ app_path('Http/Controllers/Admin') }},{{ resource_path('views/mail') }},{{ resource_path('views/layouts/admin') }},{{ resource_path('views/member') }},{{ app_path('Http/Controllers/Member') }}">
+                                                        value="{{ resource_path('views/website') }},{{ app_path('Http/Controllers/Website') }},{{ resource_path('views/layouts/website') }}">
                                                     <input type="hidden" name="language_code"
                                                         value="{{ $language->lang }}">
-                                                    <input type="hidden" name="file_name" value="admin">
+                                                    <input type="hidden" name="file_name" value="website">
                                                     <button type="submit"
                                                         class="mx-2 btn btn-primary">{{ __('admin.Generate Strings') }}</button>
                                                 </form>
@@ -69,7 +69,7 @@
                                                 <form class="translate_form" method="POST" action="#">
                                                     <input type="hidden" name="language_code"
                                                         value="{{ $language->lang }}">
-                                                    <input type="hidden" name="file_name" value="admin">
+                                                    <input type="hidden" name="file_name" value="website">
                                                     <button type="submit"
                                                         class="mx-2 btn btn-dark translate-button">{{ __('admin.Translate Strings') }}</button>
                                                 </form>
@@ -90,7 +90,7 @@
                                             </thead>
                                             <tbody>
                                                 @php
-                                                    $translated_values = trans('admin', [], $language->lang);
+                                                    $translated_values = trans('website', [], $language->lang);
                                                 @endphp
 
                                                 @if (is_array($translated_values))
@@ -99,8 +99,8 @@
                                                             <td class="text-center" width="12%">
                                                                 <button data-langcode="{{ $language->lang }}"
                                                                     data-key="{{ $key }}"
-                                                                    data-value="{{ $value }}" data-filename="admin"
-                                                                    type="button"
+                                                                    data-value="{{ $value }}"
+                                                                    data-filename="website" type="button"
                                                                     class="btn btn-primary btn-sm modal_btn trigger--fire-modal-1"
                                                                     data-toggle="modal" data-target="#exampleModal">
                                                                     <i class="fas fa-edit"></i>

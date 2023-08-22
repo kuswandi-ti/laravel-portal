@@ -134,7 +134,7 @@ class MemberAuthController extends Controller
 
         Mail::to($request->email)->send(new MemberSendResetLinkMail($token, $request->email));
 
-        return redirect()->back()->with('success', __('A mail has been sent to your email address. Please check your email.'));
+        return redirect()->back()->with('success', __('admin.A mail has been sent to your email address. Please check your email.'));
     }
 
     public function resetPassword($token)
@@ -150,14 +150,14 @@ class MemberAuthController extends Controller
         ])->first();
 
         if (!$member) {
-            return back()->with('error', __('Token is invalid !'));
+            return back()->with('error', __('admin.Token is invalid !'));
         }
 
         $member->password = bcrypt($request->password);
         $member->remember_token = null;
         $member->save();
 
-        return redirect()->route('member.login')->with('success', __('Password reset successfully. Please login first'));
+        return redirect()->route('member.login')->with('success', __('admin.Password reset successfully. Please login first'));
     }
 
     public function logout(Request $request): RedirectResponse

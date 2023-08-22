@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Route;
 
 class AdminTranslateController extends Controller
 {
@@ -18,6 +19,24 @@ class AdminTranslateController extends Controller
     {
         $languages = Language::all();
         return view('admin.translate.admin', compact('languages'));
+    }
+
+    public function indexMember(): View
+    {
+        $languages = Language::all();
+        return view('admin.translate.member', compact('languages'));
+    }
+
+    public function indexMobile(): View
+    {
+        $languages = Language::all();
+        return view('admin.translate.mobile', compact('languages'));
+    }
+
+    public function indexWebsite(): View
+    {
+        $languages = Language::all();
+        return view('admin.translate.website', compact('languages'));
     }
 
     function extractLocalizationStrings(Request $request)
@@ -47,7 +66,7 @@ class AdminTranslateController extends Controller
 
                 if (!empty($matches[1])) {
                     foreach ($matches[1] as $match) {
-                        $match = preg_replace('/^(admin|member)\./', '', $match);
+                        $match = preg_replace('/^(admin|member|web)\./', '', $match);
                         $localization_strings[$match] = $match;
                     }
                 }
@@ -63,7 +82,8 @@ class AdminTranslateController extends Controller
 
         file_put_contents(lang_path($language_code . '/' . $file_name . '.php'), $phpArray);
 
-        return redirect()->route('admin.translate.admin')->with('success', __('admin.Generate string admin translate successfully'));
+
+        return redirect()->back()->with('success', __('admin.Generate string successfully'));
     }
 
     function updateLanguangeString(Request $request): RedirectResponse
@@ -76,7 +96,7 @@ class AdminTranslateController extends Controller
 
         file_put_contents(lang_path($request->lang_code . '/' . $request->file_name . '.php'), $phpArray);
 
-        return redirect()->route('admin.translate.admin')->with('success', __('admin.Updated translate string successfully'));
+        return redirect()->back()->with('success', __('admin.Updated translate string successfully'));
     }
 
     function translateString(Request $request)

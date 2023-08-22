@@ -35,7 +35,7 @@ class MemberSettingController extends Controller
         $area->full_address = $request->full_address;
         $area->save();
 
-        return redirect()->back()->with('success', __('Update area successfully'));
+        return redirect()->back()->with('success', __('admin.Update area successfully'));
     }
 
     public function settingLogoUpdate(Request $request)
@@ -48,6 +48,6 @@ class MemberSettingController extends Controller
             );
         }
 
-        return redirect()->back()->with('success', __('Updated logo successfully'));
+        return redirect()->back()->with('success', __('admin.Updated logo successfully'));
     }
 }

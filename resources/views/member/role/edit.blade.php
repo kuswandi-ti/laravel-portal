@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Role') }}
+    {{ __('admin.Role') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Role') }}
+    {{ __('admin.Role') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Role') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Role') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Edit Role') }}
+    {{ __('admin.Edit Role') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('Update information about user role on this page') }}
+    {{ __('admin.Update information about user role on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Edit Role') }}</h4>
+                    <h4>{{ __('admin.Edit Role') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('member.role.index') }}" class="btn btn-warning">
-                            <i class="fas fa-chevron-circle-left"></i> {{ __('Back') }}
+                            <i class="fas fa-chevron-circle-left"></i> {{ __('admin.Back') }}
                         </a>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
-                            <label>{{ __('Role Name') }} <x-fill-field /></label>
+                            <label>{{ __('admin.Role Name') }} <x-fill-field /></label>
                             <input type="text" name="role_name"
                                 class="form-control @error('role_name') is-invalid @enderror"
                                 value="{{ old('role_name') ?? $role->name }}" required>
@@ -50,22 +50,22 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="control-label">{{ __('Guard Name') }} <span
-                                    class="text-danger">{{ __('(disabled)') }}</span></div>
+                            <div class="control-label">{{ __('admin.Guard Name') }} <span
+                                    class="text-danger">{{ __('admin.(disabled)') }}</span></div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
                                     <input type="radio" name="guard_name" id="guard_member" value="member"
                                         class="custom-switch-input" {{ $role->guard_name == 'member' ? 'checked' : '' }}
                                         disabled>
                                     <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-danger">{{ __('Member') }}</span>
+                                    <span class="custom-switch-description text-danger">{{ __('admin.Member') }}</span>
                                 </label>
                                 <label class="custom-switch">
                                     <input type="radio" name="guard_name" id="guard_web" value="web"
                                         class="custom-switch-input" {{ $role->guard_name == 'web' ? 'checked' : '' }}
                                         disabled>
                                     <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-info">{{ __('Web') }}</span>
+                                    <span class="custom-switch-description text-info">{{ __('admin.Web') }}</span>
                                 </label>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
 
                     <div class="card-footer bg-light">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> {{ __('Update') }}
+                            <i class="fas fa-save"></i> {{ __('admin.Update') }}
                         </button>
                     </div>
                 </form>

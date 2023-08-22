@@ -36,6 +36,10 @@ class SettingAdminTableSeeder extends Seeder
             ['key' => 'mail_port', 'value' => config('common.mail_port')],
             ['key' => 'mail_from_address', 'value' => config('common.mail_from_address')],
             ['key' => 'mail_from_name', 'value' => config('common.mail_from_name')],
+            ['key' => 'midtrans_environment', 'value' => config('common.midtrans_environment')],
+            ['key' => 'midtrans_merchant_id', 'value' => config('common.midtrans_merchant_id')],
+            ['key' => 'midtrans_client_key', 'value' => config('common.midtrans_client_key')],
+            ['key' => 'midtrans_server_key', 'value' => config('common.midtrans_server_key')],
         ];
         foreach ($input as $item) {
             Setting::create($item);

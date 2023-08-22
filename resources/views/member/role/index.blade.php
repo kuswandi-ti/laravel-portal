@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Role') }}
+    {{ __('admin.Role') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Role') }}
+    {{ __('admin.Role') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Role') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Role') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Role') }}
+    {{ __('admin.Role') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('View information about user role & permission on this page') }}
+    {{ __('admin.View information about user role & permission on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('All Roles') }}</h4>
+                    <h4>{{ __('admin.All Roles') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('member.role.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> {{ __('Create') }}
+                            <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
                         </a>
                     </div>
                 </div>
@@ -40,8 +40,8 @@
                                 <tr>
                                     <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
                                     <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                    <th>{{ __('Role Name') }}</th>
-                                    <th class="text-center">{{ __('Guard Name') }}</th>
+                                    <th>{{ __('admin.Role Name') }}</th>
+                                    <th class="text-center">{{ __('admin.Guard Name') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

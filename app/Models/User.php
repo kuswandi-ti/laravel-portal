@@ -4,10 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Area;
+use App\Models\House;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,7 +15,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
@@ -53,5 +52,10 @@ class User extends Authenticatable
     public function area()
     {
         return $this->belongsTo(Area::class, 'area_id', 'id');
+    }
+
+    public function house()
+    {
+        return $this->belongsTo(House::class, 'house_id', 'id');
     }
 }

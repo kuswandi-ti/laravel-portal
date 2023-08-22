@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('Member Admin') }}
+    {{ __('admin.Member Admin') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('Member Admin') }}
+    {{ __('admin.Member Admin') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('Member Admin') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Member Admin') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('Create Member Admin') }}
+    {{ __('admin.Create Member Admin') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('Create information about member admin on this page') }}
+    {{ __('admin.Create information about member admin on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Create Member Admin') }}</h4>
+                    <h4>{{ __('admin.Create Member Admin') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('member.admin.index') }}" class="btn btn-warning">
-                            <i class="fas fa-chevron-circle-left"></i> {{ __('Back') }}
+                            <i class="fas fa-chevron-circle-left"></i> {{ __('admin.Back') }}
                         </a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label>{{ __('Member Admin Name') }} <x-fill-field /></label>
+                            <label>{{ __('admin.Member Admin Name') }} <x-fill-field /></label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                 value="{{ old('name') }}" required>
                             @error('name')
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>{{ __('Member Admin Email') }} <x-fill-field /></label>
+                            <label>{{ __('admin.Member Admin Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email') }}" required>
                             @error('email')
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>{{ __('Password') }} <x-fill-field /></label>
+                            <label>{{ __('admin.Password') }} <x-fill-field /></label>
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
                                 required>
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>{{ __('Confirmation Password') }} <x-fill-field /></label>
+                            <label>{{ __('admin.Confirmation Password') }} <x-fill-field /></label>
                             <input type="password" name="password_confirmation"
                                 class="form-control @error('password_confirmation') is-invalid @enderror"
                                 value="{{ old('password_confirmation') }}" required>
@@ -83,7 +83,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="control-label">{{ __('Member Admin Role') }}</div>
+                            <div class="control-label">{{ __('admin.Member Admin Role') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 @foreach ($roles as $key => $item)
                                     <label class="custom-switch">
@@ -105,7 +105,7 @@
 
                     <div class="card-footer bg-light">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> {{ __('Create') }}
+                            <i class="fas fa-save"></i> {{ __('admin.Create') }}
                         </button>
                     </div>
                 </form>

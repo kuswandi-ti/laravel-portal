@@ -75,19 +75,19 @@
             {{-- End Role & User --}}
 
             {{-- Payment --}}
-            <li class="dropdown {{ setSidebarActive(['member.role.*', 'member.admin.*', 'member.staff.*']) }}">
+            <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-money-check"></i>
                     <span>{{ __('admin.Payment') }}</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['member.role.*']) }}">
+                    <li class="">
                         <a class="nav-link" href="{{ route('member.role.index') }}">{{ __('admin.Automatic') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['member.admin.*']) }}">
+                    <li class="">
                         <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Bank Transfer') }}
                         </a>
                     </li>

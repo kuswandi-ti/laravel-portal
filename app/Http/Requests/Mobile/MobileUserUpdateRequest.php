@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Member;
+namespace App\Http\Requests\Mobile;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MemberStaffUserUpdateRequest extends FormRequest
+class MobileUserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +22,17 @@ class MemberStaffUserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $staff_id = $this->route('staff');
-
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $staff_id],
-            'role' => ['required'],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users')->where(function ($query) {
+                    $query->where('email', $this->email)
+                        ->where('house_id', $this->house_id);
+                })->ignore($this->user)
+            ],
         ];
     }
 }

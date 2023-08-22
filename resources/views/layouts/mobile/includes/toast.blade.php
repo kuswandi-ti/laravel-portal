@@ -6,7 +6,7 @@
                 {{ $message }}
             </div>
         </div>
-        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('admin.OK') }}</button>
+        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
     </div>
 @endif
 
@@ -18,7 +18,7 @@
                 {{ $message }}
             </div>
         </div>
-        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('admin.OK') }}</button>
+        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
     </div>
 @endif
 
@@ -30,7 +30,7 @@
                 {{ $message }}
             </div>
         </div>
-        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('admin.OK') }}</button>
+        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
     </div>
 @endif
 
@@ -42,6 +42,6 @@
                 {{ $message }}
             </div>
         </div>
-        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('admin.OK') }}</button>
+        <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
     </div>
 @endif

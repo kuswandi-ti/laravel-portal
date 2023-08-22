@@ -20,9 +20,7 @@ class MemberStaffUserController extends Controller
      */
     public function index()
     {
-        $staffs_active = User::where('area_id', getLoggedUser()->area->id)->get();
-        $staffs_inactive = User::onlyTrashed()->where('area_id', getLoggedUser()->area->id)->get();
-        return view('member.staff.index', compact('staffs_active', 'staffs_inactive'));
+        return view('member.staff.index');
     }
 
     /**
@@ -50,6 +48,7 @@ class MemberStaffUserController extends Controller
         $staff->password = Hash::make($request->password);
         $staff->image = config('common.default_image_circle');
         $staff->area_id = getLoggedUser()->area->id;
+        $staff->created_by = getLoggedUser()->name;
         $staff->status = 1;
         $staff->save();
 
@@ -59,7 +58,7 @@ class MemberStaffUserController extends Controller
 
         Mail::to($request->email)->send(new MemberRegisterVerifyMail($token));
 
-        return redirect()->route('member.staff.index')->with('success', __('Created staff successfully'));
+        return redirect()->route('member.staff.index')->with('success', __('admin.Created staff successfully'));
     }
 
     /**
@@ -94,10 +93,12 @@ class MemberStaffUserController extends Controller
         $staff->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'updated_by' => getLoggedUser()->name,
+            'status' => 1,
         ]);
         $staff->syncRoles($request->role);
 
-        return redirect()->route('member.staff.index')->with('success', __('Updated staff successfully'));
+        return redirect()->route('member.staff.index')->with('success', __('admin.Updated staff successfully'));
     }
 
     /**
@@ -109,31 +110,74 @@ class MemberStaffUserController extends Controller
             $staff = User::findOrFail($id);
 
             $staff->status = 0;
+            $staff->deleted_at = saveDateTimeNow();
+            $staff->deleted_by = getLoggedUser()->name;
             $staff->save();
-
-            $staff->delete();
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted staff successfully')
+                'message' => __('admin.Deleted staff successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted staff is error')
+                'message' => __('admin.Deleted staff is error')
             ]);
         }
     }
 
     public function restore($id)
     {
-        $staff = User::withTrashed()->findOrFail($id);
+        $staff = User::findOrFail($id);
 
         $staff->status = 1;
+        $staff->restored_at = saveDateTimeNow();
+        $staff->restored_by = getLoggedUser()->name;
         $staff->save();
 
-        $staff->restore();
+        return redirect()->route('member.staff.index')->with('success', __('admin.Restore staff successfully'));
+    }
 
-        return redirect()->back()->with('success', __('Restore staff successfully'));
+    public function data(Request $request)
+    {
+        $query = User::where('area_id', getLoggedUserAreaId())->orderBy('name', 'ASC')->get();
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->editColumn('image', function ($query) {
+                if (!empty($query->image)) {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . $query->image) . '"></figure>';
+                } else {
+                    return '<figure class="avatar"><img src="' . url(config('common.path_storage') . config('common.default_image_circle')) . '"></figure>';
+                }
+            })
+            ->editColumn('role', function ($query) {
+                $badge = $query->roles->pluck('name')->first() == getGuardTextUser() ? 'danger' : 'dark';
+                return '<div class="badge badge-' . $badge . '">' . $query->roles->pluck('name')->first() . '</div>';
+            })
+            ->editColumn('status', function ($query) {
+                return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
+            })
+            ->addColumn('action', function ($query) {
+                if ($query->status == 1) {
+                    return '
+                        <a href="' . route('member.staff.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="' . route('member.staff.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    ';
+                } else {
+                    return '
+                        <a href="' . route('member.staff.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
+                            <i class="fas fa-undo"></i>
+                        </a>
+                    ';
+                }
+            })
+            ->rawColumns(['action'])
+            ->escapeColumns([])
+            ->make(true);
     }
 }

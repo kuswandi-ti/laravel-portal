@@ -1,7 +1,7 @@
 @extends('layouts.admin.auth')
 
 @section('page_title')
-    {{ __('Member Admin Register') }}
+    {{ __('admin.Member Admin Register') }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Member Admin Register') }}</h4>
+                    <h4>{{ __('admin.Member Admin Register') }}</h4>
                 </div>
 
                 <div class="card-body">
@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="name">{{ __('Full Name') }} <x-fill-field /></label>
+                                    <label for="name">{{ __('admin.Full Name') }} <x-fill-field /></label>
                                     <input type="text" name="name"
                                         class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
                                         required autofocus>
@@ -37,7 +37,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">{{ __('Email') }} <x-fill-field /></label>
+                                    <label for="email">{{ __('admin.Email') }} <x-fill-field /></label>
                                     <input type="email" name="email"
                                         class="form-control @error('email') is-invalid @enderror"
                                         value="{{ old('email') }}" required>
@@ -48,7 +48,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">{{ __('Password') }} <x-fill-field /></label>
+                                    <label for="password">{{ __('admin.Password') }} <x-fill-field /></label>
                                     <input type="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror" required>
                                     @error('password')
@@ -58,7 +58,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password_confirmation">{{ __('Password Confirmation') }}
+                                    <label for="password_confirmation">{{ __('admin.Password Confirmation') }}
                                         <x-fill-field /></label>
                                     <input type="password" name="password_confirmation"
                                         class="form-control @error('password_confirmation') is-invalid @enderror" required>
@@ -72,11 +72,11 @@
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="residence">{{ __('Residence') }}
+                                    <label for="residence">{{ __('admin.Residence') }}
                                         <x-fill-field /></label>
                                     <select name="residence"
                                         class="form-control select2 @error('residence') is-invalid @enderror" required>
-                                        <option value="" selected disabled>{{ __('Choose one ...') }}</option>
+                                        <option value="" selected disabled>{{ __('admin.Choose one ...') }}</option>
                                         @foreach ($residences as $id => $name)
                                             <option value="{{ $id }}"
                                                 {{ old('residence') == $id ? 'selected' : '' }}>
@@ -90,7 +90,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="area_name">{{ __('Area Name, Cluster, or Others') }}
+                                    <label for="area_name">{{ __('admin.Area Name, Cluster, or Others') }}
                                         <x-fill-field /></label>
                                     <input type="text" name="area_name"
                                         class="form-control @error('area_name') is-invalid @enderror"
@@ -102,11 +102,11 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="package">{{ __('Package') }}
+                                    <label for="package">{{ __('admin.Package') }}
                                         <x-fill-field /></label>
                                     <select name="package"
                                         class="form-control select2 @error('package') is-invalid @enderror" required>
-                                        <option value="" selected disabled>{{ __('Choose one ...') }}</option>
+                                        <option value="" selected disabled>{{ __('admin.Choose one ...') }}</option>
                                         @foreach ($packages as $id => $name)
                                             <option value="{{ $id }}"
                                                 {{ old('package') == $id ? 'selected' : '' }}>
@@ -120,15 +120,15 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="package_type">{{ __('Package Type') }}
+                                    <label for="package_type">{{ __('admin.Package Type') }}
                                         <x-fill-field /></label>
                                     <select name="package_type"
                                         class="form-control select2 @error('package_type') is-invalid @enderror" required>
-                                        <option value="" selected disabled>{{ __('Choose one ...') }}</option>
+                                        <option value="" selected disabled>{{ __('admin.Choose one ...') }}</option>
                                         <option value="yearly" {{ old('package_type') == 'yearly' ? 'selected' : '' }}>
-                                            {{ __('Yearly') }}</option>
+                                            {{ __('admin.Yearly') }}</option>
                                         <option value="monthly" {{ old('package_type') == 'monthly' ? 'selected' : '' }}>
-                                            {{ __('Monthly') }}</option>
+                                            {{ __('admin.Monthly') }}</option>
                                     </select>
                                     @error('package_type')
                                         <div class="invalid-feedback">
@@ -141,20 +141,20 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                {{ __('Register') }}
+                                {{ __('admin.Register') }}
                             </button>
                         </div>
                     </form>
 
                     <div class="text-center form-group">
                         <a href="{{ route('member.login') }}">
-                            {{ __('Login') }}
+                            {{ __('admin.Login') }}
                         </a>
                     </div>
                 </div>
             </div>
             <div class="simple-footer">
-                {{ __('Copyright') }} &copy; Stisla {{ date('Y') }}
+                {{ __('admin.Copyright') }} &copy; Stisla {{ date('Y') }}
             </div>
         </div>
     </div>

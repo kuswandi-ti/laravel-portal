@@ -39,12 +39,6 @@
                                 {{ __('admin.Midtrans') }}
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="setting2" data-toggle="tab" href="#tab-setting2" role="tab"
-                                aria-selected="false">
-                                {{ __('admin.Xendit') }}
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -65,19 +59,20 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Mode') }} <span class="text-danger">*</span></label>
-                                            <select id="midtrans_mode" name="midtrans_mode"
-                                                class="form-control @error('midtrans_mode') is-invalid @enderror" required>
+                                            <label>{{ __('admin.Environment') }} <x-fill-field /></label>
+                                            <select name="midtrans_environment" id="midtrans_environment"
+                                                class="form-control @error('midtrans_environment') is-invalid @enderror"
+                                                required>
                                                 <option value="" selected disabled>{{ __('admin.Choose one ...') }}
                                                 </option>
                                                 <option value="sandbox"
-                                                    {{ !empty($setting['midtrans_mode']) ? ($setting['midtrans_mode'] == 'sandbox' ? 'selected' : '') : '' }}>
+                                                    {{ !empty($setting['midtrans_environment']) ? ($setting['midtrans_environment'] == 'sandbox' ? 'selected' : '') : '' }}>
                                                     {{ __('admin.Sandbox') }}</option>
                                                 <option value="production"
-                                                    {{ !empty($setting['midtrans_mode']) ? ($setting['midtrans_mode'] == 'production' ? 'selected' : '') : '' }}>
+                                                    {{ !empty($setting['midtrans_environment']) ? ($setting['midtrans_environment'] == 'production' ? 'selected' : '') : '' }}>
                                                     {{ __('admin.Production') }}</option>
                                             </select>
-                                            @error('midtrans_mode')
+                                            @error('midtrans_environment')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -86,7 +81,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Merchant ID') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Merchant ID') }} <x-fill-field /></label>
                                             <input type="text" id="midtrans_merchant_id" name="midtrans_merchant_id"
                                                 class="form-control @error('midtrans_merchant_id') is-invalid @enderror"
                                                 value="{{ !empty($setting['midtrans_merchant_id']) ? $setting['midtrans_merchant_id'] : '' }}"
@@ -103,7 +98,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Client Key') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Client Key') }} <x-fill-field /></label>
                                             <input type="text" id="midtrans_client_key" name="midtrans_client_key"
                                                 class="form-control @error('midtrans_client_key') is-invalid @enderror"
                                                 value="{{ !empty($setting['midtrans_client_key']) ? $setting['midtrans_client_key'] : '' }}"
@@ -117,7 +112,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>{{ __('admin.Server Key') }} <span class="text-danger">*</span></label>
+                                            <label>{{ __('admin.Server Key') }} <x-fill-field /></label>
                                             <input type="text" id="midtrans_server_key" name="midtrans_server_key"
                                                 class="form-control @error('midtrans_server_key') is-invalid @enderror"
                                                 value="{{ !empty($setting['midtrans_server_key']) ? $setting['midtrans_server_key'] : '' }}"
@@ -130,17 +125,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade show" id="tab-setting2" role="tabpanel">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>{{ __('admin.Xendit') }}</h4>
-                            </div>
-                            <div class="card-body">
-
                             </div>
                         </div>
                     </div>

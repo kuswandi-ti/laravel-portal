@@ -51,7 +51,7 @@ class MemberHouseController extends Controller
         $house->status = 1;
         $house->save();
 
-        return redirect()->route('member.house.index')->with('success', __('Created house successfully'));
+        return redirect()->route('member.house.index')->with('success', __('admin.Created house successfully'));
     }
 
     /**
@@ -94,7 +94,7 @@ class MemberHouseController extends Controller
             'status' => 1,
         ]);
 
-        return redirect()->route('member.house.index')->with('success', __('Updated house successfully'));
+        return redirect()->route('member.house.index')->with('success', __('admin.Updated house successfully'));
     }
 
     /**
@@ -112,12 +112,12 @@ class MemberHouseController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted house successfully')
+                'message' => __('admin.Deleted house successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted house is error')
+                'message' => __('admin.Deleted house is error')
             ]);
         }
     }
@@ -131,7 +131,7 @@ class MemberHouseController extends Controller
         $house->restored_by = getLoggedUser()->name;
         $house->save();
 
-        return redirect()->route('member.house.index')->with('success', __('Restore house successfully'));
+        return redirect()->route('member.house.index')->with('success', __('admin.Restore house successfully'));
     }
 
     public function data(Request $request)
@@ -158,7 +158,7 @@ class MemberHouseController extends Controller
                     ';
                 } else {
                     return '
-                        <a href="' . route('member.house.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                        <a href="' . route('member.house.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
                             <i class="fas fa-undo"></i>
                         </a>
                     ';

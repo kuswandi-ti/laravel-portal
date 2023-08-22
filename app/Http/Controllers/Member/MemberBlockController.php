@@ -41,7 +41,7 @@ class MemberBlockController extends Controller
         $block->status = 1;
         $block->save();
 
-        return redirect()->route('member.block.index')->with('success', __('Created block successfully'));
+        return redirect()->route('member.block.index')->with('success', __('admin.Created block successfully'));
     }
 
     /**
@@ -73,7 +73,7 @@ class MemberBlockController extends Controller
             'updated_by' => getLoggedUser()->name,
         ]);
 
-        return redirect()->route('member.block.index')->with('success', __('Updated block successfully'));
+        return redirect()->route('member.block.index')->with('success', __('admin.Updated block successfully'));
     }
 
     /**
@@ -91,12 +91,12 @@ class MemberBlockController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => __('Deleted block successfully')
+                'message' => __('admin.Deleted block successfully')
             ]);
         } catch (\Throwable $th) {
             return response([
                 'status' => 'error',
-                'message' => __('Deleted block is error')
+                'message' => __('admin.Deleted block is error')
             ]);
         }
     }
@@ -110,7 +110,7 @@ class MemberBlockController extends Controller
         $block->restored_by = getLoggedUser()->name;
         $block->save();
 
-        return redirect()->route('member.block.index')->with('success', __('Restore block successfully'));
+        return redirect()->route('member.block.index')->with('success', __('admin.Restore block successfully'));
     }
 
     public function data(Request $request)
@@ -134,7 +134,7 @@ class MemberBlockController extends Controller
                     ';
                 } else {
                     return '
-                        <a href="' . route('member.block.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                        <a href="' . route('member.block.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
                             <i class="fas fa-undo"></i>
                         </a>
                     ';

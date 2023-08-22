@@ -42,6 +42,7 @@ class MainDataSeeder extends Seeder
         $package->support_ticket_per_year = 0;
         $package->online_payment_per_year = 0;
         $package->status = 1;
+        $package->created_by = 'Super Admin';
         $package->save();
 
         /** Create Residence Seeder */
@@ -54,6 +55,7 @@ class MainDataSeeder extends Seeder
         $residence->village_code = '3201072009';
         $residence->address = 'Puri Harmoni 6, Ds. Situsari, Kec. Cileungsi, Kab. Bogor, Jawa Barat';
         $residence->status = 1;
+        $residence->created_by = 'Super Admin';
         $residence->save();
 
         $residence = new Residence();
@@ -65,12 +67,14 @@ class MainDataSeeder extends Seeder
         $residence->village_code = '3201072009';
         $residence->address = 'Puri Harmoni 6, Ds. Situsari, Kec. Cileungsi, Kab. Bogor, Jawa Barat';
         $residence->status = 1;
+        $residence->created_by = 'Super Admin';
         $residence->save();
 
         /** Create Area Seeder */
         $area = new Area();
         $area->name = 'Super Admin Area';
         $area->slug = Str::slug('Super Admin Area');
+        $area->created_by = 'Super Admin';
         $area->save();
 
         /** Create Role & Permission Admin Seeder - Begin */
@@ -93,6 +97,7 @@ class MainDataSeeder extends Seeder
             'area_id' => $area->id,
             'status' => 1,
             'remember_token' => Str::random(10),
+            'created_by' => 'Super Admin',
         ]);
         // Assign Role to Super Admin User
         $admin->assignRole($role);
@@ -124,6 +129,7 @@ class MainDataSeeder extends Seeder
         $area->support_ticket = $package->support_ticket_per_year;
         $area->online_payment = $package->online_payment_per_year;
         $area->status = 1;
+        $area->created_by = 'Super Admin';
         $area->save();
 
         /** Create Role & Permission Member Seeder - Begin */
@@ -145,6 +151,7 @@ class MainDataSeeder extends Seeder
             'area_id' => $area->id,
             'status' => 1,
             'remember_token' => Str::random(10),
+            'created_by' => 'Super Admin',
         ]);
         // Create Member Role
         $role = Role::create(['guard_name' => 'member', 'name' => getGuardTextAdmin(), 'area_id' => $area->id]);
@@ -172,6 +179,7 @@ class MainDataSeeder extends Seeder
             'email' => 'ketua@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
+            'created_by' => 'Super Admin',
         ]);
         $userKetua->assignRole($roleKetua);
 
@@ -184,6 +192,7 @@ class MainDataSeeder extends Seeder
             'email' => 'bendahara@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
+            'created_by' => 'Super Admin',
         ]);
         $userBendahara->assignRole($roleBendahara);
 
@@ -196,12 +205,18 @@ class MainDataSeeder extends Seeder
             'email' => 'sekretaris@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
+            'created_by' => 'Super Admin',
         ]);
         $userSekretaris->assignRole($roleSekretaris);
         /** Create Role & Permission User Seeder - End */
 
         $input = [
-            ['key' => 'default_language', 'value' => 'en', 'area_id' => $area->id],
+            [
+                'key' => 'default_language',
+                'value' => 'en',
+                'area_id' => $area->id,
+                'created_by' => 'Super Admin',
+            ],
         ];
         foreach ($input as $item) {
             SettingMember::create($item);
