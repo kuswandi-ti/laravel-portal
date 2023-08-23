@@ -5,7 +5,10 @@ namespace Database\Seeders;
 use App\Models\Area;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Block;
+use App\Models\House;
 use App\Models\Member;
+use App\Models\Street;
 use App\Models\Package;
 use App\Models\Residence;
 use Illuminate\Support\Str;
@@ -170,15 +173,125 @@ class MainDataSeeder extends Seeder
             Permission::create($permission);
         }
 
+        /** Create Street */
+        $street1 = Street::create([
+            'name' => 'Gg. Masjid I',
+            'slug' => Str::slug('Gg. Masjid I'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $street2 = Street::create([
+            'name' => 'Gg. Masjid II',
+            'slug' => Str::slug('Gg. Masjid II'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $street3 = Street::create([
+            'name' => 'Gg. Masjid III',
+            'slug' => Str::slug('Gg. Masjid III'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $street4 = Street::create([
+            'name' => 'Gg. Masjid IV',
+            'slug' => Str::slug('Gg. Masjid IV'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $street5 = Street::create([
+            'name' => 'Gg. Masjid V',
+            'slug' => Str::slug('Gg. Masjid V'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        /** Create Street - End */
+
+        /** Create Block */
+        $block1 = Block::create([
+            'name' => 'F1',
+            'slug' => Str::slug('F1'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $block2 = Block::create([
+            'name' => 'F2',
+            'slug' => Str::slug('F2'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $block3 = Block::create([
+            'name' => 'F3',
+            'slug' => Str::slug('F3'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $block4 = Block::create([
+            'name' => 'F4',
+            'slug' => Str::slug('F4'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $block5 = Block::create([
+            'name' => 'F5',
+            'slug' => Str::slug('F5'),
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        /** Create Block - End */
+
+        /** Create House */
+        $house1 = House::create([
+            'owner_name' => 'Nana Suherna',
+            'street' => $street3->name,
+            'block' => $block3->name,
+            'no' => '14',
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $house2 = House::create([
+            'owner_name' => 'Jajang',
+            'street' => $street2->name,
+            'block' => $block2->name,
+            'no' => '24',
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        $house3 = House::create([
+            'owner_name' => 'Sarip',
+            'street' => $street4->name,
+            'block' => $block4->name,
+            'no' => '04',
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
+        /** Create House - End */
+
         $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua', 'area_id' => $area->id]);
         $roleKetua->givePermissionTo(setArrayKetuaPermission());
         $userKetua = User::factory()->create([
-            'name' => 'Ketua',
-            'slug' => Str::slug('ketua'),
+            'name' => 'Nana Suherna',
+            'slug' => Str::slug('Nana Suherna'),
             'image' => config('common.default_image_circle'),
             'email' => 'ketua@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
+            'house_id' => $house1->id,
+            'house_street_name' => $house1->street,
+            'house_block' => $house1->block,
+            'house_number' => $house1->no,
             'created_by' => 'Super Admin',
         ]);
         $userKetua->assignRole($roleKetua);
@@ -186,12 +299,16 @@ class MainDataSeeder extends Seeder
         $roleBendahara = Role::create(['guard_name' => 'web', 'name' => 'Bendahara', 'area_id' => $area->id]);
         $roleBendahara->givePermissionTo(setArrayBendaharaPermission());
         $userBendahara = User::factory()->create([
-            'name' => 'Bendahara',
-            'slug' => Str::slug('bendahara'),
+            'name' => 'Sarip',
+            'slug' => Str::slug('sarip'),
             'image' => config('common.default_image_circle'),
             'email' => 'bendahara@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
+            'house_id' => $house3->id,
+            'house_street_name' => $house3->street,
+            'house_block' => $house3->block,
+            'house_number' => $house3->no,
             'created_by' => 'Super Admin',
         ]);
         $userBendahara->assignRole($roleBendahara);
@@ -199,17 +316,22 @@ class MainDataSeeder extends Seeder
         $roleSekretaris = Role::create(['guard_name' => 'web', 'name' => 'Sekretaris', 'area_id' => $area->id]);
         $roleSekretaris->givePermissionTo(setArraySekretarisPermission());
         $userSekretaris = User::factory()->create([
-            'name' => 'Sekretaris',
-            'slug' => Str::slug('sekretaris'),
+            'name' => 'Jajang',
+            'slug' => Str::slug('jajang'),
             'image' => config('common.default_image_circle'),
             'email' => 'sekretaris@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'area_id' => $area->id,
+            'house_id' => $house2->id,
+            'house_street_name' => $house2->street,
+            'house_block' => $house2->block,
+            'house_number' => $house2->no,
             'created_by' => 'Super Admin',
         ]);
         $userSekretaris->assignRole($roleSekretaris);
         /** Create Role & Permission User Seeder - End */
 
+        /** Create Setting Member */
         $input = [
             [
                 'key' => 'default_language',
@@ -217,9 +339,22 @@ class MainDataSeeder extends Seeder
                 'area_id' => $area->id,
                 'created_by' => 'Super Admin',
             ],
+            [
+                'key' => 'default_date_format',
+                'value' => 'Y-m-d',
+                'area_id' => $area->id,
+                'created_by' => 'Super Admin',
+            ],
+            [
+                'key' => 'default_time_format',
+                'value' => 'H:i:s',
+                'area_id' => $area->id,
+                'created_by' => 'Super Admin',
+            ],
         ];
         foreach ($input as $item) {
             SettingMember::create($item);
         }
+        /** Create Setting Member - End */
     }
 }

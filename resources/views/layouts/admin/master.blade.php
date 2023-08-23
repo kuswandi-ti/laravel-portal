@@ -111,13 +111,13 @@
             $('body').on('click', '.logout', function(e) {
                 e.preventDefault();
                 Swal.fire({
-                    title: 'Are you sure to logout?',
-                    text: "After logging out will return to the login page",
+                    title: {{ __('Are you sure to logout?') }},
+                    text: {{ __('After logging out will return to the login page') }},
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, logging out !'
+                    confirmButtonText: {{ __('Yes, logging out !') }}
                 }).then((result) => {
                     if (result.value === true) {
                         $('#form-logout').submit()
@@ -128,13 +128,13 @@
             $('body').on('click', '.delete_item', function(e) {
                 e.preventDefault();
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: {{ __('Are you sure?') }},
+                    text: {{ __("You won't be able to revert this!") }},
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: {{ __('Yes, delete it!') }}
                 }).then((result) => {
                     if (result.isConfirmed) {
                         let url = $(this).attr('href');

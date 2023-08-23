@@ -95,6 +95,15 @@
             </li>
             {{-- End Payment --}}
 
+            {{-- Announcement Setting --}}
+            <li class="{{ setSidebarActive(['member.announcement.*']) }}">
+                <a href="{{ route('member.announcement.index') }}" class="nav-link">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>{{ __('admin.Announcement') }}</span>
+                </a>
+            </li>
+            {{-- End Announcement Setting --}}
+
             {{-- System Setting --}}
             <li class="{{ setSidebarActive(['member.setting.*']) }}">
                 <a href="{{ route('member.setting.index') }}" class="nav-link">

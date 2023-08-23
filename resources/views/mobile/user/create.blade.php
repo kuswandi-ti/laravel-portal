@@ -16,7 +16,7 @@
                         <label for="name">{{ __('Full Name') }} <x-fill-field /></label>
                         <input type="text" name="name" id="name"
                             class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
-                            placeholder="Enter your full name" required autofocus>
+                            placeholder="{{ __('Enter your full name') }}" required autofocus>
                         @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -28,7 +28,7 @@
                         <label for="email">{{ __('Email') }} <x-fill-field /></label>
                         <input type="email" name="email" id="email"
                             class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                            placeholder="Enter your email" required>
+                            placeholder="{{ __('Enter your email') }}" required>
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}

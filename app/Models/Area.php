@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use KodePandai\Indonesia\Models\Village;
 use KodePandai\Indonesia\Models\District;
 use KodePandai\Indonesia\Models\Province;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,7 +16,6 @@ class Area extends Model
 {
     use HasFactory;
     use HasUuids;
-    use SoftDeletes;
 
     protected $guarded = [];
 

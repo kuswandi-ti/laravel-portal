@@ -7,4 +7,11 @@
     <div class="pageTitle">
         @yield('app_title')
     </div>
+    @if (!getLoggedUser()->getRoleNames()->isEmpty())
+        <div class="right">
+            <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#sidebarPanel">
+                <ion-icon name="menu-outline"></ion-icon>
+            </a>
+        </div>
+    @endif
 </div>

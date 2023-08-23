@@ -115,7 +115,7 @@ class MemberBlockController extends Controller
 
     public function data(Request $request)
     {
-        $query = Block::orderBy('name', 'ASC');
+        $query = Block::where('area_id', getLoggedUser()->area->id)->orderBy('name', 'ASC');
 
         return datatables($query)
             ->addIndexColumn()

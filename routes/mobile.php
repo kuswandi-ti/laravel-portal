@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mobile\MobileAuthController;
 use App\Http\Controllers\Mobile\MobileUserController;
+use App\Http\Controllers\Mobile\MobileProfileController;
 use App\Http\Controllers\Mobile\MobileDashboardController;
 
 Route::group(['middleware' => ['set_language']], function () {
@@ -25,6 +26,12 @@ Route::group([
 ], function () {
     /** Auth Staff & User Routes */
     Route::post('logout', [MobileAuthController::class, 'logout'])->name('logout');
+
+    /** Profile Routes */
+    Route::get('profile-data', [MobileProfileController::class, 'indexProfileData'])->name('profile_data.index');
+    Route::put('profile-data-update/{id}', [MobileProfileController::class, 'updateProfileData'])->name('profile_data.update');
+    Route::get('profile-image', [MobileProfileController::class, 'indexProfileImage'])->name('profile_image.index');
+    Route::put('profile-image-update/{id}', [MobileProfileController::class, 'updateProfileImage'])->name('profile_image.update');
 
     /** Bottom Menu Routes */
     Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');

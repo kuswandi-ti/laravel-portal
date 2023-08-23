@@ -11,6 +11,7 @@ use App\Http\Controllers\Member\MemberSettingController;
 use App\Http\Controllers\Member\MemberAdminUserController;
 use App\Http\Controllers\Member\MemberDashboardController;
 use App\Http\Controllers\Member\MemberStaffUserController;
+use App\Http\Controllers\Member\MemberAnnouncementController;
 
 Route::group(['middleware' => ['set_language']], function () {
     Route::get('/', [MemberAuthController::class, 'login'])->name('login');
@@ -74,6 +75,11 @@ Route::group([
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');
     Route::put('setting-area/{id}', [MemberSettingController::class, 'settingAreaUpdate'])->name('setting_area.update');
     Route::put('setting-logo', [MemberSettingController::class, 'settingLogoUpdate'])->name('setting_logo.update');
+
+    /** Announcement Routes */
+    Route::get('announcement/data', [MemberAnnouncementController::class, 'data'])->name('announcement.data');
+    Route::get('announcement/restore/{id}', [MemberAnnouncementController::class, 'restore'])->name('announcement.restore');
+    Route::resource('announcement', MemberAnnouncementController::class);
 
     /** Others Routes */
     Route::post('get-cities', [MemberSettingController::class, 'getCities'])->name('setting.get_cities');

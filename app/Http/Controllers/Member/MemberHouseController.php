@@ -136,7 +136,8 @@ class MemberHouseController extends Controller
 
     public function data(Request $request)
     {
-        $query = House::orderBy('street', 'ASC')
+        $query = House::where('area_id', getLoggedUser()->area->id)
+            ->orderBy('street', 'ASC')
             ->orderBy('block', 'ASC')
             ->orderBy('no', 'ASC')
             ->orderBy('owner_name', 'ASC');

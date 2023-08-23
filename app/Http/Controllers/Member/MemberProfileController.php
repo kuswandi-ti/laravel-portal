@@ -19,7 +19,7 @@ class MemberProfileController extends Controller
      */
     public function index()
     {
-        $member = Auth::guard('member')->user();
+        $member = Auth::guard(getGuardNameMember())->user();
         return view('member.profile.index', compact('member'));
     }
 

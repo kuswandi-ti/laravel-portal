@@ -15,6 +15,20 @@
 
     @stack('styles_vendor')
     @stack('styles')
+
+    <style>
+        .select2-selection__rendered {
+            line-height: 31px !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 35px !important;
+        }
+
+        .select2-selection__arrow {
+            height: 34px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,6 +68,18 @@
 
     @stack('scripts_vendor')
     @stack('scripts')
+
+    <script>
+        $.uploadPreview({
+            input_field: "#image-upload", // Default: .image-upload
+            preview_box: "#image-preview", // Default: .image-preview
+            label_field: "#image-label", // Default: .image-label
+            label_default: "Choose File", // Default: Choose File
+            label_selected: "Change File", // Default: Change File
+            no_label: false, // Default: false
+            success_callback: null // Default: null
+        });
+    </script>
 </body>
 
 </html>

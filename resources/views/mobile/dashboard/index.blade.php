@@ -11,13 +11,13 @@
         <div class="wallet-card">
             <div class="balance">
                 <div class="left">
-                    <span class="title">Cluster Bukit Jaya</span>
-                    <h1 class="total">Mr. John</h1>
+                    <span class="title">{{ getHouseAddressUser() }}</span>
+                    <h1 class="total">{{ getLoggedUser()->name }}</h1>
                 </div>
                 <div class="right">
                     <div class="avatar-section">
                         <a href="#">
-                            <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/avatar/avatar1.jpg') }}"
+                            <img src="{{ asset(config('common.path_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
                                 alt="avatar" class="imaged rounded" style="width: 80px;">
                         </a>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="icon-wrapper bg-success">
                             <ion-icon name="arrow-down-circle-outline"></ion-icon>
                         </div>
-                        <strong>Deposit</strong>
+                        <strong>{{ __('Deposits') }}</strong>
                     </a>
                 </div>
                 <div class="item">
@@ -38,15 +38,7 @@
                         <div class="icon-wrapper bg-danger">
                             <ion-icon name="arrow-up-circle-outline"></ion-icon>
                         </div>
-                        <strong>Tarik Dana</strong>
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#sendActionSheet">
-                        <div class="icon-wrapper">
-                            <ion-icon name="cash-outline"></ion-icon>
-                        </div>
-                        <strong>Bayar Tagihan</strong>
+                        <strong>{{ __('Withdraw') }}</strong>
                     </a>
                 </div>
                 <div class="item">
@@ -54,7 +46,15 @@
                         <div class="icon-wrapper bg-warning">
                             <ion-icon name="navigate-outline"></ion-icon>
                         </div>
-                        <strong>Transfer Dana</strong>
+                        <strong>{{ __('Send') }}</strong>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#sendActionSheet">
+                        <div class="icon-wrapper">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </div>
+                        <strong>{{ __('Pay Bills') }}</strong>
                     </a>
                 </div>
             </div>
@@ -65,13 +65,13 @@
         <div class="row mt-2 text-center">
             <div class="col-6">
                 <div class="stat-box">
-                    <div class="title">Total Dana</div>
+                    <div class="title">{{ __('Total Balance') }}</div>
                     <div class="value text-success">Rp. 1.000.000</div>
                 </div>
             </div>
             <div class="col-6">
                 <div class="stat-box">
-                    <div class="title">Total Tagihan</span></div>
+                    <div class="title">{{ __('Bills Total') }}</span></div>
                     <div class="value text-danger">Rp. 500.000</div>
                 </div>
             </div>

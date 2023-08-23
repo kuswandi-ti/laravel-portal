@@ -1,5 +1,5 @@
 <div class="appHeader bg-primary text-light">
-    @if (!auth()->user()->getRoleNames()->isEmpty())
+    @if (!getLoggedUser()->getRoleNames()->isEmpty())
         <div class="left">
             <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#sidebarPanel">
                 <ion-icon name="menu-outline"></ion-icon>

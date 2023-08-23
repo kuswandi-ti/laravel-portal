@@ -252,6 +252,11 @@ function saveTimeNow()
     return Carbon::now()->addHour(7)->format('H:i:s');
 }
 
+function getHouseAddressUser(): ?string
+{
+    return getLoggedUser()->house_street_name . ', ' . getLoggedUser()->house_block . '/' . getLoggedUser()->house_number;
+}
+
 function canAccess(array $permissions)
 {
     $permission = getLoggedUser()->hasAnyPermission($permissions);

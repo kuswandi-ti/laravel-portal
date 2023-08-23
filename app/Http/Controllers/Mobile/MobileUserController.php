@@ -17,7 +17,10 @@ class MobileUserController extends Controller
      */
     public function index()
     {
-        $users = User::where('area_id', getLoggedUserAreaId())->orderBy('name', 'ASC')->get();
+        $users = User::where([
+            ['area_id', getLoggedUserAreaId()],
+            ['status', 1],
+        ])->orderBy('name', 'ASC')->get();
         return view('mobile.user.index', compact('users'));
     }
 
@@ -108,6 +111,13 @@ class MobileUserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->status = 0;
+        $user->deleted_at = saveDateTimeNow();
+        $user->deleted_by = getLoggedUser()->name;
+        $user->save();
+
+        return redirect()->route('mobile.user.index')->with('success', __('Deleted user successfully'));
     }
 }

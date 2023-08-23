@@ -6,9 +6,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\MainDataSeeder;
 use Database\Seeders\CurrencyTableSeeder;
+use Database\Seeders\ReligionTableSeeder;
 use Database\Seeders\LanguagesTableSeeder;
 use Database\Seeders\FormatDateTableSeeder;
 use Database\Seeders\FormatTimeTableSeeder;
+use Database\Seeders\ProfessionTableSeeder;
 use Database\Seeders\SettingAdminTableSeeder;
 use KodePandai\Indonesia\IndonesiaDatabaseSeeder;
 
@@ -31,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(FormatTimeTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
         $this->call(SettingAdminTableSeeder::class);
+        $this->call(ReligionTableSeeder::class);
+        $this->call(ProfessionTableSeeder::class);
         $this->call(IndonesiaDatabaseSeeder::class);
         $this->call(MainDataSeeder::class);
     }

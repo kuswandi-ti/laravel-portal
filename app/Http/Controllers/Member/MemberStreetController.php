@@ -115,7 +115,7 @@ class MemberStreetController extends Controller
 
     public function data(Request $request)
     {
-        $query = Street::orderBy('name', 'ASC');
+        $query = Street::where('area_id', getLoggedUser()->area->id)->orderBy('name', 'ASC');
 
         return datatables($query)
             ->addIndexColumn()

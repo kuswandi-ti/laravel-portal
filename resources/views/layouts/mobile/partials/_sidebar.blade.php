@@ -6,12 +6,13 @@
                 <!-- profile box -->
                 <div class="pt-2 pb-2 profileBox">
                     <div class="image-wrapper">
-                        <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar1.jpg') }}"
+                        <img src="{{ asset(config('common.path_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
                             alt="image" class="imaged w36">
                     </div>
                     <div class="in">
-                        <strong>Sebastian Doe</strong>
-                        <div class="text-muted">4029209</div>
+                        <strong>{{ getLoggedUser()->name }}</strong>
+                        <span class="badge badge-info">{{ getLoggedUser()->getRoleNames()->first() }}</span>
+                        <div class="text-muted">{{ getHouseAddressUser() }}</div>
                     </div>
                     <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
                         <ion-icon name="close-outline"></ion-icon>

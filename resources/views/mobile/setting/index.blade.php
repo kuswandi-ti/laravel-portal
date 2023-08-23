@@ -9,9 +9,9 @@
 
     <div class="mt-2 text-center section">
         <div class="avatar-section">
-            <a href="#">
-                <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar"
-                    class="rounded imaged w100">
+            <a href="{{ route('mobile.profile_image.index') }}">
+                <img src="{{ asset(config('common.path_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+                    alt="avatar" class="rounded imaged w100">
                 <span class="button">
                     <ion-icon name="camera-outline"></ion-icon>
                 </span>
@@ -19,12 +19,12 @@
         </div>
     </div>
 
-    <div class="mt-1 listview-title">Tema</div>
+    <div class="mt-1 listview-title">{{ __('Theme') }}</div>
     <ul class="listview image-listview text inset no-line">
         <li>
             <div class="item">
                 <div class="in">
-                    <div>Mode Gelap</div>
+                    <div>{{ __('Dark Mode') }}</div>
                     <div class="form-check form-switch ms-2">
                         <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch">
                         <label class="form-check-label" for="darkmodeSwitch"></label>
@@ -34,15 +34,15 @@
         </li>
     </ul>
 
-    <div class="mt-1 listview-title">Notifikasi</div>
+    <div class="mt-1 listview-title">{{ __('Notification') }}</div>
     <ul class="listview image-listview text inset">
         <li>
             <div class="item">
                 <div class="in">
                     <div>
-                        Pengingat Tagihan
+                        {{ __('Bill Reminder') }}
                         <div class="text-muted">
-                            Kirim notifikasi jika sudah mendekati tanggal jatuh tempo tagihan
+                            {{ __('Send a notification when the bill\'s due date is approaching') }}
                         </div>
                     </div>
                     <div class="form-check form-switch ms-2">
@@ -56,9 +56,9 @@
             <div class="item">
                 <div class="in">
                     <div>
-                        Notifikasi Pembayaran
+                        {{ __('Payment Notification') }}
                         <div class="text-muted">
-                            Terima notifikasi jika proses pembayaran sukses
+                            {{ __('Receive a notification if the payment process is successful') }}
                         </div>
                     </div>
                     <div class="form-check form-switch ms-2">
@@ -71,33 +71,19 @@
         <li>
             <a href="#" class="item">
                 <div class="in">
-                    <div>Nada Notifikasi</div>
-                    <span class="text-primary">Beep</span>
+                    <div>{{ __('Notification Tone') }}</div>
+                    <span class="text-primary">{{ __('Beep') }}</span>
                 </div>
             </a>
         </li>
     </ul>
 
-    <div class="mt-1 listview-title">Pengaturan Profil</div>
+    <div class="mt-1 listview-title">{{ __('Profile Settings') }}</div>
     <ul class="listview image-listview text inset">
         <li>
-            <a href="#" class="item">
+            <a href="{{ route('mobile.profile_data.index') }}" class="item">
                 <div class="in">
-                    <div>Perbaharui Username</div>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="item">
-                <div class="in">
-                    <div>Perbaharui Alamat E-mail</div>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="item">
-                <div class="in">
-                    <div>Perbaharui Alamat</div>
+                    <div>{{ __('Update Data') }}</div>
                 </div>
             </a>
         </li>
@@ -105,7 +91,7 @@
             <div class="item">
                 <div class="in">
                     <div>
-                        Sembunyikan Informasi Penting Profil
+                        {{ __('Hide Important Profile Information') }}
                     </div>
                     <div class="form-check form-switch ms-2">
                         <input class="form-check-input" type="checkbox" id="SwitchCheckDefault2">
@@ -116,27 +102,14 @@
         </li>
     </ul>
 
-    <div class="mt-1 listview-title">Keamanan</div>
+    <div class="mt-1 listview-title">{{ __('Security') }}</div>
     <ul class="mb-2 listview image-listview text inset">
         <li>
             <a href="#" class="item">
                 <div class="in">
-                    <div>Perbaharui Password</div>
+                    <div>{{ __('Update Password') }}</div>
                 </div>
             </a>
-        </li>
-        <li>
-            <div class="item">
-                <div class="in">
-                    <div>
-                        Verifikasi 2 Langkah
-                    </div>
-                    <div class="form-check form-switch ms-2">
-                        <input class="form-check-input" type="checkbox" id="SwitchCheckDefault3" checked />
-                        <label class="form-check-label" for="SwitchCheckDefault3"></label>
-                    </div>
-                </div>
-            </div>
         </li>
         <li>
             <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#DialogBasic">
@@ -144,7 +117,7 @@
                     <div>
                         <form action="{{ route('mobile.logout') }}" method="post" id="form-logout">
                             @csrf
-                            <span class="text-danger">Keluar di Semua Perangkat</span>
+                            <span class="text-danger">{{ __('Sign Out on All Devices') }}</span>
                         </form>
                     </div>
                 </div>
@@ -152,26 +125,26 @@
         </li>
     </ul>
 
-    <div class="mt-1 listview-title">Bantuan & Saran</div>
+    <div class="mt-1 listview-title">{{ __('Help & Advice') }}</div>
     <ul class="mb-4 listview image-listview text inset">
         <li>
             <a href="#" class="item">
                 <div class="in">
-                    <div>Pusat Bantuan</div>
+                    <div>{{ __('Help Center') }}</div>
                 </div>
             </a>
         </li>
         <li>
             <a href="#" class="item">
                 <div class="in">
-                    <div>Ikuti Fanpage Kami</div>
+                    <div>{{ __('Follow Our Fanpage') }}</div>
                 </div>
             </a>
         </li>
         <li>
             <a href="#" class="item">
                 <div class="in">
-                    <div>Nilai Kami</div>
+                    <div>{{ __('Rate Us') }}</div>
                 </div>
             </a>
         </li>
@@ -180,11 +153,14 @@
     <div class="modal fade dialogbox" id="DialogBasic" data-bs-backdrop="static" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <div class="modal-icon text-danger">
+                    <ion-icon name="help-circle" role="img" class="md hydrated" aria-label="help-circle"></ion-icon>
+                </div>
                 <div class="modal-header">
-                    <h5 class="modal-title">Sending $50 to John</h5>
+                    <h5 class="modal-title">{{ __('Are you sure to logout?') }}</h5>
                 </div>
                 <div class="modal-body">
-                    Are you sure about that?
+                    {{ __('After logging out will return to the website page') }}
                 </div>
                 <div class="modal-footer">
                     <div class="btn-inline">
