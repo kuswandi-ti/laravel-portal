@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MemberRegisterVerifyMail;
+use App\Mail\MemberStaffRegisterVerifyMail;
 use App\Http\Requests\Member\MemberStaffUserStoreRequest;
 use App\Http\Requests\Member\MemberStaffUserUpdateRequest;
 
@@ -40,23 +40,24 @@ class MemberStaffUserController extends Controller
      */
     public function store(MemberStaffUserStoreRequest $request)
     {
+        $token = Str::random(64);
+
         $staff = new User();
 
         $staff->name = $request->name;
         $staff->slug = Str::slug($request->name);
         $staff->email = $request->email;
-        $staff->password = Hash::make($request->password);
         $staff->image = config('common.default_image_circle');
         $staff->area_id = getLoggedUser()->area->id;
+        $staff->house_id = getLoggedUser()->house->id;
+        $staff->register_token = $token;
         $staff->created_by = getLoggedUser()->name;
         $staff->status = 1;
         $staff->save();
 
         $staff->assignRole($request->role);
 
-        $token = Str::random(64);
-
-        Mail::to($request->email)->send(new MemberRegisterVerifyMail($token));
+        Mail::to($request->email)->send(new MemberStaffRegisterVerifyMail($token));
 
         return redirect()->route('member.staff.index')->with('success', __('admin.Created staff successfully'));
     }

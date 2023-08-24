@@ -74,7 +74,7 @@
                                 <ion-icon name="person-circle-outline"></ion-icon>
                             </div>
                             <div class="in">
-                                {{ __('User') }}
+                                {{ __('User Management') }}
                             </div>
                         </a>
                     </li>

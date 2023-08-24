@@ -21,6 +21,7 @@ Route::group(['middleware' => ['set_language']], function () {
     /** Auth Admin Routes */
     Route::get('login', [AdminAuthController::class, 'login'])->name('login');
     Route::post('login', [AdminAuthController::class, 'handleLogin'])->name('login.post');
+    Route::get('register-verify/{token}', [AdminAuthController::class, 'registerVerify'])->name('register.verify');
     Route::get('forgot-password', [AdminAuthController::class, 'forgotPassword'])->name('forgot_password');
     Route::post('forgot-password', [AdminAuthController::class, 'sendResetLink'])->name('forgot_password.send');
     Route::get('reset-password/{token}', [AdminAuthController::class, 'resetPassword'])->name('reset_password');

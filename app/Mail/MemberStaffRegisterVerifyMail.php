@@ -9,20 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AdminSendResetLinkMail extends Mailable
+class MemberStaffRegisterVerifyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $token;
-    public $email;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($token, $email)
+    public function __construct($token)
     {
         $this->token = $token;
-        $this->email = $email;
     }
 
     /**
@@ -31,7 +29,7 @@ class AdminSendResetLinkMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Admin Reset Password Notification',
+            subject: 'Staff Register Verify Mail',
         );
     }
 
@@ -41,7 +39,7 @@ class AdminSendResetLinkMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.admin_reset_link_mail',
+            view: 'mail.member_staff_register_verify_mail',
         );
     }
 

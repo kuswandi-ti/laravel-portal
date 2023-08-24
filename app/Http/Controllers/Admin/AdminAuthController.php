@@ -16,9 +16,28 @@ use App\Http\Requests\Admin\AdminAuthSendResetLinkRequest;
 
 class AdminAuthController extends Controller
 {
+    public function registerVerify($token)
+    {
+        $admin = Admin::where('register_token', $token)->first();
+
+        $message = 'Sorry your email cannot be identified.';
+
+        if (!is_null($admin)) {
+            if (!$admin->email_verified_at) {
+                $admin->email_verified_at = now();
+                $admin->save();
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+
+        return redirect()->route('admin.login')->with('success', $message);
+    }
+
     public function login()
     {
-        if (!Auth::guard('admin')->check()) {
+        if (!Auth::guard(getGuardNameAdmin())->check()) {
             return view('admin.auth.login');
         } else {
             return redirect()->route('admin.dashboard.index');
@@ -75,7 +94,7 @@ class AdminAuthController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::guard('admin')->logout();
+        Auth::guard(getGuardNameAdmin())->logout();
 
         $request->session()->invalidate();
 

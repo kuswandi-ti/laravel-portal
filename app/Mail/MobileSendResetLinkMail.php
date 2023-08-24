@@ -9,18 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MemberRegisterVerifyMail extends Mailable
+class MobileSendResetLinkMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $token;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($token)
+    public function __construct()
     {
-        $this->token = $token;
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class MemberRegisterVerifyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Member Register Verify Mail',
+            subject: 'User Send Reset Link Mail',
         );
     }
 
@@ -39,7 +37,7 @@ class MemberRegisterVerifyMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.member-register-verify-mail',
+            view: 'view.name',
         );
     }
 

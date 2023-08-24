@@ -166,7 +166,8 @@
                                 <div class="input-wrapper">
                                     <label class="label text-primary mb-1" for="religion">{{ __('Religion') }}</label>
                                     <select class="form-control custom-select" name="religion">
-                                        <option value="" selected disabled>{{ __('Choose one ...') }}</option>
+                                        <option value="" selected disabled>{{ __('Choose one ...') }}
+                                        </option>
                                         @foreach ($religions as $key => $value)
                                             <option value="{{ $key }}"
                                                 {{ $user->religion == $key ? 'selected' : '' }}>

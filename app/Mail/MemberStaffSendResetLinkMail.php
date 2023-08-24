@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class StaffSendResetLinkMail extends Mailable
+class MemberStaffSendResetLinkMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -41,7 +41,7 @@ class StaffSendResetLinkMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.staff-reset-link-mail',
+            view: 'mail.member_staff_reset_link_mail',
         );
     }
 

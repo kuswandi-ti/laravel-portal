@@ -59,30 +59,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label>{{ __('admin.Password') }} <x-fill-field /></label>
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
-                                required>
-                            @error('password')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>{{ __('admin.Confirmation Password') }} <x-fill-field /></label>
-                            <input type="password" name="password_confirmation"
-                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                value="{{ old('password_confirmation') }}" required>
-                            @error('password_confirmation')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
                             <div class="control-label">{{ __('admin.Member Admin Role') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 @foreach ($roles as $key => $item)

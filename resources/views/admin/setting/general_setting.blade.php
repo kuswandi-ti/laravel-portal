@@ -238,16 +238,15 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6" style="border: 1px solid #f8a100; border-right-style: none">
-                                        <div class="mb-3 mt-3 text-center">{{ __('admin.Logo') }}</div>
+                                        <div class="mt-3 mb-3 text-center">{{ __('admin.Logo') }}</div>
                                         <div class="mb-3 text-center">
                                             @if (!empty($setting['company_logo']))
                                                 <img class="preview-company_logo"
-                                                    src="{{ url(config('common.path_image_storage') . $setting['company_logo']) }}"
-                                                    width="400" height="400">
+                                                    src="{{ url(config('common.path_storage') . $setting['company_logo']) }}"
+                                                    width="300" height="300">
                                             @else
-                                                <img class="preview-company_logo"
-                                                    src="{{ url(config('common.no_image_square')) }}" width="400"
-                                                    height="400">
+                                                <img class="preview-company_logo" src="{{ url(noImageSquare()) }}"
+                                                    width="300" height="300">
                                             @endif
                                         </div>
                                         <div class="mb-3 custom-file">
@@ -260,17 +259,16 @@
                                                 value="{{ !empty($setting['company_logo']) ? $setting['company_logo'] : url(config('common.no_image_square')) }}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6" style="border: 1px solid #f8a100; border-right-style: none">
-                                        <div class="mb-3 mt-3 text-center">{{ __('admin.Favicon') }}</div>
+                                    <div class="col-md-6" style="border: 1px solid #f8a100;">
+                                        <div class="mt-3 mb-3 text-center">{{ __('admin.Favicon') }}</div>
                                         <div class="mb-3 text-center">
                                             @if (!empty($setting['company_favicon']))
                                                 <img class="preview-company_favicon"
-                                                    src="{{ url(config('common.path_image_storage') . $setting['company_favicon']) }}"
-                                                    width="400" height="400">
+                                                    src="{{ url(config('common.path_storage') . $setting['company_favicon']) }}"
+                                                    width="300" height="300">
                                             @else
-                                                <img class="preview-company_favicon"
-                                                    src="{{ url(config('common.no_image_square')) }}" width="400"
-                                                    height="400">
+                                                <img class="preview-company_favicon" src="{{ url(noImageSquare()) }}"
+                                                    width="300" height="300">
                                             @endif
                                         </div>
                                         <div class="mb-3 custom-file">

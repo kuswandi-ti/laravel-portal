@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class StaffRegisterVerifyMail extends Mailable
+class MemberAdminRegisterVerifyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,7 +29,7 @@ class StaffRegisterVerifyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Staff Register Verify Mail',
+            subject: 'Member Register Verify Mail',
         );
     }
 
@@ -39,7 +39,7 @@ class StaffRegisterVerifyMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.staff-register-verify-mail',
+            view: 'mail.member_admin_register_verify_mail',
         );
     }
 

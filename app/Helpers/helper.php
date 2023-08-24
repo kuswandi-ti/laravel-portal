@@ -216,15 +216,15 @@ function getLoggedUserAreaId()
 
 function getSettingAdmin()
 {
-    return !empty(getLoggedUser()) ? Setting::pluck('value', 'key')->toArray() : '';
+    return Setting::pluck('value', 'key')->toArray();
 }
 
 function getSettingMember()
 {
     return !empty(getLoggedUser()) ? SettingMember::where('area_id', getLoggedUserAreaId())
-                ->get()
-                ->pluck('value', 'key')
-                ->toArray() : '';
+        ->get()
+        ->pluck('value', 'key')
+        ->toArray() : '';
 }
 
 function setStatusBadge($status)
@@ -257,12 +257,12 @@ function getHouseAddressUser(): ?string
     return getLoggedUser()->house_street_name . ', ' . getLoggedUser()->house_block . '/' . getLoggedUser()->house_number;
 }
 
-function noImageCircle() : ?string
+function noImageCircle(): ?string
 {
     return config('common.path_storage') . config('common.default_image_circle');
 }
 
-function noImageSquare() : ?string
+function noImageSquare(): ?string
 {
     return config('common.path_storage') . config('common.default_image_square');
 }
@@ -272,7 +272,7 @@ function canAccess(array $permissions)
     $permission = getLoggedUser()->hasAnyPermission($permissions);
     $super_admin = getLoggedUser()->hasRole('Super Admin');
 
-    if($permission || $super_admin) {
+    if ($permission || $super_admin) {
         return true;
     } else {
         return false;
@@ -285,7 +285,8 @@ function getLoggedUserRole()
     return $role->first();
 }
 
-function checkPermission(string $permission){
+function checkPermission(string $permission)
+{
     return getLoggedUser()->hasPermissionTo($permission);
 }
 

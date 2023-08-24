@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AdminSendResetLinkMail extends Mailable
+class MemberAdminSendResetLinkMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class AdminSendResetLinkMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Admin Reset Password Notification',
+            subject: 'Member Reset Password Notification',
         );
     }
 
@@ -41,7 +41,7 @@ class AdminSendResetLinkMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.admin_reset_link_mail',
+            view: 'mail.member_admin_reset_link_mail',
         );
     }
 

@@ -14,7 +14,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('admin.Member AdminForgot Password') }}</h4>
+                    <h4>{{ __('admin.Member Admin Forgot Password') }}</h4>
                 </div>
                 <div class="card-body">
                     <p>

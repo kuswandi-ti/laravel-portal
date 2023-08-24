@@ -18,6 +18,12 @@ class Admin
     {
         if (!Auth::guard(getGuardNameAdmin())->check()) {
             return redirect()->route('admin.login')->with('error', 'Please login first !');
+        } else {
+            if (!Auth::guard(getGuardNameAdmin())->user()->email_verified_at) {
+                Auth::guard(getGuardNameAdmin())->logout();
+                return redirect()->route('admin.login')
+                    ->with('error', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+            }
         }
 
         return $next($request);

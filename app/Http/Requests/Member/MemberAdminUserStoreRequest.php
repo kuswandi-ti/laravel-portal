@@ -24,8 +24,6 @@ class MemberAdminUserStoreRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:members,email'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8', 'max:255'],
             'role' => ['required'],
         ];
     }

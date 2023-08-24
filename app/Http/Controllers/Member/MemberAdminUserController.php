@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MemberAdminRegisterVerifyMail;
 use App\Http\Requests\Member\MemberAdminUserStoreRequest;
 use App\Http\Requests\Member\MemberAdminUserUpdateRequest;
 
@@ -38,19 +40,23 @@ class MemberAdminUserController extends Controller
      */
     public function store(MemberAdminUserStoreRequest $request)
     {
+        $token = Str::random(64);
+
         $member = new Member();
 
         $member->name = $request->name;
         $member->slug = Str::slug($request->name);
         $member->email = $request->email;
-        $member->password = Hash::make($request->password);
         $member->image = config('common.default_image_circle');
         $member->area_id = getLoggedUser()->area->id;
         $member->created_by = getLoggedUser()->name;
+        $member->register_token = $token;
         $member->status = 1;
         $member->save();
 
         $member->assignRole($request->role);
+
+        Mail::to($request->email)->send(new MemberAdminRegisterVerifyMail($token));
 
         return redirect()->route('member.admin.index')->with('success', __('admin.Created admin user successfully'));
     }
@@ -109,7 +115,7 @@ class MemberAdminUserController extends Controller
             if ($member->roles->first()->name == getGuardTextAdmin()) {
                 return response([
                     'status' => 'error',
-                    'message' => __('admin.admin.Cannot delete this user becase role is Admin')
+                    'message' => __('admin.Cannot delete this user because role is Admin')
                 ]);
             }
 

@@ -16,11 +16,11 @@ class Member
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('member')->check()) {
+        if (!Auth::guard(getGuardNameMember())->check()) {
             return redirect()->route('member.login')->with('error', 'Please login first !');
         } else {
-            if (!Auth::guard('member')->user()->email_verified_at) {
-                Auth::guard('member')->logout();
+            if (!Auth::guard(getGuardNameMember())->user()->email_verified_at) {
+                Auth::guard(getGuardNameMember())->logout();
                 return redirect()->route('member.login')
                     ->with('error', 'You need to confirm your account. We have sent you an activation code, please check your email.');
             }

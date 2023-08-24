@@ -106,7 +106,7 @@ class AdminMemberUserController extends Controller
             if ($member->roles->first()->name == 'Admin') {
                 return response([
                     'status' => 'error',
-                    'message' => __('admin.Cannot delete this user becase role is Admin')
+                    'message' => __('admin.Cannot delete this user because role is Admin')
                 ]);
             }
 
@@ -160,25 +160,21 @@ class AdminMemberUserController extends Controller
                 return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
             })
             ->addColumn('action', function ($query) {
-                if ($query->roles->pluck('name')->first() == getGuardTextAdmin()) {
-                    return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
+                if ($query->status == 1) {
+                    return '
+                        <a href="' . route('admin.member.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="' . route('admin.member.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    ';
                 } else {
-                    if ($query->status == 1) {
-                        return '
-                            <a href="' . route('admin.member.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="' . route('admin.member.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                        ';
-                    } else {
-                        return '
-                            <a href="' . route('admin.member.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
-                                <i class="fas fa-undo"></i>
-                            </a>
-                        ';
-                    }
+                    return '
+                        <a href="' . route('admin.member.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                            <i class="fas fa-undo"></i>
+                        </a>
+                    ';
                 }
             })
             ->rawColumns(['action'])

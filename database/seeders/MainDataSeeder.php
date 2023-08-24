@@ -95,6 +95,7 @@ class MainDataSeeder extends Seeder
             'name' => 'Super Admin User',
             'slug' => Str::slug('Super Admin User'),
             'email' => 'superadminuser@mail.com',
+            'email_verified_at' => saveDateTimeNow(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'image' => config('common.default_image_circle'),
             'area_id' => $area->id,

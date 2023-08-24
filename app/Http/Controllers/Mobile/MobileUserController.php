@@ -56,7 +56,7 @@ class MobileUserController extends Controller
         $user->status = 1;
         $user->save();
 
-        // $token = Str::random(64);
+        $token = Str::random(64);
         // Mail::to($request->email)->send(new MemberRegisterVerifyMail($token));
 
         return redirect()->route('mobile.user.index')->with('success', __('Created user successfully'));

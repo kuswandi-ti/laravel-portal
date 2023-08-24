@@ -20,9 +20,9 @@ Route::group(['middleware' => ['set_language']], function () {
     /** Auth Member Routes */
     Route::get('register', [MemberAuthController::class, 'register'])->name('register');
     Route::post('register', [MemberAuthController::class, 'handleRegister'])->name('register.post');
+    Route::get('register-verify/{token}', [MemberAuthController::class, 'registerVerify'])->name('register.verify');
     Route::get('login', [MemberAuthController::class, 'login'])->name('login');
     Route::post('login', [MemberAuthController::class, 'handleLogin'])->name('login.post');
-    Route::get('register-verify/{token}', [MemberAuthController::class, 'registerVerify'])->name('register.verify');
     Route::get('forgot-password', [MemberAuthController::class, 'forgotPassword'])->name('forgot_password');
     Route::post('forgot-password', [MemberAuthController::class, 'sendResetLink'])->name('forgot_password.send');
     Route::get('reset-password/{token}', [MemberAuthController::class, 'resetPassword'])->name('reset_password');

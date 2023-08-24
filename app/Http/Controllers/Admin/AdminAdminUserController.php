@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminRegisterVerifyMail;
 use App\Http\Requests\Admin\AdminAdminUserStoreRequest;
 use App\Http\Requests\Admin\AdminAdminUserUpdateRequest;
 
@@ -35,19 +37,23 @@ class AdminAdminUserController extends Controller
      */
     public function store(AdminAdminUserStoreRequest $request)
     {
+        $token = Str::random(64);
+
         $admin = new Admin();
 
         $admin->name = $request->name;
         $admin->slug = Str::slug($request->name);
         $admin->email = $request->email;
-        $admin->password = Hash::make($request->password);
         $admin->image = config('common.default_image_circle');
         $admin->area_id = getLoggedUserAreaId();
+        $admin->register_token = $token;
         $admin->created_by = getLoggedUser()->name;
         $admin->status = 1;
         $admin->save();
 
         $admin->assignRole($request->role);
+
+        Mail::to($request->email)->send(new AdminRegisterVerifyMail($token));
 
         return redirect()->route('admin.admin.index')->with('success', __('admin.Created admin user successfully'));
     }

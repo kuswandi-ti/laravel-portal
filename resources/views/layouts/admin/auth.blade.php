@@ -10,7 +10,7 @@
     <title>{{ $setting['site_title'] ?? config('app.name') }} &mdash; @yield('page_title')</title>
 
     <link rel="icon"
-        href="{{ url(config('common.path_image_storage') . (!empty($setting['company_favicon']) ? $setting['company_favicon'] : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+        href="{{ url(config('common.path_storage') . (!empty($setting['company_favicon']) ? $setting['company_favicon'] : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
         type="image/*">
 
     @stack('styles_vendor')

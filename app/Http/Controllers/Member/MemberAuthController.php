@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MemberSendResetLinkMail;
 use Illuminate\Http\RedirectResponse;
-use App\Mail\MemberRegisterVerifyMail;
+use App\Mail\MemberAdminSendResetLinkMail;
+use App\Mail\MemberAdminRegisterVerifyMail;
 use App\Http\Requests\Member\MemberAuthLoginRequest;
 use App\Http\Requests\Member\MemberAuthRegisterRequest;
 use App\Http\Requests\Member\MemberAuthResetPasswordRequest;
@@ -79,7 +80,7 @@ class MemberAuthController extends Controller
         // Assign Role to Member Admin User
         $member->assignRole($role);
 
-        Mail::to($request->email)->send(new MemberRegisterVerifyMail($token));
+        Mail::to($request->email)->send(new MemberAdminRegisterVerifyMail($token));
 
         return redirect()->route('member.login')->with('success', 'Register successfully. You need to confirm your account. We have sent you an activation code, please check your email.');;
     }
@@ -132,7 +133,7 @@ class MemberAuthController extends Controller
         $member->remember_token = $token;
         $member->save();
 
-        Mail::to($request->email)->send(new MemberSendResetLinkMail($token, $request->email));
+        Mail::to($request->email)->send(new MemberAdminSendResetLinkMail($token, $request->email));
 
         return redirect()->back()->with('success', __('admin.A mail has been sent to your email address. Please check your email.'));
     }
