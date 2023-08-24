@@ -7,6 +7,7 @@ use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\MemberAnnouncementStoreRequest;
+use App\Http\Requests\Member\MemberAnnouncementUpdateRequest;
 
 class MemberAnnouncementController extends Controller
 {
@@ -79,15 +80,24 @@ class MemberAnnouncementController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $announcement = Announcement::findOrFail($id);
+        return view('member.announcement.edit', compact('announcement'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MemberAnnouncementUpdateRequest $request, string $id)
     {
-        //
+        $announcement = Announcement::findOrFail($id);
+
+        $announcement->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'updated_by' => getLoggedUser()->name,
+        ]);
+
+        return redirect()->route('member.announcement.index')->with('success', __('admin.Updated announcement successfully'));
     }
 
     /**
@@ -95,7 +105,36 @@ class MemberAnnouncementController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $announcement = Announcement::findOrFail($id);
+
+            $announcement->status = 0;
+            $announcement->deleted_at = saveDateTimeNow();
+            $announcement->deleted_by = getLoggedUser()->name;
+            $announcement->save();
+
+            return response([
+                'status' => 'success',
+                'message' => __('admin.Deleted announcement successfully')
+            ]);
+        } catch (\Throwable $th) {
+            return response([
+                'status' => 'error',
+                'message' => __('admin.Deleted announcement is error')
+            ]);
+        }
+    }
+
+    public function restore($id)
+    {
+        $announcement = Announcement::findOrFail($id);
+
+        $announcement->status = 1;
+        $announcement->restored_at = saveDateTimeNow();
+        $announcement->restored_by = getLoggedUser()->name;
+        $announcement->save();
+
+        return redirect()->route('member.announcement.index')->with('success', __('admin.Restore announcement successfully'));
     }
 
     public function data(Request $request)

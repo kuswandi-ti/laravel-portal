@@ -48,7 +48,8 @@
             {{-- End Area & House --}}
 
             {{-- Role & User --}}
-            <li class="dropdown {{ setSidebarActive(['member.role.*', 'member.admin.*', 'member.staff.*']) }}">
+            <li
+                class="dropdown {{ setSidebarActive(['member.role.*', 'member.admin.*', 'member.staff.*', 'member.user.*']) }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-user-shield"></i>
                     <span>{{ __('admin.Role & User') }}</span>
@@ -61,39 +62,24 @@
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.admin.*']) }}">
-                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Admin User') }}
+                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Admin') }}
                         </a>
                     </li>
                 </ul>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['member.staff.*']) }}">
-                        <a class="nav-link" href="{{ route('member.staff.index') }}">{{ __('admin.Staff User') }}
+                        <a class="nav-link" href="{{ route('member.staff.index') }}">{{ __('admin.Staff') }}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['member.user.*']) }}">
+                        <a class="nav-link" href="{{ route('member.user.index') }}">{{ __('admin.User') }}
                         </a>
                     </li>
                 </ul>
             </li>
             {{-- End Role & User --}}
-
-            {{-- Payment --}}
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-money-check"></i>
-                    <span>{{ __('admin.Payment') }}</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="{{ route('member.role.index') }}">{{ __('admin.Automatic') }}
-                        </a>
-                    </li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="">
-                        <a class="nav-link" href="{{ route('member.admin.index') }}">{{ __('admin.Bank Transfer') }}
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            {{-- End Payment --}}
 
             {{-- Announcement Setting --}}
             <li class="{{ setSidebarActive(['member.announcement.*']) }}">

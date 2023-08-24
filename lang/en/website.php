@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'Authentication' => 'Authentication',
+  'website.Authentication' => 'website.Authentication',
   'Login User' => 'Login User',
   'Login Admin' => 'Login Admin',
 );

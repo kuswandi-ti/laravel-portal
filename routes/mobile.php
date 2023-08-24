@@ -33,6 +33,9 @@ Route::group([
     Route::get('profile-image', [MobileProfileController::class, 'indexProfileImage'])->name('profile_image.index');
     Route::put('profile-image-update/{id}', [MobileProfileController::class, 'updateProfileImage'])->name('profile_image.update');
 
+    /** Announcement Routes */
+    Route::get('announcement/{id}', [MobileDashboardController::class, 'showAnnouncement'])->name('dashboard.show_announcement');
+
     /** Bottom Menu Routes */
     Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/transaction', [MobileDashboardController::class, 'transaction'])->name('dashboard.transaction');

@@ -140,7 +140,9 @@ class MemberStaffUserController extends Controller
 
     public function data(Request $request)
     {
-        $query = User::where('area_id', getLoggedUserAreaId())->orderBy('name', 'ASC')->get();
+        $query = User::whereHas('roles')
+            ->where('area_id', getLoggedUserAreaId())
+            ->orderBy('name', 'ASC')->get();
 
         return datatables($query)
             ->addIndexColumn()
@@ -160,14 +162,21 @@ class MemberStaffUserController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 1) {
-                    return '
-                        <a href="' . route('member.staff.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('member.staff.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['staff update'])) {
+                        $update = '
+                            <a href="' . route('member.staff.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['staff delete'])) {
+                        $delete = '
+                            <a href="' . route('member.staff.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
                     return '
                         <a href="' . route('member.staff.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">

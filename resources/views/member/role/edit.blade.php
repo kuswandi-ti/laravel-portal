@@ -49,21 +49,20 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group guard_choice">
                             <div class="control-label">{{ __('admin.Guard Name') }} <span
                                     class="text-danger">{{ __('admin.(disabled)') }}</span></div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" id="guard_member" value="member"
-                                        class="custom-switch-input" {{ $role->guard_name == 'member' ? 'checked' : '' }}
-                                        disabled>
+                                    <input type="radio" name="guard_name" id="guard_member"
+                                        value="{{ getGuardNameMember() }}" class="custom-switch-input"
+                                        {{ $role->guard_name == 'member' ? 'checked' : '' }}>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-danger">{{ __('admin.Member') }}</span>
                                 </label>
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" id="guard_web" value="web"
-                                        class="custom-switch-input" {{ $role->guard_name == 'web' ? 'checked' : '' }}
-                                        disabled>
+                                    <input type="radio" name="guard_name" id="guard_web" value="{{ getGuardNameUser() }}"
+                                        class="custom-switch-input" {{ $role->guard_name == 'web' ? 'checked' : '' }}>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ __('admin.Web') }}</span>
                                 </label>
@@ -71,6 +70,12 @@
                         </div>
 
                         <div id="permission_member">
+                            <label class="mt-2 mb-4 custom-switch">
+                                <input value="1" type="checkbox" name="check_all_member" id="check_all_member"
+                                    class="custom-switch-input check_all_member">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description">{{ __('Check All') }}</span>
+                            </label>
                             @foreach ($permissions_member as $key => $permission)
                                 <div class="form-group">
                                     <div class="control-label text-danger">{{ __($key) }}</div>
@@ -79,7 +84,7 @@
                                             <div class="col-md-3">
                                                 <label class="mt-2 custom-switch">
                                                     <input value="{{ __($item->name) }}" type="checkbox"
-                                                        name="permissions[]" class="custom-switch-input"
+                                                        name="permissions_member[]" class="custom-switch-input check_member"
                                                         {{ in_array($item->name, $roles_permissions) ? 'checked' : '' }}>
                                                     <span class="custom-switch-indicator"></span>
                                                     <span class="custom-switch-description">{{ __($item->name) }}</span>
@@ -92,6 +97,12 @@
                         </div>
 
                         <div id="permission_web">
+                            <label class="mt-2 mb-4 custom-switch">
+                                <input value="1" type="checkbox" name="check_all_web" id="check_all_web"
+                                    class="custom-switch-input check_all_web">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description">{{ __('Check All') }}</span>
+                            </label>
                             @foreach ($permissions_web as $key => $permission)
                                 <div class="form-group">
                                     <div class="control-label text-info">{{ __($key) }}</div>
@@ -100,7 +111,7 @@
                                             <div class="col-md-3">
                                                 <label class="mt-2 custom-switch">
                                                     <input value="{{ __($item->name) }}" type="checkbox"
-                                                        name="permissions[]" class="custom-switch-input"
+                                                        name="permissions_web[]" class="custom-switch-input check_web"
                                                         {{ in_array($item->name, $roles_permissions) ? 'checked' : '' }}>
                                                     <span class="custom-switch-indicator"></span>
                                                     <span class="custom-switch-description">{{ __($item->name) }}</span>
@@ -127,6 +138,8 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            $('.guard_choice').hide();
+
             if ($('#guard_member').prop('checked')) {
                 $('#permission_member').show();
                 $('#permission_web').hide();
@@ -145,6 +158,22 @@
                         $('#permission_member').hide();
                         $('#permission_web').show();
                         break;
+                }
+            });
+
+            $('.check_all_member').on('change', function() {
+                if (this.checked) {
+                    $('.check_member').prop('checked', true);
+                } else {
+                    $('.check_member').prop('checked', false);
+                }
+            });
+
+            $('.check_all_web').on('change', function() {
+                if (this.checked) {
+                    $('.check_web').prop('checked', true);
+                } else {
+                    $('.check_web').prop('checked', false);
                 }
             });
         })

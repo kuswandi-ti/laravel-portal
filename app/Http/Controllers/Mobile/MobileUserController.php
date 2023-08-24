@@ -118,6 +118,10 @@ class MobileUserController extends Controller
         $user->deleted_by = getLoggedUser()->name;
         $user->save();
 
-        return redirect()->route('mobile.user.index')->with('success', __('Deleted user successfully'));
+        // return redirect()->route('mobile.user.index')->with('success', __('Deleted user successfully'));
+        return response()->json([
+            'success' => true,
+            'message' => __('Deleted user successfully'),
+        ]);
     }
 }

@@ -252,94 +252,93 @@
                 </div>
 
                 <div class="tab-pane fade show" id="tab-setting4" role="tabpanel">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>{{ __('admin.Payment Gateway (Midtrans)') }}</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>{{ __('admin.Mode') }} <span class="text-danger">*</span></label>
-                                        <select id="midtrans_mode" name="midtrans_mode"
-                                            class="form-control @error('midtrans_mode') is-invalid @enderror" required>
-                                            <option value="" selected disabled>{{ __('admin.Choose one ...') }}
-                                            </option>
-                                            <option value="sandbox"
-                                                {{ !empty($setting['midtrans_mode']) ? ($setting['midtrans_mode'] == 'sandbox' ? 'selected' : '') : '' }}>
-                                                {{ __('admin.Sandbox') }}</option>
-                                            <option value="production"
-                                                {{ !empty($setting['midtrans_mode']) ? ($setting['midtrans_mode'] == 'production' ? 'selected' : '') : '' }}>
-                                                {{ __('admin.Production') }}</option>
-                                        </select>
-                                        @error('midtrans_mode')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                    <form method="post" action="{{ route('member.setting_payment.update', $area->id) }}">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ __('admin.Payment Gateway (Midtrans)') }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('admin.Mode') }} <span class="text-danger">*</span></label>
+                                            <select id="midtrans_environment" name="midtrans_environment"
+                                                class="form-control @error('midtrans_environment') is-invalid @enderror"
+                                                required>
+                                                <option value="" selected disabled>{{ __('admin.Choose one ...') }}
+                                                </option>
+                                                <option value="sandbox"
+                                                    {{ !empty($setting_member['midtrans_environment']) ? ($setting_member['midtrans_environment'] == 'sandbox' ? 'selected' : '') : '' }}>
+                                                    {{ __('admin.Sandbox') }}</option>
+                                                <option value="production"
+                                                    {{ !empty($setting_member['midtrans_environment']) ? ($setting_member['midtrans_environment'] == 'production' ? 'selected' : '') : '' }}>
+                                                    {{ __('admin.Production') }}</option>
+                                            </select>
+                                            @error('midtrans_environment')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('admin.Merchant ID') }} <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" id="midtrans_merchant_id" name="midtrans_merchant_id"
+                                                class="form-control @error('midtrans_merchant_id') is-invalid @enderror"
+                                                value="{{ !empty($setting_member['midtrans_merchant_id']) ? $setting_member['midtrans_merchant_id'] : '' }}"
+                                                required>
+                                            @error('midtrans_merchant_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>{{ __('admin.Merchant ID') }} <span class="text-danger">*</span></label>
-                                        <input type="text" id="midtrans_merchant_id" name="midtrans_merchant_id"
-                                            class="form-control @error('midtrans_merchant_id') is-invalid @enderror"
-                                            value="{{ !empty($setting['midtrans_merchant_id']) ? $setting['midtrans_merchant_id'] : '' }}"
-                                            required>
-                                        @error('midtrans_merchant_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('admin.Client Key') }} <span class="text-danger">*</span></label>
+                                            <input type="text" id="midtrans_client_key" name="midtrans_client_key"
+                                                class="form-control @error('midtrans_client_key') is-invalid @enderror"
+                                                value="{{ !empty($setting_member['midtrans_client_key']) ? $setting_member['midtrans_client_key'] : '' }}"
+                                                required>
+                                            @error('midtrans_client_key')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{ __('admin.Server Key') }} <span class="text-danger">*</span></label>
+                                            <input type="text" id="midtrans_server_key" name="midtrans_server_key"
+                                                class="form-control @error('midtrans_server_key') is-invalid @enderror"
+                                                value="{{ !empty($setting_member['midtrans_server_key']) ? $setting_member['midtrans_server_key'] : '' }}"
+                                                required>
+                                            @error('midtrans_server_key')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>{{ __('admin.Client Key') }} <span class="text-danger">*</span></label>
-                                        <input type="text" id="midtrans_client_key" name="midtrans_client_key"
-                                            class="form-control @error('midtrans_client_key') is-invalid @enderror"
-                                            value="{{ !empty($setting['midtrans_client_key']) ? $setting['midtrans_client_key'] : '' }}"
-                                            required>
-                                        @error('midtrans_client_key')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>{{ __('admin.Server Key') }} <span class="text-danger">*</span></label>
-                                        <input type="text" id="midtrans_server_key" name="midtrans_server_key"
-                                            class="form-control @error('midtrans_server_key') is-invalid @enderror"
-                                            value="{{ !empty($setting['midtrans_server_key']) ? $setting['midtrans_server_key'] : '' }}"
-                                            required>
-                                        @error('midtrans_server_key')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-save"></i> {{ __('admin.Save Changes') }}
+                                </button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>{{ __('admin.Bank Transfer') }}</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div class="tab-pane fade show" id="tab-setting5" role="tabpanel">
@@ -358,12 +357,11 @@
                                         <div class="mb-3 text-center">
                                             @if (!empty($setting_member['member_logo']))
                                                 <img class="preview-member_logo"
-                                                    src="{{ url(config('common.path_image_storage') . $setting_member['member_logo']) }}"
+                                                    src="{{ url(config('common.path_storage') . $setting_member['member_logo']) }}"
                                                     width="400" height="400">
                                             @else
-                                                <img class="preview-member_logo"
-                                                    src="{{ url(config('common.no_image_square')) }}" width="400"
-                                                    height="400">
+                                                <img class="preview-member_logo" src="{{ url(noImageSquare()) }}"
+                                                    width="400" height="400">
                                             @endif
                                         </div>
                                         <div class="mb-3 custom-file">
@@ -373,7 +371,7 @@
                                             <label class="custom-file-label"
                                                 for="member_logo">{{ __('admin.Choose file') }}</label>
                                             <input type="hidden" name="old_member_logo"
-                                                value="{{ !empty($setting_member['member_logo']) ? $setting_member['member_logo'] : config('common.no_image_square') }}">
+                                                value="{{ !empty($setting_member['member_logo']) ? $setting_member['member_logo'] : config('common.default_image_square') }}">
                                         </div>
                                     </div>
                                 </div>

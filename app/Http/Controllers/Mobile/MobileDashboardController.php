@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use App\Http\Controllers\Controller;
+use App\Models\Announcement;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MobileDashboardController extends Controller
 {
     public function index()
     {
-        return view('mobile.dashboard.index');
+        $announs = Announcement::where('area_id', getLoggedUser()->area->id)
+            ->where('status', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        return view('mobile.dashboard.index', compact('announs'));
     }
 
     public function transaction()
@@ -25,5 +30,11 @@ class MobileDashboardController extends Controller
     public function setting()
     {
         return view('mobile.setting.index');
+    }
+
+    public function showAnnouncement(string $id)
+    {
+        $announcement = Announcement::findOrFail($id);
+        return view('mobile.dashboard.show_announcement', compact('announcement'));
     }
 }

@@ -18,9 +18,8 @@ class MemberSettingController extends Controller
 
     public function index()
     {
-        $areaId = Auth::guard('member')->user()->area_id;
-        $area = Area::findOrFail($areaId);
-        $permissions = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
+        $area = Area::findOrFail(getLoggedUserAreaId());
+        $permissions = Permission::where('guard_name', getGuardNameMember())->get()->groupBy('group_name');
         return view('member.setting.index', compact('permissions', 'area'));
     }
 
@@ -33,6 +32,7 @@ class MemberSettingController extends Controller
         $area->rw = $request->rw;
         $area->postal_code = $request->postal_code;
         $area->full_address = $request->full_address;
+        $area->updated_by = getLoggedUser()->name;
         $area->save();
 
         return redirect()->back()->with('success', __('admin.Update area successfully'));
@@ -41,13 +41,25 @@ class MemberSettingController extends Controller
     public function settingLogoUpdate(Request $request)
     {
         if ($request->hasFile('member_logo')) {
-            $imagePath = $this->handleImageUpload($request, 'member_logo', $request->old_member_logo, 'member_logo');
+            $image_path = $this->handleImageUpload($request, 'member_logo', $request->old_member_logo, 'member_logo');
             SettingMember::updateOrCreate(
                 ['key' => 'member_logo'],
-                ['value' => $imagePath, 'member_id' => Auth::guard('member')->user()->id],
+                ['value' => $image_path, 'area_id' => getLoggedUserAreaId(), 'updated_by' => getLoggedUser()->name],
             );
         }
 
         return redirect()->back()->with('success', __('admin.Updated logo successfully'));
+    }
+
+    public function settingPaymentUpdate(Request $request)
+    {
+        foreach ($request->only('midtrans_environment', 'midtrans_merchant_id', 'midtrans_client_key', 'midtrans_server_key') as $key => $value) {
+            SettingMember::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value, 'area_id' => getLoggedUserAreaId(), 'updated_by' => getLoggedUser()->name],
+            );
+        }
+
+        return redirect()->back()->with('success', __('admin.Updated payment setting successfully'));
     }
 }

@@ -257,6 +257,16 @@ function getHouseAddressUser(): ?string
     return getLoggedUser()->house_street_name . ', ' . getLoggedUser()->house_block . '/' . getLoggedUser()->house_number;
 }
 
+function noImageCircle() : ?string
+{
+    return config('common.path_storage') . config('common.default_image_circle');
+}
+
+function noImageSquare() : ?string
+{
+    return config('common.path_storage') . config('common.default_image_square');
+}
+
 function canAccess(array $permissions)
 {
     $permission = getLoggedUser()->hasAnyPermission($permissions);

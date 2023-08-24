@@ -40,7 +40,12 @@ class MemberRoleController extends Controller
             'guard_name' => $request->guard_name,
             'area_id' => getLoggedUser()->area->id,
         ]);
-        $role->syncPermissions($request->permissions);
+
+        if ($request->guard_name == getGuardNameMember()) {
+            $role->syncPermissions($request->permissions_member);
+        } elseif ($request->guard_name == getGuardNameUser()) {
+            $role->syncPermissions($request->permissions_web);
+        }
 
         return redirect()->route('member.role.index')->with('success', __('admin.Create role & permissions successfully'));
     }
@@ -76,7 +81,12 @@ class MemberRoleController extends Controller
         $role->update([
             'name' => $request->role_name,
         ]);
-        $role->syncPermissions($request->permissions);
+
+        if ($request->guard_name == getGuardNameMember()) {
+            $role->syncPermissions($request->permissions_member);
+        } elseif ($request->guard_name == getGuardNameUser()) {
+            $role->syncPermissions($request->permissions_web);
+        }
 
         return redirect()->route('member.role.index')->with('success', __('admin.Updated role & permissions successfully'));
     }

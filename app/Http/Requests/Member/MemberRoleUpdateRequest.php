@@ -22,10 +22,7 @@ class MemberRoleUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        // $roleId = $this->route('role');
-
         return [
-            // 'role_name' => ['required', 'string', 'max:255', 'unique:roles,name,' . $roleId],
             'role_name' => [
                 'required',
                 'string',
@@ -33,7 +30,7 @@ class MemberRoleUpdateRequest extends FormRequest
                 Rule::unique('roles', 'name')->where(function ($query) {
                     $query->where('guard_name', $this->guard_name)
                         ->where('area_id', getLoggedUserAreaId());
-                })->ignore($this->id)
+                })->ignore($this->role)
             ],
         ];
     }

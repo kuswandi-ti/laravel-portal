@@ -52,13 +52,14 @@
                             <div class="control-label">{{ __('admin.Guard Name') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="member" class="custom-switch-input"
-                                        checked>
+                                    <input type="radio" name="guard_name" value="{{ getGuardNameMember() }}"
+                                        class="custom-switch-input" checked>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-danger">{{ __('admin.Member') }}</span>
                                 </label>
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="web" class="custom-switch-input">
+                                    <input type="radio" name="guard_name" value="{{ getGuardNameUser() }}"
+                                        class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ __('admin.Web') }}</span>
                                 </label>
@@ -66,7 +67,16 @@
                         </div>
 
                         <div id="permission_member">
-                            <div class="control-label mb-3">{{ __('admin.Permission Member') }}</div>
+                            <label class="mt-2 mb-4 custom-switch">
+                                <input value="1" type="checkbox" name="check_all_member" id="check_all_member"
+                                    class="custom-switch-input check_all_member">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description">{{ __('Check All') }}</span>
+                            </label>
+
+                            <div class="control-label mb-3 mt-4 font-weight-bold">
+                                <div class="badge badge-dark">{{ __('admin.Permission Member') }}</div>
+                            </div>
                             @foreach ($permissions_member as $key => $permission)
                                 <div class="form-group">
                                     <div class="control-label text-danger">{{ __($key) }}</div>
@@ -75,7 +85,8 @@
                                             <div class="col-md-3">
                                                 <label class="mt-2 custom-switch">
                                                     <input value="{{ __($item->name) }}" type="checkbox"
-                                                        name="permissions[]" class="custom-switch-input">
+                                                        name="permissions_member[]"
+                                                        class="custom-switch-input check_member">
                                                     <span class="custom-switch-indicator"></span>
                                                     <span class="custom-switch-description">{{ __($item->name) }}</span>
                                                 </label>
@@ -87,7 +98,16 @@
                         </div>
 
                         <div id="permission_web">
-                            <div class="control-label mb-3">{{ __('admin.Permission Web') }}</div>
+                            <label class="mt-2 mb-4 custom-switch">
+                                <input value="1" type="checkbox" name="check_all_web" id="check_all_web"
+                                    class="custom-switch-input check_all_web">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description">{{ __('Check All') }}</span>
+                            </label>
+
+                            <div class="control-label mb-3 mt-4 font-weight-bold">
+                                <div class="badge badge-dark">{{ __('admin.Permission Web') }}</div>
+                            </div>
                             @foreach ($permissions_web as $key => $permission)
                                 <div class="form-group">
                                     <div class="control-label text-info">{{ __($key) }}</div>
@@ -96,7 +116,7 @@
                                             <div class="col-md-3">
                                                 <label class="mt-2 custom-switch">
                                                     <input value="{{ __($item->name) }}" type="checkbox"
-                                                        name="permissions[]" class="custom-switch-input">
+                                                        name="permissions_web[]" class="custom-switch-input check_web">
                                                     <span class="custom-switch-indicator"></span>
                                                     <span class="custom-switch-description">{{ __($item->name) }}</span>
                                                 </label>
@@ -135,6 +155,22 @@
                         $('#permission_member').hide();
                         $('#permission_web').show();
                         break;
+                }
+            });
+
+            $('.check_all_member').on('change', function() {
+                if (this.checked) {
+                    $('.check_member').prop('checked', true);
+                } else {
+                    $('.check_member').prop('checked', false);
+                }
+            });
+
+            $('.check_all_web').on('change', function() {
+                if (this.checked) {
+                    $('.check_web').prop('checked', true);
+                } else {
+                    $('.check_web').prop('checked', false);
                 }
             });
         })

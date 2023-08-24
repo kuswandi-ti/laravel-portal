@@ -80,66 +80,24 @@
 
     <div class="section mt-4 mb-4">
         <div class="owl-carousel owl-theme owl-carousel-info">
-            <div class="card bg-warning">
-                <div class="card-body">
-                    <h4>Pengumuman 1</h4>
-                    Trigger it with;
-                    <p>
-                        <code>toastbox('toastID')</code>
-                    </p>
-                    <h4>Auto Close</h4>
-                    Also, you can auto close it in any seconds after calls.
-                    <br>
-                    <strong>Example : </strong>
-                    Auto close in 3 seconds.<br>
-                    <code>toastbox('toastID', 3000)</code>
+            @if ($announs->count() > 0)
+                @foreach ($announs as $item)
+                    <a href="{{ route('mobile.dashboard.show_announcement', $item->id) }}">
+                        <div class="card bg-warning">
+                            <div class="card-body">
+                                <h2 class="text-center">{{ $item->title }}</h2>
+                                {!! truncateString($item->body, 255) !!}
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            @else
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h4>{{ __('No Announcement') }}</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="card bg-warning">
-                <div class="card-body">
-                    <h4>Pengumuman 2</h4>
-                    Trigger it with;
-                    <p>
-                        <code>toastbox('toastID')</code>
-                    </p>
-                    <h4>Auto Close</h4>
-                    Also, you can auto close it in any seconds after calls.
-                    <br>
-                    <strong>Example : </strong>
-                    Auto close in 3 seconds.<br>
-                    <code>toastbox('toastID', 3000)</code>
-                </div>
-            </div>
-            <div class="card bg-warning">
-                <div class="card-body">
-                    <h4>Pengumuman 3</h4>
-                    Trigger it with;
-                    <p>
-                        <code>toastbox('toastID')</code>
-                    </p>
-                    <h4>Auto Close</h4>
-                    Also, you can auto close it in any seconds after calls.
-                    <br>
-                    <strong>Example : </strong>
-                    Auto close in 3 seconds.<br>
-                    <code>toastbox('toastID', 3000)</code>
-                </div>
-            </div>
-            <div class="card bg-warning">
-                <div class="card-body">
-                    <h4>Pengumuman 4</h4>
-                    Trigger it with;
-                    <p>
-                        <code>toastbox('toastID')</code>
-                    </p>
-                    <h4>Auto Close</h4>
-                    Also, you can auto close it in any seconds after calls.
-                    <br>
-                    <strong>Example : </strong>
-                    Auto close in 3 seconds.<br>
-                    <code>toastbox('toastID', 3000)</code>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 

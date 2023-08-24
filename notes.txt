@@ -322,3 +322,116 @@ MIDTRANS_SERVER_KEY=SB-Mid-server-wqi7Qz4u9kNIMpxnwW1LLTsC
 # MIDTRANS_CLIENT_KEY=Mid-client-9VatgRzOBhxiVTDx
 # MIDTRANS_SERVER_KEY=Mid-server-aIcbql824rydGuK_Pz1NT7ex
 ---------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+====================
+GUARD ADMIN
+====================
+package index
+package create
+package update
+package delete
+package restore
+residence index
+residence create
+residence update
+residence delete
+residence restore
+permission index
+permission create
+permission update
+permission delete
+permission restore
+role index
+role create
+role update
+role delete
+role restore
+system admin user index
+system admin user create
+system admin user update
+system admin user delete
+system admin user restore
+member admin user index
+member admin user create
+member admin user update
+member admin user delete
+member admin user restore
+languages index
+languages create
+languages update
+languages delete
+languages restore
+translate admin index
+translate admin generate
+translate admin trans
+translate mobile index
+translate mobile generate
+translate mobile trans
+translate website index
+translate website generate
+translate website trans
+system setting
+====================
+
+
+
+====================
+GUARD MEMBER
+====================
+street index
+street create
+street update
+street delete
+street restore
+block index
+block create
+block update
+block delete
+block restore
+house index
+house create
+house update
+house delete
+house restore
+role index
+role create
+role update
+role delete
+admin index
+admin create
+admin update
+admin delete
+admin restore
+staff index
+staff create
+staff update
+staff delete
+staff restore
+user restore
+announcement index
+announcement create
+announcement update
+announcement delete
+announcement restore
+member setting
+====================
+
+
+====================
+GUARD WEB
+====================
+user index
+user create
+user update
+user delete
+====================

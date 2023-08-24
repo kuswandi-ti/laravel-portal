@@ -8,6 +8,7 @@ use App\Http\Controllers\Member\MemberHouseController;
 use App\Http\Controllers\Member\MemberStreetController;
 use App\Http\Controllers\Member\MemberProfileController;
 use App\Http\Controllers\Member\MemberSettingController;
+use App\Http\Controllers\Member\MemberUserUserController;
 use App\Http\Controllers\Member\MemberAdminUserController;
 use App\Http\Controllers\Member\MemberDashboardController;
 use App\Http\Controllers\Member\MemberStaffUserController;
@@ -66,15 +67,21 @@ Route::group([
     Route::get('admin/restore/{id}', [MemberAdminUserController::class, 'restore'])->name('admin.restore');
     Route::resource('admin', MemberAdminUserController::class);
 
-    /** User Routes */
+    /** Staff Routes */
     Route::get('staff/data', [MemberStaffUserController::class, 'data'])->name('staff.data');
     Route::get('staff/restore/{id}', [MemberStaffUserController::class, 'restore'])->name('staff.restore');
     Route::resource('staff', MemberStaffUserController::class);
+
+    /** User Routes */
+    Route::get('user/data', [MemberUserUserController::class, 'data'])->name('user.data');
+    Route::get('user/restore/{id}', [MemberUserUserController::class, 'restore'])->name('user.restore');
+    Route::get('user/index', [MemberUserUserController::class, 'index'])->name('user.index');
 
     /** Setting Routes */
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');
     Route::put('setting-area/{id}', [MemberSettingController::class, 'settingAreaUpdate'])->name('setting_area.update');
     Route::put('setting-logo', [MemberSettingController::class, 'settingLogoUpdate'])->name('setting_logo.update');
+    Route::put('setting-payment', [MemberSettingController::class, 'settingPaymentUpdate'])->name('setting_payment.update');
 
     /** Announcement Routes */
     Route::get('announcement/data', [MemberAnnouncementController::class, 'data'])->name('announcement.data');
