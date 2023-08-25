@@ -61,6 +61,25 @@
                         </div>
 
                         <div class="form-group">
+                            <label>{{ __('admin.House') }} <x-fill-field /></label>
+                            <select name="house" class="form-control select2 @error('house') is-invalid @enderror"
+                                required>
+                                <option value="" selected disabled>{{ __('admin.Choose one ...') }}
+                                </option>
+                                @foreach ($houses as $house)
+                                    <option value="{{ $house->id }}"
+                                        {{ $house->id == $staff->house_id ? 'selected' : '' }}>
+                                        {{ $house->owner_name }}</option>
+                                @endforeach
+                            </select>
+                            @error('house')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <div class="control-label">{{ __('admin.Member Staff Role') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 @foreach ($roles as $key => $item)
@@ -92,3 +111,5 @@
         </div>
     </div>
 @endsection
+
+@include('layouts.admin.includes.select2')

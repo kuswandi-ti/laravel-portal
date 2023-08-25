@@ -10,11 +10,11 @@ Route::group(['middleware' => ['set_language']], function () {
     Route::get('/', [MobileAuthController::class, 'login'])->name('login');
 
     /** Auth Staff & User Routes */
-    Route::get('register', [MobileAuthController::class, 'register'])->name('register');
+    Route::get('register-verify/{token}', [MobileAuthController::class, 'registerVerify'])->name('register.verify');
+    // Route::get('register', [MobileAuthController::class, 'register'])->name('register');
     Route::post('register', [MobileAuthController::class, 'handleRegister'])->name('register.post');
     Route::get('login', [MobileAuthController::class, 'login'])->name('login');
     Route::post('login', [MobileAuthController::class, 'handleLogin'])->name('login.post');
-    Route::get('register-verify/{token}', [MobileAuthController::class, 'registerVerify'])->name('register.verify');
     Route::get('forgot-password', [MobileAuthController::class, 'forgotPassword'])->name('forgot_password');
     Route::post('forgot-password', [MobileAuthController::class, 'sendResetLink'])->name('forgot_password.send');
     Route::get('reset-password/{token}', [MobileAuthController::class, 'resetPassword'])->name('reset_password');

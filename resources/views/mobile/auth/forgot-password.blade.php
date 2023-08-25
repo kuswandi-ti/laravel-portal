@@ -1,74 +1,48 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.mobile.auth')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@section('app_title')
+    {{ __('Forgot Password') }}
+@endsection
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+@section('content')
+    <div id="appCapsule">
+        <div class="text-center section">
+            <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/illustration/login.png') }}" alt="img"
+                class="imaged" style="width: 150px;">
+        </div>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('public/template/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="{{ asset('public/template/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('public/template/dist/css/adminlte.min.css') }}">
-</head>
+        <div class="mt-2 text-center section">
+            <h1>{{ __('Forgot Password') }}</h1>
+        </div>
 
-<body class="hold-transition register-page">
-    <div class="register-box">
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="/" class="h1"><b>Admin</b>LTE</a>
-            </div>
-            <div class="card-body">
-                <p class="register-box-msg">
-                    <strong>Forgot Password</strong>
-                </p>
-                <p class="register-box-msg">
-                    {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-                </p>
+        <div class="p-2 mb-5 section">
+            <x-alert-message />
 
-                <form method="POST" action="{{ route('password.email') }}">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                            id="email" value="{{ old('email') }}" placeholder="Enter email" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+            <form method="POST" action="{{ route('mobile.forgot_password.send') }}">
+                @csrf
+                <div class="card">
+                    <div class="pb-1 card-body">
+                        <h4 class="text-center">
+                            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one') }}
+                        </h4>
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="email">{{ __('E-mail') }} <x-fill-field /></label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    value="{{ old('email') }}" placeholder="{{ __('Your email') }}" autofocus>
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                </i>
                             </div>
                         </div>
-                        @error('email')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
                     </div>
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <button type="submit"
-                                class="btn btn-primary btn-block">{{ __('Email Password Reset Link') }}</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <a href="{{ route('login') }}" class="text-center">{{ __('Already registered?') }}</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit"
+                        class="btn btn-primary btn-block btn-lg mt-3">{{ __('Email Password Reset Link') }}</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <!-- jQuery -->
-    <script src="{{ asset('public/template/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('public/template/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('public/template/dist/js/adminlte.min.js') }}"></script>
-</body>
-
-</html>
+@endsection

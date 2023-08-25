@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Models\User;
+use App\Models\House;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -32,7 +33,10 @@ class MemberStaffUserController extends Controller
             ['guard_name', getGuardNameUser()],
             ['area_id', getLoggedUser()->area->id],
         ])->orderBy('name', 'DESC')->pluck('name', 'id');
-        return view('member.staff.create', compact('roles'));
+        $houses = House::where([
+            ['area_id', getLoggedUser()->area->id],
+        ])->orderBy('owner_name', 'ASC')->get();
+        return view('member.staff.create', compact('roles', 'houses'));
     }
 
     /**
@@ -42,14 +46,21 @@ class MemberStaffUserController extends Controller
     {
         $token = Str::random(64);
 
-        $staff = new User();
+        $house = House::findOrFail($request->house);
+        $house_street_name = $house->street;
+        $house_block = $house->block;
+        $house_number = $house->no;
 
+        $staff = new User();
         $staff->name = $request->name;
         $staff->slug = Str::slug($request->name);
         $staff->email = $request->email;
         $staff->image = config('common.default_image_circle');
         $staff->area_id = getLoggedUser()->area->id;
-        $staff->house_id = getLoggedUser()->house->id;
+        $staff->house_id = $request->house;
+        $staff->house_street_name = $house_street_name;
+        $staff->house_block = $house_block;
+        $staff->house_number = $house_number;
         $staff->register_token = $token;
         $staff->created_by = getLoggedUser()->name;
         $staff->status = 1;
@@ -81,8 +92,11 @@ class MemberStaffUserController extends Controller
             ['area_id', getLoggedUser()->area->id],
         ])->orderBy('name', 'DESC')->pluck('name', 'id');
         $staff_role = $staff->roles->pluck('name', 'id')->all();
+        $houses = House::where([
+            ['area_id', getLoggedUser()->area->id],
+        ])->orderBy('owner_name', 'ASC')->get();
 
-        return view('member.staff.edit', compact('staff', 'roles', 'staff_role'));
+        return view('member.staff.edit', compact('staff', 'roles', 'staff_role', 'houses'));
     }
 
     /**
@@ -90,10 +104,19 @@ class MemberStaffUserController extends Controller
      */
     public function update(MemberStaffUserUpdateRequest $request, string $id)
     {
+        $house = House::findOrFail($request->house);
+        $house_street_name = $house->street;
+        $house_block = $house->block;
+        $house_number = $house->no;
+
         $staff = User::findOrFail($id);
         $staff->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'house_id' => $request->house,
+            'house_street_name' => $house_street_name,
+            'house_block' => $house_block,
+            'house_number' => $house_number,
             'updated_by' => getLoggedUser()->name,
             'status' => 1,
         ]);

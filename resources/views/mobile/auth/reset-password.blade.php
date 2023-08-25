@@ -1,40 +1,70 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+@extends('layouts.mobile.auth')
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+@section('app_title')
+    {{ __('Reset Password') }}
+@endsection
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required
-                autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('content')
+    <div id="appCapsule">
+        <div class="text-center section">
+            <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/illustration/login.png') }}" alt="img"
+                class="imaged" style="width: 150px;">
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="mt-2 text-center section">
+            <h1>{{ __('Reset Password') }}</h1>
+            <h4>{{ __('Reset Password Registered User') }}</h4>
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <div class="p-2 mb-5 section">
+            <x-alert-message />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                name="password_confirmation" required autocomplete="new-password" />
+            <form method="POST" action="{{ route('mobile.reset_password.send') }}">
+                @csrf
+                <div class="card">
+                    <div class="pb-1 card-body">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="email">{{ __('E-mail') }} <x-fill-field /></label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    value="{{ old('email') }}" placeholder="{{ __('Your email') }}" autofocus>
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                            </div>
+                        </div>
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="password">{{ __('New Password') }} <x-fill-field /></label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    autocomplete="off" placeholder="{{ __('Your new password') }}">
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                            </div>
+                        </div>
+
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="password_confirmation">{{ __('New Password Confirmation') }}
+                                    <x-fill-field /></label>
+                                <input type="password_confirmation" class="form-control" name="password_confirmation"
+                                    id="password_confirmation" autocomplete="off"
+                                    placeholder="{{ __('Your new password confirmation') }}">
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit"
+                        class="btn btn-primary btn-block btn-lg mt-2 mb-2">{{ __('Reset Password') }}</button>
+                </div>
+            </form>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection

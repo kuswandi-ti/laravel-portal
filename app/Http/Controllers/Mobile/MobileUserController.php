@@ -7,6 +7,7 @@ use App\Models\House;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\MobileUserRegisterVerifyMail;
 use App\Http\Requests\Mobile\MobileUserCreateRequest;
 use App\Http\Requests\Mobile\MobileUserUpdateRequest;
 
@@ -41,6 +42,8 @@ class MobileUserController extends Controller
      */
     public function store(MobileUserCreateRequest $request)
     {
+        $token = Str::random(64);
+
         $user = new User();
 
         $user->name = $request->name;
@@ -52,12 +55,12 @@ class MobileUserController extends Controller
         $user->image = config('common.default_image_circle');
         $user->area_id = getLoggedUser()->area->id;
         $user->house_id = $request->house;
+        $user->register_token = $token;
         $user->created_by = getLoggedUser()->name;
         $user->status = 1;
         $user->save();
 
-        $token = Str::random(64);
-        // Mail::to($request->email)->send(new MemberRegisterVerifyMail($token));
+        Mail::to($request->email)->send(new MobileUserRegisterVerifyMail($token, $request->email));
 
         return redirect()->route('mobile.user.index')->with('success', __('Created user successfully'));
     }

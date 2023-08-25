@@ -95,9 +95,9 @@ class MemberAuthController extends Controller
             if (!$member->email_verified_at) {
                 $member->email_verified_at = now();
                 $member->save();
-                $message = "Your e-mail is verified. You can now login.";
+                $message = "Your e-mail is verified. You can now login";
             } else {
-                $message = "Your e-mail is already verified. You can now login.";
+                $message = "Your e-mail is already verified. You can now login";
             }
         }
 

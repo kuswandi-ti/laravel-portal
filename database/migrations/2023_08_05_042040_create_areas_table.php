@@ -15,8 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug');
-            $table->bigInteger('residence_id')->unsigned()->nullable();
-            $table->foreign('residence_id')->references('id')->on('residences')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignUuid('residence_id')->constrained('residences')->nullable();
             $table->string('rt')->nullable();
             $table->string('rw')->nullable();
             $table->string('province_code')->nullable();
@@ -25,8 +24,7 @@ return new class extends Migration
             $table->string('village_code')->nullable();
             $table->string('postal_code')->nullable();
             $table->text('full_address')->nullable();
-            $table->bigInteger('package_id')->unsigned()->nullable();
-            $table->foreign('package_id')->references('id')->on('packages')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignUuid('package_id')->constrained('packages')->nullable();
             $table->string('package_type')->comment('Monthly, Yearly')->nullable();
             $table->string('membership_type')->comment('Trial, Member')->nullable();
             $table->date('register_date')->nullable();

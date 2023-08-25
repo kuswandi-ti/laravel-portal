@@ -9,10 +9,12 @@ use App\Models\Block;
 use App\Models\House;
 use App\Models\Member;
 use App\Models\Street;
+use App\Models\Account;
 use App\Models\Package;
 use App\Models\Residence;
 use Illuminate\Support\Str;
 use App\Models\SettingMember;
+use App\Models\AccountCategory;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -61,6 +63,15 @@ class MainDataSeeder extends Seeder
         $residence->created_by = 'Super Admin';
         $residence->save();
 
+        /** Create Area Seeder */
+        $area = new Area();
+        $area->name = 'Super Admin Area';
+        $area->slug = Str::slug('Super Admin Area');
+        $area->residence_id = $residence->id;
+        $area->package_id = $package->id;
+        $area->created_by = 'Super Admin';
+        $area->save();
+
         $residence = new Residence();
         $residence->name = 'Puri Hesti Insani';
         $residence->slug = Str::slug('Puri Hesti Insani');
@@ -72,13 +83,6 @@ class MainDataSeeder extends Seeder
         $residence->status = 1;
         $residence->created_by = 'Super Admin';
         $residence->save();
-
-        /** Create Area Seeder */
-        $area = new Area();
-        $area->name = 'Super Admin Area';
-        $area->slug = Str::slug('Super Admin Area');
-        $area->created_by = 'Super Admin';
-        $area->save();
 
         /** Create Role & Permission Admin Seeder - Begin */
         // Reset cached roles and permissions
@@ -169,7 +173,7 @@ class MainDataSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         // Create User Permission
-        $permissions = getArrayUserAllPermission();;
+        $permissions = getArrayUserAllPermission();
         foreach ($permissions as $permission) {
             Permission::create($permission);
         }
@@ -357,5 +361,51 @@ class MainDataSeeder extends Seeder
             SettingMember::create($item);
         }
         /** Create Setting Member - End */
+
+        /** Create Account Category */
+        $account_category_1 = AccountCategory::create([
+            'name' => 'Pemasukan Tetap',
+            'group' => 'Income',
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+
+        $account_category_2 = AccountCategory::create([
+            'name' => 'Sumbangan Warga',
+            'group' => 'Income',
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+
+        $account_category_3 = AccountCategory::create([
+            'name' => 'Maintenance',
+            'group' => 'Expense',
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+        /** Create Account Category - End */
+
+        /** Create Account */
+        $account_1 = Account::create([
+            'name' => 'IPL',
+            'account_category_id' => $account_category_1->id,
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+
+        $account_2 = Account::create([
+            'name' => 'Sumbangan Warga a/n John',
+            'account_category_id' => $account_category_2->id,
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+
+        $account_3 = Account::create([
+            'name' => 'Pembelian Alat Penerangan',
+            'account_category_id' => $account_category_3->id,
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+        /** Create Account - End */
     }
 }

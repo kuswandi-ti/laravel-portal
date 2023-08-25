@@ -27,6 +27,7 @@ class MemberStaffUserUpdateRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $staff_id],
             'role' => ['required'],
+            'house' => ['required'],
         ];
     }
 }

@@ -1,42 +1,33 @@
-@extends('mobile.layouts.auth')
+@extends('layouts.mobile.auth')
 
-@section('app_title', 'Register')
+@section('app_title')
+    {{ __('Register New User') }}
+@endsection
 
-@section('frontend_content')
+@section('content')
     <div id="appCapsule">
-        <div class="section text-center">
-            <img src="{{ asset('public/template/mobile/assets/img/illustration/login.png') }}" alt="img" class="imaged"
-                style="width: 200px;">
+        <div class="text-center section">
+            <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/illustration/login.png') }}" alt="img"
+                class="imaged" style="width: 150px;">
         </div>
 
-        <div class="section mt-2 text-center">
-            <h1>{{ __('Register') }}</h1>
-            <h4>{{ __('Register User Baru') }}</h4>
+        <div class="mt-2 text-center section">
+            <h1>{{ __('Register New User') }}</h1>
+            <h4>{{ __('Register New User Confirmation') }}</h4>
         </div>
 
-        <div class="section mb-5 p-2">
+        <div class="p-2 mb-5 section">
             <x-alert-message />
 
-            <form method="POST" action="{{ route('mobile.register') }}">
+            <form method="POST" action="{{ route('mobile.register.post') }}">
                 @csrf
                 <div class="card">
-                    <div class="card-body pb-1">
+                    <div class="pb-1 card-body">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="name">{{ __('Nama Lengkap') }}</label>
-                                <input type="text" class="form-control" name="name" id="name"
-                                    value="{{ old('name') }}" placeholder="{{ __('Masukkan Nama Lengkap') }}">
-                                <i class="clear-input">
-                                    <ion-icon name="close-circle"></ion-icon>
-                                </i>
-                            </div>
-                        </div>
-
-                        <div class="form-group basic">
-                            <div class="input-wrapper">
-                                <label class="label" for="email">{{ __('E-mail') }}</label>
+                                <label class="label" for="email">{{ __('E-mail') }} <x-fill-field /></label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                    value="{{ old('email') }}" placeholder="{{ __('Masukkan Email') }}">
+                                    value="{{ old('email') }}" placeholder="{{ __('Your email') }}" autofocus>
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -45,9 +36,9 @@
 
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password">{{ __('Password') }}</label>
+                                <label class="label" for="password">{{ __('New Password') }} <x-fill-field /></label>
                                 <input type="password" class="form-control" name="password" id="password"
-                                    autocomplete="off" placeholder="{{ __('Masukkan Password') }}">
+                                    autocomplete="off" placeholder="{{ __('Your new password') }}">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -56,29 +47,34 @@
 
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password_confirmation">{{ __('Konfirmasi Password') }}</label>
-                                <input type="password" class="form-control" name="password_confirmation"
+                                <label class="label" for="password_confirmation">{{ __('New Password Confirmation') }}
+                                    <x-fill-field /></label>
+                                <input type="password_confirmation" class="form-control" name="password_confirmation"
                                     id="password_confirmation" autocomplete="off"
-                                    placeholder="{{ __('Masukkan Konfirmasi Password') }}">
+                                    placeholder="{{ __('Your new password confirmation') }}">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
                             </div>
                         </div>
+
+                        {{-- <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="street">{{ __('Street') }} <x-fill-field /></label>
+                                <input type="text" class="form-control" name="street" id="street"
+                                    value="{{ old('street') ?? $user->house_street_name }}"
+                                    placeholder="{{ __('Your street name') }}" autofocus>
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                            </div>
+                        </div> --}}
                     </div>
                 </div>
 
-                <div class="form-links mt-2">
-                    <div>
-                        <a href="{{ route('mobile.login') }}">{{ __('Login') }}</a>
-                    </div>
-                    <div>
-                        <a href="{{ route('mobile.password.request') }}" class="text-muted">{{ __('Lupa Password') }}</a>
-                    </div>
-                </div>
-
-                <div class="form-button-group  transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">{{ __('Register') }}</button>
+                <div class="text-center">
+                    <button type="submit"
+                        class="btn btn-primary btn-block btn-lg mt-2 mb-2">{{ __('Confirmation Registration') }}</button>
                 </div>
             </form>
         </div>

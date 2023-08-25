@@ -25,9 +25,9 @@
                     <div class="pb-1 card-body">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="email1">{{ __('E-mail') }}</label>
-                                <input type="email" class="form-control" name="email" id="email1"
-                                    value="{{ old('email') }}" placeholder="{{ __('Your Email') }}" autofocus>
+                                <label class="label" for="email">{{ __('E-mail') }} <x-fill-field /></label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    value="{{ old('email') }}" placeholder="{{ __('Your email') }}" autofocus>
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -36,9 +36,9 @@
 
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password1">{{ __('Password') }}</label>
-                                <input type="password" class="form-control" name="password" id="password1"
-                                    autocomplete="off" placeholder="{{ __('Your Password') }}">
+                                <label class="label" for="password">{{ __('Password') }} <x-fill-field /></label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    autocomplete="off" placeholder="{{ __('Your password') }}">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -47,17 +47,9 @@
                     </div>
                 </div>
 
-                <div class="mt-2 form-links">
-                    <div>
-                        &nbsp;
-                    </div>
-                    <div>
-                        <a href="{{ route('mobile.forgot_password') }}" class="text-muted">{{ __('Forgot Password') }}</a>
-                    </div>
-                </div>
-
-                <div class="form-button-group transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">{{ __('Log In') }}</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-2 mb-2">{{ __('Log In') }}</button>
+                    <a href="{{ route('mobile.forgot_password') }}" class="text-muted">{{ __('Forgot Password') }}</a>
                 </div>
             </form>
         </div>

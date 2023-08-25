@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MobileUserRegisterVerifyMail extends Mailable
+class MobileUserSendResetLinkMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class MobileUserRegisterVerifyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'User Register Mail',
+            subject: 'User Send Reset Link Mail',
         );
     }
 
@@ -41,7 +41,7 @@ class MobileUserRegisterVerifyMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.mobile_user_register_verify_mail',
+            view: 'mail.mobile_user_reset_link_mail',
         );
     }
 

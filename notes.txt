@@ -350,19 +350,16 @@ permission index
 permission create
 permission update
 permission delete
-permission restore
 role index
 role create
 role update
 role delete
-role restore
 system admin user index
 system admin user create
 system admin user update
 system admin user delete
 system admin user restore
 member admin user index
-# member admin user create
 member admin user update
 member admin user delete
 member admin user restore
@@ -442,5 +439,5 @@ user delete
 
 
 TODO :
-1. tambahkan house id saat create staff
-2. 
+1. tambahkan house id saat create staff (OK)
+2. register & forgot password di mobile
