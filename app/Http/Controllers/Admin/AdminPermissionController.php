@@ -10,6 +10,14 @@ use App\Http\Requests\Admin\AdminPermissionUpdateRequest;
 
 class AdminPermissionController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware(['permission:permission create,' . getGuardNameAdmin()])->only(['create', 'store']);
+        $this->middleware(['permission:permission delete,' . getGuardNameAdmin()])->only(['destroy']);
+        $this->middleware(['permission:permission index,' . getGuardNameAdmin()])->only(['index', 'show', 'data']);
+        $this->middleware(['permission:permission update,' . getGuardNameAdmin()])->only(['edit', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -107,14 +115,21 @@ class AdminPermissionController extends Controller
                 return '<div class="badge badge-' . $badge . '">' . $query->guard_name . '</div>';
             })
             ->addColumn('action', function ($query) {
-                return '
-                    <a href="' . route('admin.permission.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="' . route('admin.permission.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                ';
+                if (canAccess(['permission update'])) {
+                    $update = '
+                        <a href="' . route('admin.permission.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    ';
+                }
+                if (canAccess(['permission delete'])) {
+                    $delete = '
+                        <a href="' . route('admin.permission.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    ';
+                }
+                return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
             })
             ->rawColumns(['action'])
             ->escapeColumns([])

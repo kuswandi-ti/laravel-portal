@@ -27,11 +27,13 @@
             <div class="card card-primary">
                 <div class="card-header">
                     <h4>{{ __('admin.All Translate Admin Site') }}</h4>
-                    <div class="card-header-action">
-                        <a href="{{ route('admin.language.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
-                        </a>
-                    </div>
+                    @if (canAccess(['language create']))
+                        <div class="card-header-action">
+                            <a href="{{ route('admin.language.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
+                            </a>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab2" role="tablist">
@@ -54,25 +56,28 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
-                                                <form method="POST"
-                                                    action="{{ route('admin.translate.extract_localize_string') }}">
-                                                    @csrf
-                                                    <input type="hidden" name="directory"
-                                                        value="{{ resource_path('views/admin') }},{{ app_path('Http/Controllers/Admin') }},{{ resource_path('views/mail') }},{{ resource_path('views/layouts/admin') }},{{ resource_path('views/member') }},{{ app_path('Http/Controllers/Member') }}">
-                                                    <input type="hidden" name="language_code"
-                                                        value="{{ $language->lang }}">
-                                                    <input type="hidden" name="file_name" value="admin">
-                                                    <button type="submit"
-                                                        class="mx-2 btn btn-primary">{{ __('admin.Generate Strings') }}</button>
-                                                </form>
-
-                                                <form class="translate_form" method="POST" action="#">
-                                                    <input type="hidden" name="language_code"
-                                                        value="{{ $language->lang }}">
-                                                    <input type="hidden" name="file_name" value="admin">
-                                                    <button type="submit"
-                                                        class="mx-2 btn btn-dark translate-button">{{ __('admin.Translate Strings') }}</button>
-                                                </form>
+                                                @if (canAccess(['translate admin generate']))
+                                                    <form method="POST"
+                                                        action="{{ route('admin.translate.extract_localize_string') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="directory"
+                                                            value="{{ resource_path('views/admin') }},{{ app_path('Http/Controllers/Admin') }},{{ resource_path('views/mail') }},{{ resource_path('views/layouts/admin') }},{{ resource_path('views/member') }},{{ app_path('Http/Controllers/Member') }}">
+                                                        <input type="hidden" name="language_code"
+                                                            value="{{ $language->lang }}">
+                                                        <input type="hidden" name="file_name" value="admin">
+                                                        <button type="submit"
+                                                            class="mx-2 btn btn-primary">{{ __('admin.Generate Strings') }}</button>
+                                                    </form>
+                                                @endif
+                                                @if (canAccess(['translate admin trans']))
+                                                    <form class="translate_form" method="POST" action="#">
+                                                        <input type="hidden" name="language_code"
+                                                            value="{{ $language->lang }}">
+                                                        <input type="hidden" name="file_name" value="admin">
+                                                        <button type="submit"
+                                                            class="mx-2 btn btn-dark translate-button">{{ __('admin.Translate Strings') }}</button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -97,14 +102,16 @@
                                                     @foreach ($translated_values as $key => $value)
                                                         <tr>
                                                             <td class="text-center" width="12%">
-                                                                <button data-langcode="{{ $language->lang }}"
-                                                                    data-key="{{ $key }}"
-                                                                    data-value="{{ $value }}" data-filename="admin"
-                                                                    type="button"
-                                                                    class="btn btn-primary btn-sm modal_btn trigger--fire-modal-1"
-                                                                    data-toggle="modal" data-target="#exampleModal">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
+                                                                @if (canAccess(['translate admin update']))
+                                                                    <button data-langcode="{{ $language->lang }}"
+                                                                        data-key="{{ $key }}"
+                                                                        data-value="{{ $value }}"
+                                                                        data-filename="admin" type="button"
+                                                                        class="btn btn-primary btn-sm modal_btn trigger--fire-modal-1"
+                                                                        data-toggle="modal" data-target="#exampleModal">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                @endif
                                                             </td>
                                                             <td>{{ $key }}</td>
                                                             <td>{{ $value }}</td>

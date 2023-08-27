@@ -17,7 +17,6 @@
                     <h4>{{ __('admin.Member Admin Reset Password') }}</h4>
                 </div>
                 <div class="card-body">
-
                     <x-alert-message />
 
                     <form method="POST" action="{{ route('member.reset_password.send') }}">
@@ -26,7 +25,7 @@
                         <div class="form-group">
                             <label for="email">{{ __('admin.Email') }} <x-fill-field /></label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                value="{{ request()->email }}" required>
+                                value="{{ request()->email }}" required autofocus>
                             <input type="hidden" value="{{ request()->token }}" name="token">
                             @error('email')
                                 <div class="invalid-feedback">

@@ -15,6 +15,15 @@ use App\Http\Requests\Admin\AdminResidenceUpdateRequest;
 
 class AdminResidenceController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware(['permission:residence create,' . getGuardNameAdmin()])->only(['create', 'store']);
+        $this->middleware(['permission:residence delete,' . getGuardNameAdmin()])->only(['destroy']);
+        $this->middleware(['permission:residence index,' . getGuardNameAdmin()])->only(['index', 'show', 'data']);
+        $this->middleware(['permission:residence restore,' . getGuardNameAdmin()])->only(['restore']);
+        $this->middleware(['permission:residence update,' . getGuardNameAdmin()])->only(['edit', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -161,20 +170,29 @@ class AdminResidenceController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 1) {
-                    return '
-                        <a href="' . route('admin.residence.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('admin.residence.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['residence update'])) {
+                        $update = '
+                            <a href="' . route('admin.residence.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['residence delete'])) {
+                        $delete = '
+                            <a href="' . route('admin.residence.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
-                    return '
-                        <a href="' . route('admin.residence.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['residence restore'])) {
+                        return '
+                            <a href="' . route('admin.residence.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['status', 'action'])

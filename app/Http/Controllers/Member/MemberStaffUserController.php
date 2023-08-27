@@ -68,7 +68,7 @@ class MemberStaffUserController extends Controller
 
         $staff->assignRole($request->role);
 
-        Mail::to($request->email)->send(new MemberStaffRegisterVerifyMail($token));
+        Mail::to($request->email)->send(new MemberStaffRegisterVerifyMail($token, $request->email));
 
         return redirect()->route('member.staff.index')->with('success', __('admin.Created staff successfully'));
     }
@@ -186,14 +186,14 @@ class MemberStaffUserController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 1) {
-                    if (canAccess(['staff update'])) {
+                    if (canAccess(['member staff user create'])) {
                         $update = '
                             <a href="' . route('member.staff.edit', $query->id) . '" class="btn btn-primary btn-sm">
                                 <i class="fas fa-edit"></i>
                             </a>
                         ';
                     }
-                    if (canAccess(['staff delete'])) {
+                    if (canAccess(['member staff user delete'])) {
                         $delete = '
                             <a href="' . route('member.staff.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
                                 <i class="fas fa-trash-alt"></i>
@@ -202,11 +202,13 @@ class MemberStaffUserController extends Controller
                     }
                     return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
-                    return '
-                        <a href="' . route('member.staff.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['member staff user restore'])) {
+                        return '
+                            <a href="' . route('member.staff.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['action'])

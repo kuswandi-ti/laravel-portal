@@ -440,4 +440,16 @@ user delete
 
 TODO :
 1. tambahkan house id saat create staff (OK)
-2. register & forgot password di mobile
+2. System Admin 
+   - Notif email register dari halaman backend (OK)
+   - Notif email forgot password (OK)
+3. Member Admin
+   - Notif email register dari halaman backend (OK)
+   - Notif email register dari halaman website (OK)
+   - Notif email forgot password (OK)
+4. Member Staff
+   - Notif email register dari halaman backend (OK)
+   - Notif email forgot password (OK)
+5. Member User
+   - Notif email register dari halaman backend (OK)
+   - Notif email forgot password (OK)

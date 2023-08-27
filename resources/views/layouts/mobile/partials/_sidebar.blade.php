@@ -71,10 +71,20 @@
                     <li>
                         <a href="{{ route('mobile.user.index') }}" class="item">
                             <div class="icon-box bg-primary">
-                                <ion-icon name="person-circle-outline"></ion-icon>
+                                <ion-icon name="body"></ion-icon>
                             </div>
                             <div class="in">
                                 {{ __('User Management') }}
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mobile.account-category.index') }}" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="albums"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Account Category') }}
                             </div>
                         </a>
                     </li>
@@ -145,54 +155,8 @@
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="app-login.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="log-out-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Log out
-                            </div>
-                        </a>
-                    </li>
-
-
                 </ul>
                 <!-- * others -->
-
-                <!-- send money -->
-                <div class="mt-1 listview-title">Send Money</div>
-                <ul class="listview image-listview flush transparent no-line">
-                    <li>
-                        <a href="#" class="item">
-                            <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar2.jpg') }}"
-                                alt="image" class="image">
-                            <div class="in">
-                                <div>Artem Sazonov</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="item">
-                            <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar4.jpg') }}"
-                                alt="image" class="image">
-                            <div class="in">
-                                <div>Sophie Asveld</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="item">
-                            <img src="{{ asset('public/template/mobile/assets/img/sample/avatar/avatar3.jpg') }}"
-                                alt="image" class="image">
-                            <div class="in">
-                                <div>Kobus van de Vegte</div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- * send money -->
-
             </div>
         </div>
     </div>

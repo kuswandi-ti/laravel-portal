@@ -18,6 +18,11 @@
                 </div>
 
                 <div class="card-body">
+                    <div class="mb-4 alert alert-dark alert-dismissible fade show" role="alert">
+                        <p>Email : <strong>adminrt5rw11ph6@mail.com</strong></p>
+                        <p>Password : <strong>password</strong></p>
+                    </div>
+
                     <x-alert-message />
 
                     <form method="POST" action="{{ route('member.login.post') }}">
@@ -66,7 +71,7 @@
                             </button>
                         </div>
 
-                        <div class="form-group text-center">
+                        <div class="text-center form-group">
                             <a href="{{ route('member.register') }}">
                                 {{ __('admin.Register') }}
                             </a>

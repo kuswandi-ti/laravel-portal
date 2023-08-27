@@ -382,7 +382,7 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <a href="{{ route('member.register.verify', ['token' => $token]) }}"
+                                                                            <a href="{{ route('mobile.register.verify', ['token' => $token, 'email' => $email]) }}"
                                                                                 target="_blank">
                                                                                 {{ __('admin.Click here to verification') }}
                                                                             </a>

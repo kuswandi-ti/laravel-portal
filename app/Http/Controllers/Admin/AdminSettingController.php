@@ -18,6 +18,11 @@ class AdminSettingController extends Controller
 {
     use FileUploadTrait;
 
+    function __construct()
+    {
+        $this->middleware('permission:system setting,' . getGuardNameAdmin(), ['only' => ['index', 'generalSettingIndex', 'generalSettingUpdate', 'notificationSettingIndex', 'paymentSettingUpdate']]);
+    }
+
     public function index()
     {
         return view('admin.setting.index');

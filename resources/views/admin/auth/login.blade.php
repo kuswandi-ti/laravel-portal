@@ -18,6 +18,11 @@
                 </div>
 
                 <div class="card-body">
+                    <div class="mb-4 alert alert-primary alert-dismissible fade show" role="alert">
+                        <p>Email : <strong>superadminuser@mail.com</strong></p>
+                        <p>Password : <strong>password</strong></p>
+                    </div>
+
                     <x-alert-message />
 
                     <form method="POST" action="{{ route('admin.login.post') }}">

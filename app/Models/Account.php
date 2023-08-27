@@ -20,7 +20,7 @@ class Account extends Model
         return $this->belongsTo(Area::class, 'area_id', 'id');
     }
 
-    public function account_category()
+    public function category()
     {
         return $this->belongsTo(AccountCategory::class, 'account_category_id', 'id');
     }

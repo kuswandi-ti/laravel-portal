@@ -1,7 +1,7 @@
 @extends('layouts.mobile.master')
 
 @section('app_title')
-    {{ __('User Management') }}
+    {{ __('Account Category') }}
 @endsection
 
 @section('content')
@@ -9,39 +9,36 @@
 
     <div class="mt-2 listview-title">
         <div class="section-heading">
-            <a href="{{ route('mobile.user.create') }}"
-                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Register New User') }}</a>
+            <a href="{{ route('mobile.account-category.create') }}"
+                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
         </div>
     </div>
+
+    <div class="listview-title">{{ __('Income') }}</div>
     <ul class="mb-4 listview image-listview media inset">
-        @if ($users->count() > 0)
-            @foreach ($users as $user)
+        @if ($account_categories_income->count() > 0)
+            @foreach ($account_categories_income as $income)
                 <li>
                     <div class="item">
-                        <div class="imageWrapper">
-                            <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
-                                alt="image" class="imaged w64">
-                        </div>
                         <div class="in">
                             <div>
-                                {{ $user->name }}
-                                <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
-                                <div class="text-muted">
-                                    {{ $user->house_street_name }}, {{ $user->house_block }}/{{ $user->house_number }},
-                                    {{ truncateString($user->house_address_others ?? '', 10) }}
-                                </div>
+                                {{ $income->name }}
                             </div>
                             <div>
-                                {{-- @if ($user->getRoleNames()->isEmpty()) --}}
-                                <a href="{{ route('mobile.user.edit', $user->id) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('mobile.account-category.edit', $income->id) }}"
+                                    class="btn btn-primary btn-sm">
                                     {{ __('Edit') }}
                                 </a>
                                 <a href="#" class="btn btn-danger btn-sm delete"
-                                    onclick="load_modal({{ $user->id }})">
+                                    onclick="load_modal('{{ $income->id }}')">
                                     {{ __('Delete') }}
                                     </form>
                                 </a>
-                                {{-- @endif --}}
+                                <a href="{{ route('mobile.account.index', $income->id) }}"
+                                    class="btn btn-sm btn-outline-warning me-1">
+                                    {{ __('Account') }}
+                                    <ion-icon name="chevron-forward-circle-outline"></ion-icon>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -49,18 +46,58 @@
             @endforeach
         @else
             <li>
-                <a href="#" class="item">
-                    <div class="imageWrapper">
-                        <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/brand/1.jpg') }}"
-                            alt="image" class="imaged w64">
-                    </div>
+                <div class="item">
                     <div class="in">
                         <div>
                             {{ __('Data is Empty') }}
                             <div class="text-muted">{{ __('Data is Empty') }}</div>
                         </div>
                     </div>
-                </a>
+                </div>
+            </li>
+        @endif
+    </ul>
+
+    <div class="listview-title">{{ __('Expense') }}</div>
+    <ul class="mb-4 listview image-listview media inset">
+        @if ($account_categories_expense->count() > 0)
+            @foreach ($account_categories_expense as $expense)
+                <li>
+                    <div class="item">
+                        <div class="in">
+                            <div>
+                                {{ $expense->name }}
+                            </div>
+                            <div>
+                                <a href="{{ route('mobile.account-category.edit', $expense->id) }}"
+                                    class="btn btn-primary btn-sm">
+                                    {{ __('Edit') }}
+                                </a>
+                                <a href="#" class="btn btn-danger btn-sm delete"
+                                    onclick="load_modal('{{ $expense->id }}')">
+                                    {{ __('Delete') }}
+                                    </form>
+                                </a>
+                                <a href="{{ route('mobile.account.index', $expense->id) }}"
+                                    class="btn btn-sm btn-outline-warning me-1">
+                                    {{ __('Account') }}
+                                    <ion-icon name="chevron-forward-circle-outline"></ion-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            @endforeach
+        @else
+            <li>
+                <div class="item">
+                    <div class="in">
+                        <div>
+                            {{ __('Data is Empty') }}
+                            <div class="text-muted">{{ __('Data is Empty') }}</div>
+                        </div>
+                    </div>
+                </div>
             </li>
         @endif
     </ul>
@@ -107,13 +144,13 @@
 @push('scripts')
     <script>
         function load_modal(id) {
-            $('#btn-confirm_delete').attr('onclick', `confirm_delete(${id})`);
+            $('#btn-confirm_delete').attr('onclick', 'confirm_delete("' + id + '")');
             $('#dialog_delete').modal('show');
         }
 
         function confirm_delete(id) {
             $.ajax({
-                url: '{{ url('mobile/user') }}/' + id,
+                url: '{{ url('mobile/account-category') }}/' + id,
                 type: 'post',
                 data: {
                     '_method': 'delete',

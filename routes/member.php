@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Member\MemberAccountCategoryController;
+use App\Http\Controllers\Member\MemberAccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Member\MemberAuthController;
 use App\Http\Controllers\Member\MemberRoleController;
@@ -42,6 +44,16 @@ Route::group([
     Route::get('profile-password', [MemberProfileController::class, 'indexPassword'])->name('profile_password.index');
     Route::put('profile-password-update/{id}', [MemberProfileController::class, 'updatePassword'])->name('profile_password.update');
     Route::resource('profile', MemberProfileController::class);
+
+    /** Account Category Routes */
+    Route::get('account-category/data', [MemberAccountCategoryController::class, 'data'])->name('account_category.data');
+    Route::get('account-category/restore/{id}', [MemberAccountCategoryController::class, 'restore'])->name('account_category.restore');
+    Route::get('account-category', [MemberAccountCategoryController::class, 'index'])->name('account_category.index');
+
+    /** Account Routes */
+    Route::get('account/data', [MemberAccountController::class, 'data'])->name('account.data');
+    Route::get('account/restore/{id}', [MemberAccountController::class, 'restore'])->name('account.restore');
+    Route::get('account', [MemberAccountController::class, 'index'])->name('account.index');
 
     /** Street Routes */
     Route::get('street/data', [MemberStreetController::class, 'data'])->name('street.data');

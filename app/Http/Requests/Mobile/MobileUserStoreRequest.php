@@ -5,7 +5,7 @@ namespace App\Http\Requests\Mobile;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MobileUserCreateRequest extends FormRequest
+class MobileUserStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

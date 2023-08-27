@@ -78,7 +78,6 @@ Route::group([
 
     /** Translate Routes */
     Route::get('translate-admin', [AdminTranslateController::class, 'indexAdmin'])->name('translate.admin');
-    Route::get('translate-member', [AdminTranslateController::class, 'indexMember'])->name('translate.member');
     Route::get('translate-mobile', [AdminTranslateController::class, 'indexMobile'])->name('translate.mobile');
     Route::get('translate-website', [AdminTranslateController::class, 'indexWebsite'])->name('translate.website');
     Route::post('extract-localize-string', [AdminTranslateController::class, 'extractLocalizationStrings'])->name('translate.extract_localize_string');

@@ -282,6 +282,15 @@ class MainDataSeeder extends Seeder
             'status' => 1,
             'created_by' => 'Super Admin',
         ]);
+        $house4 = House::create([
+            'owner_name' => 'Kuswandi',
+            'street' => $street3->name,
+            'block' => $block3->name,
+            'no' => '41',
+            'area_id' => $area->id,
+            'status' => 1,
+            'created_by' => 'Super Admin',
+        ]);
         /** Create House - End */
 
         $roleKetua = Role::create(['guard_name' => 'web', 'name' => 'Ketua', 'area_id' => $area->id]);
@@ -336,6 +345,20 @@ class MainDataSeeder extends Seeder
         $userSekretaris->assignRole($roleSekretaris);
         /** Create Role & Permission User Seeder - End */
 
+        $user = User::factory()->create([
+            'name' => 'Kuswandi',
+            'slug' => Str::slug('Kuswandi'),
+            'image' => config('common.default_image_circle'),
+            'email' => 'kuswandi@mail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'area_id' => $area->id,
+            'house_id' => $house4->id,
+            'house_street_name' => $house4->street,
+            'house_block' => $house4->block,
+            'house_number' => $house4->no,
+            'created_by' => 'Super Admin',
+        ]);
+
         /** Create Setting Member */
         $input = [
             [
@@ -364,21 +387,27 @@ class MainDataSeeder extends Seeder
 
         /** Create Account Category */
         $account_category_1 = AccountCategory::create([
-            'name' => 'Pemasukan Tetap',
+            'name' => 'Pemasukan Rutin',
             'group' => 'Income',
             'area_id' => $area->id,
             'created_by' => 'Super Admin',
         ]);
 
         $account_category_2 = AccountCategory::create([
-            'name' => 'Sumbangan Warga',
+            'name' => 'Pemasukan Tidak Rutin',
             'group' => 'Income',
             'area_id' => $area->id,
             'created_by' => 'Super Admin',
         ]);
 
         $account_category_3 = AccountCategory::create([
-            'name' => 'Maintenance',
+            'name' => 'Pengeluran Rutin',
+            'group' => 'Expense',
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+        $account_category_4 = AccountCategory::create([
+            'name' => 'Pengeluran Tidak Rutin',
             'group' => 'Expense',
             'area_id' => $area->id,
             'created_by' => 'Super Admin',
@@ -394,14 +423,21 @@ class MainDataSeeder extends Seeder
         ]);
 
         $account_2 = Account::create([
-            'name' => 'Sumbangan Warga a/n John',
+            'name' => 'Sumbangan Warga',
             'account_category_id' => $account_category_2->id,
             'area_id' => $area->id,
             'created_by' => 'Super Admin',
         ]);
 
         $account_3 = Account::create([
-            'name' => 'Pembelian Alat Penerangan',
+            'name' => 'Iuran Sampah',
+            'account_category_id' => $account_category_3->id,
+            'area_id' => $area->id,
+            'created_by' => 'Super Admin',
+        ]);
+
+        $account_3 = Account::create([
+            'name' => 'Dana Sosial',
             'account_category_id' => $account_category_3->id,
             'area_id' => $area->id,
             'created_by' => 'Super Admin',

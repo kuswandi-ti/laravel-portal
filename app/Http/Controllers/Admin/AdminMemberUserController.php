@@ -14,6 +14,15 @@ use App\Http\Requests\Admin\AdminMemberUserUpdateRequest;
 
 class AdminMemberUserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:member admin user create,' . getGuardNameAdmin(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:member admin user delete,' . getGuardNameAdmin(), ['only' => ['destroy']]);
+        $this->middleware('permission:member admin user index,' . getGuardNameAdmin(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:member admin user restore,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
+        $this->middleware('permission:member admin user update,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -161,20 +170,29 @@ class AdminMemberUserController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 1) {
-                    return '
-                        <a href="' . route('admin.member.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('admin.member.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['member admin user update'])) {
+                        $update = '
+                            <a href="' . route('admin.member.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['member admin user delete'])) {
+                        $delete = '
+                            <a href="' . route('admin.member.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
-                    return '
-                        <a href="' . route('admin.member.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['member admin user restore'])) {
+                        return '
+                            <a href="' . route('admin.member.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['action'])

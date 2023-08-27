@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('admin.Languages') }}
+    {{ __('admin.Account Category') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('admin.Languages') }}
+    {{ __('admin.Account Category') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('admin.Languages') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Account Category') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('admin.Languages') }}
+    {{ __('admin.Account Category') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('admin.View information about language on this page') }}
+    {{ __('admin.View information about account category on this page') }}
 @endsection
 
 @section('content')
@@ -26,14 +26,7 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('admin.All Languages') }}</h4>
-                    @if (canAccess(['language create']))
-                        <div class="card-header-action">
-                            <a href="{{ route('admin.language.create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
-                            </a>
-                        </div>
-                    @endif
+                    <h4>{{ __('admin.All Account Category') }}</h4>
                 </div>
                 <div class="card-body">
                     <div class="mt-3 table-responsive">
@@ -42,9 +35,8 @@
                                 <tr>
                                     <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
                                     <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                    <th>{{ __('admin.Language Name') }}</th>
-                                    <th class="text-center">{{ __('admin.Language Code') }}</th>
-                                    <th class="text-center">{{ __('admin.Default') }}</th>
+                                    <th>{{ __('admin.Account Category Name') }}</th>
+                                    <th class="text-center">{{ __('admin.Account Category Group') }}</th>
                                     <th class="text-center" width="8%">{{ __('admin.Status') }}</th>
                                 </tr>
                             </thead>
@@ -62,6 +54,7 @@
 
 @include('layouts.admin.includes.datatable')
 
+
 @push('scripts')
     <script>
         let table_data;
@@ -72,7 +65,7 @@
             responsive: true,
             serverSide: true,
             ajax: {
-                url: '{{ route('admin.language.data') }}',
+                url: '{{ route('member.account_category.data') }}',
             },
             columns: [{
                 data: 'DT_RowIndex',
@@ -87,11 +80,7 @@
                 searchable: true,
                 sortable: true,
             }, {
-                data: 'lang',
-                searchable: true,
-                sortable: true,
-            }, {
-                data: 'default',
+                data: 'group',
                 searchable: true,
                 sortable: true,
             }, {
@@ -101,7 +90,7 @@
             }],
             columnDefs: [{
                 className: 'text-center',
-                targets: [0, 1, 3, 4, 5]
+                targets: [0, 1, 2, 3, 4]
             }],
         });
     </script>

@@ -15,16 +15,28 @@ use Illuminate\Support\Facades\Route;
 
 class AdminTranslateController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware(['permission:translate admin generate,' . getGuardNameAdmin()])->only(['extractLocalizationStrings']);
+        $this->middleware(['permission:translate admin index,' . getGuardNameAdmin()])->only(['indexAdmin']);
+        $this->middleware(['permission:translate admin trans,' . getGuardNameAdmin()])->only(['translateString']);
+        $this->middleware(['permission:translate admin update,' . getGuardNameAdmin()])->only(['updateLanguangeString']);
+
+        $this->middleware(['permission:translate mobile generate,' . getGuardNameAdmin()])->only(['extractLocalizationStrings']);
+        $this->middleware(['permission:translate mobile index,' . getGuardNameAdmin()])->only(['indexMobile']);
+        $this->middleware(['permission:translate mobile trans,' . getGuardNameAdmin()])->only(['translateString']);
+        $this->middleware(['permission:translate mobile update,' . getGuardNameAdmin()])->only(['updateLanguangeString']);
+
+        $this->middleware(['permission:translate website generate,' . getGuardNameAdmin()])->only(['extractLocalizationStrings']);
+        $this->middleware(['permission:translate website index,' . getGuardNameAdmin()])->only(['indexWebsite']);
+        $this->middleware(['permission:translate website trans,' . getGuardNameAdmin()])->only(['translateString']);
+        $this->middleware(['permission:translate website update,' . getGuardNameAdmin()])->only(['updateLanguangeString']);
+    }
+
     public function indexAdmin(): View
     {
         $languages = Language::all();
         return view('admin.translate.admin', compact('languages'));
-    }
-
-    public function indexMember(): View
-    {
-        $languages = Language::all();
-        return view('admin.translate.member', compact('languages'));
     }
 
     public function indexMobile(): View

@@ -7,8 +7,9 @@ use App\Models\House;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\MobileUserRegisterVerifyMail;
-use App\Http\Requests\Mobile\MobileUserCreateRequest;
+use App\Http\Requests\Mobile\MobileUserStoreRequest;
 use App\Http\Requests\Mobile\MobileUserUpdateRequest;
 
 class MobileUserController extends Controller
@@ -40,7 +41,7 @@ class MobileUserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MobileUserCreateRequest $request)
+    public function store(MobileUserStoreRequest $request)
     {
         $token = Str::random(64);
 

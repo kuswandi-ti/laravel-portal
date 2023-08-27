@@ -2,7 +2,6 @@
 
 use Carbon\Carbon;
 use App\Models\Setting;
-use App\Models\Language;
 use Illuminate\Support\Str;
 use App\Models\SettingMember;
 use Illuminate\Support\Facades\Auth;
@@ -62,12 +61,15 @@ function getArraySuperAdminPermission()
         ['guard_name' => 'admin', 'name' => 'translate admin generate', 'group_name' => 'Translate Admin Permission'],
         ['guard_name' => 'admin', 'name' => 'translate admin index', 'group_name' => 'Translate Admin Permission'],
         ['guard_name' => 'admin', 'name' => 'translate admin trans', 'group_name' => 'Translate Admin Permission'],
+        ['guard_name' => 'admin', 'name' => 'translate admin update', 'group_name' => 'Translate Admin Permission'],
         ['guard_name' => 'admin', 'name' => 'translate mobile generate', 'group_name' => 'Translate Mobile Permission'],
         ['guard_name' => 'admin', 'name' => 'translate mobile index', 'group_name' => 'Translate Mobile Permission'],
         ['guard_name' => 'admin', 'name' => 'translate mobile trans', 'group_name' => 'Translate Mobile Permission'],
+        ['guard_name' => 'admin', 'name' => 'translate mobile update', 'group_name' => 'Translate Mobile Permission'],
         ['guard_name' => 'admin', 'name' => 'translate website generate', 'group_name' => 'Translate Website Permission'],
         ['guard_name' => 'admin', 'name' => 'translate website index', 'group_name' => 'Translate Website Permission'],
         ['guard_name' => 'admin', 'name' => 'translate website trans', 'group_name' => 'Translate Website Permission'],
+        ['guard_name' => 'admin', 'name' => 'translate website update', 'group_name' => 'Translate Website Permission'],
         ['guard_name' => 'admin', 'name' => 'system setting', 'group_name' => 'Setting Permission'],
     ];
 }
@@ -111,6 +113,8 @@ function getArrayMemberAdminPermission()
         ['guard_name' => 'member', 'name' => 'announcement restore', 'group_name' => 'Announcement Permission'],
         ['guard_name' => 'member', 'name' => 'announcement update', 'group_name' => 'Announcement Permission'],
         ['guard_name' => 'member', 'name' => 'member setting', 'group_name' => 'Setting Permission'],
+        ['guard_name' => 'member', 'name' => 'account category restore', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'member', 'name' => 'account restore', 'group_name' => 'Account Permission'],
     ];
 }
 
@@ -134,6 +138,14 @@ function getArrayUserAllPermission()
         ['guard_name' => 'web', 'name' => 'expense delete', 'group_name' => 'Expense Permission'],
         ['guard_name' => 'web', 'name' => 'expense index', 'group_name' => 'Expense Permission'],
         ['guard_name' => 'web', 'name' => 'expense update', 'group_name' => 'Expense Permission'],
+        ['guard_name' => 'web', 'name' => 'account category create', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'account category delete', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'account category index', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'account category update', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'account create', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'account delete', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'account index', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'account update', 'group_name' => 'Account Permission'],
     ];
 }
 

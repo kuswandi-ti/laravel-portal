@@ -20,6 +20,28 @@
             </li>
             {{-- End Dashboard --}}
 
+            {{-- Account --}}
+            <li class="dropdown {{ setSidebarActive(['member.account_category.*', 'member.account.*']) }}">
+                <a href="#" class="nav-link has-dropdown">
+                    <i class="fas fa-wallet"></i>
+                    <span>{{ __('admin.Account') }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['member.account_category.*']) }}">
+                        <a class="nav-link"
+                            href="{{ route('member.account_category.index') }}">{{ __('admin.Account Category') }}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['member.account.*']) }}">
+                        <a class="nav-link" href="{{ route('member.account.index') }}">{{ __('admin.Account') }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {{-- End Account --}}
+
             {{-- Area & House --}}
             <li class="dropdown {{ setSidebarActive(['member.street.*', 'member.block.*', 'member.house.*']) }}">
                 <a href="#" class="nav-link has-dropdown">

@@ -27,11 +27,13 @@
             <div class="mb-3 card card-primary">
                 <div class="card-header">
                     <h4>{{ __('admin.All Package') }}</h4>
-                    <div class="card-header-action">
-                        <a href="{{ route('admin.package.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
-                        </a>
-                    </div>
+                    @if (canAccess(['package create']))
+                        <div class="card-header-action">
+                            <a href="{{ route('admin.package.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
+                            </a>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-pills" id="myTab3" role="tablist">
@@ -118,19 +120,25 @@
                                     </div>
                                     <div class="pricing-cta">
                                         @if ($package->status == 1)
-                                            <a href="{{ route('admin.package.edit', $package->id) }}"
-                                                class="btn btn-primary btn-sm">
-                                                {{ __('admin.Edit') }} <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('admin.package.destroy', $package->id) }}"
-                                                class="btn btn-primary btn-sm delete_item">{{ __('admin.Delete') }} <i
-                                                    class="fas fa-trash-alt"></i></a>
+                                            @if (canAccess(['package update']))
+                                                <a href="{{ route('admin.package.edit', $package->id) }}"
+                                                    class="btn btn-primary btn-sm">
+                                                    {{ __('admin.Edit') }} <i class="fas fa-edit"></i>
+                                                </a>
+                                            @endif
+                                            @if (canAccess(['package delete']))
+                                                <a href="{{ route('admin.package.destroy', $package->id) }}"
+                                                    class="btn btn-primary btn-sm delete_item">{{ __('admin.Delete') }} <i
+                                                        class="fas fa-trash-alt"></i></a>
+                                            @endif
                                         @else
-                                            <a href="{{ route('admin.package.restore', $package->id) }}"
-                                                class="btn btn-primary btn-sm" data-toggle="tooltip"
-                                                title="{{ __('Restore to Active') }}">
-                                                {{ __('admin.Restore') }} <i class="fas fa-undo"></i>
-                                            </a>
+                                            @if (canAccess(['package restore']))
+                                                <a href="{{ route('admin.package.restore', $package->id) }}"
+                                                    class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                                    title="{{ __('Restore to Active') }}">
+                                                    {{ __('admin.Restore') }} <i class="fas fa-undo"></i>
+                                                </a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

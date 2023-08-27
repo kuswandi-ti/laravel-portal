@@ -11,6 +11,14 @@ use App\Http\Requests\Admin\AdminRoleUpdateRequest;
 
 class AdminRoleController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware(['permission:role admin create,' . getGuardNameAdmin()])->only(['create', 'store']);
+        $this->middleware(['permission:role admin delete,' . getGuardNameAdmin()])->only(['destroy']);
+        $this->middleware(['permission:role admin index,' . getGuardNameAdmin()])->only(['index', 'show', 'data']);
+        $this->middleware(['permission:role admin update,' . getGuardNameAdmin()])->only(['edit', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -50,8 +58,8 @@ class AdminRoleController extends Controller
     public function edit(string $id)
     {
         $role = Role::findOrFail($id);
-        $permissions_admin = Permission::where('guard_name', 'admin')->get()->groupBy('group_name');
-        $permissions_member = Permission::where('guard_name', 'member')->get()->groupBy('group_name');
+        $permissions_admin = Permission::where('guard_name', getGuardNameAdmin())->get()->groupBy('group_name');
+        $permissions_member = Permission::where('guard_name', getGuardNameMember())->get()->groupBy('group_name');
         $roles_permissions = $role->permissions;
         $roles_permissions = $roles_permissions->pluck('name')->toArray();
 
@@ -115,14 +123,21 @@ class AdminRoleController extends Controller
                 if ($query->name == 'Super Admin') {
                     return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
                 } else {
-                    return '
-                        <a href="' . route('admin.role.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('admin.role.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['role admin update'])) {
+                        $update = '
+                            <a href="' . route('admin.role.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['role admin delete'])) {
+                        $delete = '
+                            <a href="' . route('admin.role.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 }
             })
             ->rawColumns(['action'])

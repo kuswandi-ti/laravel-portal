@@ -7,7 +7,7 @@
 @section('content')
     @include('layouts.mobile.partials._header')
 
-    <div class="section wallet-card-section pt-1">
+    <div class="pt-1 section wallet-card-section">
         <div class="wallet-card">
             <div class="balance">
                 <div class="left">
@@ -18,7 +18,7 @@
                     <div class="avatar-section">
                         <a href="#">
                             <img src="{{ asset(config('common.path_storage') . (!empty(getLoggedUser()->image) ? getLoggedUser()->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
-                                alt="avatar" class="imaged rounded" style="width: 80px;">
+                                alt="avatar" class="rounded imaged" style="width: 80px;">
                         </a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="section">
-        <div class="row mt-2 text-center">
+        <div class="mt-2 text-center row">
             <div class="col-6">
                 <div class="stat-box">
                     <div class="title">{{ __('Total Balance') }}</div>
@@ -78,36 +78,28 @@
         </div>
     </div>
 
-    <div class="section mt-4 mb-4">
+    <div class="mt-4 mb-4 section">
         <div class="owl-carousel owl-theme owl-carousel-info">
-            @if ($announs->count() > 0)
-                @foreach ($announs as $item)
-                    <a href="{{ route('mobile.dashboard.show_announcement', $item->id) }}">
-                        <div class="card bg-warning">
-                            <div class="card-body">
-                                <h2 class="text-center">{{ $item->title }}</h2>
-                                {!! truncateString($item->body, 255) !!}
-                            </div>
+            @foreach ($announs as $item)
+                <a href="{{ route('mobile.dashboard.show_announcement', $item->id) }}">
+                    <div class="card bg-warning">
+                        <div class="card-body">
+                            <h2 class="text-center">{{ $item->title }}</h2>
+                            {!! truncateString($item->body, 255) !!}
                         </div>
-                    </a>
-                @endforeach
-            @else
-                <div class="card bg-warning">
-                    <div class="card-body">
-                        <h4>{{ __('No Announcement') }}</h4>
                     </div>
-                </div>
-            @endif
+                </a>
+            @endforeach
         </div>
     </div>
 
-    <div class="section mt-4 mb-4">
+    <div class="mt-4 mb-4 section">
         <div class="section-heading">
             <h2 class="title">5 Transaksi Terakhir</h2>
             <a href="#" class="link">Lihat Semua</a>
         </div>
         <div class="card">
-            <ul class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1">
+            <ul class="mt-1 mb-1 listview flush transparent no-line image-listview detailed-list">
                 <li>
                     <div class="item">
                         <div class="icon-box text-success">
@@ -232,7 +224,7 @@
         </div>
     </div>
 
-    <div class="section full mt-4 mb-4">
+    <div class="mt-4 mb-4 section full">
         <div class="section-heading padding">
             <h2 class="title">Info Terkini</h2>
             <a href="app-blog.html" class="link">Lihat Semua</a>
