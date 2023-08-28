@@ -27,11 +27,13 @@
             <div class="card card-primary">
                 <div class="card-header">
                     <h4>{{ __('admin.All Block') }}</h4>
-                    <div class="card-header-action">
-                        <a href="{{ route('member.block.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
-                        </a>
-                    </div>
+                    @if (canAccess(['block create']))
+                        <div class="card-header-action">
+                            <a href="{{ route('member.block.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
+                            </a>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="mt-3 table-responsive">

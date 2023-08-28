@@ -16,6 +16,15 @@ use App\Http\Requests\Member\MemberStaffUserUpdateRequest;
 
 class MemberStaffUserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:member staff user create,' . getGuardNameMember(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:member staff user delete,' . getGuardNameMember(), ['only' => ['destroy']]);
+        $this->middleware('permission:member staff user index,' . getGuardNameMember(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:member staff user restore,' . getGuardNameMember(), ['only' => ['restore']]);
+        $this->middleware('permission:member staff user update,' . getGuardNameMember(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

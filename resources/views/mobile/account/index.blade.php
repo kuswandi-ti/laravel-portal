@@ -13,10 +13,12 @@
             <span class="text-warning">{{ $account_category->name ?? '' }}</span>
         </div>
 
-        <div class="section-heading">
-            <a href="{{ route('mobile.account.create', $account_category->id) }}"
-                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
-        </div>
+        @if (canAccess(['account create']))
+            <div class="section-heading">
+                <a href="{{ route('mobile.account.create', $account_category->id) }}"
+                    class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
+            </div>
+        @endif
     </div>
     <ul class="mb-4 listview image-listview media inset">
         @if ($accounts->count() > 0)
@@ -28,14 +30,19 @@
                                 {{ $account->name }}
                             </div>
                             <div>
-                                <a href="{{ route('mobile.account.edit', $account->id) }}" class="btn btn-primary btn-sm">
-                                    {{ __('Edit') }}
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm delete"
-                                    onclick="load_modal('{{ $account->id }}')">
-                                    {{ __('Delete') }}
-                                    </form>
-                                </a>
+                                @if (canAccess(['account update']))
+                                    <a href="{{ route('mobile.account.edit', $account->id) }}"
+                                        class="btn btn-primary btn-sm">
+                                        {{ __('Edit') }}
+                                    </a>
+                                @endif
+                                @if (canAccess(['account delete']))
+                                    <a href="#" class="btn btn-danger btn-sm delete"
+                                        onclick="load_modal('{{ $account->id }}')">
+                                        {{ __('Delete') }}
+                                        </form>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>

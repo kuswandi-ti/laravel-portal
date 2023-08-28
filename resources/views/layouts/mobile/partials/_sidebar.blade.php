@@ -19,39 +19,40 @@
                     </a>
                 </div>
                 <!-- * profile box -->
+
                 <!-- balance -->
-                <div class="sidebar-balance">
+                {{-- <div class="sidebar-balance">
                     <div class="listview-title">Balance</div>
                     <div class="in">
                         <h1 class="amount">$ 2,562.50</h1>
                     </div>
-                </div>
+                </div> --}}
                 <!-- * balance -->
 
                 <!-- action group -->
-                <div class="action-group">
+                {{-- <div class="action-group">
                     <a href="index.html" class="action-button">
                         <div class="in">
                             <div class="iconbox">
                                 <ion-icon name="add-outline"></ion-icon>
                             </div>
-                            Deposit
+                            {{ __('Income') }}
                         </div>
                     </a>
                     <a href="index.html" class="action-button">
                         <div class="in">
                             <div class="iconbox">
-                                <ion-icon name="arrow-down-outline"></ion-icon>
+                                <ion-icon name="remove"></ion-icon>
                             </div>
-                            Withdraw
+                            {{ __('Expense') }}
                         </div>
                     </a>
                     <a href="index.html" class="action-button">
                         <div class="in">
                             <div class="iconbox">
-                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                                <ion-icon name="volume-high"></ion-icon>
                             </div>
-                            Send
+                            {{ __('Announce') }}
                         </div>
                     </a>
                     <a href="app-cards.html" class="action-button">
@@ -62,101 +63,36 @@
                             My Cards
                         </div>
                     </a>
-                </div>
+                </div> --}}
                 <!-- * action group -->
 
-                <!-- setup -->
                 <div class="mt-1 listview-title">{{ __('Menu') }}</div>
                 <ul class="listview flush transparent no-line image-listview">
-                    <li>
-                        <a href="{{ route('mobile.user.index') }}" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="body"></ion-icon>
-                            </div>
-                            <div class="in">
-                                {{ __('User Management') }}
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('mobile.account-category.index') }}" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="albums"></ion-icon>
-                            </div>
-                            <div class="in">
-                                {{ __('Account Category') }}
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="pie-chart-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Overview
-                                <span class="badge badge-primary">10</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="app-pages.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="document-text-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Pages
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="app-components.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="apps-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Components
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="app-cards.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="card-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                My Cards
-                            </div>
-                        </a>
-                    </li>
+                    @if (canAccess(['member user index']))
+                        <li>
+                            <a href="{{ route('mobile.user.index') }}" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="body"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    {{ __('User Management') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (canAccess(['account category index', 'account index']))
+                        <li>
+                            <a href="{{ route('mobile.account-category.index') }}" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="albums"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    {{ __('Account Category') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
-                <!-- * setup -->
-
-                <!-- others -->
-                <div class="mt-1 listview-title">Others</div>
-                <ul class="listview flush transparent no-line image-listview">
-                    <li>
-                        <a href="app-settings.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="settings-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Settings
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="component-messages.html" class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="chatbubble-outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                Support
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- * others -->
             </div>
         </div>
     </div>

@@ -21,12 +21,12 @@
                 <div class="row">
                     <div class="col">
                         <span class="text-warning">STAFF</span><br>
-                        Email : <strong>ketua@mail.com</strong><br>
+                        Email : <strong>ketuart5rw11ph6@mail.com</strong><br>
                         Password : <strong>password</strong>
                     </div>
                     <div class="col">
                         <span class="text-warning">USER</span><br>
-                        Email : <strong>kuswandi@mail.com</strong><br>
+                        Email : <strong>kuswandirt5rw11ph6@mail.com</strong><br>
                         Password : <strong>password</strong>
                     </div>
                 </div>

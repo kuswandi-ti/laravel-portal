@@ -15,6 +15,11 @@ use App\Http\Requests\Member\MemberUserUserUpdateRequest;
 
 class MemberUserUserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:member user restore,' . getGuardNameMember(), ['only' => ['restore']]);
+    }
+
     public function index()
     {
         return view('member.user.index');
@@ -53,11 +58,13 @@ class MemberUserUserController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 0) {
-                    return '
-                        <a href="' . route('member.user.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['member user restore'])) {
+                        return '
+                            <a href="' . route('member.user.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['action'])

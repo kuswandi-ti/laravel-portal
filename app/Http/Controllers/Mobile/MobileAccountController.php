@@ -11,6 +11,14 @@ use App\Http\Requests\Mobile\MobileAccountUpdateRequest;
 
 class MobileAccountController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:account create,' . getGuardNameUser(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:account delete,' . getGuardNameUser(), ['only' => ['destroy']]);
+        $this->middleware('permission:account index,' . getGuardNameUser(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:account update,' . getGuardNameUser(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

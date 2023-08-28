@@ -15,7 +15,7 @@ class AdminLanguageController extends Controller
         $this->middleware('permission:language create,' . getGuardNameAdmin(), ['only' => ['create', 'store']]);
         $this->middleware('permission:language delete,' . getGuardNameAdmin(), ['only' => ['destroy']]);
         $this->middleware('permission:language index,' . getGuardNameAdmin(), ['only' => ['index', 'show', 'data']]);
-        $this->middleware('permission:language restore,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
+        $this->middleware('permission:language restore,' . getGuardNameAdmin(), ['only' => ['restore']]);
         $this->middleware('permission:language update,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
     }
 

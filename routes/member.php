@@ -87,7 +87,7 @@ Route::group([
     /** User Routes */
     Route::get('user/data', [MemberUserUserController::class, 'data'])->name('user.data');
     Route::get('user/restore/{id}', [MemberUserUserController::class, 'restore'])->name('user.restore');
-    Route::get('user/index', [MemberUserUserController::class, 'index'])->name('user.index');
+    Route::get('user', [MemberUserUserController::class, 'index'])->name('user.index');
 
     /** Setting Routes */
     Route::get('setting', [MemberSettingController::class, 'index'])->name('setting.index');

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->text('body');
+            $table->text('description')->nullable();
+            $table->text('body')->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();

@@ -16,6 +16,11 @@ class MemberSettingController extends Controller
 {
     use FileUploadTrait;
 
+    function __construct()
+    {
+        $this->middleware('permission:member setting,' . getGuardNameMember(), ['only' => ['index', 'settingAreaUpdate', 'settingLogoUpdate', 'settingPaymentUpdate']]);
+    }
+
     public function index()
     {
         $area = Area::findOrFail(getLoggedUserAreaId());

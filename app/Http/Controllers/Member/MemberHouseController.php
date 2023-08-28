@@ -12,6 +12,15 @@ use App\Http\Requests\Member\MemberHouseUpdateRequest;
 
 class MemberHouseController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:house create,' . getGuardNameMember(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:house delete,' . getGuardNameMember(), ['only' => ['destroy']]);
+        $this->middleware('permission:house index,' . getGuardNameMember(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:house restore,' . getGuardNameMember(), ['only' => ['restore']]);
+        $this->middleware('permission:house update,' . getGuardNameMember(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -149,20 +158,29 @@ class MemberHouseController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 1) {
-                    return '
-                        <a href="' . route('member.house.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('member.house.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['house update'])) {
+                        $update = '
+                            <a href="' . route('member.house.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['house delete'])) {
+                        $delete = '
+                            <a href="' . route('member.house.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
-                    return '
-                        <a href="' . route('member.house.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['house restore'])) {
+                        return '
+                            <a href="' . route('member.house.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['action'])

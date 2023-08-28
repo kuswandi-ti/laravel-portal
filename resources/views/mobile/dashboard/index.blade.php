@@ -54,7 +54,7 @@
                         <div class="icon-wrapper">
                             <ion-icon name="cash-outline"></ion-icon>
                         </div>
-                        <strong>{{ __('Pay Bills') }}</strong>
+                        <strong>{{ __('Pay Dues') }}</strong>
                     </a>
                 </div>
             </div>
@@ -71,7 +71,7 @@
             </div>
             <div class="col-6">
                 <div class="stat-box">
-                    <div class="title">{{ __('Bills Total') }}</span></div>
+                    <div class="title">{{ __('Not Paid Dues') }}</span></div>
                     <div class="value text-danger">Rp. 500.000</div>
                 </div>
             </div>
@@ -83,9 +83,9 @@
             @foreach ($announs as $item)
                 <a href="{{ route('mobile.dashboard.show_announcement', $item->id) }}">
                     <div class="card bg-warning">
-                        <div class="card-body">
-                            <h2 class="text-center">{{ $item->title }}</h2>
-                            {!! truncateString($item->body, 255) !!}
+                        <div class="card-body text-center">
+                            <h2 class="mb-2">{{ $item->title }}</h2>
+                            {!! $item->description > 150 ? truncateString($item->description, 150) : $item->description !!}
                         </div>
                     </div>
                 </a>

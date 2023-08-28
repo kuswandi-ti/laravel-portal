@@ -12,6 +12,14 @@ use App\Http\Requests\Member\MemberRoleUpdateRequest;
 
 class MemberRoleController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:role member create,' . getGuardNameMember(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:role member delete,' . getGuardNameMember(), ['only' => ['destroy']]);
+        $this->middleware('permission:role member index,' . getGuardNameMember(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:role member update,' . getGuardNameMember(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -137,14 +145,21 @@ class MemberRoleController extends Controller
                 if ($query->name == 'Admin') {
                     return '<div class="badge badge-danger">'  . __('admin.No Action') . '</div>';
                 } else {
-                    return '
-                        <a href="' . route('member.role.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('member.role.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['role member update'])) {
+                        $update = '
+                            <a href="' . route('member.role.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['role member delete'])) {
+                        $delete = '
+                            <a href="' . route('member.role.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 }
             })
             ->rawColumns(['action'])

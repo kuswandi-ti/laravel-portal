@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->enum('group', ['Income', 'Expense'])->nullable();
+            $table->enum('type', ['D', 'C'])->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();

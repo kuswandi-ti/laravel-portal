@@ -8,43 +8,53 @@
     @include('layouts.mobile.partials._title')
 
     <div class="mt-2 listview-title">
-        <div class="section-heading">
-            <a href="{{ route('mobile.user.create') }}"
-                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Register New User') }}</a>
-        </div>
+        @if (canAccess(['member user create']))
+            <div class="section-heading">
+                <a href="{{ route('mobile.user.create') }}"
+                    class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Register New User') }}</a>
+            </div>
+        @endif
     </div>
+
     <ul class="mb-4 listview image-listview media inset">
         @if ($users->count() > 0)
             @foreach ($users as $user)
                 <li>
-                    <div class="item">
-                        <div class="imageWrapper">
-                            <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
-                                alt="image" class="imaged w64">
-                        </div>
-                        <div class="in">
-                            <div>
-                                {{ $user->name }}
-                                <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
-                                <div class="text-muted">
-                                    {{ $user->house_street_name }}, {{ $user->house_block }}/{{ $user->house_number }},
-                                    {{ truncateString($user->house_address_others ?? '', 10) }}
+                    <a href="{{ route('mobile.user.show', $user->id) }}">
+                        <div class="item">
+                            <div class="imageWrapper">
+                                <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+                                    alt="image" class="imaged w64">
+                            </div>
+                            <div class="in">
+                                <div>
+                                    {{ $user->name }}
+                                    <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
+                                    <div class="text-muted">
+                                        {{ $user->house_street_name }}, {{ $user->house_block }}/{{ $user->house_number }},
+                                        {{ truncateString($user->house_address_others ?? '', 10) }}
+                                    </div>
+                                </div>
+                                <div>
+                                    {{-- @if ($user->getRoleNames()->isEmpty()) --}}
+                                    @if (canAccess(['member user update']))
+                                        <a href="{{ route('mobile.user.edit', $user->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endif
+                                    @if (canAccess(['member user delete']))
+                                        <a href="#" class="btn btn-danger btn-sm delete"
+                                            onclick="load_modal({{ $user->id }})">
+                                            {{ __('Delete') }}
+                                            </form>
+                                        </a>
+                                    @endif
+                                    {{-- @endif --}}
                                 </div>
                             </div>
-                            <div>
-                                {{-- @if ($user->getRoleNames()->isEmpty()) --}}
-                                <a href="{{ route('mobile.user.edit', $user->id) }}" class="btn btn-primary btn-sm">
-                                    {{ __('Edit') }}
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm delete"
-                                    onclick="load_modal({{ $user->id }})">
-                                    {{ __('Delete') }}
-                                    </form>
-                                </a>
-                                {{-- @endif --}}
-                            </div>
                         </div>
-                    </div>
+                    </a>
                 </li>
             @endforeach
         @else

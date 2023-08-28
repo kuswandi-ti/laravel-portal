@@ -19,7 +19,7 @@ class AdminMemberUserController extends Controller
         $this->middleware('permission:member admin user create,' . getGuardNameAdmin(), ['only' => ['create', 'store']]);
         $this->middleware('permission:member admin user delete,' . getGuardNameAdmin(), ['only' => ['destroy']]);
         $this->middleware('permission:member admin user index,' . getGuardNameAdmin(), ['only' => ['index', 'show', 'data']]);
-        $this->middleware('permission:member admin user restore,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
+        $this->middleware('permission:member admin user restore,' . getGuardNameAdmin(), ['only' => ['restore']]);
         $this->middleware('permission:member admin user update,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
     }
 

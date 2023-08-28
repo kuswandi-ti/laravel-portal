@@ -8,10 +8,12 @@
     @include('layouts.mobile.partials._title')
 
     <div class="mt-2 listview-title">
-        <div class="section-heading">
-            <a href="{{ route('mobile.account-category.create') }}"
-                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
-        </div>
+        @if (canAccess(['account category create', 'account create']))
+            <div class="section-heading">
+                <a href="{{ route('mobile.account-category.create') }}"
+                    class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
+            </div>
+        @endif
     </div>
 
     <div class="listview-title">{{ __('Income') }}</div>
@@ -25,20 +27,26 @@
                                 {{ $income->name }}
                             </div>
                             <div>
-                                <a href="{{ route('mobile.account-category.edit', $income->id) }}"
-                                    class="btn btn-primary btn-sm">
-                                    {{ __('Edit') }}
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm delete"
-                                    onclick="load_modal('{{ $income->id }}')">
-                                    {{ __('Delete') }}
-                                    </form>
-                                </a>
-                                <a href="{{ route('mobile.account.index', $income->id) }}"
-                                    class="btn btn-sm btn-outline-warning me-1">
-                                    {{ __('Account') }}
-                                    <ion-icon name="chevron-forward-circle-outline"></ion-icon>
-                                </a>
+                                @if (canAccess(['account category update']))
+                                    <a href="{{ route('mobile.account-category.edit', $income->id) }}"
+                                        class="btn btn-primary btn-sm">
+                                        {{ __('Edit') }}
+                                    </a>
+                                @endif
+                                @if (canAccess(['account category delete']))
+                                    <a href="#" class="btn btn-danger btn-sm delete"
+                                        onclick="load_modal('{{ $income->id }}')">
+                                        {{ __('Delete') }}
+                                        </form>
+                                    </a>
+                                @endif
+                                @if (canAccess(['account index']))
+                                    <a href="{{ route('mobile.account.index', $income->id) }}"
+                                        class="btn btn-sm btn-outline-warning me-1">
+                                        {{ __('Account') }}
+                                        <ion-icon name="chevron-forward-circle-outline"></ion-icon>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -69,20 +77,26 @@
                                 {{ $expense->name }}
                             </div>
                             <div>
-                                <a href="{{ route('mobile.account-category.edit', $expense->id) }}"
-                                    class="btn btn-primary btn-sm">
-                                    {{ __('Edit') }}
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm delete"
-                                    onclick="load_modal('{{ $expense->id }}')">
-                                    {{ __('Delete') }}
-                                    </form>
-                                </a>
-                                <a href="{{ route('mobile.account.index', $expense->id) }}"
-                                    class="btn btn-sm btn-outline-warning me-1">
-                                    {{ __('Account') }}
-                                    <ion-icon name="chevron-forward-circle-outline"></ion-icon>
-                                </a>
+                                @if (canAccess(['account category update']))
+                                    <a href="{{ route('mobile.account-category.edit', $expense->id) }}"
+                                        class="btn btn-primary btn-sm">
+                                        {{ __('Edit') }}
+                                    </a>
+                                @endif
+                                @if (canAccess(['account category delete']))
+                                    <a href="#" class="btn btn-danger btn-sm delete"
+                                        onclick="load_modal('{{ $expense->id }}')">
+                                        {{ __('Delete') }}
+                                        </form>
+                                    </a>
+                                @endif
+                                @if (canAccess(['account index']))
+                                    <a href="{{ route('mobile.account.index', $expense->id) }}"
+                                        class="btn btn-sm btn-outline-warning me-1">
+                                        {{ __('Account') }}
+                                        <ion-icon name="chevron-forward-circle-outline"></ion-icon>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>

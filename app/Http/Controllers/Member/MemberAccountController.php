@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class MemberAccountController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:account restore,' . getGuardNameMember(), ['only' => ['restore', 'data']]);
+    }
+
     public function index()
     {
         return view('member.account.index');
@@ -38,11 +43,13 @@ class MemberAccountController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 0) {
-                    return '
-                        <a href="' . route('member.account.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['account restore'])) {
+                        return '
+                            <a href="' . route('member.account.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['action'])

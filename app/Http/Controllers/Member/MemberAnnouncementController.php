@@ -11,6 +11,15 @@ use App\Http\Requests\Member\MemberAnnouncementUpdateRequest;
 
 class MemberAnnouncementController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:announcement create,' . getGuardNameMember(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:announcement delete,' . getGuardNameMember(), ['only' => ['destroy']]);
+        $this->middleware('permission:announcement index,' . getGuardNameMember(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:announcement restore,' . getGuardNameMember(), ['only' => ['restore']]);
+        $this->middleware('permission:announcement update,' . getGuardNameMember(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -58,6 +67,7 @@ class MemberAnnouncementController extends Controller
         $content = $dom->saveHTML();
 
         $announcement->title = $request->title;
+        $announcement->description = $request->description;
         $announcement->body = $content;
         $announcement->area_id = getLoggedUserAreaId();
         $announcement->created_by = getLoggedUser()->name;
@@ -93,6 +103,7 @@ class MemberAnnouncementController extends Controller
 
         $announcement->update([
             'title' => $request->title,
+            'description' => $request->description,
             'body' => $request->body,
             'updated_by' => getLoggedUser()->name,
         ]);
@@ -148,20 +159,29 @@ class MemberAnnouncementController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 1) {
-                    return '
-                        <a href="' . route('member.announcement.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('member.announcement.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['announcement update'])) {
+                        $update = '
+                            <a href="' . route('member.announcement.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['announcement delete'])) {
+                        $delete = '
+                            <a href="' . route('member.announcement.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
-                    return '
-                        <a href="' . route('member.announcement.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['announcement restore'])) {
+                        return '
+                            <a href="' . route('member.announcement.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['action'])

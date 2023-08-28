@@ -11,6 +11,15 @@ use App\Http\Requests\Member\MemberStreetUpdateRequest;
 
 class MemberStreetController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:street create,' . getGuardNameMember(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:street delete,' . getGuardNameMember(), ['only' => ['destroy']]);
+        $this->middleware('permission:street index,' . getGuardNameMember(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:street restore,' . getGuardNameMember(), ['only' => ['restore']]);
+        $this->middleware('permission:street update,' . getGuardNameMember(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -124,20 +133,29 @@ class MemberStreetController extends Controller
             })
             ->addColumn('action', function ($query) {
                 if ($query->status == 1) {
-                    return '
-                        <a href="' . route('member.street.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="' . route('member.street.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    ';
+                    if (canAccess(['street update'])) {
+                        $update = '
+                            <a href="' . route('member.street.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['street delete'])) {
+                        $delete = '
+                            <a href="' . route('member.street.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
-                    return '
-                        <a href="' . route('member.street.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('admin.Restore to Active') . '">
-                            <i class="fas fa-undo"></i>
-                        </a>
-                    ';
+                    if (canAccess(['street restore'])) {
+                        return '
+                            <a href="' . route('member.street.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
+                    }
                 }
             })
             ->rawColumns(['action'])

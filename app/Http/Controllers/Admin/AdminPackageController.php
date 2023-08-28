@@ -15,7 +15,7 @@ class AdminPackageController extends Controller
         $this->middleware('permission:package create,' . getGuardNameAdmin(), ['only' => ['create', 'store']]);
         $this->middleware('permission:package delete,' . getGuardNameAdmin(), ['only' => ['destroy']]);
         $this->middleware('permission:package index,' . getGuardNameAdmin(), ['only' => ['index', 'show']]);
-        $this->middleware('permission:package restore,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
+        $this->middleware('permission:package restore,' . getGuardNameAdmin(), ['only' => ['restore']]);
         $this->middleware('permission:package update,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
     }
 

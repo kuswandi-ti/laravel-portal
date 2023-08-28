@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mobile\MobileAuthController;
+use App\Http\Controllers\Mobile\MobileNewsController;
 use App\Http\Controllers\Mobile\MobileUserController;
 use App\Http\Controllers\Mobile\MobileAccountController;
 use App\Http\Controllers\Mobile\MobileProfileController;
@@ -48,6 +49,9 @@ Route::group([
 
     /** Announcement Routes */
     Route::get('announcement/{id}', [MobileDashboardController::class, 'showAnnouncement'])->name('dashboard.show_announcement');
+
+    /** News Routes */
+    Route::resource('news', MobileNewsController::class);
 
     /** Bottom Menu Routes */
     Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');

@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class MobileAccountCategoryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:account category create,' . getGuardNameUser(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:account category delete,' . getGuardNameUser(), ['only' => ['destroy']]);
+        $this->middleware('permission:account category index,' . getGuardNameUser(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:account category update,' . getGuardNameUser(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

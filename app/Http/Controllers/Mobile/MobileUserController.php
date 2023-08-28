@@ -14,6 +14,14 @@ use App\Http\Requests\Mobile\MobileUserUpdateRequest;
 
 class MobileUserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:member user create,' . getGuardNameUser(), ['only' => ['create', 'store']]);
+        $this->middleware('permission:member user delete,' . getGuardNameUser(), ['only' => ['destroy']]);
+        $this->middleware('permission:member user index,' . getGuardNameUser(), ['only' => ['index', 'show', 'data']]);
+        $this->middleware('permission:member user update,' . getGuardNameUser(), ['only' => ['edit', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -71,7 +79,12 @@ class MobileUserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $houses = House::where('area_id', getLoggedUserAreaId())
+            ->orderBy('block')
+            ->orderBy('no')
+            ->get();
+        return view('mobile.user.show', compact('user', 'houses'));
     }
 
     /**

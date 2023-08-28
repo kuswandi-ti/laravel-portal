@@ -27,11 +27,13 @@
             <div class="card card-primary">
                 <div class="card-header">
                     <h4>{{ __('admin.All Street') }}</h4>
-                    <div class="card-header-action">
-                        <a href="{{ route('member.street.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
-                        </a>
-                    </div>
+                    @if (canAccess(['street create']))
+                        <div class="card-header-action">
+                            <a href="{{ route('member.street.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
+                            </a>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="mt-3 table-responsive">

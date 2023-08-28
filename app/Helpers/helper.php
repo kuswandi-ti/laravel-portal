@@ -23,7 +23,7 @@ function truncateString(string $text, int $limit = 45): ?string
     return Str::limit($text, $limit, '...');
 }
 
-function getArraySuperAdminPermission()
+function getArrayAllGuardAdminPermission()
 {
     return [
         ['guard_name' => 'admin', 'name' => 'package create', 'group_name' => 'Package Permission'],
@@ -74,7 +74,7 @@ function getArraySuperAdminPermission()
     ];
 }
 
-function getArrayMemberAdminPermission()
+function getArrayAllGuardMemberPermission()
 {
     return [
         ['guard_name' => 'member', 'name' => 'street create', 'group_name' => 'Street Permission'],
@@ -118,7 +118,7 @@ function getArrayMemberAdminPermission()
     ];
 }
 
-function getArrayUserAllPermission()
+function getArrayAllGuardUserPermission()
 {
     return [
         ['guard_name' => 'web', 'name' => 'member user create', 'group_name' => 'Member User Permission'],
@@ -188,10 +188,12 @@ function setArrayMemberAdminPermission()
         'announcement restore',
         'announcement update',
         'member setting',
+        'account category restore',
+        'account restore',
     ];
 }
 
-function setArrayKetuaPermission()
+function setArrayUserKetuaPermission()
 {
     return [
         'bill index',
@@ -202,7 +204,7 @@ function setArrayKetuaPermission()
     ];
 }
 
-function setArrayBendaharaPermission()
+function setArrayUserBendaharaPermission()
 {
     return [
         'bill create',
@@ -217,10 +219,18 @@ function setArrayBendaharaPermission()
         'income delete',
         'income index',
         'income update',
+        'account category create',
+        'account category delete',
+        'account category index',
+        'account category update',
+        'account create',
+        'account delete',
+        'account index',
+        'account update',
     ];
 }
 
-function setArraySekretarisPermission()
+function setArrayUserSekretarisPermission()
 {
     return [
         'member user create',
@@ -321,7 +331,11 @@ function saveTimeNow()
 
 function getHouseAddressUser(): ?string
 {
-    return getLoggedUser()->house_street_name . ', ' . getLoggedUser()->house_block . '/' . getLoggedUser()->house_number;
+    if (getGuardNameLoggedUser() == getGuardNameUser()) {
+        return getLoggedUser()->house_street_name . ', ' . getLoggedUser()->house_block . '/' . getLoggedUser()->house_number;
+    } else {
+        return getLoggedUser()->area->residence->name . ', ' . getLoggedUser()->area->name;
+    }
 }
 
 function noImageCircle(): ?string

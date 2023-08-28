@@ -56,7 +56,21 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>{{ __('admin.Content') }} <x-fill-field /></label>
+                                    <label>{{ __('admin.Description') }}</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description"></textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>{{ __('admin.Content') }}</label>
                                     <textarea class="form-control summernote @error('body') is-invalid @enderror" name="body"></textarea>
                                     @error('body')
                                         <div class="invalid-feedback">

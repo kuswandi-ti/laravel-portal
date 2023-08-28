@@ -19,7 +19,7 @@ class AdminAdminUserController extends Controller
         $this->middleware('permission:sytem admin user create,' . getGuardNameAdmin(), ['only' => ['create', 'store']]);
         $this->middleware('permission:sytem admin user delete,' . getGuardNameAdmin(), ['only' => ['destroy']]);
         $this->middleware('permission:sytem admin user index,' . getGuardNameAdmin(), ['only' => ['index', 'show', 'data']]);
-        $this->middleware('permission:sytem admin user restore,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
+        $this->middleware('permission:sytem admin user restore,' . getGuardNameAdmin(), ['only' => ['restore']]);
         $this->middleware('permission:sytem admin user update,' . getGuardNameAdmin(), ['only' => ['edit', 'update']]);
     }
 
