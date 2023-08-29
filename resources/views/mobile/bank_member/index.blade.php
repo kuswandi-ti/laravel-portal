@@ -1,42 +1,42 @@
 @extends('layouts.mobile.master')
 
 @section('app_title')
-    {{ __('Account Subcategory') }}
+    {{ __('Cash & Bank') }}
 @endsection
 
 @section('content')
     @include('layouts.mobile.partials._title')
 
     <div class="mt-2 listview-title">
-        <div class="mb-2 section-title">
-            <span class="text-dark">({{ $account_category->group ?? '' }})</span>
-            <span class="text-warning">{{ $account_category->name ?? '' }}</span>
-        </div>
-
-        @if (canAccess(['account create']))
-            <a href="{{ route('mobile.account.create', $account_category->id) }}"
+        @if (canAccess(['bank member create']))
+            <a href="{{ route('mobile.bank-member.create') }}"
                 class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
         @endif
     </div>
+
     <ul class="mb-4 listview image-listview media inset">
-        @if ($accounts->count() > 0)
-            @foreach ($accounts as $account)
+        @if ($bank_members->count() > 0)
+            @foreach ($bank_members as $item)
                 <li>
                     <div class="item">
                         <div class="in">
                             <div>
-                                {{ $account->name }}
+                                {{ $item->bank_account_number }} - {{ $item->bank_account_name }}
+                                <div class="text-muted">
+                                    {{ __('Beginning Balance') }}
+                                    <span class="text-info">{{ formatAmount($item->beginning_balance) }}</span>
+                                </div>
                             </div>
                             <div>
-                                @if (canAccess(['account update']))
-                                    <a href="{{ route('mobile.account.edit', $account->id) }}"
+                                @if (canAccess(['bank member update']))
+                                    <a href="{{ route('mobile.bank-member.edit', $item->id) }}"
                                         class="btn btn-primary btn-sm">
                                         {{ __('Edit') }}
                                     </a>
                                 @endif
-                                @if (canAccess(['account delete']))
+                                @if (canAccess(['bank member delete']))
                                     <a href="#" class="btn btn-danger btn-sm delete"
-                                        onclick="load_modal('{{ $account->id }}')">
+                                        onclick="load_modal('{{ $item->id }}')">
                                         {{ __('Delete') }}
                                         </form>
                                     </a>
@@ -108,7 +108,7 @@
 
         function confirm_delete(id) {
             $.ajax({
-                url: '{{ url('mobile/account') }}/' + id,
+                url: '{{ url('mobile/bank-member') }}/' + id,
                 type: 'post',
                 data: {
                     '_method': 'delete',

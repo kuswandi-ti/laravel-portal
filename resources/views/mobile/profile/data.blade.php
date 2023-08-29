@@ -57,10 +57,10 @@
                                             <select class="form-control custom-select" name="gender">
                                                 <option value="" selected disabled>{{ __('Choose one ...') }}
                                                 </option>
-                                                <option value="Man" {{ $user->gender == 'Man' ? 'selected' : '' }}>
-                                                    {{ __('Man') }}</option>
-                                                <option value="Woman" {{ $user->gender == 'Woman' ? 'selected' : '' }}>
-                                                    {{ __('Woman') }}</option>
+                                                <option value="man" {{ $user->gender == 'man' ? 'selected' : '' }}>
+                                                    {{ __('MAN') }}</option>
+                                                <option value="woman" {{ $user->gender == 'woman' ? 'selected' : '' }}>
+                                                    {{ __('WOMAN') }}</option>
                                             </select>
                                             @error('gender')
                                                 <div class="input-info">
@@ -78,15 +78,15 @@
                                             <select class="form-control custom-select" name="marital_status">
                                                 <option value="" selected disabled>{{ __('Choose one ...') }}
                                                 </option>
-                                                <option value="Single"
-                                                    {{ $user->marital_status == 'Single' ? 'selected' : '' }}>
-                                                    {{ __('Single') }}</option>
-                                                <option value="Married"
-                                                    {{ $user->marital_status == 'Married' ? 'selected' : '' }}>
-                                                    {{ __('Married') }}</option>
-                                                <option value="Divorced"
-                                                    {{ $user->marital_status == 'Divorced' ? 'selected' : '' }}>
-                                                    {{ __('Divorced') }}</option>
+                                                <option value="single"
+                                                    {{ $user->marital_status == 'single' ? 'selected' : '' }}>
+                                                    {{ __('SINGLE') }}</option>
+                                                <option value="married"
+                                                    {{ $user->marital_status == 'married' ? 'selected' : '' }}>
+                                                    {{ __('MARRIED') }}</option>
+                                                <option value="divorced"
+                                                    {{ $user->marital_status == 'divorced' ? 'selected' : '' }}>
+                                                    {{ __('DIVORCED') }}</option>
                                             </select>
                                             @error('marital_status')
                                                 <div class="input-info">
@@ -311,15 +311,15 @@
                                             <select class="form-control custom-select" name="house_ownership">
                                                 <option value="" selected disabled>{{ __('Choose one ...') }}
                                                 </option>
-                                                <option value="Owner"
-                                                    {{ $user->house_ownership == 'Owner' ? 'selected' : '' }}>
-                                                    {{ __('Owner') }}</option>
-                                                <option value="Rent"
-                                                    {{ $user->house_ownership == 'Rent' ? 'selected' : '' }}>
-                                                    {{ __('Rent') }}</option>
-                                                <option value="Other"
-                                                    {{ $user->house_ownership == 'Other' ? 'selected' : '' }}>
-                                                    {{ __('Other') }}</option>
+                                                <option value="owner"
+                                                    {{ $user->house_ownership == 'owner' ? 'selected' : '' }}>
+                                                    {{ __('OWNER') }}</option>
+                                                <option value="rent"
+                                                    {{ $user->house_ownership == 'rent' ? 'selected' : '' }}>
+                                                    {{ __('RENT') }}</option>
+                                                <option value="other"
+                                                    {{ $user->house_ownership == 'other' ? 'selected' : '' }}>
+                                                    {{ __('OTHER') }}</option>
                                             </select>
                                             @error('house_ownership')
                                                 <div class="input-info">
@@ -337,15 +337,15 @@
                                             <select class="form-control custom-select" name="house_stay">
                                                 <option value="" selected disabled>{{ __('Choose one ...') }}
                                                 </option>
-                                                <option value="Permanent"
-                                                    {{ $user->house_stay == 'Permanent' ? 'selected' : '' }}>
-                                                    {{ __('Permanent') }}</option>
-                                                <option value="Non Permanent"
-                                                    {{ $user->house_stay == 'Non Permanent' ? 'selected' : '' }}>
-                                                    {{ __('Non Permanent') }}</option>
-                                                <option value="Other"
-                                                    {{ $user->house_stay == 'Other' ? 'selected' : '' }}>
-                                                    {{ __('Other') }}</option>
+                                                <option value="permanent"
+                                                    {{ $user->house_stay == 'permanent' ? 'selected' : '' }}>
+                                                    {{ __('PERMANENT') }}</option>
+                                                <option value="temporary"
+                                                    {{ $user->house_stay == 'temporary' ? 'selected' : '' }}>
+                                                    {{ __('TEMPORARY') }}</option>
+                                                <option value="other"
+                                                    {{ $user->house_stay == 'other' ? 'selected' : '' }}>
+                                                    {{ __('OTHER') }}</option>
                                             </select>
                                             @error('house_stay')
                                                 <div class="input-info">

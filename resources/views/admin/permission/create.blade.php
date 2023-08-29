@@ -62,15 +62,22 @@
                             <div class="control-label">{{ __('admin.Guard Name') }}</div>
                             <div class="mt-2 custom-switches-stacked">
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="admin" class="custom-switch-input"
-                                        checked>
+                                    <input type="radio" name="guard_name" value="{{ getGuardNameAdmin() }}"
+                                        class="custom-switch-input" checked>
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-danger">{{ getGuardTextAdmin() }}</span>
                                 </label>
                                 <label class="custom-switch">
-                                    <input type="radio" name="guard_name" value="member" class="custom-switch-input">
+                                    <input type="radio" name="guard_name" value="{{ getGuardNameMember() }}"
+                                        class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description text-info">{{ getGuardTextMember() }}</span>
+                                </label>
+                                <label class="custom-switch">
+                                    <input type="radio" name="guard_name" value="{{ getGuardNameUser() }}"
+                                        class="custom-switch-input">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description text-info">{{ getGuardTextUser() }}</span>
                                 </label>
                             </div>
                         </div>

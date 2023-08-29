@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\Member\MemberAccountCategoryController;
-use App\Http\Controllers\Member\MemberAccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Member\MemberAuthController;
 use App\Http\Controllers\Member\MemberRoleController;
 use App\Http\Controllers\Member\MemberBlockController;
 use App\Http\Controllers\Member\MemberHouseController;
 use App\Http\Controllers\Member\MemberStreetController;
+use App\Http\Controllers\Member\MemberAccountController;
 use App\Http\Controllers\Member\MemberProfileController;
 use App\Http\Controllers\Member\MemberSettingController;
 use App\Http\Controllers\Member\MemberUserUserController;
 use App\Http\Controllers\Member\MemberAdminUserController;
 use App\Http\Controllers\Member\MemberDashboardController;
 use App\Http\Controllers\Member\MemberStaffUserController;
+use App\Http\Controllers\Member\MemberBankMemberController;
 use App\Http\Controllers\Member\MemberAnnouncementController;
+use App\Http\Controllers\Member\MemberAccountCategoryController;
 
 Route::group(['middleware' => ['set_language']], function () {
     Route::get('/', [MemberAuthController::class, 'login'])->name('login');
@@ -44,6 +45,11 @@ Route::group([
     Route::get('profile-password', [MemberProfileController::class, 'indexPassword'])->name('profile_password.index');
     Route::put('profile-password-update/{id}', [MemberProfileController::class, 'updatePassword'])->name('profile_password.update');
     Route::resource('profile', MemberProfileController::class);
+
+    /** Bank Member Routes */
+    Route::get('bank-member/data', [MemberBankMemberController::class, 'data'])->name('bank_member.data');
+    Route::get('bank-member/restore/{id}', [MemberBankMemberController::class, 'restore'])->name('bank_member.restore');
+    Route::get('bank-member', [MemberBankMemberController::class, 'index'])->name('bank_member.index');
 
     /** Account Category Routes */
     Route::get('account-category/data', [MemberAccountCategoryController::class, 'data'])->name('account_category.data');

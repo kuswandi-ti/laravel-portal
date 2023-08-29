@@ -30,7 +30,7 @@
                         <div class="icon-wrapper bg-success">
                             <ion-icon name="arrow-down-circle-outline"></ion-icon>
                         </div>
-                        <strong>{{ __('Deposits') }}</strong>
+                        <strong>{{ __('Deposit') }}</strong>
                     </a>
                 </div>
                 <div class="item">
@@ -65,7 +65,7 @@
         <div class="mt-2 text-center row">
             <div class="col-6">
                 <div class="stat-box">
-                    <div class="title">{{ __('Total Balance') }}</div>
+                    <div class="title">{{ __('Total Deposit') }}</div>
                     <div class="value text-success">Rp. 1.000.000</div>
                 </div>
             </div>

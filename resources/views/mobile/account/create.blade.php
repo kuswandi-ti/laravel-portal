@@ -1,7 +1,7 @@
 @extends('layouts.mobile.master')
 
 @section('app_title')
-    {{ __('Create Account') }}
+    {{ __('Create Account Subcategory') }}
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="name">{{ __('Account Name') }} <x-fill-field /></label>
+                            <label class="label" for="name">{{ __('Account Subcategory Name') }} <x-fill-field /></label>
                             <input type="text" class="form-control" name="name" id="name"
                                 value="{{ old('name') }}" placeholder="{{ __('Enter account name') }}" required autofocus>
                         </div>

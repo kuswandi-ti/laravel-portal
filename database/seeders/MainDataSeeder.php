@@ -12,6 +12,7 @@ use App\Models\Street;
 use App\Models\Account;
 use App\Models\Package;
 use App\Models\Residence;
+use App\Models\BankMember;
 use Illuminate\Support\Str;
 use App\Models\SettingMember;
 use App\Models\AccountCategory;
@@ -638,29 +639,25 @@ class MainDataSeeder extends Seeder
         /** 21. Create Account Category */
         $account_category_1 = AccountCategory::create([
             'name' => 'Pemasukan Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
             'name' => 'Pemasukan Tidak Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
             'name' => 'Pengeluran Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
             'name' => 'Pengeluran Tidak Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
@@ -719,29 +716,25 @@ class MainDataSeeder extends Seeder
         /** 24. Create Account Category (PH6), RT 004 RW 011 */
         $account_category_1 = AccountCategory::create([
             'name' => 'Pemasukan Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
             'name' => 'Pemasukan Tidak Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
             'name' => 'Pengeluran Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
             'name' => 'Pengeluran Tidak Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
@@ -1283,29 +1276,25 @@ class MainDataSeeder extends Seeder
         /** 21. Create Account Category (PHI), RT 001 RW 010 */
         $account_category_1 = AccountCategory::create([
             'name' => 'Pemasukan Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
             'name' => 'Pemasukan Tidak Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
             'name' => 'Pengeluran Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
             'name' => 'Pengeluran Tidak Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
@@ -1364,29 +1353,25 @@ class MainDataSeeder extends Seeder
         /** 24. Create Account Category (PHI), RT 002 RW 010 */
         $account_category_1 = AccountCategory::create([
             'name' => 'Pemasukan Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
             'name' => 'Pemasukan Tidak Rutin',
-            'group' => 'Income',
-            'type' => 'C',
+            'group' => 'income',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
             'name' => 'Pengeluran Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
             'name' => 'Pengeluran Tidak Rutin',
-            'group' => 'Expense',
-            'type' => 'D',
+            'group' => 'expense',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);

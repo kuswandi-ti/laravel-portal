@@ -20,6 +20,15 @@
             </li>
             {{-- End Dashboard --}}
 
+            {{-- Bank Member --}}
+            <li class="{{ setSidebarActive(['member.bank_member.*']) }}">
+                <a href="{{ route('member.bank_member.index') }}" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>{{ __('admin.Cash & Bank') }}</span>
+                </a>
+            </li>
+            {{-- End Bank Member --}}
+
             {{-- Account --}}
             @if (canAccess(['account category restore', 'account restore']))
                 <li class="dropdown {{ setSidebarActive(['member.account_category.*', 'member.account.*']) }}">

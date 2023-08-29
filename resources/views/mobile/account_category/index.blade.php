@@ -9,10 +9,8 @@
 
     <div class="mt-2 listview-title">
         @if (canAccess(['account category create', 'account create']))
-            <div class="section-heading">
-                <a href="{{ route('mobile.account-category.create') }}"
-                    class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
-            </div>
+            <a href="{{ route('mobile.account-category.create') }}"
+                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
         @endif
     </div>
 
@@ -43,7 +41,7 @@
                                 @if (canAccess(['account index']))
                                     <a href="{{ route('mobile.account.index', $income->id) }}"
                                         class="btn btn-sm btn-outline-warning me-1">
-                                        {{ __('Account') }}
+                                        {{ __('Sub Category') }}
                                         <ion-icon name="chevron-forward-circle-outline"></ion-icon>
                                     </a>
                                 @endif
@@ -93,7 +91,7 @@
                                 @if (canAccess(['account index']))
                                     <a href="{{ route('mobile.account.index', $expense->id) }}"
                                         class="btn btn-sm btn-outline-warning me-1">
-                                        {{ __('Account') }}
+                                        {{ __('Sub Category') }}
                                         <ion-icon name="chevron-forward-circle-outline"></ion-icon>
                                     </a>
                                 @endif

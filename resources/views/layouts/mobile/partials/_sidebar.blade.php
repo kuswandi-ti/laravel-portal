@@ -66,7 +66,7 @@
                 </div> --}}
                 <!-- * action group -->
 
-                <div class="mt-1 listview-title">{{ __('Menu') }}</div>
+                <div class="mt-1 listview-title">{{ __('Main Data') }}</div>
                 <ul class="listview flush transparent no-line image-listview">
                     @if (canAccess(['member user index']))
                         <li>
@@ -76,6 +76,18 @@
                                 </div>
                                 <div class="in">
                                     {{ __('User Management') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (canAccess(['bank member index']))
+                        <li>
+                            <a href="{{ route('mobile.bank-member.index') }}" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="briefcase"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    {{ __('Cash & Bank') }}
                                 </div>
                             </a>
                         </li>
@@ -92,6 +104,64 @@
                             </a>
                         </li>
                     @endif
+                </ul>
+
+                <div class="mt-1 listview-title">{{ __('Transaction') }}</div>
+                <ul class="listview flush transparent no-line image-listview">
+                    <li>
+                        <a href="{{ route('mobile.user.index') }}" class="item">
+                            <div class="icon-box bg-warning">
+                                <ion-icon name="arrow-down-circle"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Income Transaction') }}
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mobile.user.index') }}" class="item">
+                            <div class="icon-box bg-warning">
+                                <ion-icon name="arrow-up-circle"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Expense Transaction') }}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-1 listview-title">{{ __('Report') }}</div>
+                <ul class="listview flush transparent no-line image-listview">
+                    <li>
+                        <a href="{{ route('mobile.user.index') }}" class="item">
+                            <div class="icon-box bg-info">
+                                <ion-icon name="document"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('User Data Report') }}
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mobile.user.index') }}" class="item">
+                            <div class="icon-box bg-info">
+                                <ion-icon name="document"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Income Report') }}
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mobile.user.index') }}" class="item">
+                            <div class="icon-box bg-info">
+                                <ion-icon name="document"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Expense Report') }}
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

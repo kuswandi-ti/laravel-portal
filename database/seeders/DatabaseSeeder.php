@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ReligionTableSeeder::class);
         $this->call(ProfessionTableSeeder::class);
         $this->call(IndonesiaDatabaseSeeder::class);
+        $this->call(BankTableSeeder::class);
         $this->call(MainDataSeeder::class);
     }
 }

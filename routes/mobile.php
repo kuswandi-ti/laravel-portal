@@ -7,6 +7,7 @@ use App\Http\Controllers\Mobile\MobileUserController;
 use App\Http\Controllers\Mobile\MobileAccountController;
 use App\Http\Controllers\Mobile\MobileProfileController;
 use App\Http\Controllers\Mobile\MobileDashboardController;
+use App\Http\Controllers\Mobile\MobileBankMemberController;
 use App\Http\Controllers\Mobile\MobileAccountCategoryController;
 
 Route::group(['middleware' => ['set_language']], function () {
@@ -45,13 +46,12 @@ Route::group([
     Route::get('account/{id}/edit', [MobileAccountController::class, 'edit'])->name('account.edit');
     Route::put('account/{id}', [MobileAccountController::class, 'update'])->name('account.update');
     Route::delete('account/{id}', [MobileAccountController::class, 'destroy'])->name('account.destroy');
-    // Route::resource('account', MobileAccountController::class);
 
     /** Announcement Routes */
     Route::get('announcement/{id}', [MobileDashboardController::class, 'showAnnouncement'])->name('dashboard.show_announcement');
 
-    /** News Routes */
-    Route::resource('news', MobileNewsController::class);
+    /** Bank Member Routes */
+    Route::resource('bank-member', MobileBankMemberController::class);
 
     /** Bottom Menu Routes */
     Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');

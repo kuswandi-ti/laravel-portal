@@ -8,11 +8,18 @@
     @include('layouts.mobile.partials._title')
 
     <div class="mt-2 listview-title">
-        @if (canAccess(['member user create']))
-            <div class="section-heading">
-                <a href="{{ route('mobile.user.create') }}"
-                    class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Register New User') }}</a>
+        <form class="search-form mb-2">
+            <div class="form-group searchbox">
+                <input type="text" class="form-control">
+                <i class="input-icon">
+                    <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                </i>
             </div>
+        </form>
+
+        @if (canAccess(['member user create']))
+            <a href="{{ route('mobile.user.create') }}"
+                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Register New User') }}</a>
         @endif
     </div>
 

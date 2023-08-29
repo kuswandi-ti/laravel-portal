@@ -18,7 +18,7 @@
 @endsection
 
 @section('section_body_lead')
-    {{ __('admin.View information about account category on this page') }}
+    {{ __('admin.Restore information about account category on this page') }}
 @endsection
 
 @section('content')

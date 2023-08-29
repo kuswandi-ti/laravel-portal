@@ -23,6 +23,16 @@ function truncateString(string $text, int $limit = 45): ?string
     return Str::limit($text, $limit, '...');
 }
 
+function capitalAllWord(string $text = null): ?string
+{
+    return $text != null ? Str::of($text)->upper() : '';
+}
+
+function capitalFirstLetter(string $text = null): ?string
+{
+    return $text != null ? Str::of($text)->ucfirst() : '';
+}
+
 function getArrayAllGuardAdminPermission()
 {
     return [
@@ -71,6 +81,11 @@ function getArrayAllGuardAdminPermission()
         ['guard_name' => 'admin', 'name' => 'translate website trans', 'group_name' => 'Translate Website Permission'],
         ['guard_name' => 'admin', 'name' => 'translate website update', 'group_name' => 'Translate Website Permission'],
         ['guard_name' => 'admin', 'name' => 'system setting', 'group_name' => 'Setting Permission'],
+        ['guard_name' => 'admin', 'name' => 'bank admin create', 'group_name' => 'Bank Permission'],
+        ['guard_name' => 'admin', 'name' => 'bank admin delete', 'group_name' => 'Bank Permission'],
+        ['guard_name' => 'admin', 'name' => 'bank admin index', 'group_name' => 'Bank Permission'],
+        ['guard_name' => 'admin', 'name' => 'bank admin restore', 'group_name' => 'Bank Permission'],
+        ['guard_name' => 'admin', 'name' => 'bank admin update', 'group_name' => 'Bank Permission'],
     ];
 }
 
@@ -115,6 +130,7 @@ function getArrayAllGuardMemberPermission()
         ['guard_name' => 'member', 'name' => 'member setting', 'group_name' => 'Setting Permission'],
         ['guard_name' => 'member', 'name' => 'account category restore', 'group_name' => 'Account Permission'],
         ['guard_name' => 'member', 'name' => 'account restore', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'member', 'name' => 'bank member restore', 'group_name' => 'Bank Permission'],
     ];
 }
 
@@ -146,6 +162,10 @@ function getArrayAllGuardUserPermission()
         ['guard_name' => 'web', 'name' => 'account delete', 'group_name' => 'Account Permission'],
         ['guard_name' => 'web', 'name' => 'account index', 'group_name' => 'Account Permission'],
         ['guard_name' => 'web', 'name' => 'account update', 'group_name' => 'Account Permission'],
+        ['guard_name' => 'web', 'name' => 'bank member create', 'group_name' => 'Bank Permission'],
+        ['guard_name' => 'web', 'name' => 'bank member delete', 'group_name' => 'Bank Permission'],
+        ['guard_name' => 'web', 'name' => 'bank member index', 'group_name' => 'Bank Permission'],
+        ['guard_name' => 'web', 'name' => 'bank member update', 'group_name' => 'Bank Permission'],
     ];
 }
 
@@ -190,6 +210,7 @@ function setArrayMemberAdminPermission()
         'member setting',
         'account category restore',
         'account restore',
+        'bank member restore',
     ];
 }
 
@@ -227,6 +248,10 @@ function setArrayUserBendaharaPermission()
         'account delete',
         'account index',
         'account update',
+        'bank member create',
+        'bank member delete',
+        'bank member index',
+        'bank member update',
     ];
 }
 

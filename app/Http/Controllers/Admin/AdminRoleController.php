@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Area;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -119,6 +120,14 @@ class AdminRoleController extends Controller
                 $badge = $query->guard_name == getGuardNameAdmin() ? 'danger' : 'dark';
                 return '<div class="badge badge-' . $badge . '">' . $query->guard_name . '</div>';
             })
+            ->editColumn('residence', function ($query) {
+                $area = Area::findOrFail($query->area_id);
+                return $area->residence->name;
+            })
+            ->editColumn('area', function ($query) {
+                $area = Area::findOrFail($query->area_id);
+                return $area->name;
+            })
             ->addColumn('action', function ($query) {
                 if ($query->name == 'Super Admin') {
                     return '<div class="badge badge-danger">'  . __('No Action') . '</div>';
@@ -140,7 +149,7 @@ class AdminRoleController extends Controller
                     return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 }
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'residence', 'area'])
             ->escapeColumns([])
             ->make(true);
     }

@@ -103,8 +103,12 @@ class AdminPermissionController extends Controller
 
     public function data(Request $request)
     {
-        $query = Permission::where('guard_name', '!=', getGuardNameUser())
-            ->orderBy('guard_name', 'ASC')
+        // $query = Permission::where('guard_name', '!=', getGuardNameUser())
+        //     ->orderBy('guard_name', 'ASC')
+        //     ->orderBy('name', 'ASC')
+        //     ->get();
+
+        $query = Permission::orderBy('guard_name', 'ASC')
             ->orderBy('name', 'ASC')
             ->get();
 

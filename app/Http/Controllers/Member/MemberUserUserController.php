@@ -17,7 +17,7 @@ class MemberUserUserController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:member user restore,' . getGuardNameMember(), ['only' => ['restore']]);
+        $this->middleware('permission:member user restore,' . getGuardNameMember(), ['only' => ['restore', 'data']]);
     }
 
     public function index()

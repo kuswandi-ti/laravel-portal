@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('account_categories', function (Blueprint $table) {
+        Schema::create('bank_members', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->enum('group', ['income', 'expense'])->nullable();
+            $table->string('bank_account_number')->nullable();
+            $table->string('bank_account_name')->nullable();
+            $table->decimal('beginning_balance', 20, 2)->default(0);
+            $table->string('bank_code')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->enum('bank_type', ['cash', 'bank', 'other'])->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
             $table->boolean('status')->default(1)->comment('Active or Inactive Status');
             $table->timestamps();
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('account_categories');
+        Schema::dropIfExists('bank_members');
     }
 };

@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('page_title')
-    {{ __('admin.Role') }}
+    {{ __('admin.Cash & Bank') }}
 @endsection
 
 @section('section_header_title')
-    {{ __('admin.Role') }}
+    {{ __('admin.Cash & Bank') }}
 @endsection
 
 @section('section_header_breadcrumb')
     @parent
-    <div class="breadcrumb-item">{{ __('admin.Role') }}</div>
+    <div class="breadcrumb-item">{{ __('admin.Cash & Bank') }}</div>
 @endsection
 
 @section('section_body_title')
-    {{ __('admin.Role') }}
+    {{ __('admin.Cash & Bank') }}
 @endsection
 
 @section('section_body_lead')
-    {{ __('admin.View information about user role & permission on this page') }}
+    {{ __('admin.View information about cash & bank on this page') }}
 @endsection
 
 @section('content')
@@ -26,10 +26,10 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('admin.All Roles') }}</h4>
-                    @if (canAccess(['role admin create']))
+                    <h4>{{ __('admin.All Cash & Bank') }}</h4>
+                    @if (canAccess(['bank admin create']))
                         <div class="card-header-action">
-                            <a href="{{ route('admin.role.create') }}" class="btn btn-primary">
+                            <a href="{{ route('admin.bank.create') }}" class="btn btn-primary">
                                 <i class="fas fa-plus-circle"></i> {{ __('admin.Create') }}
                             </a>
                         </div>
@@ -42,13 +42,14 @@
                                 <tr>
                                     <th class="text-center" width="10%"><i class="fas fa-list-ol"></i></th>
                                     <th class="text-center" width="12%"><i class="fas fa-cogs"></i></th>
-                                    <th>{{ __('admin.Role Name') }}</th>
-                                    <th>{{ __('admin.Residence') }}</th>
-                                    <th>{{ __('admin.Area') }}</th>
-                                    <th class="text-center">{{ __('admin.Guard Name') }}</th>
+                                    <th class="text-center">{{ __('admin.Bank Code') }}</th>
+                                    <th>{{ __('admin.Bank Name') }}</th>
+                                    <th class="text-center">{{ __('admin.Bank Type') }}</th>
+                                    <th class="text-center" width="8%">{{ __('admin.Status') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -71,7 +72,7 @@
             responsive: true,
             serverSide: true,
             ajax: {
-                url: '{{ route('admin.role.data') }}',
+                url: '{{ route('admin.bank.data') }}',
             },
             columns: [{
                 data: 'DT_RowIndex',
@@ -82,25 +83,25 @@
                 searchable: false,
                 sortable: false,
             }, {
+                data: 'code',
+                searchable: true,
+                sortable: true,
+            }, {
                 data: 'name',
                 searchable: true,
                 sortable: true,
             }, {
-                data: 'residence',
+                data: 'type',
                 searchable: true,
                 sortable: true,
             }, {
-                data: 'area',
-                searchable: true,
-                sortable: true,
-            }, {
-                data: 'guard_name',
+                data: 'status',
                 searchable: true,
                 sortable: true,
             }],
             columnDefs: [{
                 className: 'text-center',
-                targets: [0, 1, 5]
+                targets: [0, 1, 2, 4, 5]
             }],
         });
     </script>

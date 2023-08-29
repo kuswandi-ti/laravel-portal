@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminBankController;
 use App\Http\Controllers\Admin\AdminLanguageChange;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPackageController;
@@ -11,9 +12,9 @@ use App\Http\Controllers\Admin\AdminLanguageController;
 use App\Http\Controllers\Admin\AdminAdminUserController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminResidenceController;
+use App\Http\Controllers\Admin\AdminTranslateController;
 use App\Http\Controllers\Admin\AdminMemberUserController;
 use App\Http\Controllers\Admin\AdminPermissionController;
-use App\Http\Controllers\Admin\AdminTranslateController;
 
 Route::group(['middleware' => ['set_language']], function () {
     Route::get('/', [AdminAuthController::class, 'login'])->name('login');
@@ -52,6 +53,11 @@ Route::group([
     /** Profile Routes */
     Route::put('profile-password-update/{id}', [AdminProfileController::class, 'updatePassword'])->name('profile_password.update');
     Route::resource('profile', AdminProfileController::class);
+
+    /** Bank Routes */
+    Route::get('bank/data', [AdminBankController::class, 'data'])->name('bank.data');
+    Route::get('bank/bank/{id}', [AdminBankController::class, 'restore'])->name('bank.restore');
+    Route::resource('bank', AdminBankController::class);
 
     /** Permission Routes */
     Route::get('permission/data', [AdminPermissionController::class, 'data'])->name('permission.data');

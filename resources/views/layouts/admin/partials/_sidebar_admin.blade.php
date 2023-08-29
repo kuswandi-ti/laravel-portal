@@ -42,6 +42,17 @@
             @endif
             {{-- End Residence --}}
 
+            {{-- Bank --}}
+            @if (canAccess(['bank admin index']))
+                <li class="{{ setSidebarActive(['admin.bank.*']) }}">
+                    <a href="{{ route('admin.bank.index') }}" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span>{{ __('admin.Cash & Bank') }}</span>
+                    </a>
+                </li>
+            @endif
+            {{-- End Bank --}}
+
             {{-- Manage Admin Role & Permission --}}
             @if (canAccess(['permission index', 'role admin index']))
                 <li class="dropdown {{ setSidebarActive(['admin.permission.*', 'admin.role.*']) }}">
