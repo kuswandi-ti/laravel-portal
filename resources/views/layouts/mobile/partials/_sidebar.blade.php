@@ -109,6 +109,16 @@
                 <div class="mt-1 listview-title">{{ __('Transaction') }}</div>
                 <ul class="listview flush transparent no-line image-listview">
                     <li>
+                        <a href="{{ route('mobile.dues.index') }}" class="item">
+                            <div class="icon-box bg-warning">
+                                <ion-icon name="layers"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Generate Dues') }}
+                            </div>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('mobile.user.index') }}" class="item">
                             <div class="icon-box bg-warning">
                                 <ion-icon name="arrow-down-circle"></ion-icon>
@@ -159,6 +169,20 @@
                             </div>
                             <div class="in">
                                 {{ __('Expense Report') }}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-1 listview-title">{{ __('Setting') }}</div>
+                <ul class="listview flush transparent no-line image-listview">
+                    <li>
+                        <a href="{{ route('mobile.user.index') }}" class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="build"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('System Setting') }}
                             </div>
                         </a>
                     </li>

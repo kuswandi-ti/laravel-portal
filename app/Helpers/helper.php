@@ -401,6 +401,15 @@ function formatAmount($amount)
     return number_format((float)$amount, 0, ',', '.');
 }
 
+function formatMonth($month_number)
+{
+    $month_name = array(1 =>
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    );
+
+    return $month_name[(int) $month_number];
+}
+
 function unformatAmount($str)
 {
     $str = str_replace(".", "", $str);

@@ -65,38 +65,40 @@
         <div class="mt-2 text-center row">
             <div class="col-6">
                 <div class="stat-box">
-                    <div class="title">{{ __('Total Deposit') }}</div>
+                    <div class="title">{{ __('Total Balance') }}</div>
                     <div class="value text-success">Rp. 1.000.000</div>
                 </div>
             </div>
             <div class="col-6">
                 <div class="stat-box">
-                    <div class="title">{{ __('Not Paid Dues') }}</span></div>
+                    <div class="title">{{ __('Unpaid Dues') }}</span></div>
                     <div class="value text-danger">Rp. 500.000</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="mt-4 mb-4 section">
-        <div class="owl-carousel owl-theme owl-carousel-info">
-            @foreach ($announs as $item)
-                <a href="{{ route('mobile.dashboard.show_announcement', $item->id) }}">
-                    <div class="card bg-warning">
-                        <div class="card-body text-center">
-                            <h2 class="mb-2">{{ $item->title }}</h2>
-                            {!! $item->description > 150 ? truncateString($item->description, 150) : $item->description !!}
+    @if ($announs->count() > 0)
+        <div class="mt-4 mb-4 section">
+            <div class="owl-carousel owl-theme owl-carousel-info">
+                @foreach ($announs as $item)
+                    <a href="{{ route('mobile.dashboard.show_announcement', $item->id) }}">
+                        <div class="card bg-warning">
+                            <div class="card-body text-center">
+                                <h2 class="mb-2">{{ $item->title }}</h2>
+                                {!! $item->description > 150 ? truncateString($item->description, 150) : $item->description !!}
+                            </div>
                         </div>
-                    </div>
-                </a>
-            @endforeach
+                    </a>
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 
     <div class="mt-4 mb-4 section">
         <div class="section-heading">
-            <h2 class="title">5 Transaksi Terakhir</h2>
-            <a href="#" class="link">Lihat Semua</a>
+            <h2 class="title">{{ __('Last 5 Transactions') }}</h2>
+            <a href="#" class="link">{{ __('See All') }}</a>
         </div>
         <div class="card">
             <ul class="mt-1 mb-1 listview flush transparent no-line image-listview detailed-list">

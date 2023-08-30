@@ -1,7 +1,7 @@
 @extends('layouts.mobile.master')
 
 @section('app_title')
-    {{ __('Account Subcategory') }}
+    {{ __('Account') }}
 @endsection
 
 @section('content')

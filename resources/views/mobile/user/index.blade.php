@@ -8,11 +8,12 @@
     @include('layouts.mobile.partials._title')
 
     <div class="mt-2 listview-title">
-        <form class="search-form mb-2">
+        <form class="search-form mb-2" action="{{ route('mobile.user.index') }}" method="GET">
             <div class="form-group searchbox">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="search" value="{{ old('search') }}">
                 <i class="input-icon">
-                    <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                    <ion-icon name="search-outline" role="img" class="md hydrated"
+                        aria-label="search outline"></ion-icon>
                 </i>
             </div>
         </form>
@@ -38,7 +39,8 @@
                                     {{ $user->name }}
                                     <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
                                     <div class="text-muted">
-                                        {{ $user->house_street_name }}, {{ $user->house_block }}/{{ $user->house_number }},
+                                        {{ $user->house_street_name }},
+                                        {{ $user->house_block }}/{{ $user->house_number }},
                                         {{ truncateString($user->house_address_others ?? '', 10) }}
                                     </div>
                                 </div>

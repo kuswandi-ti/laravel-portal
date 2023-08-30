@@ -17,9 +17,8 @@
     </a>
     <a href="#" class="item">
         <div class="col">
-            <div class="action-button large">
-                <ion-icon name="cash-outline" role="img" class="md hydrated" aria-label="cash-outline">
-                </ion-icon>
+            <div class="action-button large btn-danger">
+                <ion-icon name="radio-button-on-outline"></ion-icon>
             </div>
         </div>
     </a>

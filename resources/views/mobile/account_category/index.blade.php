@@ -41,7 +41,7 @@
                                 @if (canAccess(['account index']))
                                     <a href="{{ route('mobile.account.index', $income->id) }}"
                                         class="btn btn-sm btn-outline-warning me-1">
-                                        {{ __('Sub Category') }}
+                                        {{ __('Account') }}
                                         <ion-icon name="chevron-forward-circle-outline"></ion-icon>
                                     </a>
                                 @endif

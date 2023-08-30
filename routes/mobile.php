@@ -8,6 +8,7 @@ use App\Http\Controllers\Mobile\MobileAccountController;
 use App\Http\Controllers\Mobile\MobileProfileController;
 use App\Http\Controllers\Mobile\MobileDashboardController;
 use App\Http\Controllers\Mobile\MobileBankMemberController;
+use App\Http\Controllers\Mobile\MobileGenerateDuesController;
 use App\Http\Controllers\Mobile\MobileAccountCategoryController;
 
 Route::group(['middleware' => ['set_language']], function () {
@@ -52,6 +53,9 @@ Route::group([
 
     /** Bank Member Routes */
     Route::resource('bank-member', MobileBankMemberController::class);
+
+    /** Generate Dues Routes */
+    Route::get('dues', [MobileGenerateDuesController::class, 'index'])->name('dues.index');
 
     /** Bottom Menu Routes */
     Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');

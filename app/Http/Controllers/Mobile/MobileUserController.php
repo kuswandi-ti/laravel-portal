@@ -25,12 +25,36 @@ class MobileUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::where([
             ['area_id', getLoggedUserAreaId()],
             ['status', 1],
-        ])->orderBy('name', 'ASC')->get();
+            [function ($query) use ($request) {
+                if (($search = $request->search)) {
+                    $query->orWhere('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('email', 'LIKE', '%' . $search . '%')
+                        ->orWhere('gender', 'LIKE', '%' . $search . '%')
+                        ->orWhere('marital_status', 'LIKE', '%' . $search . '%')
+                        ->orWhere('place_of_birth', 'LIKE', '%' . $search . '%')
+                        ->orWhere('profession', 'LIKE', '%' . $search . '%')
+                        ->orWhere('workplace', 'LIKE', '%' . $search . '%')
+                        ->orWhere('religion', 'LIKE', '%' . $search . '%')
+                        ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                        ->orWhere('house_street_name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('house_block', 'LIKE', '%' . $search . '%')
+                        ->orWhere('house_number', 'LIKE', '%' . $search . '%')
+                        ->orWhere('house_address_others', 'LIKE', '%' . $search . '%')
+                        ->orWhere('house_ownership', 'LIKE', '%' . $search . '%')
+                        ->orWhere('house_stay', 'LIKE', '%' . $search . '%')
+                        ->orWhere('house_note', 'LIKE', '%' . $search . '%')
+                        ->orWhere('family_card_no', 'LIKE', '%' . $search . '%')
+                        ->orWhere('id_card_no', 'LIKE', '%' . $search . '%')
+                        ->get();
+                }
+            }]
+        ])
+        ->orderBy('name', 'ASC')->get();
         return view('mobile.user.index', compact('users'));
     }
 

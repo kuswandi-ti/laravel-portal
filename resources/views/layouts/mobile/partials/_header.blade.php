@@ -11,6 +11,9 @@
     </div>
     <div class="right">
         <a href="#" class="headerButton">
+            <ion-icon class="icon" name="ticket-outline"></ion-icon>
+        </a>
+        <a href="#" class="headerButton">
             <ion-icon class="icon" name="chatbubble-ellipses-outline"></ion-icon>
         </a>
         <a href="app-settings.html" class="headerButton">
@@ -18,3 +21,11 @@
         </a>
     </div>
 </div>
+
+@push('styles')
+    <style>
+        ion-icon {
+            pointer-events: none;
+        }
+    </style>
+@endpush
