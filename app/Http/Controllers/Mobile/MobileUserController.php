@@ -89,6 +89,11 @@ class MobileUserController extends Controller
         $user->area_id = getLoggedUser()->area->id;
         $user->house_id = $request->house;
         $user->register_token = $token;
+        if (!empty($request->flag_dues)) {
+            $user->flag_dues = $request->flag_dues;
+        } else {
+            $user->flag_dues = 0;
+        }
         $user->created_by = getLoggedUser()->name;
         $user->status = 1;
         $user->save();
@@ -140,6 +145,11 @@ class MobileUserController extends Controller
         $user->image = config('common.default_image_circle');
         $user->area_id = getLoggedUser()->area->id;
         $user->house_id = $request->house;
+        if (!empty($request->flag_dues)) {
+            $user->flag_dues = $request->flag_dues;
+        } else {
+            $user->flag_dues = 0;
+        }
         $user->updated_by = getLoggedUser()->name;
         $user->status = 1;
         $user->save();

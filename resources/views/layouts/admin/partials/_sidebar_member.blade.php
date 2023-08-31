@@ -20,6 +20,7 @@
             </li>
             {{-- End Dashboard --}}
 
+            <li class="menu-header">{{ __('Setup') }}</li>
             {{-- Bank Member --}}
             <li class="{{ setSidebarActive(['member.bank_member.*']) }}">
                 <a href="{{ route('member.bank_member.index') }}" class="nav-link">
@@ -158,6 +159,26 @@
                 </li>
             @endif
             {{-- End System Setting --}}
+
+            <li class="menu-header">{{ __('Transaction') }}</li>
+            {{-- Bank Member --}}
+            <li class="{{ setSidebarActive(['member.bank_member.*']) }}">
+                <a href="{{ route('member.bank_member.index') }}" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>{{ __('admin.Cash & Bank') }}</span>
+                </a>
+            </li>
+            {{-- End Bank Member --}}
+
+            <li class="menu-header">{{ __('Report') }}</li>
+            {{-- Bank Member --}}
+            <li class="{{ setSidebarActive(['member.bank_member.*']) }}">
+                <a href="{{ route('member.bank_member.index') }}" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>{{ __('admin.Cash & Bank') }}</span>
+                </a>
+            </li>
+            {{-- End Bank Member --}}
         </ul>
     </aside>
 </div>

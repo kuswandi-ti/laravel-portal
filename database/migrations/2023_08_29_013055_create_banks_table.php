@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->enum('type', ['cash', 'bank', 'other'])->default('bank')->nullable();
-            $table->boolean('status')->default(1)->comment('Active or Inactive Status');
+            $table->boolean('status')->default(1)->comment('1 = Active, 0 = Inactive');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('restored_at')->nullable();

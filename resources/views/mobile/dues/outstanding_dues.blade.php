@@ -1,68 +1,87 @@
 @extends('layouts.mobile.master')
 
 @section('app_title')
-    {{ __('Account') }}
+    {{ __('Outstanding Dues') }}
 @endsection
 
 @section('content')
     @include('layouts.mobile.partials._title')
 
-    <div class="mt-2 listview-title">
-        <div class="mb-2 section-title">
-            <span class="text-dark">({{ $account_category->group ?? '' }})</span>
-            <span class="text-warning">{{ $account_category->name ?? '' }}</span>
-        </div>
+    {{-- <div class="mt-2 listview-title">
+        <form class="search-form mb-2" action="{{ route('mobile.user.index') }}" method="GET">
+            <div class="form-group searchbox">
+                <input type="text" class="form-control" name="search" value="{{ old('search') }}">
+                <i class="input-icon">
+                    <ion-icon name="search-outline" role="img" class="md hydrated"
+                        aria-label="search outline"></ion-icon>
+                </i>
+            </div>
+        </form>
 
-        @if (canAccess(['account create']))
-            <a href="{{ route('mobile.account.create', $account_category->id) }}"
-                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Create New') }}</a>
+        @if (canAccess(['member user create']))
+            <a href="{{ route('mobile.user.create') }}"
+                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Register New User') }}</a>
         @endif
-    </div>
-    <ul class="mb-4 listview image-listview media inset">
-        @if ($accounts->count() > 0)
-            @foreach ($accounts as $account)
+    </div> --}}
+
+    {{-- <ul class="mb-4 listview image-listview media inset">
+        @if ($users->count() > 0)
+            @foreach ($users as $user)
                 <li>
-                    <div class="item">
-                        <div class="in">
-                            <div>
-                                {{ $account->name }}
+                    <a href="{{ route('mobile.user.show', $user->id) }}">
+                        <div class="item">
+                            <div class="imageWrapper">
+                                <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+                                    alt="image" class="imaged w64">
                             </div>
-                            <div>
-                                @if ($account->default == 0)
-                                    @if (canAccess(['account update']))
-                                        <a href="{{ route('mobile.account.edit', $account->id) }}"
-                                            class="btn btn-primary btn-sm">
+                            <div class="in">
+                                <div>
+                                    {{ $user->name }}
+                                    <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
+                                    <div class="text-muted">
+                                        {{ $user->house_street_name }},
+                                        {{ $user->house_block }}/{{ $user->house_number }},
+                                        {{ truncateString($user->house_address_others ?? '', 10) }}
+                                    </div>
+                                </div>
+                                <div>
+                                    @if (canAccess(['member user update']))
+                                        <a href="{{ route('mobile.user.edit', $user->id) }}" class="btn btn-primary btn-sm">
                                             {{ __('Edit') }}
                                         </a>
                                     @endif
-                                    @if (canAccess(['account delete']))
+                                    @if (canAccess(['member user delete']))
                                         <a href="#" class="btn btn-danger btn-sm delete"
-                                            onclick="load_modal('{{ $account->id }}')">
+                                            onclick="load_modal({{ $user->id }})">
                                             {{ __('Delete') }}
                                             </form>
                                         </a>
                                     @endif
-                                @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </li>
             @endforeach
         @else
             <li>
-                <div class="item">
+                <a href="#" class="item">
+                    <div class="imageWrapper">
+                        <img src="{{ asset(config('common.path_template_mobile') . 'assets/img/sample/brand/1.jpg') }}"
+                            alt="image" class="imaged w64">
+                    </div>
                     <div class="in">
                         <div>
                             {{ __('Data is Empty') }}
                             <div class="text-muted">{{ __('Data is Empty') }}</div>
                         </div>
                     </div>
-                </div>
+                </a>
             </li>
         @endif
-    </ul>
+    </ul> --}}
 
-    <div class="modal fade dialogbox" id="dialog_delete" data-bs-backdrop="static" tabindex="-1" role="dialog">
+    {{-- <div class="modal fade dialogbox" id="dialog_delete" data-bs-backdrop="static" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-icon text-danger">
@@ -86,9 +105,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div id="toast_delete" class="toast-box toast-center">
+    {{-- <div id="toast_delete" class="toast-box toast-center">
         <div class="in">
             <ion-icon name="checkmark-circle" class="text-success"></ion-icon>
             <div class="text">
@@ -96,7 +115,7 @@
             </div>
         </div>
         <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
-    </div>
+    </div> --}}
 
     @include('layouts.mobile.includes.toast')
 @endsection
@@ -104,13 +123,13 @@
 @push('scripts')
     <script>
         function load_modal(id) {
-            $('#btn-confirm_delete').attr('onclick', 'confirm_delete("' + id + '")');
+            $('#btn-confirm_delete').attr('onclick', `confirm_delete(${id})`);
             $('#dialog_delete').modal('show');
         }
 
         function confirm_delete(id) {
             $.ajax({
-                url: '{{ url('mobile/account') }}/' + id,
+                url: '{{ url('mobile/user') }}/' + id,
                 type: 'post',
                 data: {
                     '_method': 'delete',

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->boolean('live_chat_per_year')->default(0);
             $table->boolean('support_ticket_per_year')->default(0);
             $table->boolean('online_payment_per_year')->default(0);
-            $table->boolean('status')->default(1)->comment('Active or Inactive Status');
+            $table->boolean('status')->default(1)->comment('1 = Active, 0 = Inactive');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('restored_at')->nullable();

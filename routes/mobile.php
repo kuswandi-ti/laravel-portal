@@ -9,7 +9,9 @@ use App\Http\Controllers\Mobile\MobileProfileController;
 use App\Http\Controllers\Mobile\MobileDashboardController;
 use App\Http\Controllers\Mobile\MobileBankMemberController;
 use App\Http\Controllers\Mobile\MobileGenerateDuesController;
+use App\Http\Controllers\Mobile\MobileSettingMemberController;
 use App\Http\Controllers\Mobile\MobileAccountCategoryController;
+use App\Http\Controllers\Mobile\MobileOutstandingDuesController;
 
 Route::group(['middleware' => ['set_language']], function () {
     Route::get('/', [MobileAuthController::class, 'login'])->name('login');
@@ -55,7 +57,14 @@ Route::group([
     Route::resource('bank-member', MobileBankMemberController::class);
 
     /** Generate Dues Routes */
-    Route::get('dues', [MobileGenerateDuesController::class, 'index'])->name('dues.index');
+    Route::get('generate-dues', [MobileGenerateDuesController::class, 'index'])->name('generate_dues.index');
+    Route::post('generate-dues', [MobileGenerateDuesController::class, 'generateDues'])->name('generate_dues.post');
+
+    /** Outstanding Dues Routes */
+    Route::get('outstanding-dues', [MobileOutstandingDuesController::class, 'index'])->name('outstanding_dues.index');
+
+    /** Setting Routes */
+    Route::resource('setting-member', MobileSettingMemberController::class);
 
     /** Bottom Menu Routes */
     Route::get('/dashboard', [MobileDashboardController::class, 'index'])->name('dashboard.index');

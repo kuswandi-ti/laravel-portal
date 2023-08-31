@@ -25,18 +25,20 @@
                                 {{ $income->name }}
                             </div>
                             <div>
-                                @if (canAccess(['account category update']))
-                                    <a href="{{ route('mobile.account-category.edit', $income->id) }}"
-                                        class="btn btn-primary btn-sm">
-                                        {{ __('Edit') }}
-                                    </a>
-                                @endif
-                                @if (canAccess(['account category delete']))
-                                    <a href="#" class="btn btn-danger btn-sm delete"
-                                        onclick="load_modal('{{ $income->id }}')">
-                                        {{ __('Delete') }}
-                                        </form>
-                                    </a>
+                                @if ($income->default == 0)
+                                    @if (canAccess(['account category update']))
+                                        <a href="{{ route('mobile.account-category.edit', $income->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endif
+                                    @if (canAccess(['account category delete']))
+                                        <a href="#" class="btn btn-danger btn-sm delete"
+                                            onclick="load_modal('{{ $income->id }}')">
+                                            {{ __('Delete') }}
+                                            </form>
+                                        </a>
+                                    @endif
                                 @endif
                                 @if (canAccess(['account index']))
                                     <a href="{{ route('mobile.account.index', $income->id) }}"
@@ -75,18 +77,20 @@
                                 {{ $expense->name }}
                             </div>
                             <div>
-                                @if (canAccess(['account category update']))
-                                    <a href="{{ route('mobile.account-category.edit', $expense->id) }}"
-                                        class="btn btn-primary btn-sm">
-                                        {{ __('Edit') }}
-                                    </a>
-                                @endif
-                                @if (canAccess(['account category delete']))
-                                    <a href="#" class="btn btn-danger btn-sm delete"
-                                        onclick="load_modal('{{ $expense->id }}')">
-                                        {{ __('Delete') }}
-                                        </form>
-                                    </a>
+                                @if ($expense->default == 0)
+                                    @if (canAccess(['account category update']))
+                                        <a href="{{ route('mobile.account-category.edit', $expense->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endif
+                                    @if (canAccess(['account category delete']))
+                                        <a href="#" class="btn btn-danger btn-sm delete"
+                                            onclick="load_modal('{{ $expense->id }}')">
+                                            {{ __('Delete') }}
+                                            </form>
+                                        </a>
+                                    @endif
                                 @endif
                                 @if (canAccess(['account index']))
                                     <a href="{{ route('mobile.account.index', $expense->id) }}"

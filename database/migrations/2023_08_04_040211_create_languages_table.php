@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('lang');
             $table->string('slug');
-            $table->boolean('default')->default(0)->comment('Yes or No');
-            $table->boolean('status')->default(1)->comment('Active or Inactive Status');
+            $table->boolean('default')->default(0)->comment('1 = Default, 0 = Non Default');
+            $table->boolean('status')->default(1)->comment('1 = Active, 0 = Inactive');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('restored_at')->nullable();

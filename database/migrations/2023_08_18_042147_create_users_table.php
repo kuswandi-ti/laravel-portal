@@ -39,7 +39,8 @@ return new class extends Migration
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
             $table->foreignUuid('house_id')->constrained('houses')->nullable();
             $table->string('register_token')->nullable();
-            $table->boolean('status')->default(1)->comment('Active or Inactive Status');
+            $table->boolean('flag_dues')->default(1)->comment('1 = Paid, 0 = Non Paid Dues');
+            $table->boolean('status')->default(1)->comment('1 = Active, 0 = Inactive Status');
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

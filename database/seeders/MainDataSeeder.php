@@ -332,7 +332,7 @@ class MainDataSeeder extends Seeder
         ]);
 
         $house1 = House::create([
-            'owner_name' => 'Nana Suherna',
+            'owner_name' => 'Nana Suherna RT 005 RW 011 PH6',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '14',
@@ -341,7 +341,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house2 = House::create([
-            'owner_name' => 'Jajang',
+            'owner_name' => 'Jajang RT 005 RW 011 PH6',
             'street' => $street2->name,
             'block' => $block2->name,
             'no' => '24',
@@ -350,7 +350,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house3 = House::create([
-            'owner_name' => 'Sarip',
+            'owner_name' => 'Sarip RT 005 RW 011 PH6',
             'street' => $street4->name,
             'block' => $block4->name,
             'no' => '04',
@@ -359,7 +359,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house4 = House::create([
-            'owner_name' => 'Kuswandi',
+            'owner_name' => 'Kuswandi RT 005 RW 011 PH6',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '41',
@@ -372,8 +372,8 @@ class MainDataSeeder extends Seeder
         $roleKetua = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Ketua', 'area_id' => $area_ph6_rt5rw11ph6->id]);
         $roleKetua->givePermissionTo(setArrayUserKetuaPermission());
         $userKetua = User::factory()->create([
-            'name' => 'Nana Suherna',
-            'slug' => Str::slug('Nana Suherna'),
+            'name' => $house1->owner_name,
+            'slug' => Str::slug($house1->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'ketuart5rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -389,8 +389,8 @@ class MainDataSeeder extends Seeder
         $roleBendahara = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Bendahara', 'area_id' => $area_ph6_rt5rw11ph6->id]);
         $roleBendahara->givePermissionTo(setArrayUserBendaharaPermission());
         $userBendahara = User::factory()->create([
-            'name' => 'Sarip',
-            'slug' => Str::slug('sarip'),
+            'name' => $house3->owner_name,
+            'slug' => Str::slug($house3->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'bendaharart5rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -406,8 +406,8 @@ class MainDataSeeder extends Seeder
         $roleSekretaris = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Sekretaris', 'area_id' => $area_ph6_rt5rw11ph6->id]);
         $roleSekretaris->givePermissionTo(setArrayUserSekretarisPermission());
         $userSekretaris = User::factory()->create([
-            'name' => 'Jajang',
-            'slug' => Str::slug('jajang'),
+            'name' => $house2->owner_name,
+            'slug' => Str::slug($house2->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'sekretarisrt5rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -422,8 +422,8 @@ class MainDataSeeder extends Seeder
         /** Create Role & Permission User Seeder - End */
 
         $user = User::factory()->create([
-            'name' => 'Kuswandi',
-            'slug' => Str::slug('Kuswandi'),
+            'name' => $house4->owner_name,
+            'slug' => Str::slug($house4->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'kuswandirt5rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -509,7 +509,7 @@ class MainDataSeeder extends Seeder
         ]);
 
         $house1 = House::create([
-            'owner_name' => 'Nana Suherna',
+            'owner_name' => 'Nana Suherna RT 004 RW 011 PH6',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '14',
@@ -518,7 +518,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house2 = House::create([
-            'owner_name' => 'Jajang',
+            'owner_name' => 'Jajang RT 004 RW 011 PH6',
             'street' => $street2->name,
             'block' => $block2->name,
             'no' => '24',
@@ -527,7 +527,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house3 = House::create([
-            'owner_name' => 'Sarip',
+            'owner_name' => 'Sarip RT 004 RW 011 PH6',
             'street' => $street4->name,
             'block' => $block4->name,
             'no' => '04',
@@ -536,7 +536,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house4 = House::create([
-            'owner_name' => 'Kuswandi',
+            'owner_name' => 'Kuswandi RT 004 RW 011 PH6',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '41',
@@ -549,8 +549,8 @@ class MainDataSeeder extends Seeder
         $roleKetua = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Ketua', 'area_id' => $area_ph6_rt4rw11ph6->id]);
         $roleKetua->givePermissionTo(setArrayUserKetuaPermission());
         $userKetua = User::factory()->create([
-            'name' => 'Nana Suherna',
-            'slug' => Str::slug('Nana Suherna'),
+            'name' => $house1->owner_name,
+            'slug' => Str::slug($house1->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'ketuart4rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -566,8 +566,8 @@ class MainDataSeeder extends Seeder
         $roleBendahara = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Bendahara', 'area_id' => $area_ph6_rt4rw11ph6->id]);
         $roleBendahara->givePermissionTo(setArrayUserBendaharaPermission());
         $userBendahara = User::factory()->create([
-            'name' => 'Sarip',
-            'slug' => Str::slug('sarip'),
+            'name' => $house3->owner_name,
+            'slug' => Str::slug($house3->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'bendaharart4rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -583,8 +583,8 @@ class MainDataSeeder extends Seeder
         $roleSekretaris = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Sekretaris', 'area_id' => $area_ph6_rt4rw11ph6->id]);
         $roleSekretaris->givePermissionTo(setArrayUserSekretarisPermission());
         $userSekretaris = User::factory()->create([
-            'name' => 'Jajang',
-            'slug' => Str::slug('jajang'),
+            'name' => $house2->owner_name,
+            'slug' => Str::slug($house2->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'sekretarisrt4rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -598,8 +598,8 @@ class MainDataSeeder extends Seeder
         $userSekretaris->assignRole($roleSekretaris);
 
         $user = User::factory()->create([
-            'name' => 'Kuswandi',
-            'slug' => Str::slug('Kuswandi'),
+            'name' => $house4->owner_name,
+            'slug' => Str::slug($house4->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'kuswandirt4rw11ph6@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -631,6 +631,12 @@ class MainDataSeeder extends Seeder
                 'area_id' => $area_ph6_rt5rw11ph6->id,
                 'created_by' => 'Super Admin',
             ],
+            [
+                'key' => 'dues_amount',
+                'value' => 50000,
+                'area_id' => $area_ph6_rt5rw11ph6->id,
+                'created_by' => 'Super Admin',
+            ],
         ];
         foreach ($input as $item) {
             SettingMember::create($item);
@@ -638,25 +644,26 @@ class MainDataSeeder extends Seeder
 
         /** 21. Create Account Category */
         $account_category_1 = AccountCategory::create([
-            'name' => 'Pemasukan Rutin',
+            'name' => __('Regular Income'),
+            'default' => 1,
             'group' => 'income',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
-            'name' => 'Pemasukan Tidak Rutin',
+            'name' => __('Irregular Income'),
             'group' => 'income',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
-            'name' => 'Pengeluran Rutin',
+            'name' => __('Regular Expense'),
             'group' => 'expense',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
-            'name' => 'Pengeluran Tidak Rutin',
+            'name' => __('Irregular Expense'),
             'group' => 'expense',
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
@@ -665,24 +672,25 @@ class MainDataSeeder extends Seeder
         /** 22. Create Account (PH6), RT 005 RW 011 */
         $account_1 = Account::create([
             'name' => 'IPL',
+            'default' => 1,
             'account_category_id' => $account_category_1->id,
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_2 = Account::create([
-            'name' => 'Sumbangan Warga',
+            'name' => __('Donation'),
             'account_category_id' => $account_category_2->id,
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_3 = Account::create([
-            'name' => 'Iuran Sampah',
+            'name' => __('Garbage Fees'),
             'account_category_id' => $account_category_3->id,
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_4 = Account::create([
-            'name' => 'Dana Sosial',
+            'name' => __('Social Fund'),
             'account_category_id' => $account_category_4->id,
             'area_id' => $area_ph6_rt5rw11ph6->id,
             'created_by' => 'Super Admin',
@@ -708,6 +716,12 @@ class MainDataSeeder extends Seeder
                 'area_id' => $area_ph6_rt4rw11ph6->id,
                 'created_by' => 'Super Admin',
             ],
+            [
+                'key' => 'dues_amount',
+                'value' => 50000,
+                'area_id' => $area_ph6_rt4rw11ph6->id,
+                'created_by' => 'Super Admin',
+            ],
         ];
         foreach ($input as $item) {
             SettingMember::create($item);
@@ -715,25 +729,26 @@ class MainDataSeeder extends Seeder
 
         /** 24. Create Account Category (PH6), RT 004 RW 011 */
         $account_category_1 = AccountCategory::create([
-            'name' => 'Pemasukan Rutin',
+            'name' => __('Regular Income'),
+            'default' => 1,
             'group' => 'income',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
-            'name' => 'Pemasukan Tidak Rutin',
+            'name' => __('Irregular Income'),
             'group' => 'income',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
-            'name' => 'Pengeluran Rutin',
+            'name' => __('Regular Expense'),
             'group' => 'expense',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
-            'name' => 'Pengeluran Tidak Rutin',
+            'name' => __('Irregular Expense'),
             'group' => 'expense',
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
@@ -742,24 +757,25 @@ class MainDataSeeder extends Seeder
         /** 25. Create Account (PH6), RT 004 RW 011 */
         $account_1 = Account::create([
             'name' => 'IPL',
+            'default' => 1,
             'account_category_id' => $account_category_1->id,
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_2 = Account::create([
-            'name' => 'Sumbangan Warga',
+            'name' => __('Donation'),
             'account_category_id' => $account_category_2->id,
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_3 = Account::create([
-            'name' => 'Iuran Sampah',
+            'name' => __('Garbage Fees'),
             'account_category_id' => $account_category_3->id,
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
         ]);
         $account_4 = Account::create([
-            'name' => 'Dana Sosial',
+            'name' => __('Social Fund'),
             'account_category_id' => $account_category_4->id,
             'area_id' => $area_ph6_rt4rw11ph6->id,
             'created_by' => 'Super Admin',
@@ -969,7 +985,7 @@ class MainDataSeeder extends Seeder
         ]);
 
         $house1 = House::create([
-            'owner_name' => 'Nana Suherna',
+            'owner_name' => 'Nana Suherna RT 001 RW 010 PHI',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '14',
@@ -978,7 +994,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house2 = House::create([
-            'owner_name' => 'Jajang',
+            'owner_name' => 'Jajang RT 001 RW 010 PHI',
             'street' => $street2->name,
             'block' => $block2->name,
             'no' => '24',
@@ -987,7 +1003,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house3 = House::create([
-            'owner_name' => 'Sarip',
+            'owner_name' => 'Sarip RT 001 RW 010 PHI',
             'street' => $street4->name,
             'block' => $block4->name,
             'no' => '04',
@@ -996,7 +1012,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house4 = House::create([
-            'owner_name' => 'Kuswandi',
+            'owner_name' => 'Kuswandi RT 001 RW 010 PHI',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '41',
@@ -1009,8 +1025,8 @@ class MainDataSeeder extends Seeder
         $roleKetua = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Ketua', 'area_id' => $area_phi_rt1rw10phi->id]);
         $roleKetua->givePermissionTo(setArrayUserKetuaPermission());
         $userKetua = User::factory()->create([
-            'name' => 'Nana Suherna',
-            'slug' => Str::slug('Nana Suherna'),
+            'name' => $house1->owner_name,
+            'slug' => Str::slug($house1->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'ketuart1rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1026,8 +1042,8 @@ class MainDataSeeder extends Seeder
         $roleBendahara = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Bendahara', 'area_id' => $area_phi_rt1rw10phi->id]);
         $roleBendahara->givePermissionTo(setArrayUserBendaharaPermission());
         $userBendahara = User::factory()->create([
-            'name' => 'Sarip',
-            'slug' => Str::slug('sarip'),
+            'name' => $house3->owner_name,
+            'slug' => Str::slug($house3->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'bendaharart1rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1043,8 +1059,8 @@ class MainDataSeeder extends Seeder
         $roleSekretaris = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Sekretaris', 'area_id' => $area_phi_rt1rw10phi->id]);
         $roleSekretaris->givePermissionTo(setArrayUserSekretarisPermission());
         $userSekretaris = User::factory()->create([
-            'name' => 'Jajang',
-            'slug' => Str::slug('jajang'),
+            'name' => $house2->owner_name,
+            'slug' => Str::slug($house2->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'sekretarisrt1rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1059,8 +1075,8 @@ class MainDataSeeder extends Seeder
         /** Create Role & Permission User Seeder - End */
 
         $user = User::factory()->create([
-            'name' => 'Kuswandi',
-            'slug' => Str::slug('Kuswandi'),
+            'name' => $house4->owner_name,
+            'slug' => Str::slug($house4->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'kuswandirt1rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1146,7 +1162,7 @@ class MainDataSeeder extends Seeder
         ]);
 
         $house1 = House::create([
-            'owner_name' => 'Nana Suherna',
+            'owner_name' => 'Nana Suherna RT 002 RW 010 PHI',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '14',
@@ -1155,7 +1171,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house2 = House::create([
-            'owner_name' => 'Jajang',
+            'owner_name' => 'Jajang RT 002 RW 010 PHI',
             'street' => $street2->name,
             'block' => $block2->name,
             'no' => '24',
@@ -1164,7 +1180,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house3 = House::create([
-            'owner_name' => 'Sarip',
+            'owner_name' => 'Sarip RT 002 RW 010 PHI',
             'street' => $street4->name,
             'block' => $block4->name,
             'no' => '04',
@@ -1173,7 +1189,7 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $house4 = House::create([
-            'owner_name' => 'Kuswandi',
+            'owner_name' => 'Kuswandi RT 002 RW 010 PHI',
             'street' => $street3->name,
             'block' => $block3->name,
             'no' => '41',
@@ -1186,8 +1202,8 @@ class MainDataSeeder extends Seeder
         $roleKetua = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Ketua', 'area_id' => $area_phi_rt2rw10phi->id]);
         $roleKetua->givePermissionTo(setArrayUserKetuaPermission());
         $userKetua = User::factory()->create([
-            'name' => 'Nana Suherna',
-            'slug' => Str::slug('Nana Suherna'),
+            'name' => $house1->owner_name,
+            'slug' => Str::slug($house1->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'ketuart2rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1203,8 +1219,8 @@ class MainDataSeeder extends Seeder
         $roleBendahara = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Bendahara', 'area_id' => $area_phi_rt2rw10phi->id]);
         $roleBendahara->givePermissionTo(setArrayUserBendaharaPermission());
         $userBendahara = User::factory()->create([
-            'name' => 'Sarip',
-            'slug' => Str::slug('sarip'),
+            'name' => $house3->owner_name,
+            'slug' => Str::slug($house3->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'bendaharart2rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1220,8 +1236,8 @@ class MainDataSeeder extends Seeder
         $roleSekretaris = Role::create(['guard_name' => getGuardNameUser(), 'name' => 'Sekretaris', 'area_id' => $area_phi_rt2rw10phi->id]);
         $roleSekretaris->givePermissionTo(setArrayUserSekretarisPermission());
         $userSekretaris = User::factory()->create([
-            'name' => 'Jajang',
-            'slug' => Str::slug('jajang'),
+            'name' => $house2->owner_name,
+            'slug' => Str::slug($house2->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'sekretarisrt2rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1235,8 +1251,8 @@ class MainDataSeeder extends Seeder
         $userSekretaris->assignRole($roleSekretaris);
 
         $user = User::factory()->create([
-            'name' => 'Kuswandi',
-            'slug' => Str::slug('Kuswandi'),
+            'name' => $house4->owner_name,
+            'slug' => Str::slug($house4->owner_name),
             'image' => config('common.default_image_circle'),
             'email' => 'kuswandirt2rw10phi@mail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -1268,6 +1284,12 @@ class MainDataSeeder extends Seeder
                 'area_id' => $area_phi_rt1rw10phi->id,
                 'created_by' => 'Super Admin',
             ],
+            [
+                'key' => 'dues_amount',
+                'value' => 50000,
+                'area_id' => $area_phi_rt1rw10phi->id,
+                'created_by' => 'Super Admin',
+            ],
         ];
         foreach ($input as $item) {
             SettingMember::create($item);
@@ -1275,25 +1297,26 @@ class MainDataSeeder extends Seeder
 
         /** 21. Create Account Category (PHI), RT 001 RW 010 */
         $account_category_1 = AccountCategory::create([
-            'name' => 'Pemasukan Rutin',
+            'name' => __('Regular Income'),
+            'default' => 1,
             'group' => 'income',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
-            'name' => 'Pemasukan Tidak Rutin',
+            'name' => __('Irregular Income'),
             'group' => 'income',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
-            'name' => 'Pengeluran Rutin',
+            'name' => __('Regular Expense'),
             'group' => 'expense',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
-            'name' => 'Pengeluran Tidak Rutin',
+            'name' => __('Irregular Expense'),
             'group' => 'expense',
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
@@ -1302,24 +1325,25 @@ class MainDataSeeder extends Seeder
         /** 22. Create Account (PHI), RT 001 RW 010 */
         $account_1 = Account::create([
             'name' => 'IPL',
+            'default' => 1,
             'account_category_id' => $account_category_1->id,
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_2 = Account::create([
-            'name' => 'Sumbangan Warga',
+            'name' => __('Donation'),
             'account_category_id' => $account_category_2->id,
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_3 = Account::create([
-            'name' => 'Iuran Sampah',
+            'name' => __('Garbage Fees'),
             'account_category_id' => $account_category_3->id,
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_4 = Account::create([
-            'name' => 'Dana Sosial',
+            'name' => __('Social Fund'),
             'account_category_id' => $account_category_4->id,
             'area_id' => $area_phi_rt1rw10phi->id,
             'created_by' => 'Super Admin',
@@ -1345,6 +1369,12 @@ class MainDataSeeder extends Seeder
                 'area_id' => $area_phi_rt2rw10phi->id,
                 'created_by' => 'Super Admin',
             ],
+            [
+                'key' => 'dues_amount',
+                'value' => 50000,
+                'area_id' => $area_phi_rt2rw10phi->id,
+                'created_by' => 'Super Admin',
+            ],
         ];
         foreach ($input as $item) {
             SettingMember::create($item);
@@ -1352,25 +1382,26 @@ class MainDataSeeder extends Seeder
 
         /** 24. Create Account Category (PHI), RT 002 RW 010 */
         $account_category_1 = AccountCategory::create([
-            'name' => 'Pemasukan Rutin',
+            'name' => __('Regular Income'),
+            'default' => 1,
             'group' => 'income',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_2 = AccountCategory::create([
-            'name' => 'Pemasukan Tidak Rutin',
+            'name' => __('Irregular Income'),
             'group' => 'income',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_3 = AccountCategory::create([
-            'name' => 'Pengeluran Rutin',
+            'name' => __('Regular Expense'),
             'group' => 'expense',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_category_4 = AccountCategory::create([
-            'name' => 'Pengeluran Tidak Rutin',
+            'name' => __('Irregular Expense'),
             'group' => 'expense',
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
@@ -1384,19 +1415,19 @@ class MainDataSeeder extends Seeder
             'created_by' => 'Super Admin',
         ]);
         $account_2 = Account::create([
-            'name' => 'Sumbangan Warga',
+            'name' => __('Donation'),
             'account_category_id' => $account_category_2->id,
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_3 = Account::create([
-            'name' => 'Iuran Sampah',
+            'name' => __('Garbage Fees'),
             'account_category_id' => $account_category_3->id,
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',
         ]);
         $account_4 = Account::create([
-            'name' => 'Dana Sosial',
+            'name' => __('Social Fund'),
             'account_category_id' => $account_category_4->id,
             'area_id' => $area_phi_rt2rw10phi->id,
             'created_by' => 'Super Admin',

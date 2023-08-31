@@ -109,12 +109,32 @@
                 <div class="mt-1 listview-title">{{ __('Transaction') }}</div>
                 <ul class="listview flush transparent no-line image-listview">
                     <li>
-                        <a href="{{ route('mobile.dues.index') }}" class="item">
+                        <a href="{{ route('mobile.generate_dues.index') }}" class="item">
                             <div class="icon-box bg-warning">
                                 <ion-icon name="layers"></ion-icon>
                             </div>
                             <div class="in">
                                 {{ __('Generate Dues') }}
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mobile.outstanding_dues.index') }}" class="item">
+                            <div class="icon-box bg-warning">
+                                <ion-icon name="extension-puzzle-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Outstanding Dues') }}
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mobile.outstanding_dues.index') }}" class="item">
+                            <div class="icon-box bg-warning">
+                                <ion-icon name="cash-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{ __('Pay Dues') }}
                             </div>
                         </a>
                     </li>
@@ -177,7 +197,7 @@
                 <div class="mt-1 listview-title">{{ __('Setting') }}</div>
                 <ul class="listview flush transparent no-line image-listview">
                     <li>
-                        <a href="{{ route('mobile.user.index') }}" class="item">
+                        <a href="{{ route('mobile.setting-member.index') }}" class="item">
                             <div class="icon-box bg-danger">
                                 <ion-icon name="build"></ion-icon>
                             </div>

@@ -73,6 +73,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-check mt-4">
+                        <input type="checkbox" class="form-check-input" name="flag_dues" id="flag_dues" value="1">
+                        <label class="form-check-label" for="flag_dues">{{ __('Pay Dues ?') }}</label>
+                    </div>
                 </div>
             </div>
 

@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bank_members', function (Blueprint $table) {
+        Schema::create('dues', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('bank_account_number')->nullable();
-            $table->string('bank_account_name')->nullable();
-            $table->decimal('beginning_balance', 20, 2)->default(0);
-            $table->string('bank_code')->nullable();
-            $table->string('bank_name')->nullable();
-            $table->enum('bank_type', ['cash', 'bank', 'other'])->nullable();
             $table->foreignUuid('area_id')->constrained('areas')->nullable();
-            $table->boolean('status')->default(1)->comment('1 = Active, 0 = Inactive');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->integer('month')->nullable();
+            $table->integer('year')->nullable();
+            $table->decimal('dues_amount', 20, 2)->default(0)->nullable();
+            $table->boolean('payable')->default(0)->comment('1 = Pay, 0 = Not Pay')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('restored_at')->nullable();
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bank_members');
+        Schema::dropIfExists('dues');
     }
 };

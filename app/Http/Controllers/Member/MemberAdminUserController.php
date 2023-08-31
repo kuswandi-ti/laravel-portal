@@ -178,33 +178,29 @@ class MemberAdminUserController extends Controller
                 return '<div class="badge badge-' . setStatusBadge($query->status) . '">' . setStatusText($query->status) . '</div>';
             })
             ->addColumn('action', function ($query) {
-                if ($query->roles->pluck('name')->first() == getGuardTextAdmin()) {
-                    return '<div class="badge badge-danger">'  . __('admin.No Action') . '</div>';
+                if ($query->status == 1) {
+                    if (canAccess(['member admin user update'])) {
+                        $update = '
+                            <a href="' . route('member.admin.edit', $query->id) . '" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        ';
+                    }
+                    if (canAccess(['member admin user delete'])) {
+                        $delete = '
+                            <a href="' . route('member.admin.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        ';
+                    }
+                    return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
                 } else {
-                    if ($query->status == 1) {
-                        if (canAccess(['member admin user update'])) {
-                            $update = '
-                                <a href="' . route('member.admin.edit', $query->id) . '" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            ';
-                        }
-                        if (canAccess(['member admin user delete'])) {
-                            $delete = '
-                                <a href="' . route('member.admin.destroy', $query->id) . '" class="btn btn-danger btn-sm delete_item">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            ';
-                        }
-                        return (!empty($update) ? $update : '') . (!empty($delete) ? $delete : '');
-                    } else {
-                        if (canAccess(['member admin user restore'])) {
-                            return '
-                                <a href="' . route('member.admin.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
-                                    <i class="fas fa-undo"></i>
-                                </a>
-                            ';
-                        }
+                    if (canAccess(['member admin user restore'])) {
+                        return '
+                            <a href="' . route('member.admin.restore', $query->id) . '" class="btn btn-warning btn-sm" data-toggle="tooltip" title="' . __('Restore to Active') . '">
+                                <i class="fas fa-undo"></i>
+                            </a>
+                        ';
                     }
                 }
             })

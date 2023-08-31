@@ -15,7 +15,7 @@ class SettingAdminTableSeeder extends Seeder
     {
         $input = [
             ['key' => 'company_name', 'value' => 'PT. Sekawan Kreatif Optima'],
-            ['key' => 'site_title', 'value' => 'MyIPL'],
+            ['key' => 'site_title', 'value' => 'ErteAdmin'],
             ['key' => 'company_phone', 'value' => '021-505848'],
             ['key' => 'company_email', 'value' => 'admin@sko.com'],
             ['key' => 'company_address', 'value' => 'Cileungsi - Bogor'],
