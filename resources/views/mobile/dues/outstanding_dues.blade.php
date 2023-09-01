@@ -7,8 +7,8 @@
 @section('content')
     @include('layouts.mobile.partials._title')
 
-    {{-- <div class="mt-2 listview-title">
-        <form class="search-form mb-2" action="{{ route('mobile.user.index') }}" method="GET">
+    <div class="mt-2 listview-title">
+        <form class="search-form mb-2" action="{{ route('mobile.outstanding_dues.index') }}" method="GET">
             <div class="form-group searchbox">
                 <input type="text" class="form-control" name="search" value="{{ old('search') }}">
                 <i class="input-icon">
@@ -17,50 +17,35 @@
                 </i>
             </div>
         </form>
+    </div>
 
-        @if (canAccess(['member user create']))
-            <a href="{{ route('mobile.user.create') }}"
-                class="mb-1 btn btn-outline-secondary btn-block me-1">{{ __('Register New User') }}</a>
-        @endif
-    </div> --}}
-
-    {{-- <ul class="mb-4 listview image-listview media inset">
+    <ul class="mb-4 listview image-listview media inset">
         @if ($users->count() > 0)
             @foreach ($users as $user)
                 <li>
-                    <a href="{{ route('mobile.user.show', $user->id) }}">
-                        <div class="item">
-                            <div class="imageWrapper">
-                                <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
-                                    alt="image" class="imaged w64">
+                    <div class="item">
+                        <div class="imageWrapper">
+                            <img src="{{ url(config('common.path_storage') . (!empty($due->user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+                                alt="image" class="imaged w64">
+                        </div>
+                        <div class="in">
+                            <div>
+                                {{ $user->name }}
+                                <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
+                                <div class="text-muted">
+                                    {{ $user->house_street_name }},
+                                    {{ $user->house_block }}/{{ $user->house_number }},
+                                    {{ truncateString($user->house_address_others ?? '', 10) }}
+                                </div>
                             </div>
-                            <div class="in">
-                                <div>
-                                    {{ $user->name }}
-                                    <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
-                                    <div class="text-muted">
-                                        {{ $user->house_street_name }},
-                                        {{ $user->house_block }}/{{ $user->house_number }},
-                                        {{ truncateString($user->house_address_others ?? '', 10) }}
-                                    </div>
-                                </div>
-                                <div>
-                                    @if (canAccess(['member user update']))
-                                        <a href="{{ route('mobile.user.edit', $user->id) }}" class="btn btn-primary btn-sm">
-                                            {{ __('Edit') }}
-                                        </a>
-                                    @endif
-                                    @if (canAccess(['member user delete']))
-                                        <a href="#" class="btn btn-danger btn-sm delete"
-                                            onclick="load_modal({{ $user->id }})">
-                                            {{ __('Delete') }}
-                                            </form>
-                                        </a>
-                                    @endif
-                                </div>
+                            <div>
+                                <a href="{{ route('mobile.outstanding_dues.show', $user->id) }}">
+                                    <span
+                                        class="badge badge-secondary p-2">{{ formatAmount($user->dues_sum_dues_amount) }}</span>
+                                </a>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </li>
             @endforeach
         @else
@@ -79,7 +64,7 @@
                 </a>
             </li>
         @endif
-    </ul> --}}
+    </ul>
 
     {{-- <div class="modal fade dialogbox" id="dialog_delete" data-bs-backdrop="static" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

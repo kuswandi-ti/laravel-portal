@@ -65,3 +65,23 @@
         <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
     </div>
 @endif
+
+<div id="toast_error" class="toast-box toast-center">
+    <div class="in">
+        <ion-icon name="close-circle" class="text-danger"></ion-icon>
+        <div class="text">
+            <span id="toast_message_error"></span>
+        </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
+</div>
+
+<div id="toast_success" class="toast-box toast-center">
+    <div class="in">
+        <ion-icon name="checkmark-circle" class="text-success"></ion-icon>
+        <div class="text">
+            <span id="toast_message_success"></span>
+        </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-text-light close-button">{{ __('OK') }}</button>
+</div>

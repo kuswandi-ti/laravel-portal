@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\House;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -55,29 +56,31 @@ class MemberStaffUserController extends Controller
     {
         $token = Str::random(64);
 
-        $house = House::findOrFail($request->house);
-        $house_street_name = $house->street;
-        $house_block = $house->block;
-        $house_number = $house->no;
+        DB::transaction(function () use ($request) {
+            $house = House::findOrFail($request->house);
+            $house_street_name = $house->street;
+            $house_block = $house->block;
+            $house_number = $house->no;
 
-        $staff = new User();
-        $staff->name = $request->name;
-        $staff->slug = Str::slug($request->name);
-        $staff->email = $request->email;
-        $staff->image = config('common.default_image_circle');
-        $staff->area_id = getLoggedUser()->area->id;
-        $staff->house_id = $request->house;
-        $staff->house_street_name = $house_street_name;
-        $staff->house_block = $house_block;
-        $staff->house_number = $house_number;
-        $staff->register_token = $token;
-        $staff->created_by = getLoggedUser()->name;
-        $staff->status = 1;
-        $staff->save();
+            $staff = new User();
+            $staff->name = $request->name;
+            $staff->slug = Str::slug($request->name);
+            $staff->email = $request->email;
+            $staff->image = config('common.default_image_circle');
+            $staff->area_id = getLoggedUser()->area->id;
+            $staff->house_id = $request->house;
+            $staff->house_street_name = $house_street_name;
+            $staff->house_block = $house_block;
+            $staff->house_number = $house_number;
+            $staff->register_token = $token;
+            $staff->created_by = getLoggedUser()->name;
+            $staff->status = 1;
+            $staff->save();
 
-        $staff->assignRole($request->role);
+            $staff->assignRole($request->role);
 
-        Mail::to($request->email)->send(new MemberStaffRegisterVerifyMail($token, $request->email));
+            Mail::to($request->email)->send(new MemberStaffRegisterVerifyMail($token, $request->email));
+        });
 
         return redirect()->route('member.staff.index')->with('success', __('admin.Created staff successfully'));
     }
@@ -119,17 +122,20 @@ class MemberStaffUserController extends Controller
         $house_number = $house->no;
 
         $staff = User::findOrFail($id);
-        $staff->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'house_id' => $request->house,
-            'house_street_name' => $house_street_name,
-            'house_block' => $house_block,
-            'house_number' => $house_number,
-            'updated_by' => getLoggedUser()->name,
-            'status' => 1,
-        ]);
-        $staff->syncRoles($request->role);
+
+        DB::transaction(function () use ($request) {
+            $staff->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'house_id' => $request->house,
+                'house_street_name' => $house_street_name,
+                'house_block' => $house_block,
+                'house_number' => $house_number,
+                'updated_by' => getLoggedUser()->name,
+                'status' => 1,
+            ]);
+            $staff->syncRoles($request->role);
+        });
 
         return redirect()->route('member.staff.index')->with('success', __('admin.Updated staff successfully'));
     }

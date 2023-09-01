@@ -18,10 +18,8 @@
                             <div class="input-wrapper">
                                 <label class="label" for="block">{{ __('Month') }} <x-fill-field /></label>
                                 <select class="form-control custom-select" name="month" id="month" required>
-                                    <option value="" selected disabled>
-                                        {{ __('Choose one ...') }}</option>
                                     @for ($i = 1; $i <= 12; $i++)
-                                        <option value="{{ $i }}" {{ old('month') == $i ? 'selected' : '' }}>
+                                        <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>
                                             {{ formatMonth($i) }}</option>
                                     @endfor
                                 </select>
@@ -33,7 +31,7 @@
                             <div class="input-wrapper">
                                 <label class="label" for="year">{{ __('Year') }} <x-fill-field /></label>
                                 <input type="text" class="form-control" name="year" id="year"
-                                    value="{{ old('year') }}" required>
+                                    value="{{ old('year') ?? date('Y') }}" required>
                             </div>
                         </div>
                     </div>
@@ -43,7 +41,8 @@
 
         <div class="mt-2 row">
             <div class="col-md-12">
-                <button type="button" class="btn btn-primary btn-block" onclick="load_modal()">{{ __('Process') }}</button>
+                <button type="button" class="btn btn-primary btn-block btn_process"
+                    onclick="load_modal()">{{ __('Process') }}</button>
             </div>
         </div>
         {{-- </form> --}}
@@ -81,28 +80,45 @@
 @push('scripts')
     <script>
         function load_modal() {
-            $('#btn-confirm').attr('onclick', 'confirm_delete()');
+            $('#btn-confirm').attr('onclick', 'confirm_generate()');
             $('#dialog_confirm').modal('show');
-            // alert($('#month').val())
         }
 
-        function confirm_delete() {
+        function confirm_generate() {
+            let month = $('#month').val();
+            let year = $('#year').val();
+
+            $('.btn_process').text("{{ __('Processing...') }}");
+            $('.btn_process').prepend(
+                '<span class="spinner-border spinner-border-sm me-05 spinner" role="status" aria-hidden="true"></span>'
+            );
+            $('.btn_process').attr('disabled', 'disabled');
+
             $.ajax({
-                url: '{{ url('mobile/account-category') }}/' + id,
+                url: '{{ route('mobile.generate_dues.post') }}',
                 type: 'post',
                 data: {
-                    '_method': 'delete',
+                    '_method': 'post',
+                    'month': month,
+                    'year': year,
                 },
                 success: function(data) {
                     if (data.success == true) {
-                        $('#toast_message').text(data.message);
-                        toastbox('toast_delete', 5000)
-                        window.location.reload(true);
+                        $('#toast_message_success').text(data.message);
+                        toastbox('toast_success', 5000);
+                    } else {
+                        $('#toast_message_error').text(data.message);
+                        toastbox('toast_error');
                     }
                 },
                 error: function(error) {
-                    $('#toast_message').text(error.message);
-                    toastbox('toast_delete', 5000)
+                    $('#toast_message_error').text(error.message);
+                    toastbox('toast_error');
+                },
+                complete: function(data) {
+                    $('.btn_process').text("{{ __('Process') }}");
+                    $('.btn_process').find('.spinner').remove();
+                    $('.btn_process').removeAttr('disabled');
                 }
             });
         }

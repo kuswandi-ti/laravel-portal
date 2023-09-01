@@ -62,6 +62,7 @@ Route::group([
 
     /** Outstanding Dues Routes */
     Route::get('outstanding-dues', [MobileOutstandingDuesController::class, 'index'])->name('outstanding_dues.index');
+    Route::get('outstanding-dues/{user_id}', [MobileOutstandingDuesController::class, 'show'])->name('outstanding_dues.show');
 
     /** Setting Routes */
     Route::resource('setting-member', MobileSettingMemberController::class);

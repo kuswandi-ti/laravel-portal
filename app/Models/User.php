@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Area;
+use App\Models\Dues;
 use App\Models\House;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -15,8 +16,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-
-    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -38,6 +37,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'register_token',
         'remember_token',
     ];
 
@@ -59,5 +59,10 @@ class User extends Authenticatable
     public function house()
     {
         return $this->belongsTo(House::class, 'house_id', 'id');
+    }
+
+    public function dues()
+    {
+        return $this->hasMany(Dues::class);
     }
 }

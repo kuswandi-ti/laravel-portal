@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Member;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -46,20 +47,22 @@ class AdminMemberUserController extends Controller
      */
     public function store(AdminMemberUserStoreRequest $request)
     {
-        $member = new Member();
+        DB::transaction(function () use ($request) {
+            $member = new Member();
 
-        $member->name = $request->name;
-        $member->slug = Str::slug($request->name);
-        $member->email = $request->email;
-        $member->password = Hash::make($request->password);
-        $member->image = config('common.default_image_circle');
-        $member->area_id = $request->area;
-        $member->email_verified_at = saveDateTimeNow();
-        $member->created_by = getLoggedUser()->name;
-        $member->status = 1;
-        $member->save();
+            $member->name = $request->name;
+            $member->slug = Str::slug($request->name);
+            $member->email = $request->email;
+            $member->password = Hash::make($request->password);
+            $member->image = config('common.default_image_circle');
+            $member->area_id = $request->area;
+            $member->email_verified_at = saveDateTimeNow();
+            $member->created_by = getLoggedUser()->name;
+            $member->status = 1;
+            $member->save();
 
-        $member->assignRole($request->role);
+            $member->assignRole($request->role);
+        });
 
         return redirect()->route('admin.member.index')->with('success', __('Created member user successfully'));
     }
@@ -91,15 +94,18 @@ class AdminMemberUserController extends Controller
     public function update(AdminMemberUserUpdateRequest $request, string $id)
     {
         $member = Member::findOrFail($id);
-        $member->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'email' => $request->email,
-            'area_id' => $request->area,
-            'updated_by' => getLoggedUser()->name,
-            'status' => 1,
-        ]);
-        $member->syncRoles($request->role);
+
+        DB::transaction(function () use ($request) {
+            $member->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'email' => $request->email,
+                'area_id' => $request->area,
+                'updated_by' => getLoggedUser()->name,
+                'status' => 1,
+            ]);
+            $member->syncRoles($request->role);
+        });
 
         return redirect()->route('admin.member.index')->with('success', __('Updated member user successfully'));
     }

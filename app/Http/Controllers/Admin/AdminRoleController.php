@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
@@ -43,12 +44,14 @@ class AdminRoleController extends Controller
      */
     public function store(AdminRoleStoreRequest $request)
     {
-        $role = Role::create([
-            'name' => $request->role_name,
-            'guard_name' => $request->guard_name,
-            'area_id' => getLoggedUserAreaId(),
-        ]);
-        $role->syncPermissions($request->permissions);
+        DB::transaction(function () use ($request) {
+            $role = Role::create([
+                'name' => $request->role_name,
+                'guard_name' => $request->guard_name,
+                'area_id' => getLoggedUserAreaId(),
+            ]);
+            $role->syncPermissions($request->permissions);
+        });
 
         return redirect()->route('admin.role.index')->with('success', __('admin.Create role & permissions successfully'));
     }
@@ -73,10 +76,13 @@ class AdminRoleController extends Controller
     public function update(AdminRoleUpdateRequest $request, string $id)
     {
         $role = Role::findOrFail($id);
-        $role->update([
-            'name' => $request->role_name,
-        ]);
-        $role->syncPermissions($request->permissions);
+
+        DB::transaction(function () use ($request) {
+            $role->update([
+                'name' => $request->role_name,
+            ]);
+            $role->syncPermissions($request->permissions);
+        });
 
         return redirect()->route('admin.role.index')->with('success', __('admin.Updated role & permissions successfully'));
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -43,17 +44,19 @@ class MemberRoleController extends Controller
      */
     public function store(MemberRoleStoreRequest $request)
     {
-        $role = Role::create([
-            'name' => $request->role_name,
-            'guard_name' => $request->guard_name,
-            'area_id' => getLoggedUser()->area->id,
-        ]);
+        DB::transaction(function () use ($request) {
+            $role = Role::create([
+                'name' => $request->role_name,
+                'guard_name' => $request->guard_name,
+                'area_id' => getLoggedUser()->area->id,
+            ]);
 
-        if ($request->guard_name == getGuardNameMember()) {
-            $role->syncPermissions($request->permissions_member);
-        } elseif ($request->guard_name == getGuardNameUser()) {
-            $role->syncPermissions($request->permissions_web);
-        }
+            if ($request->guard_name == getGuardNameMember()) {
+                $role->syncPermissions($request->permissions_member);
+            } elseif ($request->guard_name == getGuardNameUser()) {
+                $role->syncPermissions($request->permissions_web);
+            }
+        });
 
         return redirect()->route('member.role.index')->with('success', __('admin.Create role & permissions successfully'));
     }
@@ -86,15 +89,18 @@ class MemberRoleController extends Controller
     public function update(MemberRoleUpdateRequest $request, string $id)
     {
         $role = Role::findOrFail($id);
-        $role->update([
-            'name' => $request->role_name,
-        ]);
 
-        if ($request->guard_name == getGuardNameMember()) {
-            $role->syncPermissions($request->permissions_member);
-        } elseif ($request->guard_name == getGuardNameUser()) {
-            $role->syncPermissions($request->permissions_web);
-        }
+        DB::transaction(function () use ($request) {
+            $role->update([
+                'name' => $request->role_name,
+            ]);
+
+            if ($request->guard_name == getGuardNameMember()) {
+                $role->syncPermissions($request->permissions_member);
+            } elseif ($request->guard_name == getGuardNameUser()) {
+                $role->syncPermissions($request->permissions_web);
+            }
+        });
 
         return redirect()->route('member.role.index')->with('success', __('admin.Updated role & permissions successfully'));
     }

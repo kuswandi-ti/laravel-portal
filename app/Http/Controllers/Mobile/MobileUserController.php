@@ -55,6 +55,7 @@ class MobileUserController extends Controller
             }]
         ])
         ->orderBy('name', 'ASC')->get();
+
         return view('mobile.user.index', compact('users'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -47,21 +48,23 @@ class AdminAdminUserController extends Controller
     {
         $token = Str::random(64);
 
-        $admin = new Admin();
+        DB::transaction(function () use ($request) {
+            $admin = new Admin();
 
-        $admin->name = $request->name;
-        $admin->slug = Str::slug($request->name);
-        $admin->email = $request->email;
-        $admin->image = config('common.default_image_circle');
-        $admin->area_id = getLoggedUserAreaId();
-        $admin->register_token = $token;
-        $admin->created_by = getLoggedUser()->name;
-        $admin->status = 1;
-        $admin->save();
+            $admin->name = $request->name;
+            $admin->slug = Str::slug($request->name);
+            $admin->email = $request->email;
+            $admin->image = config('common.default_image_circle');
+            $admin->area_id = getLoggedUserAreaId();
+            $admin->register_token = $token;
+            $admin->created_by = getLoggedUser()->name;
+            $admin->status = 1;
+            $admin->save();
 
-        $admin->assignRole($request->role);
+            $admin->assignRole($request->role);
 
-        Mail::to($request->email)->send(new AdminRegisterVerifyMail($token));
+            Mail::to($request->email)->send(new AdminRegisterVerifyMail($token));
+        });
 
         return redirect()->route('admin.admin.index')->with('success', __('admin.Created admin user successfully'));
     }
@@ -92,14 +95,17 @@ class AdminAdminUserController extends Controller
     public function update(AdminAdminUserUpdateRequest $request, string $id)
     {
         $admin = Admin::findOrFail($id);
-        $admin->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'email' => $request->email,
-            'updated_by' => getLoggedUser()->name,
-            'status' => 1,
-        ]);
-        $admin->syncRoles($request->role);
+
+        DB::transaction(function () use ($request) {
+            $admin->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'email' => $request->email,
+                'updated_by' => getLoggedUser()->name,
+                'status' => 1,
+            ]);
+            $admin->syncRoles($request->role);
+        });
 
         return redirect()->route('admin.admin.index')->with('success', __('admin.Updated admin user successfully'));
     }

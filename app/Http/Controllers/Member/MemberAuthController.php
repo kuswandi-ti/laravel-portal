@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\Residence;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -36,51 +37,53 @@ class MemberAuthController extends Controller
     {
         $setting = Setting::pluck('value', 'key')->toArray();
 
-        // Create Area
-        $residence = Residence::findOrFail($request->residence);
-        $province_code = $residence->province_code;
-        $city_code = $residence->city_code;
-        $district_code = $residence->district_code;
-        $village_code = $residence->village_code;
-        $area = Area::create([
-            'name' => $request->area_name,
-            'slug' => Str::slug($request->area_name),
-            'residence_id' => $request->residence,
-            'province_code' => $province_code,
-            'city_code' => $city_code,
-            'district_code' => $district_code,
-            'village_code' => $village_code,
-            'package_id' => $request->package,
-            'package_type' => $request->package_type,
-            'membership_type' => 'trial',
-            'register_date' => date_create('now')->format($setting['default_date_format']),
-            'valid_to_date' => date($setting['default_date_format'], strtotime('+' . $setting['trial_days'] . ' days', strtotime(date_create('now')->format($setting['default_date_format'])))),
-            'status' => 1,
-        ]);;
+        DB::transaction(function () use ($request) {
+            // Create Area
+            $residence = Residence::findOrFail($request->residence);
+            $province_code = $residence->province_code;
+            $city_code = $residence->city_code;
+            $district_code = $residence->district_code;
+            $village_code = $residence->village_code;
+            $area = Area::create([
+                'name' => $request->area_name,
+                'slug' => Str::slug($request->area_name),
+                'residence_id' => $request->residence,
+                'province_code' => $province_code,
+                'city_code' => $city_code,
+                'district_code' => $district_code,
+                'village_code' => $village_code,
+                'package_id' => $request->package,
+                'package_type' => $request->package_type,
+                'membership_type' => 'trial',
+                'register_date' => date_create('now')->format($setting['default_date_format']),
+                'valid_to_date' => date($setting['default_date_format'], strtotime('+' . $setting['trial_days'] . ' days', strtotime(date_create('now')->format($setting['default_date_format'])))),
+                'status' => 1,
+            ]);;
 
-        // Create Member
-        $token = Str::random(64);
-        $member = Member::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'email' => $request->email,
-            'image' => config('common.default_image_circle'),
-            'area_id' => $area->id,
-            'register_token' => $token,
-            'password' => Hash::make($request->password),
-            'status' => 1,
-        ]);
+            // Create Member
+            $token = Str::random(64);
+            $member = Member::create([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'email' => $request->email,
+                'image' => config('common.default_image_circle'),
+                'area_id' => $area->id,
+                'register_token' => $token,
+                'password' => Hash::make($request->password),
+                'status' => 1,
+            ]);
 
-        // Create Role
-        $role = Role::create(['guard_name' => getGuardNameMember(), 'name' => getGuardTextAdmin(), 'area_id' => $area->id]);
+            // Create Role
+            $role = Role::create(['guard_name' => getGuardNameMember(), 'name' => getGuardTextAdmin(), 'area_id' => $area->id]);
 
-        // Assign Permission to Member Role
-        $role->givePermissionTo(setArrayMemberAdminPermission());
+            // Assign Permission to Member Role
+            $role->givePermissionTo(setArrayMemberAdminPermission());
 
-        // Assign Role to Member Admin User
-        $member->assignRole($role);
+            // Assign Role to Member Admin User
+            $member->assignRole($role);
 
-        Mail::to($request->email)->send(new MemberAdminRegisterVerifyMail($token));
+            Mail::to($request->email)->send(new MemberAdminRegisterVerifyMail($token));
+        });
 
         return redirect()->route('member.login')->with('success', 'Register successfully. You need to confirm your account. We have sent you an activation code, please check your email.');;
     }
@@ -129,11 +132,13 @@ class MemberAuthController extends Controller
     {
         $token = Str::random(64);
 
-        $member = Member::where('email', $request->email)->first();
-        $member->remember_token = $token;
-        $member->save();
+        DB::transaction(function () use ($request) {
+            $member = Member::where('email', $request->email)->first();
+            $member->remember_token = $token;
+            $member->save();
 
-        Mail::to($request->email)->send(new MemberAdminSendResetLinkMail($token, $request->email));
+            Mail::to($request->email)->send(new MemberAdminSendResetLinkMail($token, $request->email));
+        });
 
         return redirect()->back()->with('success', __('admin.A mail has been sent to your email address. Please check your email.'));
     }
