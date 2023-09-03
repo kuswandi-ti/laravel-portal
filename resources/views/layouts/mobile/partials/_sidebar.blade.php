@@ -129,7 +129,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('mobile.outstanding_dues.index') }}" class="item">
+                        <a href="{{ route('mobile.pay_dues.index') }}" class="item">
                             <div class="icon-box bg-warning">
                                 <ion-icon name="cash-outline"></ion-icon>
                             </div>

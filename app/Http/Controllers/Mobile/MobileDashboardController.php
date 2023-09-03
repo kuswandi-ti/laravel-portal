@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Models\Dues;
+use App\Models\User;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +16,13 @@ class MobileDashboardController extends Controller
             ->where('status', 1)
             ->orderBy('created_at', 'DESC')
             ->get();
-        return view('mobile.dashboard.index', compact('announs'));
+
+        $notpaid_dues = Dues::where([
+            ['user_id', getLoggedUser()->id],
+        ])
+            ->sum('dues_amount');
+
+        return view('mobile.dashboard.index', compact('announs', 'notpaid_dues'));
     }
 
     public function transaction()

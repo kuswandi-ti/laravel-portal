@@ -8,7 +8,7 @@
     @include('layouts.mobile.partials._title')
 
     <div class="mt-2 listview-title">
-        <form class="search-form mb-2" action="{{ route('mobile.user.index') }}" method="GET">
+        <form class="mb-2 search-form" action="{{ route('mobile.user.index') }}" method="GET">
             <div class="form-group searchbox">
                 <input type="text" class="form-control" name="search" value="{{ old('search') }}">
                 <i class="input-icon">
@@ -28,7 +28,7 @@
         @if ($users->count() > 0)
             @foreach ($users as $user)
                 <li>
-                    <a href="{{ route('mobile.user.show', $user->id) }}">
+                    <a href="{{ route('mobile.user.show', $user->id) }}" class="item">
                         <div class="item">
                             <div class="imageWrapper">
                                 <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
@@ -37,15 +37,17 @@
                             <div class="in">
                                 <div>
                                     {{ $user->name }}
-                                    <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
                                     <div class="text-muted">
                                         {{ $user->house_street_name }},
                                         {{ $user->house_block }}/{{ $user->house_number }},
                                         {{ truncateString($user->house_address_others ?? '', 10) }}
                                     </div>
+                                    <div>
+                                        <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
+                                    </div>
                                 </div>
                                 <div>
-                                    {{-- @if ($user->getRoleNames()->isEmpty()) --}}
+                                    {{-- $user->getRoleNames()->isEmpty() --}}
                                     @if (canAccess(['member user update']))
                                         <a href="{{ route('mobile.user.edit', $user->id) }}"
                                             class="btn btn-primary btn-sm">
@@ -59,7 +61,6 @@
                                             </form>
                                         </a>
                                     @endif
-                                    {{-- @endif --}}
                                 </div>
                             </div>
                         </div>

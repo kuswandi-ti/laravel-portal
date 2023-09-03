@@ -12,6 +12,7 @@ use App\Http\Controllers\Mobile\MobileGenerateDuesController;
 use App\Http\Controllers\Mobile\MobileSettingMemberController;
 use App\Http\Controllers\Mobile\MobileAccountCategoryController;
 use App\Http\Controllers\Mobile\MobileOutstandingDuesController;
+use App\Http\Controllers\Mobile\MobilePayDuesController;
 
 Route::group(['middleware' => ['set_language']], function () {
     Route::get('/', [MobileAuthController::class, 'login'])->name('login');
@@ -63,6 +64,11 @@ Route::group([
     /** Outstanding Dues Routes */
     Route::get('outstanding-dues', [MobileOutstandingDuesController::class, 'index'])->name('outstanding_dues.index');
     Route::get('outstanding-dues/{user_id}', [MobileOutstandingDuesController::class, 'show'])->name('outstanding_dues.show');
+
+    /** Pay Dues Routes */
+    Route::get('pay-dues', [MobilePayDuesController::class, 'index'])->name('pay_dues.index');
+    Route::post('pay-dues', [MobilePayDuesController::class, 'payDues'])->name('pay_dues.post');
+    Route::get('pay-dues-user', [MobilePayDuesController::class, 'indexUser'])->name('pay_dues_user.index');
 
     /** Setting Routes */
     Route::resource('setting-member', MobileSettingMemberController::class);

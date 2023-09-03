@@ -8,16 +8,32 @@
     @include('layouts.mobile.partials._title')
 
     <div class="mt-2 mb-2 section">
-        {{-- <form method="POST" action="{{ route('mobile.generate_dues.post') }}">
-            @csrf --}}
         <div class="card">
+            <div class="card-body">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="generate_choice" id="per_month" value="per_month"
+                        checked>
+                    <label class="form-check-label" for="per_month">&nbsp;{{ __('Per Month') }}</label>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="generate_choice" id="per_user" value="per_user">
+                    <label class="form-check-label" for="per_user">&nbsp;{{ __('Per User') }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-2 mb-2 section">
+        <div class="card card_per_month">
             <div class="card-body">
                 <div class="row">
                     <div class="col">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="block">{{ __('Month') }} <x-fill-field /></label>
-                                <select class="form-control custom-select" name="month" id="month" required>
+                                <label class="label" for="month_per_month">{{ __('Month') }} <x-fill-field /></label>
+                                <select class="form-control custom-select" name="month_per_month" id="month_per_month"
+                                    required>
                                     @for ($i = 1; $i <= 12; $i++)
                                         <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>
                                             {{ formatMonth($i) }}</option>
@@ -29,9 +45,56 @@
                     <div class="col">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="year">{{ __('Year') }} <x-fill-field /></label>
-                                <input type="text" class="form-control" name="year" id="year"
-                                    value="{{ old('year') ?? date('Y') }}" required>
+                                <label class="label" for="year_per_month">{{ __('Year') }} <x-fill-field /></label>
+                                <input type="text" class="form-control" name="year_per_month" id="year_per_month"
+                                    value="{{ old('year_per_month') ?? date('Y') }}" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card_per_user">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="mb-1 label" for="user">{{ __('User') }} <x-fill-field /></label>
+                                <select class="form-control custom-select select2" name="user" id="user">
+                                    <option value="" selected disabled>{{ __('Choose one ...') }}
+                                    </option>
+                                    @foreach ($users as $key => $value)
+                                        <option value="{{ $key }}" {{ old('user') == $key ? 'selected' : '' }}>
+                                            {{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="month_per_user">{{ __('Month') }} <x-fill-field /></label>
+                                <select class="form-control custom-select" name="month_per_user" id="month_per_user"
+                                    required>
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>
+                                            {{ formatMonth($i) }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="year_per_user">{{ __('Year') }} <x-fill-field /></label>
+                                <input type="text" class="form-control" name="year_per_user" id="year_per_user"
+                                    value="{{ old('year_per_user') ?? date('Y') }}" required>
                             </div>
                         </div>
                     </div>
@@ -45,7 +108,6 @@
                     onclick="load_modal()">{{ __('Process') }}</button>
             </div>
         </div>
-        {{-- </form> --}}
 
         <div class="modal fade dialogbox" id="dialog_confirm" data-bs-backdrop="static" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -72,21 +134,50 @@
                 </div>
             </div>
         </div>
-
-        @include('layouts.mobile.includes.toast')
     </div>
+
+    @include('layouts.mobile.includes.toast')
 @endsection
+
+@include('layouts.admin.includes.select2')
 
 @push('scripts')
     <script>
+        $(document).ready(function() {
+            $('.card_per_month').show()
+            $('.card_per_user').hide()
+        })
+
+        $('#per_month').click(function() {
+            $('.card_per_month').show()
+            $('.card_per_user').hide()
+        });
+
+        $('#per_user').click(function() {
+            $('.card_per_month').hide()
+            $('.card_per_user').show()
+        });
+
         function load_modal() {
             $('#btn-confirm').attr('onclick', 'confirm_generate()');
             $('#dialog_confirm').modal('show');
         }
 
         function confirm_generate() {
-            let month = $('#month').val();
-            let year = $('#year').val();
+            let month = '';
+            let year = '';
+            let user_id = '';
+            let choice = $('input[name="generate_choice"]:checked').val();
+
+            if (choice == 'per_month') {
+                month = $('#month_per_month option:selected').val();
+                year = $('#year_per_month').val();
+                user_id = '';
+            } else {
+                month = $('#month_per_user option:selected').val();
+                year = $('#year_per_user').val();
+                user_id = $('#user').val();
+            }
 
             $('.btn_process').text("{{ __('Processing...') }}");
             $('.btn_process').prepend(
@@ -99,8 +190,10 @@
                 type: 'post',
                 data: {
                     '_method': 'post',
+                    'choice': choice,
                     'month': month,
                     'year': year,
+                    'user_id': user_id,
                 },
                 success: function(data) {
                     if (data.success == true) {

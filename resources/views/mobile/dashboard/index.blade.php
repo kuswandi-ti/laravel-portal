@@ -50,7 +50,7 @@
                     </a>
                 </div>
                 <div class="item">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#sendActionSheet">
+                    <a href="{{ route('mobile.pay_dues_user.index') }}">
                         <div class="icon-wrapper">
                             <ion-icon name="cash-outline"></ion-icon>
                         </div>
@@ -70,10 +70,12 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="stat-box">
-                    <div class="title">{{ __('Unpaid Dues') }}</span></div>
-                    <div class="value text-danger">Rp. 500.000</div>
-                </div>
+                <a href="{{ route('mobile.pay_dues_user.index') }}">
+                    <div class="stat-box">
+                        <div class="title">{{ __('Unpaid Dues') }}</span></div>
+                        <div class="value text-danger">{{ formatAmount($notpaid_dues) }}</div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -84,7 +86,7 @@
                 @foreach ($announs as $item)
                     <a href="{{ route('mobile.dashboard.show_announcement', $item->id) }}">
                         <div class="card bg-warning">
-                            <div class="card-body text-center">
+                            <div class="text-center card-body">
                                 <h2 class="mb-2">{{ $item->title }}</h2>
                                 {!! $item->description > 150 ? truncateString($item->description, 150) : $item->description !!}
                             </div>

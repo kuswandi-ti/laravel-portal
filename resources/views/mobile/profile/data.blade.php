@@ -7,13 +7,13 @@
 @section('content')
     @include('layouts.mobile.partials._title')
 
-    <div class="mt-2 mb-2 section">
+    <div class="mt-2 mb-4 section">
         <form method="POST" action="{{ route('mobile.profile_data.update', $user->id) }}">
             @csrf
             @method('PUT')
 
             <div class="card">
-                <div class="card-body pt-0">
+                <div class="pt-0 card-body">
                     <ul class="nav nav-tabs lined" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-bs-toggle="tab" href="#tab1" role="tab"
@@ -32,7 +32,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="tab-content mt-2">
+                    <div class="mt-2 tab-content">
                         <div class="tab-pane fade active show" id="tab1" role="tabpanel">
                             <div class="form-group basic">
                                 <div class="input-wrapper">
@@ -99,7 +99,7 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label text-primary mb-1"
+                                    <label class="mb-1 label text-primary"
                                         for="place_of_birth">{{ __('Place of Birth') }}</label>
                                     <select class="form-control custom-select select2" name="place_of_birth">
                                         <option value="" selected disabled>{{ __('Choose one ...') }}</option>
@@ -132,7 +132,7 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label text-primary mb-1" for="profession">{{ __('Profession') }}</label>
+                                    <label class="mb-1 label text-primary" for="profession">{{ __('Profession') }}</label>
                                     <select class="form-control custom-select select2" name="profession">
                                         <option value="" selected disabled>{{ __('Choose one ...') }}</option>
                                         @foreach ($professions as $key => $value)
@@ -164,7 +164,7 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label text-primary mb-1" for="religion">{{ __('Religion') }}</label>
+                                    <label class="mb-1 label text-primary" for="religion">{{ __('Religion') }}</label>
                                     <select class="form-control custom-select" name="religion">
                                         <option value="" selected disabled>{{ __('Choose one ...') }}
                                         </option>
@@ -370,7 +370,7 @@
 
             <div class="mt-2 row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Upate') }}</button>
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('Update') }}</button>
                 </div>
             </div>
         </form>

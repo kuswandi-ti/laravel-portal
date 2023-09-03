@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Models\Dues;
 use App\Models\User;
+use App\Models\House;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,24 +39,34 @@ class MobileOutstandingDuesController extends Controller
                 }
             }]
         ])
-        ->withSum([
-            'dues' => function ($query) {
-                $query->where('payable', 0);
-            }
-        ], 'dues_amount')
-        ->orderBy('name')
-        ->get();
+            ->withSum([
+                'dues' => function ($query) {
+                    $query->where('payable', 0);
+                }
+            ], 'dues_amount')
+            ->orderBy('name')
+            ->get();
 
         return view('mobile.dues.outstanding_dues', compact('users'));
     }
 
     public function show(string $user_id)
     {
-        $user = User::findOrFail($id);
-        $houses = House::where('area_id', getLoggedUserAreaId())
-            ->orderBy('block')
-            ->orderBy('no')
-            ->get();
-        return view('mobile.user.show', compact('user', 'houses'));
+        $dues = Dues::where([
+            ['user_id', $user_id],
+        ])
+            ->with(['user'])
+            ->orderBy('year', 'ASC')
+            ->orderBy('month', 'ASC')
+            ->get()
+            ->groupBy('year')
+            ->toArray();
+
+        $notpaid_dues = Dues::where([
+            ['user_id', $user_id],
+        ])
+            ->sum('dues_amount');
+
+        return view('mobile.dues.outstanding_dues_show', compact('dues', 'notpaid_dues'));
     }
 }
