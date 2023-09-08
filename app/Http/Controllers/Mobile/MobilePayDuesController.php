@@ -106,7 +106,8 @@ class MobilePayDuesController extends Controller
         } catch (\Throwable $th) {
             return response([
                 'success' => false,
-                'message' => __('Pay dues is error')
+                // 'message' => __('Pay dues is error'),
+                'message' => $th->getMessage(),
             ]);
         }
     }

@@ -29,7 +29,7 @@ Route::group(['middleware' => ['set_language']], function () {
 });
 
 Route::group([
-    'middleware' => ['mobile']
+    'middleware' => ['mobile', 'prevent_back_history']
 ], function () {
     /** Auth Staff & User Routes */
     Route::post('logout', [MobileAuthController::class, 'logout'])->name('logout');

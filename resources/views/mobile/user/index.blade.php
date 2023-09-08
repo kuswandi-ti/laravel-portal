@@ -28,43 +28,69 @@
         @if ($users->count() > 0)
             @foreach ($users as $user)
                 <li>
-                    <a href="{{ route('mobile.user.show', $user->id) }}" class="item">
-                        <div class="item">
-                            <div class="imageWrapper">
-                                <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
-                                    alt="image" class="imaged w64">
-                            </div>
-                            <div class="in">
-                                <div>
-                                    {{ $user->name }}
-                                    <div class="text-muted">
-                                        {{ $user->house_street_name }},
-                                        {{ $user->house_block }}/{{ $user->house_number }},
-                                        {{ truncateString($user->house_address_others ?? '', 10) }}
-                                    </div>
-                                    <div>
-                                        <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
-                                    </div>
+                    <div class="item">
+                        <div class="imageWrapper">
+                            <img src="{{ url(config('common.path_storage') . (!empty($user->image) ? $user->image : config('common.default_image_circle')) ?? config('common.default_image_circle')) }}"
+                                alt="image" class="imaged w64">
+                        </div>
+                        <div class="in">
+                            <div>
+                                {{ $user->name }}
+                                <div class="text-muted">
+                                    {{ $user->house_street_name }},
+                                    {{ $user->house_block }}/{{ $user->house_number }},
+                                    {{ truncateString($user->house_address_others ?? '', 10) }}
                                 </div>
                                 <div>
-                                    {{-- $user->getRoleNames()->isEmpty() --}}
-                                    @if (canAccess(['member user update']))
-                                        <a href="{{ route('mobile.user.edit', $user->id) }}"
-                                            class="btn btn-primary btn-sm">
+                                    <span class="badge badge-info">{{ $user->getRoleNames()->first() }}</span>
+                                </div>
+                            </div>
+                            <div>
+                                {{-- @if (canAccess(['member user index']))
+                                    <a href="{{ route('mobile.user.show', $user->id) }}" class="btn btn-warning btn-sm">
+                                        {{ __('Show') }}
+                                    </a>
+                                @endif
+                                @if (canAccess(['member user update']))
+                                    <a href="{{ route('mobile.user.edit', $user->id) }}" class="btn btn-primary btn-sm">
+                                        {{ __('Edit') }}
+                                    </a>
+                                @endif
+                                @if (canAccess(['member user delete']))
+                                    <a href="#" class="btn btn-danger btn-sm delete"
+                                        onclick="load_modal({{ $user->id }})">
+                                        {{ __('Delete') }}
+                                        </form>
+                                    </a>
+                                @endif --}}
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <ion-icon name="apps"></ion-icon>
+                                    </button>
+                                    <div class="dropdown-menu" style="">
+                                        <a class="dropdown-item" href="{{ route('mobile.user.show', $user->id) }}">
+                                            <ion-icon name="book-outline" role="img" class="md hydrated"
+                                                aria-label="book-outline"></ion-icon>
+                                            {{ __('Show') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('mobile.user.edit', $user->id) }}">
+                                            <ion-icon name="create-outline" role="img" class="md hydrated"
+                                                aria-label="create outline"></ion-icon>
                                             {{ __('Edit') }}
                                         </a>
-                                    @endif
-                                    @if (canAccess(['member user delete']))
-                                        <a href="#" class="btn btn-danger btn-sm delete"
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item delete" href="#"
                                             onclick="load_modal({{ $user->id }})">
+                                            <ion-icon name="trash-outline" role="img" class="md hydrated"
+                                                aria-label="trash outline"></ion-icon>
                                             {{ __('Delete') }}
-                                            </form>
                                         </a>
-                                    @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </li>
             @endforeach
         @else
